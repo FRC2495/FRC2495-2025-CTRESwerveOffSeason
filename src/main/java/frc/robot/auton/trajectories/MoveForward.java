@@ -1,10 +1,9 @@
-package frc.robot.auton.common;
+package frc.robot.auton.trajectories;
 
 import java.util.List;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 
@@ -14,36 +13,34 @@ import frc.robot.RobotContainer;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.subsystems.*;
 
-// moves in S shape
-public class MoveInSShape extends SequentialCommandGroup {
+// moves forward by specified distance
+public class MoveForward extends SequentialCommandGroup {
 
 	private double distance;
-
-	public MoveInSShape(SwerveDrivetrain drivetrain, RobotContainer container, double distance) {
+	
+	public MoveForward(SwerveDrivetrain drivetrain, RobotContainer container, double distance) {
 
 		this.distance = distance;
-
+		
 		addCommands(
-
-			new DrivetrainSwerveRelative(drivetrain, container, createSShapeTrajectory(container))
-		   
+			new DrivetrainSwerveRelative(drivetrain, container, createMoveForwardTrajectory(container))
 		); 
   
 	}
-
-	public Trajectory createSShapeTrajectory(RobotContainer container) {
+	
+	public Trajectory createMoveForwardTrajectory(RobotContainer container) {
 		// An example trajectory to follow. All units in meters.
 		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
 			// Start at the origin facing the +X direction
 			new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
-			// Pass through these two interior waypoints, making an 's' curve path
-			List.of(new Translation2d(1.0*distance/3.0, -1.0*distance/3.0), new Translation2d(2.0*distance/3.0, +1.0*distance/3.0)),
-			// End n meters straight ahead of where we started, facing forward
+			// Pass through these waypoints
+			List.of(),
+			// End straight ahead of where we started, facing forward
 			// https://docs.wpilib.org/en/stable/docs/software/advanced-controls/geometry/coordinate-systems.html
-			new Pose2d(distance, 0, Rotation2d.fromDegrees(0)),
+			new Pose2d(+distance, 0, Rotation2d.fromDegrees(0)),
 			container.createTrajectoryConfig());
 
 		return trajectory;
 	}
-   
+
 }

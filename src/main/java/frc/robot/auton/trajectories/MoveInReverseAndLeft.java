@@ -1,4 +1,4 @@
-package frc.robot.auton.common;
+package frc.robot.auton.trajectories;
 
 import java.util.List;
 
@@ -13,17 +13,17 @@ import frc.robot.RobotContainer;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.subsystems.*;
 
-// moves in reverse and right, ending oriented at specified heading
-public class MoveInReverseAndRight extends SequentialCommandGroup {
+// moves in reverse and left, ending oriented at specified heading
+public class MoveInReverseAndLeft extends SequentialCommandGroup {
 
 	private double reverseDistance;
-	private double rightDistance;
+	private double leftDistance;
 	private double finalHeading;
 
-	public MoveInReverseAndRight(SwerveDrivetrain drivetrain, RobotContainer container,  double reverseDistance, double rightDistance, double finalHeading) {
+	public MoveInReverseAndLeft(SwerveDrivetrain drivetrain, RobotContainer container,  double reverseDistance, double leftDistance, double finalHeading) {
 
 		this.reverseDistance = reverseDistance;
-		this.rightDistance = rightDistance;
+		this.leftDistance = leftDistance;
 		this.finalHeading = finalHeading;
 
 		addCommands(
@@ -43,7 +43,7 @@ public class MoveInReverseAndRight extends SequentialCommandGroup {
 			List.of(),
 			// End ahead of where we started, facing sideway
 			// https://docs.wpilib.org/en/stable/docs/software/advanced-controls/geometry/coordinate-systems.html
-			new Pose2d(+reverseDistance, +rightDistance, Rotation2d.fromDegrees(/*-*/finalHeading)),
+			new Pose2d(+reverseDistance, -leftDistance, Rotation2d.fromDegrees(finalHeading)),
 			container.createReverseTrajectoryConfig());
 
 		return trajectory;

@@ -73,7 +73,7 @@ import frc.robot.commands.indicator.*;
 import frc.robot.commands.groups.*;
 //import frc.robot.commands.gamepad.*;
 import frc.robot.auton.*;
-import frc.robot.auton.common.*;
+import frc.robot.auton.trajectories.*;
 
 
 /*

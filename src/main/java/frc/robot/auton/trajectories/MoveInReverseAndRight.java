@@ -1,4 +1,4 @@
-package frc.robot.auton.common;
+package frc.robot.auton.trajectories;
 
 import java.util.List;
 
@@ -13,38 +13,41 @@ import frc.robot.RobotContainer;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.subsystems.*;
 
-// moves forward and right, ending oriented at specified heading
-public class MoveForwardAndRight extends SequentialCommandGroup {
+// moves in reverse and right, ending oriented at specified heading
+public class MoveInReverseAndRight extends SequentialCommandGroup {
 
-	private double forwardDistance;
+	private double reverseDistance;
 	private double rightDistance;
 	private double finalHeading;
 
-	public MoveForwardAndRight(SwerveDrivetrain drivetrain, RobotContainer container, double forwardDistance, double rightDistance, double finalHeading) {
+	public MoveInReverseAndRight(SwerveDrivetrain drivetrain, RobotContainer container,  double reverseDistance, double rightDistance, double finalHeading) {
 
-		this.forwardDistance = forwardDistance;
+		this.reverseDistance = reverseDistance;
 		this.rightDistance = rightDistance;
 		this.finalHeading = finalHeading;
-		
-		addCommands(
-			new DrivetrainSwerveRelative(drivetrain, container, createForwardAndRightTrajectory(container))           
-		); 
 
+		addCommands(
+
+			new DrivetrainSwerveRelative(drivetrain, container, createReverseAndRightTrajectory(container))
+		   
+		); 
+  
 	}
 
-	public Trajectory createForwardAndRightTrajectory(RobotContainer container) {
+	public Trajectory createReverseAndRightTrajectory(RobotContainer container) {
 		// An example trajectory to follow. All units in meters.
 		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-			// Start at the origin facing the +X direction
-			new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
+			// Start at the origin facing the -X direction
+			new Pose2d(0, 0, Rotation2d.fromDegrees(180.0)),
 			// Pass through these waypoints
 			List.of(),
 			// End ahead of where we started, facing sideway
 			// https://docs.wpilib.org/en/stable/docs/software/advanced-controls/geometry/coordinate-systems.html
-			new Pose2d(+forwardDistance, -rightDistance, Rotation2d.fromDegrees(/*-*/finalHeading)),
-			container.createTrajectoryConfig());
+			new Pose2d(+reverseDistance, +rightDistance, Rotation2d.fromDegrees(/*-*/finalHeading)),
+			container.createReverseTrajectoryConfig());
 
 		return trajectory;
 	}
+
    
 }

@@ -1,4 +1,4 @@
-package frc.robot.auton.common;
+package frc.robot.auton.trajectories;
 
 import java.util.List;
 
@@ -13,22 +13,26 @@ import frc.robot.RobotContainer;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.subsystems.*;
 
-// moves in gamma shape
-public class MoveInGammaShape extends SequentialCommandGroup {
+// moves forward and right, ending oriented at specified heading
+public class MoveForwardAndRight extends SequentialCommandGroup {
 
-	private double sideLength;
+	private double forwardDistance;
+	private double rightDistance;
+	private double finalHeading;
 
-	public MoveInGammaShape(SwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
+	public MoveForwardAndRight(SwerveDrivetrain drivetrain, RobotContainer container, double forwardDistance, double rightDistance, double finalHeading) {
 
-		this.sideLength = sideLength;
+		this.forwardDistance = forwardDistance;
+		this.rightDistance = rightDistance;
+		this.finalHeading = finalHeading;
 		
 		addCommands(
-			new DrivetrainSwerveRelative(drivetrain, container, createGammaShapeTrajectory(container))           
+			new DrivetrainSwerveRelative(drivetrain, container, createForwardAndRightTrajectory(container))           
 		); 
 
 	}
 
-	public Trajectory createGammaShapeTrajectory(RobotContainer container) {
+	public Trajectory createForwardAndRightTrajectory(RobotContainer container) {
 		// An example trajectory to follow. All units in meters.
 		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
 			// Start at the origin facing the +X direction
@@ -37,7 +41,7 @@ public class MoveInGammaShape extends SequentialCommandGroup {
 			List.of(),
 			// End ahead of where we started, facing sideway
 			// https://docs.wpilib.org/en/stable/docs/software/advanced-controls/geometry/coordinate-systems.html
-			new Pose2d(+sideLength, -sideLength, Rotation2d.fromDegrees(-90)),
+			new Pose2d(+forwardDistance, -rightDistance, Rotation2d.fromDegrees(/*-*/finalHeading)),
 			container.createTrajectoryConfig());
 
 		return trajectory;

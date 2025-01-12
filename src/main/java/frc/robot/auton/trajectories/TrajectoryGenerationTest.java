@@ -1,13 +1,11 @@
-package frc.robot.auton.common;
+package frc.robot.auton.trajectories;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.RobotContainer;
+import frc.robot.auton.trajectories.*;
 import frc.robot.subsystems.*;
 import frc.robot.interfaces.*;
-
-import frc.robot.auton.common.*;
-
 import frc.robot.commands.drivetrain.DrivetrainSwerveRelative;
 
 // The purpose of this class is to help testing trajectories at home in simulation mode

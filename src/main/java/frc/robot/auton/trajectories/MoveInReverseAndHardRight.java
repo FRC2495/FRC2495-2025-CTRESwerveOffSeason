@@ -1,4 +1,4 @@
-package frc.robot.auton.common;
+package frc.robot.auton.trajectories;
 
 import java.util.List;
 

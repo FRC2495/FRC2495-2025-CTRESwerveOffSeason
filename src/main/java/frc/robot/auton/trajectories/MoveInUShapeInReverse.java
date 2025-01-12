@@ -1,9 +1,10 @@
-package frc.robot.auton.common;
+package frc.robot.auton.trajectories;
 
 import java.util.List;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 
@@ -13,37 +14,33 @@ import frc.robot.RobotContainer;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.subsystems.*;
 
-// moves in reverse and left, ending oriented at specified heading
-public class MoveInReverseAndLeft extends SequentialCommandGroup {
+// moves in U shape in reverse
+public class MoveInUShapeInReverse extends SequentialCommandGroup {
 
-	private double reverseDistance;
-	private double leftDistance;
-	private double finalHeading;
+	private double sideLength;
 
-	public MoveInReverseAndLeft(SwerveDrivetrain drivetrain, RobotContainer container,  double reverseDistance, double leftDistance, double finalHeading) {
+	public MoveInUShapeInReverse(SwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
 
-		this.reverseDistance = reverseDistance;
-		this.leftDistance = leftDistance;
-		this.finalHeading = finalHeading;
+		this.sideLength = sideLength;
 
 		addCommands(
 
-			new DrivetrainSwerveRelative(drivetrain, container, createReverseAndRightTrajectory(container))
+			new DrivetrainSwerveRelative(drivetrain, container, createUShapeInReverseTrajectory(container))
 		   
 		); 
   
 	}
 
-	public Trajectory createReverseAndRightTrajectory(RobotContainer container) {
+	public Trajectory createUShapeInReverseTrajectory(RobotContainer container) {
 		// An example trajectory to follow. All units in meters.
 		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
 			// Start at the origin facing the -X direction
 			new Pose2d(0, 0, Rotation2d.fromDegrees(180.0)),
 			// Pass through these waypoints
-			List.of(),
+			List.of(new Translation2d(1.0, sideLength/2)),
 			// End ahead of where we started, facing sideway
 			// https://docs.wpilib.org/en/stable/docs/software/advanced-controls/geometry/coordinate-systems.html
-			new Pose2d(+reverseDistance, -leftDistance, Rotation2d.fromDegrees(finalHeading)),
+			new Pose2d(0, +sideLength, Rotation2d.fromDegrees(0)),
 			container.createReverseTrajectoryConfig());
 
 		return trajectory;

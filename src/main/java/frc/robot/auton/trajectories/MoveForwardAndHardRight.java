@@ -1,4 +1,4 @@
-package frc.robot.auton.common;
+package frc.robot.auton.trajectories;
 
 import java.util.List;
 
@@ -13,24 +13,24 @@ import frc.robot.RobotContainer;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.subsystems.*;
 
-// moves foward and left at 90 degrees
-public class MoveForwardAndHardLeft extends SequentialCommandGroup {
+// moves forward and right at 90 degrees
+public class MoveForwardAndHardRight extends SequentialCommandGroup {
 
 	private double forwardDistance;
-	private double leftDistance;
+	private double rightDistance;
 
-	public MoveForwardAndHardLeft(SwerveDrivetrain drivetrain, RobotContainer container, double forwardDistance, double leftDistance) {
+	public MoveForwardAndHardRight(SwerveDrivetrain drivetrain, RobotContainer container, double forwardDistance, double rightDistance) {
 
 		this.forwardDistance = forwardDistance;
-		this.leftDistance = leftDistance;
+		this.rightDistance = rightDistance;
 		
 		addCommands(
-			new DrivetrainSwerveRelative(drivetrain, container, createForwardAndHardLeftTrajectory(container))           
+			new DrivetrainSwerveRelative(drivetrain, container, createForwardAndHardRightTrajectory(container))           
 		); 
 
 	}
 
-	public Trajectory createForwardAndHardLeftTrajectory(RobotContainer container) {
+	public Trajectory createForwardAndHardRightTrajectory(RobotContainer container) {
 		// An example trajectory to follow. All units in meters.
 		Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
 			// Start at the origin facing the +X direction
@@ -39,7 +39,7 @@ public class MoveForwardAndHardLeft extends SequentialCommandGroup {
 			List.of(),
 			// End ahead of where we started, facing sideway
 			// https://docs.wpilib.org/en/stable/docs/software/advanced-controls/geometry/coordinate-systems.html
-			new Pose2d(+forwardDistance, +leftDistance, Rotation2d.fromDegrees(+90)),
+			new Pose2d(+forwardDistance, -rightDistance, Rotation2d.fromDegrees(-90)),
 			container.createTrajectoryConfig());
 
 		return trajectory;
