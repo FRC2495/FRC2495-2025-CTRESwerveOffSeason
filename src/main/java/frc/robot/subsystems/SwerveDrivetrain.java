@@ -27,7 +27,8 @@ import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import com.kauailabs.navx.frc.AHRS;
+import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
 
 import frc.robot.Constants.DrivetrainConstants;
 import frc.utils.SwerveUtils;
@@ -91,7 +92,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 		Ports.Analog.REAR_RIGHT_TURNING_ABSOLUTE_ENCODER);
 
 	// The gyro sensor
-	private final AHRS m_gyro = new AHRS(); // usign SPI by default, which is what we want.
+	private final AHRS m_gyro = new AHRS(NavXComType.kMXP_SPI); // usign SPI by default, which is what we want.
 
 	// Slew rate filter variables for controlling lateral acceleration
 	private double m_currentRotation = 0.0;
