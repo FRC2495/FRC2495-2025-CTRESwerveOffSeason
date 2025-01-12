@@ -7,11 +7,6 @@ import frc.robot.subsystems.*;
 import frc.robot.interfaces.*;
 
 import frc.robot.auton.common.*;
-import frc.robot.auton.sp1.*;
-import frc.robot.auton.sp2.*;
-import frc.robot.auton.sp3.*;
-import frc.robot.auton.sp4.*;
-import frc.robot.auton.sp6.*;
 
 import frc.robot.commands.drivetrain.DrivetrainSwerveRelative;
 
@@ -23,8 +18,7 @@ public class TrajectoryGenerationTest extends SequentialCommandGroup {
 		addCommands(
 
 			// replace line below by whatever trajectory-generation command you want to test:
-			//new StartingPositionTwoDriveAndTurnToLeftNote(drivetrain, container, object_detection_camera)
-
+			
 			//new MoveIn8Shape(drivetrain, container, 3)
 
 			//new MoveInInfinityShape(drivetrain, container, 3)
@@ -55,103 +49,6 @@ public class TrajectoryGenerationTest extends SequentialCommandGroup {
 
 			// another example, calling a method that generates a trajectory direcly:
 			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionOnePickupSecondNote.createPickupSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionOnePickupThirdNote.createPickupThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionOneScoreTwoPickupThreeNote.createShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionOneThreeNote.createShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionOneOneNoteAndLeave.createBeforePickupSecondNoteTrajectory(container)),
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionOneOneNoteAndPickupAtMidline.createPickupSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionOneTwoNoteAtMidline.createShootSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionOneThreeNote.createShootSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoDriveAndTurnToLeftNote.createPickupLeftThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoDriveAndTurnToLeftNote.createMoveForwardTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoDriveAndTurnToRightNote.createPickupRightThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoDriveAndTurnToRightNote.createMoveForwardTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoLeftThreeNote.createShootSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoLeftThreeNote.createShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoLeftThreeNote.createLeaveAfterShootLeftThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoPickupLeftThirdNote.createPickupLeftThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoPickupRightThirdNote.createPickupRightThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoPickupSecondNote.createPickupSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoRightThreeNote.createShootSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoRightThreeNote.createShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoRightThreeNote.createLeaveAfterShootRightThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoShootLeftThirdNote.createShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoTwoNote.createShootSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionTwoTwoNote.createLeaveAfterShootSecondNoteTrajectory(container))
-
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionThreeDrivePickupSecondNote.createPickupSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionThreeThreeNote.createShootSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionThreeDrivePickupThirdNote.createPickupThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionThreeShootThirdNote.createShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionThreeOneNoteAndLeave.createMoveAwayFromSpeakerTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionThreePickupMidlineNote.createMoveTowardsMidlineNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionThreeTwoNoteAtMidline.createAreaBeforeShootSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionThreeTwoNoteAtMidline.createShootSecondNoteTrajectory(container))
-
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionFourDrivePickupSecondNote.createPickupSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionFourPickupThirdNote.createPickupThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionFourThreeNote.createShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionFourOneNoteAndLeave.createMoveAwayFromSpeakerTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionFourPickupMidlineNote.createMoveTowardsMidlineNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionFourTwoNoteAtMidline.createAfterMidlineNotePickupTrajectory(container))
-
-			new DrivetrainSwerveRelative(drivetrain, container, StartingPositionFourTwoNoteAtMidline.createMoveTowardsSpeakerTrajectory(container))
-
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixPickupSecondNote.createPickupSecondNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixPickupThirdNote.createPickupThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixThreeNote.createAreaBeforeThirdNotePickupTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixThreeNote.createAreaBeforeShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixThreeNote.createShootThirdNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixOneNoteAndLeave.createMoveAwayFromSpeakerTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixDrivePickupMidlineNote.createPickupMidlineNoteTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixTwoNoteAtMidline.createAfterMidlineNotePickupTrajectory(container))
-
-			//new DrivetrainSwerveRelative(drivetrain, container, StartingPositionSixTwoNoteAtMidline.createMoveTowardsSpeakerTrajectory(container))
 
 		); 
   

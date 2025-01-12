@@ -15,15 +15,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.RobotContainer;
 //import frc.robot.auton.PathPlannerAuton.AutonTypes;
-import frc.robot.auton.common.JustShootNote;
-import frc.robot.auton.sp1.*;
-import frc.robot.auton.sp2.*;
-import frc.robot.auton.sp3.*;
-import frc.robot.auton.sp4.*;
-import frc.robot.auton.sp6.StartingPositionSixOneNoteAndPickupAtMidline;
-import frc.robot.auton.sp6.StartingPositionSixOneNoteAndPickupAtMidlineAndFeed;
-import frc.robot.auton.sp6.StartingPositionSixThreeNote;
-import frc.robot.auton.sp6.StartingPositionSixTwoNoteAtMidline;
 import frc.robot.interfaces.*;
 //import frc.robot.auton.common.*;
 import frc.robot.subsystems.*;
@@ -65,17 +56,16 @@ public class CustomAuton extends SequentialCommandGroup {
 					case RobotContainer.GAME_PIECE_1_NOTE:
 						switch (autonOption) {
 							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								addCommands(new JustShootNote(neck, shooter, roller));
+								//addCommands(new JustShootNote(neck, shooter, roller));
 								break;
 							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
 								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
 								break;
 							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionOneOneNoteAndPickupAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, 
-								notesensor, noteSensorTwo));
+								//addCommands(new StartingPositionOneOneNoteAndPickupAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, notesensor, noteSensorTwo));
 								break;
 							case RobotContainer.AUTON_OPTION_FEED_NOTE:
-								addCommands(new StartingPositionOneOneNoteAndPickupAtMidlineAndFeed(container, drivetrain, roller, shooter, neck, object_detection_camera, notesensor, noteSensorTwo));
+								//addCommands(new StartingPositionOneOneNoteAndPickupAtMidlineAndFeed(container, drivetrain, roller, shooter, neck, object_detection_camera, notesensor, noteSensorTwo));
 								break;
 							default:
 								// nothing
@@ -91,7 +81,7 @@ public class CustomAuton extends SequentialCommandGroup {
 								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
 								break;
 							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionOneTwoNoteAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
+								//addCommands(new StartingPositionOneTwoNoteAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
 								break;
 							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
 								//TODO
@@ -110,332 +100,7 @@ public class CustomAuton extends SequentialCommandGroup {
 								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
 								break;
 							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionOneThreeNote(container, elevator, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								//TODO
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-				
-					default:
-						// nothing
-						break;
-						
-				}
-				break;
-			case RobotContainer.START_POSITION_2:
-				switch (gamePiece) {
-					case RobotContainer.GAME_PIECE_1_NOTE:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								addCommands(new JustShootNote(neck, shooter, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								//TODO
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_2_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								//todo
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								addCommands(new StartingPositionTwoTwoNote(container, drivetrain, roller, shooter, neck, notesensor, noteSensorTwo));
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_3_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionTwoLeftThreeNote(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								addCommands(new StartingPositionTwoRightThreeNote(container, drivetrain, roller, shooter, neck, notesensor, noteSensorTwo, apriltag_camera));
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-				
-					default:
-						// nothing
-						break;
-						
-				}
-				break;
-			case RobotContainer.START_POSITION_3:
-				switch (gamePiece) {
-					case RobotContainer.GAME_PIECE_1_NOTE:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								addCommands(new JustShootNote(neck, shooter, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionThreeOneNoteAndPickupAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_FEED_NOTE:
-								addCommands(new StartingPositionThreeOneNoteAndPickupAtMidlineAndFeed(container, drivetrain, roller, shooter, neck, object_detection_camera, notesensor, noteSensorTwo));
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_2_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionThreeTwoNoteAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								//TODO
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_3_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionThreeThreeNote(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								//TODO
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-				
-					default:
-						// nothing
-						break;
-						
-				}
-				break;
-			case RobotContainer.START_POSITION_4:
-				switch (gamePiece) {
-					case RobotContainer.GAME_PIECE_1_NOTE:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								addCommands(new JustShootNote(neck, shooter, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionFourOneNoteAndPickupAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_FEED_NOTE:
-								addCommands(new StartingPositionFourOneNoteAndPickupAtMidlineAndFeed(container, drivetrain, roller, shooter, neck, object_detection_camera, notesensor, noteSensorTwo));
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_2_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionFourTwoNoteAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								//TODO
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_3_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionFourThreeNote(container, elevator, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								//TODO
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-				
-					default:
-						// nothing
-						break;
-						
-				}
-				break;
-			case RobotContainer.START_POSITION_5:
-				switch (gamePiece) {
-					case RobotContainer.GAME_PIECE_1_NOTE:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								addCommands(new JustShootNote(neck, shooter, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								//TODO
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_2_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								addCommands(new StartingPositionTwoTwoNote(container, drivetrain, roller, shooter, neck, notesensor, noteSensorTwo));
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_3_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionTwoLeftThreeNote(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								addCommands(new StartingPositionTwoRightThreeNote(container, drivetrain, roller, shooter, neck, notesensor, noteSensorTwo, object_detection_camera));
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-				
-					default:
-						// nothing
-						break;
-						
-				}
-				break;
-				
-			case RobotContainer.START_POSITION_6:
-				switch (gamePiece) {
-					case RobotContainer.GAME_PIECE_1_NOTE:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								addCommands(new JustShootNote(neck, shooter, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionSixOneNoteAndPickupAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_FEED_NOTE:
-								addCommands(new StartingPositionSixOneNoteAndPickupAtMidlineAndFeed(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_2_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionSixTwoNoteAtMidline(container, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
-								//TODO
-								break;
-							default:
-								// nothing
-								break;
-						}	
-						break;
-					case RobotContainer.GAME_PIECE_3_NOTES:
-						switch (autonOption) {
-							case RobotContainer.AUTON_OPTION_JUST_SHOOT_NOTE:
-								//TODO
-								break;
-							case RobotContainer.AUTON_OPTION_LEAVE_COMMUNITY:
-								//addCommands(new DropTopCubeAndShrink(container, elevator, drawer, roller));
-								break;
-							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE:
-								addCommands(new StartingPositionSixThreeNote(container, drivetrain, roller, shooter, neck, notesensor, noteSensorTwo, object_detection_camera, apriltag_camera));
+								//addCommands(new StartingPositionOneThreeNote(container, elevator, drivetrain, roller, shooter, neck, object_detection_camera, apriltag_camera, notesensor, noteSensorTwo));
 								break;
 							case RobotContainer.AUTON_OPTION_PICKUP_NOTE_AT_WING:
 								//TODO
