@@ -77,7 +77,7 @@ public class SimpleShooter extends SubsystemBase implements ISimpleShooter{
 		// Users will still need to set the motor controller's direction, and neutral mode.
 		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
-		shooter_follower.follow(shooter);
+		shooterFollowerConfig.follow(shooter);
 
 
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
