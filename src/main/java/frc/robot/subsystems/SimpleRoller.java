@@ -4,16 +4,13 @@ import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-//import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
-/*import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.ControlMode;*/
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 
 import frc.robot.interfaces.*;
-//import frc.robot.RobotContainer;
-//import frc.robot.Ports;
 
 
 /**
@@ -38,7 +35,8 @@ public class SimpleRoller extends SubsystemBase implements IRoller{
 	static final int RELEASE_DISTANCE_INCHES = 17;
 	static final int SHOOT_DISTANCE_INCHES = 17;
 	
-	CANSparkMax roller;
+	SparkMax roller;
+	SparkMaxConfig rollerConfig;
 	//BaseMotorController grasperLeft; 
 		
 	boolean isRolling;
@@ -46,22 +44,23 @@ public class SimpleRoller extends SubsystemBase implements IRoller{
 	boolean isShooting;
 	
 		
-	public SimpleRoller(CANSparkMax roller_in) {
+	public SimpleRoller(SparkMax roller_in) {
 		
 		roller = roller_in;
+		rollerConfig = new SparkMaxConfig();
 
-		roller.restoreFactoryDefaults();
+		rollerConfig 
+			.inverted(false)
+			.idleMode(IdleMode.kCoast);
 		
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
-		roller.setIdleMode(IdleMode.kCoast);
 		
 		// Motor controller output direction can be set by calling the setInverted() function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
-		roller.setInverted(false);
 
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
@@ -69,7 +68,10 @@ public class SimpleRoller extends SubsystemBase implements IRoller{
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
 		
 		// set peak output to max in case if had been reduced previously
-		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
+		//setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
+		//TODO empty method
+
+		roller.configure(rollerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 	}
 	
 	/*@Override
