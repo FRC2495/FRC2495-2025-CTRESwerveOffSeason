@@ -13,7 +13,13 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.revrobotics.SparkPIDController;*/
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
+import com.revrobotics.spark.SparkClosedLoopController;
 
 import frc.robot.Constants.SwerveModuleConstants;
 import frc.robot.sensors.ThriftyEncoder;
@@ -24,13 +30,14 @@ import frc.robot.sensors.ThriftyEncoder;
 public class SwerveModule {
 	private final SparkMax m_drivingSparkMax;
 	private final SparkMax m_turningSparkMax;
+	private final SparkMaxConfig config;
 
 	private final RelativeEncoder m_drivingEncoder;
 	private final RelativeEncoder m_turningEncoder;
 	private final ThriftyEncoder m_turningAbsoluteEncoder;
 
-	private final SparkPIDController m_drivingPIDController;
-	private final SparkPIDController m_turningPIDController;
+	private final SparkClosedLoopController m_drivingPIDController;
+	private final SparkClosedLoopController m_turningPIDController;
 
 	private SwerveModuleState m_desiredState = new SwerveModuleState(0.0, new Rotation2d());
 
@@ -38,24 +45,30 @@ public class SwerveModule {
 	 * Constructs a SwerveModule and configures the driving and turning motor,
 	 * encoder, and PID controller.
 	 */
-	public SwerveModule(int drivingCANId, int turningCANId, int turningAnalogPort) {
-		m_drivingSparkMax = new CANSparkMax(drivingCANId, MotorType.kBrushless);
-		m_turningSparkMax = new CANSparkMax(turningCANId, MotorType.kBrushless);
+	public SwerveModule(int drivingCANId, int turningCANId, int turningAnalogPort) {\
+		config = new SparkMaxConfig();
 
-		// Factory reset, so we get the SPARKS MAX to a known state before configuring
-		// them. This is useful in case a SPARK MAX is swapped out.
-		m_drivingSparkMax.restoreFactoryDefaults();
-		m_turningSparkMax.restoreFactoryDefaults();
+		m_drivingSparkMax = new SparkMax(drivingCANId, MotorType.kBrushless);
+		m_turningSparkMax = new SparkMax(turningCANId, MotorType.kBrushless);
 
 		// Setup encoders and PID controllers for the driving and turning SPARKS MAX.
 		m_drivingEncoder = m_drivingSparkMax.getEncoder();
 		m_turningEncoder = m_turningSparkMax.getEncoder();
 		m_turningAbsoluteEncoder = new ThriftyEncoder(turningAnalogPort);
 
-		m_drivingPIDController = m_drivingSparkMax.getPIDController();
-		m_turningPIDController = m_turningSparkMax.getPIDController();
-		m_drivingPIDController.setFeedbackDevice(m_drivingEncoder);
-		m_turningPIDController.setFeedbackDevice(m_turningEncoder);
+		m_drivingPIDController = m_drivingSparkMax.getClosedLoopController();
+		m_turningPIDController = m_turningSparkMax.getClosedLoopController();
+
+		config
+			.inverted(true)
+			.idleMode(IdleMode.kBrake);
+		config.encoder
+			.positionConversionFactor(1000)
+			.velocityConversionFactor(1000);
+		config.closedLoop
+			.feedbackSensor(FeedbackSensor.m_drivingEncoder)
+			.pid(1.0, 0.0, 0.0);
+		m_drivingSparkMax.configure(config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
 		// Apply position and velocity conversion factors for the driving encoder. The
 		// native units for position and velocity are rotations and RPM, respectively,
@@ -67,10 +80,6 @@ public class SwerveModule {
 		// want these in radians and radians per second to use with WPILib's swerve APIs.
 		m_turningEncoder.setPositionConversionFactor(SwerveModuleConstants.TURNING_ENCODER_POSITION_FACTOR_RADIANS_PER_ROTATION);
 		m_turningEncoder.setVelocityConversionFactor(SwerveModuleConstants.TURNING_ENCODER_VELOCITY_FACTOR_RADIANS_PER_SECOND_PER_RPM);
-
-		// Invert the turning controller, since the output shaft rotates in the opposite direction of
-		// the steering motor.
-		m_turningSparkMax.setInverted(true);
 
 		// Enable PID wrap around for the turning motor. This will allow the PID
 		// controller to go through 0 to get to the setpoint i.e. going from 350 degrees
