@@ -121,11 +121,11 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 	private PIDController turnPidController; // the PID controller used to turn
 
+	RobotConfig config;
+
 
 	/** Creates a new Drivetrain. */
 	public SwerveDrivetrain() {
-
-		RobotConfig config;
 		try{
 		config = RobotConfig.fromGUISettings();
 		} catch (Exception e) {
@@ -308,6 +308,10 @@ public class SwerveDrivetrain extends SubsystemBase {
 		m_frontRight.setDesiredState(swerveModuleStates[1]);
 		m_rearLeft.setDesiredState(swerveModuleStates[2]);
 		m_rearRight.setDesiredState(swerveModuleStates[3]);
+	}
+
+	public void driveRobotRelative(ChassisSpeeds speeds){
+		this.drive(speeds.vxMetersPerSecond,speeds.vyMetersPerSecond,speeds.omegaRadiansPerSecond,false,false);
 	}
 
 	/**
