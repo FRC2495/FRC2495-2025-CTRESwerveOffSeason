@@ -1,12 +1,5 @@
 {
-  "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 1.05,
-      "y": 7.05
-    },
-    "rotation": 0
-  },
+  "version": "2025.0",
   "command": {
     "type": "sequential",
     "data": {
@@ -14,24 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "sp1 - shoot first and pickup second"
+            "pathName": "SPB2 - Leave SZ + drop preloaded coral side B"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "sp1 - shoot second then pickup third"
+            "pathName": "SPB2 - Move to right coral pickup station from side B"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "sp1 - shoot third"
+            "pathName": "SPB2 - Move from right coral pickup station to side E"
           }
         }
       ]
     }
   },
+  "resetOdom": true,
   "folder": null,
   "choreoAuto": false
 }

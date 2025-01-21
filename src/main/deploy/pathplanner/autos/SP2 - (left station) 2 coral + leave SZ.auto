@@ -1,0 +1,31 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB2 - Leave SZ + drop preloaded coral side B"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB2 - Move to left coral pickup station from side B"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB2 - Move from left coral pickup station to side E"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

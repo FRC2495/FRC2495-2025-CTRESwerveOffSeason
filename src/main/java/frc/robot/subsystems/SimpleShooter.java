@@ -4,12 +4,16 @@ import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.revrobotics.spark.SparkBase.PersistMode;
+import com.revrobotics.spark.SparkBase.ResetMode;
 //import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 /*import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.ControlMode;*/
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkBaseConfig.*;
 
 import frc.robot.interfaces.*;
 //import frc.robot.RobotContainer;
@@ -38,39 +42,42 @@ public class SimpleShooter extends SubsystemBase implements ISimpleShooter{
 	//static final int RELEASE_DISTANCE_INCHES = 17;
 	static final int SHOOT_DISTANCE_INCHES = 17;
 	
-	CANSparkMax shooter;
-	CANSparkMax shooter_follower;
-	//BaseMotorController grasperLeft; 
+	SparkMax shooter;
+	SparkMax shooter_follower;
+	SparkMaxConfig shooterConfig;
+	SparkMaxConfig shooterFollowerConfig;
 		
 	boolean isTaking;
 	boolean isShooting;
 	
 		
-	public SimpleShooter(CANSparkMax shooter_in, CANSparkMax shooter_follower_in) {
+	public SimpleShooter(SparkMax shooter_in, SparkMax shooter_follower_in) {
 		
 		shooter = shooter_in;
 		shooter_follower = shooter_follower_in;
+		shooterConfig = new SparkMaxConfig();
+		shooterFollowerConfig = new SparkMaxConfig();
 
-		shooter.restoreFactoryDefaults();
-		shooter_follower.restoreFactoryDefaults();
-		
+		shooterConfig
+			.inverted(false)
+			.idleMode(IdleMode.kCoast);
+
+		shooterFollowerConfig
+			.inverted(false)
+			.idleMode(IdleMode.kCoast);
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
-		shooter.setIdleMode(IdleMode.kCoast);
-		shooter_follower.setIdleMode(IdleMode.kCoast);
 		// Motor controller output direction can be set by calling the setInverted() function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
-		shooter.setInverted(false);
-		shooter_follower.setInverted(false);
 
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
 		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
-		shooter_follower.follow(shooter);
+		shooterFollowerConfig.follow(shooter);
 
 
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
@@ -82,7 +89,11 @@ public class SimpleShooter extends SubsystemBase implements ISimpleShooter{
 		setPIDParameters();*/
 
 		// set peak output to max in case if had been reduced previously
-		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
+		//setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
+		//TODO empty method
+
+		shooter.configure(shooterConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+		shooter_follower.configure(shooterFollowerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 	}
 	
 	/*@Override
