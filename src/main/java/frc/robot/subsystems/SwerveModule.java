@@ -138,9 +138,18 @@ public class SwerveModule {
 		// Optimize the reference state to avoid spinning further than 90 degrees.
 		correctedDesiredState.optimize(new Rotation2d(m_turningEncoder.getPosition()));
 
-		// Command driving and turning SPARKS towards their respective setpoints.
-		m_drivingClosedLoopController.setReference(correctedDesiredState.speedMetersPerSecond, ControlType.kVelocity);
-		m_turningClosedLoopController.setReference(correctedDesiredState.angle.getRadians(), ControlType.kPosition);
+		if (Math.abs(correctedDesiredState.speedMetersPerSecond) < 0.001 // less than 1 mm per sec
+			&& Math.abs(correctedDesiredState.angle.getRadians() - m_turningEncoder.getPosition()) < Rotation2d.fromDegrees(1).getRadians()) // less than 1 degree
+		{
+			m_drivingSparkMax.set(0); // no point in doing anything
+			m_turningSparkMax.set(0);
+		}
+		else
+		{
+			// Command driving and turning SPARKS MAX towards their respective setpoints.
+			m_drivingClosedLoopController.setReference(correctedDesiredState.speedMetersPerSecond, ControlType.kVelocity);
+			m_turningClosedLoopController.setReference(correctedDesiredState.angle.getRadians(), ControlType.kPosition);
+		}
 
 		m_desiredState = desiredState;
 	}
