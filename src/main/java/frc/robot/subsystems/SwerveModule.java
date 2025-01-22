@@ -63,7 +63,7 @@ public class SwerveModule {
 		m_turningClosedLoopController = m_turningSparkMax.getClosedLoopController();
 
 		drivingConfig
-			.inverted(true)
+			.inverted(false)
 			.idleMode(SwerveModuleConstants.DRIVING_MOTOR_IDLE_MODE)
 			.smartCurrentLimit(SwerveModuleConstants.DRIVING_MOTOR_CURRENT_LIMIT_AMPS);
 		drivingConfig.encoder
@@ -77,16 +77,17 @@ public class SwerveModule {
 		m_drivingSparkMax.configure(drivingConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
 		turningConfig
+			.inverted(true)
             .idleMode(SwerveModuleConstants.TURNING_MOTOR_IDLE_MODE)
             .smartCurrentLimit(SwerveModuleConstants.TURNING_MOTOR_CURRENT_LIMIT_AMPS);
-        turningConfig.absoluteEncoder
+        turningConfig.encoder
             // Invert the turning encoder, since the output shaft rotates in the opposite
             // direction of the steering motor in the MAXSwerve Module.
             .inverted(true)
             .positionConversionFactor(SwerveModuleConstants.TURNING_ENCODER_POSITION_FACTOR_RADIANS_PER_ROTATION) // radians
             .velocityConversionFactor(SwerveModuleConstants.TURNING_ENCODER_VELOCITY_FACTOR_RADIANS_PER_SECOND_PER_RPM); // radians per second
         turningConfig.closedLoop
-            .feedbackSensor(FeedbackSensor.kAbsoluteEncoder)
+            .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
             // These are example gains you may need to them for your own robot!
             .pid(SwerveModuleConstants.TURNING_P, SwerveModuleConstants.TURNING_I, SwerveModuleConstants.TURNING_D)
             .outputRange(SwerveModuleConstants.TURNING_MIN_OUTPUT_NORMALIZED, SwerveModuleConstants.TURNING_MAX_OUTPUT_NORMALIZED)
