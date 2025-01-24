@@ -112,7 +112,7 @@ public final class Constants {
 		public static final double DRIVING_MIN_OUTPUT_NORMALIZED = -1;
 		public static final double DRIVING_MAX_OUTPUT_NORMALIZED = 1;
 
-		public static final double TURNING_P = 1.0; //1.0; // 1.0 might be a bit too much - reduce a bit if needed
+		public static final double TURNING_P = 1.0; // 1.0 might be a bit too much - reduce a bit if needed
 		public static final double TURNING_I = 0;
 		public static final double TURNING_D = 0;
 		public static final double TURNING_FF = 0;

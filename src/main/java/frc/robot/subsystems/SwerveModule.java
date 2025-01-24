@@ -83,7 +83,6 @@ public class SwerveModule {
         turningConfig.encoder
             // Invert the turning encoder, since the output shaft rotates in the opposite
             // direction of the steering motor in the MAXSwerve Module.
-            .inverted(true)
             .positionConversionFactor(SwerveModuleConstants.TURNING_ENCODER_POSITION_FACTOR_RADIANS_PER_ROTATION) // radians
             .velocityConversionFactor(SwerveModuleConstants.TURNING_ENCODER_VELOCITY_FACTOR_RADIANS_PER_SECOND_PER_RPM); // radians per second
         turningConfig.closedLoop
@@ -98,7 +97,7 @@ public class SwerveModule {
             // longer route.
             .positionWrappingEnabled(true)
             .positionWrappingInputRange(SwerveModuleConstants.TURNING_ENCODER_POSITION_PID_MIN_INPUT_RADIANS, SwerveModuleConstants.TURNING_ENCODER_POSITION_PID_MAX_INPUT_RADIANS);
-		m_turningSparkMax.configure(drivingConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+		m_turningSparkMax.configure(turningConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 		m_desiredState.angle = new Rotation2d(m_turningEncoder.getPosition());
 		m_drivingEncoder.setPosition(0);
 	}
