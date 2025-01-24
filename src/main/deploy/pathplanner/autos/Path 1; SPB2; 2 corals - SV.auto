@@ -1,12 +1,5 @@
 {
-  "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 1.05,
-      "y": 7.05
-    },
-    "rotation": 0
-  },
+  "version": "2025.0",
   "command": {
     "type": "sequential",
     "data": {
@@ -14,24 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "sp1 - shoot first and pickup second"
+            "pathName": "SPB2 to side B"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "sp1 - shoot second then pickup third"
+            "pathName": "Side B to Coral Station"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "sp1 - shoot third"
+            "pathName": "Coral station to side D"
           }
         }
       ]
     }
   },
+  "resetOdom": true,
   "folder": null,
   "choreoAuto": false
 }
