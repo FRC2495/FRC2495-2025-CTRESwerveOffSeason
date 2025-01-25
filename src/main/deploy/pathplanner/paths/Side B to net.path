@@ -3,44 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-<<<<<<<< HEAD:src/main/deploy/pathplanner/paths/SPB3 - Move from left coral pickup station to side D.path
-        "x": 1.187,
-        "y": 0.986
+        "x": 5.840250000000001,
+        "y": 4.0445
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2977189484779856,
-        "y": 3.1543764709572057
-========
-        "x": 5.9,
-        "y": 4.025
-      },
-      "prevControl": null,
-      "nextControl": {
-        "x": 6.667130326444924,
-        "y": 4.727251409060318
->>>>>>>> 576736c650a34503ab476654c78b068f40a41265:src/main/deploy/pathplanner/paths/Side B to net.path
+        "x": 7.3178368292770095,
+        "y": 3.2143164117626744
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-<<<<<<<< HEAD:src/main/deploy/pathplanner/paths/SPB3 - Move from left coral pickup station to side D.path
-        "x": 3.812090163934426,
-        "y": 2.8801741803278684
+        "x": 7.692750000000001,
+        "y": 4.71725
       },
       "prevControl": {
-        "x": 2.898352926674012,
-        "y": 1.9471911533909458
-========
-        "x": 7.4,
-        "y": 5.3
-      },
-      "prevControl": {
-        "x": 6.604550041129346,
-        "y": 4.643957938095307
->>>>>>>> 576736c650a34503ab476654c78b068f40a41265:src/main/deploy/pathplanner/paths/Side B to net.path
+        "x": 6.83477821637638,
+        "y": 5.57586430464151
       },
       "nextControl": null,
       "isLocked": false,
@@ -61,21 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-<<<<<<<< HEAD:src/main/deploy/pathplanner/paths/SPB3 - Move from left coral pickup station to side D.path
-    "rotation": -120.65066795705286
-========
-    "rotation": 180.0
->>>>>>>> 576736c650a34503ab476654c78b068f40a41265:src/main/deploy/pathplanner/paths/Side B to net.path
+    "rotation": -0.47745377730959543
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-<<<<<<<< HEAD:src/main/deploy/pathplanner/paths/SPB3 - Move from left coral pickup station to side D.path
-    "rotation": 52.30575953331084
-========
-    "rotation": 0.0
->>>>>>>> 576736c650a34503ab476654c78b068f40a41265:src/main/deploy/pathplanner/paths/Side B to net.path
+    "rotation": 180.0
   },
   "useDefaultConstraints": true
 }
