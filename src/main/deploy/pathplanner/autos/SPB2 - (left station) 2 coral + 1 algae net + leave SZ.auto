@@ -13,13 +13,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Side B to Right Coral Pickup"
+            "pathName": "SP2 - side B to net"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Right Coral Pickup to Side E"
+            "pathName": "Net to Left Coral Station"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left Coral Pickup to Side E"
           }
         }
       ]
