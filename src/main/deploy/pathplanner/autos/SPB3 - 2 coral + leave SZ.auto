@@ -7,31 +7,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 to side C"
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Side C to net"
+            "pathName": "SPB3 - Move from side C to left coral station"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Net to side B"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Side B to processor"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Processor to coral station"
+            "pathName": "SPB3 - left coral station to side D"
           }
         }
       ]
