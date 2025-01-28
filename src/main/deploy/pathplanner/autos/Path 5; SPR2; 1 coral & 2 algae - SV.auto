@@ -7,19 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 to side A - SV"
+            "pathName": "SPB2 to side B - SV"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Side A to right coral station - SV"
+            "pathName": "Side B to processor - SV"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Right coral station to side F - SV"
+            "pathName": "Processor to side C - SV"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Side C to processor - SV"
           }
         }
       ]

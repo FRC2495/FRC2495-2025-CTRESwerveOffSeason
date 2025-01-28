@@ -7,19 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 to side A - SV"
+            "pathName": "SPB1 to side B - SV"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Side A to right coral station - SV"
+            "pathName": "Side B to Bnet - SV"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Right coral station to side F - SV"
+            "pathName": "Bnet to side A - SV"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Side A to Bnet - SV"
           }
         }
       ]

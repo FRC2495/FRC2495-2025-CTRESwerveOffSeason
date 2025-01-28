@@ -7,31 +7,19 @@
         {
           "type": "path",
           "data": {
-<<<<<<<< HEAD:src/main/deploy/pathplanner/autos/Path 1; SPB2; 2 corals - SV.auto
-            "pathName": "SPB2 to side B"
-========
-            "pathName": "SPB2 - Leave SZ + drop preloaded coral side B"
->>>>>>>> 83590ad767e207cb0ec17143adc90a4e2102a776:src/main/deploy/pathplanner/autos/SP2 - (left station) 2 coral + leave SZ.auto
+            "pathName": "SPB2 to side B - SV"
           }
         },
         {
           "type": "path",
           "data": {
-<<<<<<<< HEAD:src/main/deploy/pathplanner/autos/Path 1; SPB2; 2 corals - SV.auto
-            "pathName": "Side B to Coral Station"
-========
-            "pathName": "SPB2 - Move to left coral pickup station from side B"
->>>>>>>> 83590ad767e207cb0ec17143adc90a4e2102a776:src/main/deploy/pathplanner/autos/SP2 - (left station) 2 coral + leave SZ.auto
+            "pathName": "Side B to left coral station - SV"
           }
         },
         {
           "type": "path",
           "data": {
-<<<<<<<< HEAD:src/main/deploy/pathplanner/autos/Path 1; SPB2; 2 corals - SV.auto
-            "pathName": "Coral station to side D"
-========
-            "pathName": "SPB2 - Move from left coral pickup station to side E"
->>>>>>>> 83590ad767e207cb0ec17143adc90a4e2102a776:src/main/deploy/pathplanner/autos/SP2 - (left station) 2 coral + leave SZ.auto
+            "pathName": "Left coral station to side D - SV"
           }
         }
       ]
