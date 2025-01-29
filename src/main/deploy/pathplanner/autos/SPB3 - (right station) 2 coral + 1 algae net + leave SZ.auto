@@ -7,25 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Leave sz + 1 coral"
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Side B to net"
+            "pathName": "SPB3 - Move from side C to net"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Net to Left Coral Station"
+            "pathName": "SPB3 - Move from (C) net to left coral pickup station"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Left Coral Pickup to Side E"
+            "pathName": "SPB3 - Move from left coral pickup station to side E"
           }
         }
       ]
