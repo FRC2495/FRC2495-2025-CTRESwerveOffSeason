@@ -122,18 +122,11 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 	private PIDController turnPidController; // the PID controller used to turn
 
-	RobotConfig config;
-
+	private RobotConfig config;
 
 	/** Creates a new Drivetrain. */
 	public SwerveDrivetrain() {
-		try{
-		config = RobotConfig.fromGUISettings();
-		} catch (Exception e) {
-		// Handle exception as needed
-		e.printStackTrace();
-		}
-
+		
 		m_frontLeft.calibrateVirtualPosition(FRONT_LEFT_VIRTUAL_OFFSET_RADIANS); // set virtual position for absolute encoder
 		m_frontRight.calibrateVirtualPosition(FRONT_RIGHT_VIRTUAL_OFFSET_RADIANS);
 		m_rearLeft.calibrateVirtualPosition(REAR_LEFT_VIRTUAL_OFFSET_RADIANS);
@@ -161,11 +154,18 @@ public class SwerveDrivetrain extends SubsystemBase {
 		turnPidController.enableContinuousInput(-180, 180); // because -180 degrees is the same as 180 degrees (needs input range to be defined first)
 		turnPidController.setTolerance(DEGREE_THRESHOLD); // n degree error tolerated
 
+		try{
+			config = RobotConfig.fromGUISettings();
+		} catch (Exception e) {
+			// Handle exception as needed
+			e.printStackTrace();
+		}
+
 		AutoBuilder.configure(
             this::getPose, // Robot pose supplier
             this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
             this::getChassisSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-            (speeds, feedforwards) -> driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
+            (chassisSpeeds) -> driveRobotRelative(chassisSpeeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
             new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
                     new PIDConstants(SwerveModuleConstants.DRIVING_P, SwerveModuleConstants.DRIVING_I, SwerveModuleConstants.DRIVING_D), // Translation PID constants
                     new PIDConstants(SwerveModuleConstants.TURNING_P, SwerveModuleConstants.TURNING_I, SwerveModuleConstants.TURNING_D) // Rotation PID constants
@@ -311,8 +311,12 @@ public class SwerveDrivetrain extends SubsystemBase {
 		m_rearRight.setDesiredState(swerveModuleStates[3]);
 	}
 
+	public void drive(double xSpeed, double ySpeed, double angularSpeed) {
+		this.drive(xSpeed, ySpeed, angularSpeed, true, false);
+	}
+
 	public void driveRobotRelative(ChassisSpeeds speeds){
-		this.drive(speeds.vxMetersPerSecond,speeds.vyMetersPerSecond,speeds.omegaRadiansPerSecond,false,false);
+		this.drive(speeds.vxMetersPerSecond,speeds.vyMetersPerSecond,speeds.omegaRadiansPerSecond,false,true);
 	}
 
 	/**

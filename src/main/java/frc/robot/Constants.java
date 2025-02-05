@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.config.RobotConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
 import edu.wpi.first.math.geometry.Translation2d;
@@ -139,7 +140,7 @@ public final class Constants {
 		public static final double X_CONTROLLER_P = 1;
 		public static final double Y_CONTROLLER_P = 1;
 		public static final double THETA_CONTROLLER_P = 1;
-
+		
 		// Constraint for the motion profiled robot angle controller
 		public static final TrapezoidProfile.Constraints THETA_CONTROLLER_CONSTRAINTS = new TrapezoidProfile.Constraints(
 			MAX_ANGULAR_SPEED_RADIANS_PER_SECOND, MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED);
