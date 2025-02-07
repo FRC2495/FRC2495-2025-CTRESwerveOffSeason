@@ -24,6 +24,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.studica.frc.AHRS;
@@ -156,6 +157,8 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 		try{
 			config = RobotConfig.fromGUISettings();
+			System.out.println("wheelRadiusMeters: " + config.moduleConfig.wheelRadiusMeters); 
+			//SmartDashboard.putNumber("wheelRadiusMeters",config.moduleConfig.wheelRadiusMeters);
 		} catch (Exception e) {
 			// Handle exception as needed
 			e.printStackTrace();
