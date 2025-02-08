@@ -172,8 +172,8 @@ public class SwerveDrivetrain extends SubsystemBase {
             this::getChassisSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
             (chassisSpeeds) -> driveRobotRelative(chassisSpeeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
             new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                    new PIDConstants(Constants.AutoConstants.X_CONTROLLER_P, 0.0, 0.0),//(SwerveModuleConstants.DRIVING_P, SwerveModuleConstants.DRIVING_I, SwerveModuleConstants.DRIVING_D), // Translation PID constants
-                    new PIDConstants(Constants.AutoConstants.THETA_CONTROLLER_P, 0.0, 0.0)//(SwerveModuleConstants.TURNING_P, SwerveModuleConstants.TURNING_I, SwerveModuleConstants.TURNING_D) // Rotation PID constants
+                    new PIDConstants(Constants.AutoConstants.X_CONTROLLER_P, Constants.AutoConstants.X_CONTROLLER_I, 0.0),//(SwerveModuleConstants.DRIVING_P, SwerveModuleConstants.DRIVING_I, SwerveModuleConstants.DRIVING_D), // Translation PID constants
+                    new PIDConstants(Constants.AutoConstants.THETA_CONTROLLER_P, Constants.AutoConstants.THETA_CONTROLLER_I, 0.0)//(SwerveModuleConstants.TURNING_P, SwerveModuleConstants.TURNING_I, SwerveModuleConstants.TURNING_D) // Rotation PID constants
             ),
             config, // The robot configuration
             () -> {
