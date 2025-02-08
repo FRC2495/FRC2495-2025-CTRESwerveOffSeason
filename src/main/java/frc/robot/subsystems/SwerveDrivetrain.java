@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
 
+import frc.robot.Constants;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.SwerveModuleConstants;
 import frc.utils.SwerveUtils;
@@ -157,8 +158,9 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 		try{
 			config = RobotConfig.fromGUISettings();
-			System.out.println("wheelRadiusMeters: " + config.moduleConfig.wheelRadiusMeters); 
-			//SmartDashboard.putNumber("wheelRadiusMeters",config.moduleConfig.wheelRadiusMeters);
+			//System.out.println("wheelRadiusMeters: " + config.moduleConfig.wheelRadiusMeters); 
+			SmartDashboard.putNumber("wheelRadiusMeters",config.moduleConfig.wheelRadiusMeters);
+			SmartDashboard.putNumber("driveCurrentLimit",config.moduleConfig.driveCurrentLimit);
 		} catch (Exception e) {
 			// Handle exception as needed
 			e.printStackTrace();
@@ -170,8 +172,8 @@ public class SwerveDrivetrain extends SubsystemBase {
             this::getChassisSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
             (chassisSpeeds) -> driveRobotRelative(chassisSpeeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
             new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
-                    new PIDConstants(SwerveModuleConstants.DRIVING_P, SwerveModuleConstants.DRIVING_I, SwerveModuleConstants.DRIVING_D), // Translation PID constants
-                    new PIDConstants(SwerveModuleConstants.TURNING_P, SwerveModuleConstants.TURNING_I, SwerveModuleConstants.TURNING_D) // Rotation PID constants
+                    new PIDConstants(Constants.AutoConstants.X_CONTROLLER_P, 0.0, 0.0),//(SwerveModuleConstants.DRIVING_P, SwerveModuleConstants.DRIVING_I, SwerveModuleConstants.DRIVING_D), // Translation PID constants
+                    new PIDConstants(Constants.AutoConstants.THETA_CONTROLLER_P, 0.0, 0.0)//(SwerveModuleConstants.TURNING_P, SwerveModuleConstants.TURNING_I, SwerveModuleConstants.TURNING_D) // Rotation PID constants
             ),
             config, // The robot configuration
             () -> {
