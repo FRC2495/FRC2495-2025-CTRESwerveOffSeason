@@ -128,21 +128,21 @@ public final class Constants {
 	}
 
 	public static final class AutoConstants {
-		public static final double MAX_SPEED_METERS_PER_SECOND = 3.0; //4.42; //3.0;
+		public static final double MAX_SPEED_METERS_PER_SECOND = 4.0; //2.85;//4.0; //4.42; //3.0;
 		public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
 		public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = Math.PI;
 		public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = Math.PI;
 
 		public static final double HIGH_SPEED_METERS_PER_SECOND = 5.0;
 
-		public static final double REDUCED_SPEED_METERS_PER_SECOND = 2.0; //4.42; //3.0;
+		public static final double REDUCED_SPEED_METERS_PER_SECOND = 2; //4.42; //3.0;
 
 		public static final double X_CONTROLLER_P = 1;
 		public static final double Y_CONTROLLER_P = 1;
 		public static final double THETA_CONTROLLER_P = 1;
 
-		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_P = 5; // 2.5
-		public static final double ROTATION_HOLONOMIC_CONTROLLER_P = 5; // 2.5
+		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_P = 2.5;//5; //.5;//2.75;//2.5;//4.0; //3.5; //3; //2.5;//5; //1;
+		public static final double ROTATION_HOLONOMIC_CONTROLLER_P = 1;//5;//2; //5; //2.5
 
 		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_I = 0;
 		public static final double ROTATION_HOLONOMIC_CONTROLLER_I = 0;
