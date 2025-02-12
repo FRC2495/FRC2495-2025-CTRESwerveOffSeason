@@ -27,6 +27,7 @@ import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.ControlModeValue;
+import com.ctre.phoenix6.signals.FeedbackSensorSourceValue;
 import com.ctre.phoenix6.signals.ForwardLimitSourceValue;
 import com.ctre.phoenix6.signals.ForwardLimitTypeValue;
 import com.ctre.phoenix6.signals.ForwardLimitValue;
@@ -144,7 +145,7 @@ public class ElevatorTest extends SubsystemBase implements IElevator {
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
 		elevatorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;  // TODO switch to false if required if switching to Talon FX
-		elevator_followerConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;  // TODO comment out if switching to Talon FX
+		elevator_followerConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;  // TODO comment out if switching to Talon FX
 		
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
@@ -156,15 +157,14 @@ public class ElevatorTest extends SubsystemBase implements IElevator {
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
 		// The Follower relies on the master status frame allowing its status frame to be slowed without affecting performance.
 		// This is a useful optimization to manage CAN bus utilization.
-		final DutyCycleOut m_request = new DutyCycleOut(0);
-		setPIDParameters();
 		
 		// use slot 0 for closed-looping
  		//elevator.selectProfileSlot(SLOT_0, PRIMARY_PID_LOOP);
 		
 		// set peak output to max in case if had been reduced previously
 		//setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
-
+		// set peak output to max in case if had been reduced previously
+		//setPeakOutputs(MAX_PCT_OUTPUT);
 	
 		// Sensors for motor controllers provide feedback about the position, velocity, and acceleration
 		// of the system using that motor controller.
@@ -172,6 +172,12 @@ public class ElevatorTest extends SubsystemBase implements IElevator {
 		// This ensures the best resolution possible when performing closed-loops in firmware.
 		// CTRE Magnetic Encoder (relative/quadrature) =  4096 units per rotation		
 		// FX Integrated Sensor = 2048 units per rotation
+		elevatorConfig.Feedback.FeedbackSensorSource = FeedbackSensorSourceValue.RotorSensor; 
+
+		// this will reset the encoder automatically when at or past the forward limit sensor
+		elevatorConfig.HardwareLimitSwitch.ForwardLimitAutosetPositionEnable = true;
+		elevatorConfig.HardwareLimitSwitch.ReverseLimitAutosetPositionEnable = false;
+
 		var slot0Configs = new Slot0Configs();
 		slot0Configs.kV = 0.12;
 		slot0Configs.kP = 0.11;
@@ -284,7 +290,7 @@ public class ElevatorTest extends SubsystemBase implements IElevator {
 		//setPIDParameters();
 		System.out.println("Moving to Midway");
 		//setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-        setPeakOutputs(REDUCED_PCT_OUTPUT);
+        //setPeakOutputs(REDUCED_PCT_OUTPUT);
 		
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorMidwayPosition);
