@@ -5,15 +5,24 @@
 package frc.robot.sensors;
 
 import java.util.List;
+import java.util.Optional;
 
 //import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonPoseEstimator;
 //import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonUtils;
+import org.photonvision.EstimatedRobotPose;
+import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 //import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
+import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.math.geometry.Transform3d;
+import edu.wpi.first.math.geometry.Translation3d;
 //import edu.wpi.first.apriltag.AprilTagFieldLayout;
 //import edu.wpi.first.apriltag.AprilTagFields;
 //import edu.wpi.first.math.geometry.Pose2d;
@@ -31,14 +40,29 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	//TODO: UPDATE CAM SETTINGS FOR NEW ROBOT
 	private static final String DEFAULT_CAM_NAME = "AprilTagCam";
-	private static final double CAMERA_HEIGHT_METERS =  Units.inchesToMeters(18);
+	private static final double CAMERA_HEIGHT_METERS =  Units.inchesToMeters(18.5);
 	private static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(60); // may need to change 
 	private static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(+20.0); // tilt of our camera (radians)
+
+	private PhotonPoseEstimator estimator;
+	private Transform3d robotToCam = new Transform3d(
+		new Translation3d(Units.inchesToMeters(-11.625), Units.inchesToMeters(0), CAMERA_HEIGHT_METERS),
+		new Rotation3d(0.0, CAMERA_PITCH_RADIANS, Units.degreesToRadians(180))
+	);
 
 	static final double APRILTAG_CAMERA_SHOOTER_ALIGNMENT_CORRECTION_DEGREES = 5.0; // apply offset in degrees to compensate for shooter being a bit crooked - TODO adjust as needed
 
 	public AprilTagCamera() {
 		super(DEFAULT_CAM_NAME);
+		estimator = new PhotonPoseEstimator(AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape), PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
+	}
+
+	public Optional<EstimatedRobotPose> getGlobalPose(){
+		Optional<EstimatedRobotPose> globalPose = Optional.empty();
+		for (var change : getAllUnreadResults()) {
+			globalPose = estimator.update(change);
+		}
+		return globalPose;
 	}
 	
 	public double getDistanceToTarget() {
