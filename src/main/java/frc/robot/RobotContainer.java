@@ -176,7 +176,7 @@ public class RobotContainer {
 
 	// motorized devices
 
-	private final SwerveDrivetrain drivetrain = new SwerveDrivetrain();
+	private final SwerveDrivetrain drivetrain = new SwerveDrivetrain(apriltag_camera);
 
 	/*private final WPI_TalonSRX drawer_master = new WPI_TalonSRX(Ports.CAN.DRAWER);
 
