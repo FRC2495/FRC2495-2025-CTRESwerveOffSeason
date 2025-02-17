@@ -40,14 +40,18 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	//TODO: UPDATE CAM SETTINGS FOR NEW ROBOT
 	private static final String DEFAULT_CAM_NAME = "AprilTagCam";
+	private static final double CAMERA_X_METERS =  Units.inchesToMeters(-11.625);
+	private static final double CAMERA_Y_METERS =  Units.inchesToMeters(0);
 	private static final double CAMERA_HEIGHT_METERS =  Units.inchesToMeters(18.5);
 	private static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(60); // may need to change 
 	private static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(+20.0); // tilt of our camera (radians)
+	private static final double CAMERA_ROLL_RADIANS = 0.0;
+	private static final double CAMERA_YAW_RADIANS = Units.degreesToRadians(180.0);
 
 	private PhotonPoseEstimator estimator;
 	private Transform3d robotToCam = new Transform3d(
-		new Translation3d(Units.inchesToMeters(-11.625), Units.inchesToMeters(0), CAMERA_HEIGHT_METERS),
-		new Rotation3d(0.0, CAMERA_PITCH_RADIANS, Units.degreesToRadians(180))
+		new Translation3d(CAMERA_X_METERS, CAMERA_Y_METERS, CAMERA_HEIGHT_METERS),
+		new Rotation3d(CAMERA_ROLL_RADIANS, CAMERA_PITCH_RADIANS, CAMERA_YAW_RADIANS)
 	);
 
 	static final double APRILTAG_CAMERA_SHOOTER_ALIGNMENT_CORRECTION_DEGREES = 5.0; // apply offset in degrees to compensate for shooter being a bit crooked - TODO adjust as needed
