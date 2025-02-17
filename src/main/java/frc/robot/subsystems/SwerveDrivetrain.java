@@ -538,7 +538,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 		
 		// calling disable() on controller will force a call to pidWrite with zero output
 		// which we need to handle by not doing anything that could have a side effect 
-		if (output != 0 && Math.abs(turnPidController.getPositionError()) < DEGREE_THRESHOLD)
+		if (output != 0 && Math.abs(turnPidController.getError()) < DEGREE_THRESHOLD)
 		{
 			output = 0;
 		}
