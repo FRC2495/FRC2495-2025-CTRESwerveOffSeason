@@ -33,6 +33,7 @@ import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
 //import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.Constants.AprilTags;
+import frc.robot.RobotContainer;
 import frc.robot.interfaces.ICamera;
 
 /** Wrapper for PhotonCamera class */
@@ -59,7 +60,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	public AprilTagCamera() {
 		super(DEFAULT_CAM_NAME);
-		//estimator = new PhotonPoseEstimator(FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
+		estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
 	/*public Optional<EstimatedRobotPose> getGlobalPose(){

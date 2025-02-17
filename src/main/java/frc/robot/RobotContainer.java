@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.apriltag.AprilTagFieldLayout;
+import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
 //import edu.wpi.first.math.controller.PIDController;
 //import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -218,6 +220,8 @@ public class RobotContainer {
 	private final Field2d field = new Field2d(); //  a representation of the field
 
 	private final Indicator indicator = new Indicator(apriltag_camera, object_detection_camera);
+
+	public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
 
 	// The driver's and copilot's joystick(s) and controller(s)
 
