@@ -215,10 +215,10 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 		calculateTurnAngleUsingPidController();
 
-		Optional<EstimatedRobotPose> result = poseCamera.getGlobalPose();
+		/*Optional<EstimatedRobotPose> result = poseCamera.getGlobalPose();
 		if (result.isPresent()) {
 			m_odometry.addVisionMeasurement(result.get().estimatedPose.toPose2d(), result.get().timestampSeconds);
-		}
+		}*/
 	}
 
 	/**

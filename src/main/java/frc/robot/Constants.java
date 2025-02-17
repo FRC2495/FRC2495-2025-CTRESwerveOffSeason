@@ -141,7 +141,7 @@ public final class Constants {
 		public static final double Y_CONTROLLER_P = 1;
 		public static final double THETA_CONTROLLER_P = 1;
 
-		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_P = 5; //.5; //2.75; //4.0; //3.5; //3; //2.5; //5; //1; 
+		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_P = 2.9; //.5; //2.75; //4.0; //3.5; //3; //2.5; //5; //1; 
 		public static final double ROTATION_HOLONOMIC_CONTROLLER_P = 1; //2; //5; //2.5
 
 		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_I = 0;

@@ -55,19 +55,20 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	);
 
 	static final double APRILTAG_CAMERA_SHOOTER_ALIGNMENT_CORRECTION_DEGREES = 5.0; // apply offset in degrees to compensate for shooter being a bit crooked - TODO adjust as needed
+	//static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
 
 	public AprilTagCamera() {
 		super(DEFAULT_CAM_NAME);
-		estimator = new PhotonPoseEstimator(AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape), PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
+		//estimator = new PhotonPoseEstimator(FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
-	public Optional<EstimatedRobotPose> getGlobalPose(){
+	/*public Optional<EstimatedRobotPose> getGlobalPose(){
 		Optional<EstimatedRobotPose> globalPose = Optional.empty();
 		for (var change : getAllUnreadResults()) {
 			globalPose = estimator.update(change);
 		}
 		return globalPose;
-	}
+	}*/
 	
 	public double getDistanceToTarget() {
 		//return getDistanceToBestTarget();
