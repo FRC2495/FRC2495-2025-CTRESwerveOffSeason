@@ -60,7 +60,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	public AprilTagCamera() {
 		super(DEFAULT_CAM_NAME);
-		estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
+		//estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
 	/*public Optional<EstimatedRobotPose> getGlobalPose(){
