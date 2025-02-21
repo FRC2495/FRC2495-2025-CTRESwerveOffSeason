@@ -1,30 +1,30 @@
-package frc.robot.commands.shooter;
+// package frc.robot.commands.shooter;
 
-import edu.wpi.first.wpilibj2.command.Command;
+// import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.Shooter;
+// import frc.robot.subsystems.Shooter;
 
-/**
- *
- */
-public class ShooterShootLow extends Command {
+// /**
+//  *
+//  */
+// public class ShooterShootLow extends Command {
 
-	private Shooter shooter;
+// 	private Shooter shooter;
 
 
-	public ShooterShootLow(Shooter shooter_in) {
+// 	public ShooterShootLow(Shooter shooter_in) {
 
-		this.shooter = shooter_in;
+// 		this.shooter = shooter_in;
 
-		addRequirements(
-			shooter);
+// 		addRequirements(
+// 			shooter);
 
-	}
+// 	}
 
-	// Called just before this Command runs the first time
-	@Override
-	public void initialize() {
-		//System.out.println("ShooterShootLow: initialize");
-		shooter.shootLow();
-	}
-}
+// 	// Called just before this Command runs the first time
+// 	@Override
+// 	public void initialize() {
+// 		//System.out.println("ShooterShootLow: initialize");
+// 		shooter.shootLow();
+// 	}
+// }

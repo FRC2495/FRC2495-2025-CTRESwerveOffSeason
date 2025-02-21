@@ -57,7 +57,7 @@ import frc.robot.subsystems.Elevator;
 //import frc.robot.subsystems.Drawer;
 import frc.robot.subsystems.Neck;
 import frc.robot.subsystems.Roller;
-import frc.robot.subsystems.Shooter;
+//import frc.robot.subsystems.Shooter;
 //import frc.robot.subsystems.Compressor;
 //import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
@@ -69,7 +69,7 @@ import frc.robot.commands.elevator.*;
 import frc.robot.commands.neck.*;
 import frc.robot.commands.roller.*;
 //import frc.robot.commands.simpleshooter.*;
-import frc.robot.commands.shooter.*;
+//import frc.robot.commands.shooter.*;
 import frc.robot.interfaces.ICamera;
 //import frc.robot.commands.mouth.*;
 import frc.robot.commands.indicator.*;
@@ -205,9 +205,9 @@ public class RobotContainer {
 
 	//private final /*I*/SimpleShooter shooter = new SimpleShooter(shooter_master, shooter_follower);
 
-	private final TalonFX shooter_master = new TalonFX(Ports.CAN.SHOOTER_MASTER);
+	//private final TalonFX shooter_master = new TalonFX(Ports.CAN.SHOOTER_MASTER);
 	
-	private final /*I*/Shooter shooter = new Shooter(shooter_master);
+	//private final /*I*/Shooter shooter = new Shooter(shooter_master);
 
 	// pneumatic devices
 
@@ -318,7 +318,7 @@ public class RobotContainer {
 		
 		roller.setDefaultCommand(new RollerStopForever(roller)); // we stop by default
 
-		shooter.setDefaultCommand(new ShooterStopForever(shooter)); // we stop by default
+		//shooter.setDefaultCommand(new ShooterStopForever(shooter)); // we stop by default
 
 		//compressor.checkCompressor(); //we compress in the background
 
@@ -383,8 +383,8 @@ public class RobotContainer {
 		joyMain.button(8)
 			.whileTrue(new NeckJoystickControl(neck, drivetrain, getMainJoystick()));
 		
-		joyMain.button(9)
-			.whileTrue(new ShooterJoystickControl(shooter, drivetrain, getMainJoystick()));
+		joyMain.button(9);
+			//.whileTrue(new ShooterJoystickControl(shooter, drivetrain, getMainJoystick()));
 		
 		joyMain.button(10)
 			.whileTrue(new ElevatorJoystickControl(elevator, drivetrain, getMainJoystick()));
@@ -418,17 +418,17 @@ public class RobotContainer {
 			
 		copilotGamepad.back()
 			//.onTrue(new DrivetrainAndGyroReset(drivetrain));
-			.onTrue(new AlmostEverythingStop(elevator, neck, roller, shooter));
+			.onTrue(new AlmostEverythingStop(elevator, neck, roller));
 
 		copilotGamepad.start()
 			//.onTrue(new AlmostEverythingStop(elevator, neck, roller));
 			.onTrue(new NeckHome(neck));
 
 
-		copilotGamepad.leftTrigger()
+		copilotGamepad.leftTrigger();
 			//.onTrue(new DrawerRetractWithStallDetection(drawer));
 			//.whileTrue(new ShooterTake(shooter));
-			.whileTrue(new ShooterShootHigh(shooter));
+			//.whileTrue(new ShooterShootHigh(shooter));
 
 		copilotGamepad.rightTrigger()
 			//.onTrue(new DrawerExtendWithStallDetection(drawer));
@@ -674,6 +674,11 @@ public class RobotContainer {
 		return swerveControllerCommand.andThen(() -> drivetrain.drive(0, 0, 0, false, false));
 	}*/
 
+	/*public AprilTagFieldLayout getAprilTagFieldLayout()
+	{
+		return FIELD_LAYOUT;
+	}*/
+
 	public Field2d getField()
 	{
 		return field;
@@ -734,10 +739,10 @@ public class RobotContainer {
 		return mouth;
 	}*/
 
-	public Shooter getShooter()
+	/*public Shooter getShooter()
 	{
 		return shooter;
-	}
+	}*/
 
 	public Joystick getMainJoystick()
 	{
