@@ -1,25 +1,27 @@
+
 package frc.robot.commands.neck;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Neck;
+
+import frc.robot.subsystems.OldNeck;
 
 /**
  *
  */
-public class NeckHome extends Command {
+public class OldNeckMoveDownWithStallDetection extends Command {
 
-	private Neck neck;
+	private OldNeck old_neck;
 
-	public NeckHome(Neck neck) {
-		this.neck = neck;
-		addRequirements(neck);
+	public OldNeckMoveDownWithStallDetection(OldNeck old_neck) {
+		this.old_neck = old_neck;
+		addRequirements(old_neck);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("NeckHome: initialize");
-		neck.home();
+		System.out.println("OldNeckMoveDownWithStallDetection: initialize");
+		old_neck.moveDown();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -31,13 +33,14 @@ public class NeckHome extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	public boolean isFinished() {
-		return !neck.checkHome();
+		return !old_neck.tripleCheckMove() || old_neck.tripleCheckIfStalled();
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("NeckHome: end");
-		neck.stop();
+		System.out.println("OldNeckMoveDownWithStallDetection: end");
+		old_neck.stop();
+		//old_neck.stay();
 	}
 }

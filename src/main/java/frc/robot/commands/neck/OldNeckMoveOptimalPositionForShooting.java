@@ -2,39 +2,39 @@ package frc.robot.commands.neck;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.Neck;
+import frc.robot.subsystems.OldNeck;
 import frc.robot.util.Magic;
 import frc.robot.interfaces.ICamera;
 
 /**
  *
  */
-public class NeckMoveOptimalPositionForShooting extends Command {
+public class OldNeckMoveOptimalPositionForShooting extends Command {
 
-	private Neck neck;
+	private OldNeck old_neck;
 	private ICamera camera;
 
-	public NeckMoveOptimalPositionForShooting(Neck neck_in, ICamera camera_in) {
+	public OldNeckMoveOptimalPositionForShooting(OldNeck old_neck_in, ICamera camera_in) {
 
-		this.neck = neck_in;
+		this.old_neck = old_neck_in;
 		this.camera = camera_in;
 
 		addRequirements(
-			neck);
+			old_neck);
 
 	}
 
 	@Override
 	public void initialize() {
-		System.out.println("NeckMoveOptimalPositionForShooting: initialize");
+		System.out.println("OldNeckMoveOptimalPositionForShooting: initialize");
 
 		double distance = camera!=null? camera.getDistanceToTarget():0.0; // call will return 0.0 by convention if no target acquired
 
-		if (distance != 0.0) // only moves neck if target is acquired - noop otherwise
+		if (distance != 0.0) // only moves old_neck if target is acquired - noop otherwise
 		{
 			double magic_encoder_ticks = Magic.getEncoderCounts(distance);
 
-			neck.moveCustom(magic_encoder_ticks);
+			old_neck.moveCustom(magic_encoder_ticks);
 		}
 	}
 
@@ -47,13 +47,13 @@ public class NeckMoveOptimalPositionForShooting extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	public boolean isFinished() {
-		return !neck.tripleCheckMove() || neck.tripleCheckIfStalled();
+		return !old_neck.tripleCheckMove() || old_neck.tripleCheckIfStalled();
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("NeckMoveOptimalPositionForShooting: end");
-		neck.stay(); // stop()
+		System.out.println("OldNeckMoveOptimalPositionForShooting: end");
+		old_neck.stay(); // stop()
 	}
 }

@@ -3,25 +3,25 @@ package frc.robot.commands.neck;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.Neck;
+import frc.robot.subsystems.OldNeck;
 
 /**
  *
  */
-public class NeckMoveSubWithStallDetection extends Command {
+public class OldNeckMoveUpWithStallDetection extends Command {
 
-	private Neck neck;
+	private OldNeck old_neck;
 
-	public NeckMoveSubWithStallDetection(Neck neck) {
-		this.neck = neck;
-		addRequirements(neck);
+	public OldNeckMoveUpWithStallDetection(OldNeck old_neck) {
+		this.old_neck = old_neck;
+		addRequirements(old_neck);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("NeckMoveSubWithStallDetection: initialize");
-		neck.moveSub();
+		System.out.println("OldNeckMoveUpWithStallDetection: initialize");
+		old_neck.moveUp();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -33,13 +33,13 @@ public class NeckMoveSubWithStallDetection extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	public boolean isFinished() {
-		return !neck.tripleCheckMove() || neck.tripleCheckIfStalled();
+		return !old_neck.tripleCheckMove() || old_neck.tripleCheckIfStalled();
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interupted) {
-		System.out.println("NeckMoveSubWithStallDetection: end");
-		neck.stay();  // we don't want to stop so we stay up...
+		System.out.println("OldNeckMoveUpWithStallDetection: end");
+		old_neck.stay();  // we don't want to stop so we stay up...
 	}
 }
