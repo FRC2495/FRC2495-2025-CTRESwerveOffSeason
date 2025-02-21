@@ -56,7 +56,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	);
 
 	static final double APRILTAG_CAMERA_SHOOTER_ALIGNMENT_CORRECTION_DEGREES = 5.0; // apply offset in degrees to compensate for shooter being a bit crooked - TODO adjust as needed
-	//static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
+	//static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
 	public AprilTagCamera() {
 		super(DEFAULT_CAM_NAME);
