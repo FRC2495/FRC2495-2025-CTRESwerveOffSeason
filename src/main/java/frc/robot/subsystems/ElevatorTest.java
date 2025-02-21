@@ -115,6 +115,7 @@
 
 // 		elevatorConfig = new TalonFXConfiguration();
 // 		elevator_followerConfig = new TalonFXConfiguration();
+        
 // 		elevator.getConfigurator().apply(elevatorConfig);
 // 		elevator_follower.getConfigurator().apply(elevator_followerConfig);
 		
@@ -362,7 +363,7 @@
 // 		// F gain is multiplied directly by the set point passed into the programming API.
 // 		// The result of this multiplication is in motor output units [-1023, 1023]. This allows the robot to feed-forward using the target set-point.
 // 		// In order to calculate feed-forward, you will need to measure your motor's velocity at a specified percent output
-// 		// (preferably an output close to the intended operating range).
+// 		// (preferably an output close to the intended operating r++++++++ange).
 		
 // 		var talonFXConfigs = new TalonFXConfiguration();
 
