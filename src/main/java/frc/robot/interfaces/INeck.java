@@ -44,7 +44,7 @@ public interface INeck extends Subsystem {
 	
 	public void stop();
 		
-	public void setPeakOutputs(double peakOutput);
+	public void setNominalAndPeakOutputs(double peakOutput);
 	
 	// for debug purpose only
 	public void joystickControl(Joystick joystick);

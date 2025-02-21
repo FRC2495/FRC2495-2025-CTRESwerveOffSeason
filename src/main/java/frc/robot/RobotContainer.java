@@ -56,6 +56,7 @@ import frc.robot.subsystems.SwerveDrivetrain;
 import frc.robot.subsystems.Elevator;
 //import frc.robot.subsystems.Drawer;
 import frc.robot.subsystems.Neck;
+import frc.robot.subsystems.OldNeck;
 import frc.robot.subsystems.Roller;
 //import frc.robot.subsystems.Shooter;
 //import frc.robot.subsystems.Compressor;
@@ -189,10 +190,14 @@ public class RobotContainer {
 
 	private final /*I*/Elevator elevator = new Elevator(elevator_master, elevator_follower);
 
-	private final TalonFX neck_master = new TalonFX(Ports.CAN.NECK_MASTER);
-	private final TalonFX neck_follower = new TalonFX(Ports.CAN.NECK_FOLLOWER);
+	private final WPI_TalonSRX neck_master = new WPI_TalonSRX(Ports.CAN.NECK_MASTER);
 	
-	private final /*I*/Neck neck = new Neck(neck_master, neck_follower);
+	private final /*I*/Neck neck = new Neck(neck_master);
+
+	private final TalonFX old_neck_master = new TalonFX(Ports.CAN.NECK_MASTER);
+	private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.NECK_FOLLOWER);
+	
+	private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
 
 	//private final CANSparkMax roller_master = new CANSparkMax(Ports.CAN.ROLLER, MotorType.kBrushless);
 	private final WPI_TalonSRX roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
@@ -485,10 +490,10 @@ public class RobotContainer {
 			.whileTrue();*/
 
 		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+			.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
 
 		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+			.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
 
 		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD);
 			//.whileTrue(new DrawerGamepadControl(drawer, getCopilotGamepad()));
