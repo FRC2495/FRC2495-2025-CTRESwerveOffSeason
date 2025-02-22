@@ -30,17 +30,9 @@ public class Neck extends SubsystemBase implements INeck {
 	
 	public static final double GEAR_RATIO = 3.0; // todo change if needed
 
-	public static final int ANGLE_TO_ACROSS_FIELD_TICKS = 10000;
-	public static final int ANGLE_TO_SUB_TICKS = 30000;
-	public static final int ANGLE_TO_PODIUM_TICKS = 65000;
-	public static final int ANGLE_TO_FEED_NOTE_TICKS = 65000; //85000 // used to be sp1 second note neck position 53000;
+	public static final int ANGLE_TO_CORAL_STATION_TICKS = 0; //TODO set proper value
 	public static final int ANGLE_TO_MIDWAY_TICKS = 90000;
 	public static final int ANGLE_TO_TRAVEL_TICKS = 180000; // todo set proper value
-
-
-	// shoot from podium : -65000 
-	// shoot from sub : -20000
-
 	
 	/*
 	!!! VIRTUAL_HOME_OFFSET_TICKS is important for moving up,     !!!
@@ -267,24 +259,6 @@ public class Neck extends SubsystemBase implements INeck {
 		stalledCount = 0;
 	}
 
-	public void moveToFeedNote() {	
-
-		//setPIDParameters();
-		System.out.println("Moving To Feed Note");
-		
-		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-
-		tac = -ANGLE_TO_FEED_NOTE_TICKS;
-		neck.set(ControlMode.Position,tac);
-		
-		isMoving = true;
-		isMovingUp = true;
-		onTargetCount = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
-
-
 	public void moveCustom(double encoder_ticks) {	
 
 		//setPIDParameters();
@@ -302,6 +276,23 @@ public class Neck extends SubsystemBase implements INeck {
 		stalledCount = 0;
 	}
 
+	public void moveToCoralStation() {	
+
+		//setPIDParameters();
+		System.out.println("Moving to Coral Station");
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		tac = -ANGLE_TO_TRAVEL_TICKS;
+		neck.set(ControlMode.Position,tac);
+		
+		isMoving = true;
+		isMovingUp = true;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
 	public void moveMidway() {	
 
 		//setPIDParameters();
@@ -310,57 +301,6 @@ public class Neck extends SubsystemBase implements INeck {
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		tac = -ANGLE_TO_MIDWAY_TICKS;
-		neck.set(ControlMode.Position,tac);
-		
-		isMoving = true;
-		isMovingUp = true;
-		onTargetCount = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
-
-	public void moveSub() {
-		
-		//setPIDParameters();
-		System.out.println("Moving to Sub");
-		
-		setNominalAndPeakOutputs(SUPER_REDUCED_PCT_OUTPUT);
-
-		tac = -ANGLE_TO_SUB_TICKS;
-		neck.set(ControlMode.Position,tac);
-		
-		isMoving = true;
-		isMovingUp = true;
-		onTargetCount = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
-
-	public void moveAcrossField() {
-		
-		//setPIDParameters();
-		System.out.println("Moving Across Field");
-		
-		setNominalAndPeakOutputs(SUPER_REDUCED_PCT_OUTPUT);
-
-		tac = -ANGLE_TO_ACROSS_FIELD_TICKS;
-		neck.set(ControlMode.Position,tac);
-		
-		isMoving = true;
-		isMovingUp = true;
-		onTargetCount = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
-	
-	public void movePodium() {
-		
-		//setPIDParameters();
-		System.out.println("Moving to Podium");
-		
-		setNominalAndPeakOutputs(SUPER_REDUCED_PCT_OUTPUT);
-
-		tac = -ANGLE_TO_PODIUM_TICKS;
 		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
