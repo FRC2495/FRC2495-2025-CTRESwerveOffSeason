@@ -65,6 +65,7 @@ import frc.robot.subsystems.AlgaeRoller;
 //import frc.robot.subsystems.Compressor;
 //import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
+import frc.robot.commands.algae_roller.AlgaeRollerJoystickControl;
 import frc.robot.commands.algae_roller.AlgaeRollerStopForever;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
@@ -394,10 +395,10 @@ public class RobotContainer {
 			.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
 		
 		joyMain.button(8)
-			.whileTrue(new OldNeckJoystickControl(old_neck, drivetrain, getMainJoystick()));
+			.whileTrue(new AlgaeRollerJoystickControl(algae_roller, drivetrain, getMainJoystick()));
 		
 		joyMain.button(9);
-			//.whileTrue(new ShooterJoystickControl(shooter, drivetrain, getMainJoystick()));
+			//.whileTrue(new NeckJoystickControl(neck, drivetrain, getMainJoystick()));
 		
 		joyMain.button(10)
 			.whileTrue(new ElevatorJoystickControl(elevator, drivetrain, getMainJoystick()));

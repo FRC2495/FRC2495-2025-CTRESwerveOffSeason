@@ -246,40 +246,6 @@ public class Slider extends SubsystemBase implements ISlider {
 		isReallyStalled = false;
 		stalledCount = 0;
 	}
-
-	public void extendPickup() {
-		
-		//setPIDParameters();
-		System.out.println("Extending to Pickup");
-		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-
-		tac = -LENGTH_OF_PICKUP_TICKS;
-		
-		slider.set(ControlMode.Position,tac);
-		
-		isMoving = true;
-		isExtending = true;
-		onTargetCount = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
-
-	public void extendLevelTwo() {
-		
-		//setPIDParameters();
-		System.out.println("Extending to Level Two");
-		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-
-		tac = -LENGTH_OF_LEVEL_TWO_TICKS;
-		
-		slider.set(ControlMode.Position,tac);
-		
-		isMoving = true;
-		isExtending = true;
-		onTargetCount = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
 	
 	public void retract() {
 		

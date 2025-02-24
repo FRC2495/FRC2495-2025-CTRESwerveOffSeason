@@ -17,12 +17,6 @@ public interface ISlider extends Subsystem {
 
 	// extends the arm asynchronously
 	public void extend();
-
-	// extends the arm asynchronously
-	public void extendPickup();
-
-	// extends the arm asynchronously
-	public void extendLevelTwo();
 	
 	// retracts the arm asynchronously
 	public void retract();
