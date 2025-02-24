@@ -1,5 +1,5 @@
 
-package frc.robot.commands.neck;
+package frc.robot.commands.old_neck;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -8,11 +8,11 @@ import frc.robot.subsystems.OldNeck;
 /**
  *
  */
-public class OldNeckMoveAcrossFieldWithStallDetection extends Command {
+public class OldNeckMoveDownWithStallDetection extends Command {
 
 	private OldNeck old_neck;
 
-	public OldNeckMoveAcrossFieldWithStallDetection(OldNeck old_neck) {
+	public OldNeckMoveDownWithStallDetection(OldNeck old_neck) {
 		this.old_neck = old_neck;
 		addRequirements(old_neck);
 	}
@@ -20,8 +20,8 @@ public class OldNeckMoveAcrossFieldWithStallDetection extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("OldNeckMoveAcrossFieldWithStallDetection: initialize");
-		old_neck.moveAcrossField();
+		System.out.println("OldNeckMoveDownWithStallDetection: initialize");
+		old_neck.moveDown();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -38,8 +38,9 @@ public class OldNeckMoveAcrossFieldWithStallDetection extends Command {
 
 	// Called once after isFinished returns true
 	@Override
-	public void end(boolean interupted) {
-		System.out.println("OldNeckMoveAcrossFieldWithStallDetection: end");
-		old_neck.stay();  // we don't want to stop so we stay up...
+	public void end(boolean interrupted) {
+		System.out.println("OldNeckMoveDownWithStallDetection: end");
+		old_neck.stop();
+		//old_neck.stay();
 	}
 }

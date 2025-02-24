@@ -1,5 +1,5 @@
 
-package frc.robot.commands.neck;
+package frc.robot.commands.old_neck;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -8,11 +8,11 @@ import frc.robot.subsystems.OldNeck;
 /**
  *
  */
-public class OldNeckMoveSubWithStallDetection extends Command {
+public class OldNeckMovePodiumWithStallDetection extends Command {
 
 	private OldNeck old_neck;
 
-	public OldNeckMoveSubWithStallDetection(OldNeck old_neck) {
+	public OldNeckMovePodiumWithStallDetection(OldNeck old_neck) {
 		this.old_neck = old_neck;
 		addRequirements(old_neck);
 	}
@@ -20,8 +20,8 @@ public class OldNeckMoveSubWithStallDetection extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("OldNeckMoveSubWithStallDetection: initialize");
-		old_neck.moveSub();
+		System.out.println("OldNeckMovePodiumWithStallDetection: initialize");
+		old_neck.movePodium();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -39,7 +39,7 @@ public class OldNeckMoveSubWithStallDetection extends Command {
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interupted) {
-		System.out.println("NeckMoveSubWithStallDetection: end");
+		System.out.println("OldNeckMovePodiumWithStallDetection: end");
 		old_neck.stay();  // we don't want to stop so we stay up...
 	}
 }

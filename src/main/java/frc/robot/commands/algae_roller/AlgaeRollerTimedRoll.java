@@ -54,7 +54,7 @@ public class AlgaeRollerTimedRoll extends WaitCommand {
 	// Called once after timeout
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("AlgaeRollerTimedRoll: end");
+		System.out.println("RollerTimedRoll: end");
 		algae_roller.stop();
 		super.end(interrupted);
 	}

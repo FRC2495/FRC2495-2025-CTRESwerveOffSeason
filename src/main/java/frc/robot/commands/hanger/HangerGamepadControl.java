@@ -1,36 +1,36 @@
 
-package frc.robot.commands.neck;
+package frc.robot.commands.hanger;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.subsystems.OldNeck;
+import frc.robot.subsystems.Hanger;
 
 /**
  *
  */
-public class OldNeckGamepadControl extends Command {
+public class HangerGamepadControl extends Command {
 
-	private OldNeck old_neck;
+	private Hanger hanger;
 	private XboxController gamepad;
 
-	public OldNeckGamepadControl(OldNeck old_neck, XboxController gamepad) {
-		this.old_neck = old_neck;
+	public HangerGamepadControl(Hanger hanger, XboxController gamepad) {
+		this.hanger = hanger;
 		this.gamepad = gamepad;
 		
 		addRequirements(
-			old_neck);
+			hanger);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("OldNeckGamepadControl: initialize");
+		System.out.println("HangerGamepadControl: initialize");
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	public void execute() {
-		old_neck.gamepadControl(gamepad);
+		hanger.gamepadControl(gamepad);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -42,7 +42,7 @@ public class OldNeckGamepadControl extends Command {
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("NeckGamepadControl: end");
-		old_neck.stop();
+		System.out.println("HangerGamepadControl: end");
+		hanger.stop();
 	}
 }

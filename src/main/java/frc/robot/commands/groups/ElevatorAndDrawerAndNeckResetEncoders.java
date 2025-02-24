@@ -7,7 +7,7 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.OldNeck;
 
 import frc.robot.commands.elevator.*;
-import frc.robot.commands.neck.*;
+import frc.robot.commands.old_neck.*;
 
 /**
  *
