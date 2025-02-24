@@ -8,17 +8,8 @@ import frc.robot.subsystems.*;
 
 public class AlgaeRollerSuperSmartRoll extends SequentialCommandGroup {
 
-    public AlgaeRollerSuperSmartRoll(AlgaeRoller algae_roller, NoteSensor notesensor, NoteSensor noteSensorTwo){
+    public AlgaeRollerSuperSmartRoll(AlgaeRoller algae_roller){
 
-        addCommands(
-
-			new AlgaeRollerRollLowRpmUntilNoteSensed(algae_roller, notesensor, noteSensorTwo),
-
-            new WaitCommand(0.5), // we wait for things to settle down
-
-            new AlgaeRollerReleaseShortDistance(algae_roller)
-            
-        ); 
   
     }
 
