@@ -5,30 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.coral_roller;
+package frc.robot.commands.algae_roller;
 
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.sensors.NoteSensor;
-import frc.robot.subsystems.CoralRoller;
+
+import frc.robot.subsystems.AlgaeRoller;
 
 /**
  * Add your docs here.
  */
-public class CoralRollerTimedRollUntilNoteSensed extends WaitCommand {
+public class AlgaeRollerTimedShoot extends WaitCommand {
 
-	private CoralRoller coral_roller;
-	private NoteSensor notesensor;
-	private NoteSensor noteSensorTwo;
+	private AlgaeRoller algae_roller;
 
 	/**
 	 * Add your docs here.
 	 */
-	public CoralRollerTimedRollUntilNoteSensed(CoralRoller coral_roller, double timeout, NoteSensor notesensor, NoteSensor noteSensorTwo) {
+	public AlgaeRollerTimedShoot(AlgaeRoller algae_roller, double timeout) {
 		super(timeout);
-		this.coral_roller = coral_roller;
-		this.notesensor = notesensor;
-		this.noteSensorTwo = noteSensorTwo;
-		addRequirements(coral_roller);
+		this.algae_roller = algae_roller;
+		addRequirements(algae_roller);
 		
 		
 		// ControllerBase is not a real subsystem, so no need to reserve it
@@ -43,9 +39,9 @@ public class CoralRollerTimedRollUntilNoteSensed extends WaitCommand {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("CoralRollerTimedRollUntilNoteSensed: initialize");
+		System.out.println("AlgaeRollerTimedShoot: initialize");
 		super.initialize();
-		coral_roller.roll();
+		algae_roller.shoot();
 
 	}
 
@@ -55,15 +51,10 @@ public class CoralRollerTimedRollUntilNoteSensed extends WaitCommand {
 		// nothing
 	}
 
-	@Override
-	public boolean isFinished() {
-		return !notesensor.isEnergized() || !noteSensorTwo.isEnergized();
-	}
-
 	// Called once after timeout
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("CoralRollerTimedRollUntilNoteSensed: end");
+		System.out.println("AlgaeRollerTimedShoot: end");
 		
 		super.end(interrupted);
 	}
