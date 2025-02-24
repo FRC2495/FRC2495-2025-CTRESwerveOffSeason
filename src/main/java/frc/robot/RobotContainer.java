@@ -391,7 +391,7 @@ public class RobotContainer {
 			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 
 		joyMain.button(7)
-			.whileTrue(new CoralRollerJoystickControl(roller, drivetrain, getMainJoystick()));
+			.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
 		
 		joyMain.button(8)
 			.whileTrue(new OldNeckJoystickControl(old_neck, drivetrain, getMainJoystick()));
@@ -414,24 +414,24 @@ public class RobotContainer {
 		// copilot (gamepad)
 		
 		copilotGamepad.a()
-			.whileTrue(new CoralRollerRelease(roller));
+			.whileTrue(new CoralRollerRelease(coral_roller));
 		
 		copilotGamepad.b()
-			.whileTrue(new CoralRollerRoll(roller));
+			.whileTrue(new CoralRollerRoll(coral_roller));
 
 		copilotGamepad.x()
-			.onTrue(new CoralRollerReleaseShortDistance(roller));
+			.onTrue(new CoralRollerReleaseShortDistance(coral_roller));
 
-		copilotGamepad.y()
+		copilotGamepad.y();
 			//.whileTrue(new RollerRollLowRpm(roller));
 			//.onTrue(new RollerRollLowRpmUntilNoteSensed(roller, getNoteSensor()));
 			//.onTrue(new RollerReleaseShortDistance(roller));
 			//.onTrue(new RollerSuperSmartRoll(roller, noteSensor, noteSensorTwo));
-			.onTrue(new CoralRollerRollLowRpmUntilNoteSensed(roller, noteSensor, noteSensorTwo));
+			//.onTrue(new CoralRollerRollLowRpmUntilNoteSensed(coral_roller, noteSensor, noteSensorTwo));
 			
 		copilotGamepad.back()
 			//.onTrue(new DrivetrainAndGyroReset(drivetrain));
-			.onTrue(new AlmostEverythingStop(elevator, old_neck, roller));
+			.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
 
 		copilotGamepad.start()
 			//.onTrue(new AlmostEverythingStop(elevator, neck, roller));
@@ -445,7 +445,7 @@ public class RobotContainer {
 
 		copilotGamepad.rightTrigger()
 			//.onTrue(new DrawerExtendWithStallDetection(drawer));
-			.whileTrue(new CoralRollerRoll(roller));
+			.whileTrue(new CoralRollerRoll(coral_roller));
 
 
 		copilotGamepad.povDown()
@@ -477,11 +477,11 @@ public class RobotContainer {
 
 
 		copilotGamepad.leftStick()
-			.onTrue(new CoralRollerTimedRoll(roller, 3));
+			.onTrue(new CoralRollerTimedRoll(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));			
 
 		copilotGamepad.rightStick()
-			.onTrue(new CoralRollerTimedRelease(roller, 3));
+			.onTrue(new CoralRollerTimedRelease(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
 
 
