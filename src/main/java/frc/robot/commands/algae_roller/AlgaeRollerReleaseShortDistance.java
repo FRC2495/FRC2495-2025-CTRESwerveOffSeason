@@ -20,7 +20,7 @@ public class AlgaeRollerReleaseShortDistance extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("AlgaeRollerReleaseShortDistance: initialize");
+		System.out.println("RollerReleaseShortDistance: initialize");
 		algae_roller.releaseShortDistance();
 	}
 
@@ -39,7 +39,7 @@ public class AlgaeRollerReleaseShortDistance extends Command {
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("AlgaeRollerReleaseShortDistance: end");
+		System.out.println("RollerReleaseShortDistance: end");
 		algae_roller.stop(); // adjust if needed
 	}
 }
