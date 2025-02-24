@@ -9,20 +9,20 @@
 // it from being updated in the future.
 
 
-package frc.robot.commands.roller;
+package frc.robot.commands.coral_roller;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.CoralRoller;
 
 /**
  *
  */
-public class RollerRelease extends Command {
+public class CoralRollerRelease extends Command {
 
-	private Roller roller;
+	private CoralRoller roller;
 
-	public RollerRelease(Roller roller) {
+	public CoralRollerRelease(CoralRoller roller) {
 		this.roller = roller;
 		addRequirements(roller);
 	}

@@ -5,26 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.roller;
+package frc.robot.commands.coral_roller;
 
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 
-import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.CoralRoller;
 
 /**
  * Add your docs here.
  */
-public class RollerTimedShoot extends WaitCommand {
+public class CoralRollerTimedRelease extends WaitCommand {
 
-	private Roller roller;
+	private CoralRoller coral_roller;
 
 	/**
 	 * Add your docs here.
 	 */
-	public RollerTimedShoot(Roller roller, double timeout) {
+	public CoralRollerTimedRelease(CoralRoller coral_roller, double timeout) {
 		super(timeout);
-		this.roller = roller;
-		addRequirements(roller);
+		this.coral_roller = coral_roller;
+		addRequirements(coral_roller);
 		
 		
 		// ControllerBase is not a real subsystem, so no need to reserve it
@@ -39,9 +39,9 @@ public class RollerTimedShoot extends WaitCommand {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("RollerTimedShoot: initialize");
+		System.out.println("CoralRollerTimedRelease: initialize");
 		super.initialize();
-		roller.shoot();
+		coral_roller.release();
 
 	}
 
@@ -54,7 +54,7 @@ public class RollerTimedShoot extends WaitCommand {
 	// Called once after timeout
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("RollerTimedShoot: end");
+		System.out.println("CoralRollerTimedRelease: end");
 		
 		super.end(interrupted);
 	}

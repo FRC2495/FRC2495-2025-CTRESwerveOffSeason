@@ -1,27 +1,27 @@
 
-package frc.robot.commands.roller;
+package frc.robot.commands.coral_roller;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.CoralRoller;
 
 /**
  *
  */
-public class RollerStopForever extends Command {
+public class CoralRollerStopForever extends Command {
 
-	private Roller roller;
+	private CoralRoller coral_roller;
 
-	public RollerStopForever(Roller roller) {
-		this.roller = roller;
-		addRequirements(roller);
+	public CoralRollerStopForever(CoralRoller coral_roller) {
+		this.coral_roller = coral_roller;
+		addRequirements(coral_roller);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("RollerStopForever: initialize");
-		roller.stop();
+		System.out.println("CoralRollerStopForever: initialize");
+		coral_roller.stop();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -39,6 +39,6 @@ public class RollerStopForever extends Command {
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("RollerStopForever: end");
+		System.out.println("CoralRollerStopForever: end");
 	}
 }

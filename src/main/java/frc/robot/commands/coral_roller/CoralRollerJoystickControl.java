@@ -1,22 +1,22 @@
 
-package frc.robot.commands.roller;
+package frc.robot.commands.coral_roller;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 
-import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.SwerveDrivetrain;
 
 /**
  *
  */
-public class RollerJoystickControl extends Command {
+public class CoralRollerJoystickControl extends Command {
 
-	private Roller roller;
+	private CoralRoller roller;
 	//private SwerveDrivetrain drivetrain;
 	private Joystick joystick;
 
-	public RollerJoystickControl(Roller roller, SwerveDrivetrain drivetrain, Joystick joystick) {
+	public CoralRollerJoystickControl(CoralRoller roller, SwerveDrivetrain drivetrain, Joystick joystick) {
 		this.roller = roller;
 		//this.drivetrain = drivetrain;
 		this.joystick = joystick;

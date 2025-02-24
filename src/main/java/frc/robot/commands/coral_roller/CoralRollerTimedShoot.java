@@ -5,30 +5,26 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.roller;
+package frc.robot.commands.coral_roller;
 
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.sensors.NoteSensor;
-import frc.robot.subsystems.Roller;
+
+import frc.robot.subsystems.CoralRoller;
 
 /**
  * Add your docs here.
  */
-public class RollerTimedRollUntilNoteSensed extends WaitCommand {
+public class CoralRollerTimedShoot extends WaitCommand {
 
-	private Roller roller;
-	private NoteSensor notesensor;
-	private NoteSensor noteSensorTwo;
+	private CoralRoller coral_roller;
 
 	/**
 	 * Add your docs here.
 	 */
-	public RollerTimedRollUntilNoteSensed(Roller roller, double timeout, NoteSensor notesensor, NoteSensor noteSensorTwo) {
+	public CoralRollerTimedShoot(CoralRoller coral_roller, double timeout) {
 		super(timeout);
-		this.roller = roller;
-		this.notesensor = notesensor;
-		this.noteSensorTwo = noteSensorTwo;
-		addRequirements(roller);
+		this.coral_roller = coral_roller;
+		addRequirements(coral_roller);
 		
 		
 		// ControllerBase is not a real subsystem, so no need to reserve it
@@ -43,9 +39,9 @@ public class RollerTimedRollUntilNoteSensed extends WaitCommand {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("RollerTimedRollUntilNoteSensed: initialize");
+		System.out.println("CoralRollerTimedShoot: initialize");
 		super.initialize();
-		roller.roll();
+		coral_roller.shoot();
 
 	}
 
@@ -55,15 +51,10 @@ public class RollerTimedRollUntilNoteSensed extends WaitCommand {
 		// nothing
 	}
 
-	@Override
-	public boolean isFinished() {
-		return !notesensor.isEnergized() || !noteSensorTwo.isEnergized();
-	}
-
 	// Called once after timeout
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("RollerTimedRollUntilNoteSensed: end");
+		System.out.println("CoralRollerTimedShoot: end");
 		
 		super.end(interrupted);
 	}
