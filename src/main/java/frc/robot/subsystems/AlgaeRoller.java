@@ -40,8 +40,8 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	static final int RELEASE_DISTANCE_INCHES = 17;
 	static final int SHOOT_DISTANCE_INCHES = 17;
 	
-	WPI_TalonSRX roller;
-	BaseMotorController roller_follower; 
+	WPI_TalonSRX algae_roller;
+	BaseMotorController algae_roller_follower; 
 		
 	boolean isMoving;
 	boolean isRolling;
@@ -82,17 +82,17 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 		
 	public AlgaeRoller(WPI_TalonSRX roller_in, BaseMotorController roller_follower_in) {
 		
-		roller = roller_in;
-		roller_follower = roller_follower_in; 
+		algae_roller = roller_in;
+		algae_roller_follower = roller_follower_in; 
 
-		roller.configFactoryDefault();
-		roller_follower.configFactoryDefault();
+		algae_roller.configFactoryDefault();
+		algae_roller_follower.configFactoryDefault();
 		
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
-		roller.setNeutralMode(NeutralMode.Coast);
-		roller_follower.setNeutralMode(NeutralMode.Coast);
+		algae_roller.setNeutralMode(NeutralMode.Coast);
+		algae_roller_follower.setNeutralMode(NeutralMode.Coast);
 
 		// Sensors for motor controllers provide feedback about the position, velocity, and acceleration
 		// of the system using that motor controller.
@@ -100,31 +100,31 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 		// This ensures the best resolution possible when performing closed-loops in firmware.
 		// CTRE Magnetic Encoder (relative/quadrature) =  4096 units per rotation
 		// FX Integrated Sensor = 2048 units per rotation
-		roller.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS);
+		algae_roller.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS);
 
 		// Sensor phase is the term used to explain sensor direction.
 		// In order for limit switches and closed-loop features to function properly the sensor and motor has to be in-phase.
 		// This means that the sensor position must move in a positive direction as the motor controller drives positive output.  
-		roller.setSensorPhase(true); // TODO flip if needed
+		algae_roller.setSensorPhase(true); // TODO flip if needed
 		
 		// Motor controller output direction can be set by calling the setInverted() function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
-		roller.setInverted(false);
-		roller_follower.setInverted(false);  // TODO comment out if switching to Talon FX
+		algae_roller.setInverted(false);
+		algae_roller_follower.setInverted(false);  // TODO comment out if switching to Talon FX
 
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
 		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
-		roller_follower.follow(roller);
+		algae_roller_follower.follow(algae_roller);
 
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
 		// The Follower relies on the master status frame allowing its status frame to be slowed without affecting performance.
 		// This is a useful optimization to manage CAN bus utilization.
-		roller_follower.setStatusFramePeriod(StatusFrame.Status_1_General, 255, TALON_TIMEOUT_MS);
-		roller_follower.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255, TALON_TIMEOUT_MS);
+		algae_roller_follower.setStatusFramePeriod(StatusFrame.Status_1_General, 255, TALON_TIMEOUT_MS);
+		algae_roller_follower.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255, TALON_TIMEOUT_MS);
 		
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
@@ -150,7 +150,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	public boolean tripleCheckMove() {
 		if (isMoving) {
 			
-			double error = roller.getClosedLoopError(PRIMARY_PID_LOOP);
+			double error = algae_roller.getClosedLoopError(PRIMARY_PID_LOOP);
 			
 			boolean isOnTarget = (Math.abs(error) < TICK_THRESH);
 			
@@ -185,7 +185,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	public void roll() {
 		//SwitchedCamera.setUsbCamera(Ports.UsbCamera.GRASPER_CAMERA);
 
-		roller.set(ControlMode.PercentOutput, -REDUCED_PCT_OUTPUT);
+		algae_roller.set(ControlMode.PercentOutput, -REDUCED_PCT_OUTPUT);
 		
 		isRolling = true;
 		isReleasing = false;
@@ -201,7 +201,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 
 		double targetVelocity_UnitsPer100ms = -ROLL_LOW_RPM * CTRE_MAGNETIC_ENCODER_SENSOR_TICKS_PER_ROTATION / 600; // 1 revolution = TICKS_PER_ROTATION ticks, 1 min = 600 * 100 ms
 
-		roller.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
+		algae_roller.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
 		
 		isRolling = true;
 		isReleasing = false;
@@ -213,7 +213,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	public void release() {
 		//SwitchedCamera.setUsbCamera(Ports.UsbCamera.GRASPER_CAMERA);
 
-		roller.set(ControlMode.PercentOutput, SUPER_REDUCED_PCT_OUTPUT);
+		algae_roller.set(ControlMode.PercentOutput, SUPER_REDUCED_PCT_OUTPUT);
 		
 		isReleasing = true;
 		isRolling = false;
@@ -234,7 +234,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 
 		tac = +LENGTH_OF_SHORT_DISTANCE_TICKS;
 		
-		roller.set(ControlMode.Position,tac);
+		algae_roller.set(ControlMode.Position,tac);
 		
 		isReleasing = true;
 		isRolling = false;
@@ -247,7 +247,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	public void shoot() {
 		//SwitchedCamera.setUsbCamera(Ports.UsbCamera.GRASPER_CAMERA);
 
-		roller.set(ControlMode.PercentOutput, -MAX_PCT_OUTPUT);
+		algae_roller.set(ControlMode.PercentOutput, -MAX_PCT_OUTPUT);
 		
 		isRolling = false;
 		isReleasing = false;
@@ -257,7 +257,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	}
 	
 	public double getEncoderPosition() {
-		return roller.getSelectedSensorPosition(PRIMARY_PID_LOOP);
+		return algae_roller.getSelectedSensorPosition(PRIMARY_PID_LOOP);
 	}
 
 	public double getPresetRpm()
@@ -266,7 +266,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	}
 	
 	public void stop() {
-		roller.set(ControlMode.PercentOutput, 0);
+		algae_roller.set(ControlMode.PercentOutput, 0);
 		
 		isRolling = false;
 		isReleasing = false;
@@ -279,7 +279,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 
 	public void setPIDParameters()
 	{
-		roller.configAllowableClosedloopError(SLOT_0, TICK_PER_100MS_THRESH, TALON_TIMEOUT_MS);
+		algae_roller.configAllowableClosedloopError(SLOT_0, TICK_PER_100MS_THRESH, TALON_TIMEOUT_MS);
 		
 		// P is the proportional gain. It modifies the closed-loop output by a proportion (the gain value)
 		// of the closed-loop error.
@@ -306,16 +306,16 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 		// In order to calculate feed-forward, you will need to measure your motor's velocity at a specified percent output
 		// (preferably an output close to the intended operating range).
 			
-		roller.config_kP(SLOT_0, ROLL_PROPORTIONAL_GAIN, TALON_TIMEOUT_MS);
-		roller.config_kI(SLOT_0, ROLL_INTEGRAL_GAIN, TALON_TIMEOUT_MS);
-		roller.config_kD(SLOT_0, ROLL_DERIVATIVE_GAIN, TALON_TIMEOUT_MS);	
-		roller.config_kF(SLOT_0, ROLL_FEED_FORWARD, TALON_TIMEOUT_MS);
+		algae_roller.config_kP(SLOT_0, ROLL_PROPORTIONAL_GAIN, TALON_TIMEOUT_MS);
+		algae_roller.config_kI(SLOT_0, ROLL_INTEGRAL_GAIN, TALON_TIMEOUT_MS);
+		algae_roller.config_kD(SLOT_0, ROLL_DERIVATIVE_GAIN, TALON_TIMEOUT_MS);	
+		algae_roller.config_kF(SLOT_0, ROLL_FEED_FORWARD, TALON_TIMEOUT_MS);
 	}		
 
 
 	public void setPIDParametersShortDistance()
 	{
-		roller.configAllowableClosedloopError(SLOT_0, TICK_PER_100MS_THRESH, TALON_TIMEOUT_MS);
+		algae_roller.configAllowableClosedloopError(SLOT_0, TICK_PER_100MS_THRESH, TALON_TIMEOUT_MS);
 		
 		// P is the proportional gain. It modifies the closed-loop output by a proportion (the gain value)
 		// of the closed-loop error.
@@ -342,20 +342,20 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 		// In order to calculate feed-forward, you will need to measure your motor's velocity at a specified percent output
 		// (preferably an output close to the intended operating range).
 			
-		roller.config_kP(SLOT_0, ROLL_PROPORTIONAL_GAIN_SHORT_DISTANCE, TALON_TIMEOUT_MS);
-		roller.config_kI(SLOT_0, ROLL_INTEGRAL_GAIN_SHORT_DISTANCE, TALON_TIMEOUT_MS);
-		roller.config_kD(SLOT_0, ROLL_DERIVATIVE_GAIN_SHORT_DISTANCE, TALON_TIMEOUT_MS);	
-		roller.config_kF(SLOT_0, ROLL_FEED_FORWARD, TALON_TIMEOUT_MS);
+		algae_roller.config_kP(SLOT_0, ROLL_PROPORTIONAL_GAIN_SHORT_DISTANCE, TALON_TIMEOUT_MS);
+		algae_roller.config_kI(SLOT_0, ROLL_INTEGRAL_GAIN_SHORT_DISTANCE, TALON_TIMEOUT_MS);
+		algae_roller.config_kD(SLOT_0, ROLL_DERIVATIVE_GAIN_SHORT_DISTANCE, TALON_TIMEOUT_MS);	
+		algae_roller.config_kF(SLOT_0, ROLL_FEED_FORWARD, TALON_TIMEOUT_MS);
 	}	
 		
 	// NOTE THAT THIS METHOD WILL IMPACT BOTH OPEN AND CLOSED LOOP MODES
 	public void setNominalAndPeakOutputs(double peakOutput)
 	{
-		roller.configPeakOutputForward(peakOutput, TALON_TIMEOUT_MS);
-		roller.configPeakOutputReverse(-peakOutput, TALON_TIMEOUT_MS);
+		algae_roller.configPeakOutputForward(peakOutput, TALON_TIMEOUT_MS);
+		algae_roller.configPeakOutputReverse(-peakOutput, TALON_TIMEOUT_MS);
 
-		roller.configNominalOutputForward(0, TALON_TIMEOUT_MS);
-		roller.configNominalOutputReverse(0, TALON_TIMEOUT_MS);
+		algae_roller.configNominalOutputForward(0, TALON_TIMEOUT_MS);
+		algae_roller.configNominalOutputReverse(0, TALON_TIMEOUT_MS);
 	}
 	
 	public boolean isRolling(){
@@ -377,17 +377,17 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	// for debug purpose only
 	public void joystickControl(Joystick joystick)
 	{
-		roller.set(ControlMode.PercentOutput, -joystick.getY());
+		algae_roller.set(ControlMode.PercentOutput, -joystick.getY());
 	}
 
 	// in units per 100 ms
 	public int getEncoderVelocity() {
-		return (int) (roller.getSelectedSensorVelocity(PRIMARY_PID_LOOP));
+		return (int) (algae_roller.getSelectedSensorVelocity(PRIMARY_PID_LOOP));
 	}
 
 	// in revolutions per minute
 	public int getRpm() {
-		return (int) (roller.getSelectedSensorVelocity(PRIMARY_PID_LOOP)*600/CTRE_MAGNETIC_ENCODER_SENSOR_TICKS_PER_ROTATION);  // 1 min = 600 * 100 ms, 1 revolution = TICKS_PER_ROTATION ticks 
+		return (int) (algae_roller.getSelectedSensorVelocity(PRIMARY_PID_LOOP)*600/CTRE_MAGNETIC_ENCODER_SENSOR_TICKS_PER_ROTATION);  // 1 min = 600 * 100 ms, 1 revolution = TICKS_PER_ROTATION ticks 
 	}
 
 	public double getTarget() {
@@ -397,8 +397,8 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	// MAKE SURE THAT YOU ARE NOT IN A CLOSED LOOP CONTROL MODE BEFORE CALLING THIS METHOD.
 	// OTHERWISE THIS IS EQUIVALENT TO MOVING TO THE DISTANCE TO THE CURRENT ZERO IN REVERSE! 
 	public void resetEncoder() {
-		roller.set(ControlMode.PercentOutput,0); // we stop AND MAKE SURE WE DO NOT MOVE WHEN SETTING POSITION
-		roller.setSelectedSensorPosition(0, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // we mark the virtual zero
+		algae_roller.set(ControlMode.PercentOutput,0); // we stop AND MAKE SURE WE DO NOT MOVE WHEN SETTING POSITION
+		algae_roller.setSelectedSensorPosition(0, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // we mark the virtual zero
 	}
 }
 

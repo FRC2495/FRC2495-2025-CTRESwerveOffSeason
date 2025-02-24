@@ -7,15 +7,8 @@ import frc.robot.subsystems.*;
 
 public class CoralRollerSmartRoll extends SequentialCommandGroup {
 
-    public CoralRollerSmartRoll(CoralRoller coral_roller, NoteSensor notesensor, NoteSensor noteSensorTwo){
+    public CoralRollerSmartRoll(CoralRoller coral_roller){
 
-        addCommands(
-
-			new CoralRollerRollUntilNoteSensed(coral_roller, notesensor, noteSensorTwo),
-
-            new CoralRollerTimedRelease(coral_roller, 0.1)
-            
-        ); 
   
     }
 

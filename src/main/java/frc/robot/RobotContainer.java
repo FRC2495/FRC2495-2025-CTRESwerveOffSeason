@@ -53,22 +53,25 @@ import frc.robot.interfaces.INeck;
 import frc.robot.interfaces.IRoller;*/
 
 import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.AlgaeRoller;
+import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
 //import frc.robot.subsystems.Drawer;
 import frc.robot.subsystems.Neck;
 import frc.robot.subsystems.OldNeck;
-import frc.robot.subsystems.Roller;
+import frc.robot.subsystems.CoralRoller;
+import frc.robot.subsystems.AlgaeRoller;
 //import frc.robot.subsystems.Shooter;
 //import frc.robot.subsystems.Compressor;
 //import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
+import frc.robot.commands.algae_roller.AlgaeRollerStopForever;
 //import frc.robot.subsystems.SimpleShooter;
-
+import frc.robot.commands.coral_roller.*;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.*;
 //import frc.robot.commands.drawer.*;
 import frc.robot.commands.neck.*;
-import frc.robot.commands.roller.*;
 //import frc.robot.commands.simpleshooter.*;
 //import frc.robot.commands.shooter.*;
 import frc.robot.interfaces.ICamera;
@@ -200,10 +203,14 @@ public class RobotContainer {
 	private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
 
 	//private final CANSparkMax roller_master = new CANSparkMax(Ports.CAN.ROLLER, MotorType.kBrushless);
-	private final WPI_TalonSRX roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
-	private final WPI_TalonSRX roller_follower = new WPI_TalonSRX(Ports.CAN.ROLLER_FOLLOWER);
+	private final WPI_TalonSRX coral_roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
+	private final WPI_TalonSRX coral_roller_follower = new WPI_TalonSRX(Ports.CAN.ROLLER_FOLLOWER);
+	private final WPI_TalonSRX algae_roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
+	private final WPI_TalonSRX algae_roller_follower = new WPI_TalonSRX(Ports.CAN.ROLLER_FOLLOWER);
 
-	private final /*I*/Roller roller = new Roller(roller_master, roller_follower);
+
+	private final /*I*/CoralRoller coral_roller = new CoralRoller(coral_roller_master, coral_roller_follower);
+	private final /*I*/AlgaeRoller algae_roller = new AlgaeRoller(algae_roller_master, algae_roller_follower);
 
 	//private final CANSparkMax shooter_master = new CANSparkMax(Ports.CAN.SHOOTER_MASTER, MotorType.kBrushless);
 	//private final CANSparkMax shooter_follower = new CANSparkMax(Ports.CAN.SHOOTER_FOLLOWER, MotorType.kBrushless);
@@ -321,7 +328,8 @@ public class RobotContainer {
 					true, true),
 				drivetrain));
 		
-		roller.setDefaultCommand(new RollerStopForever(roller)); // we stop by default
+		coral_roller.setDefaultCommand(new CoralRollerStopForever(coral_roller)); // we stop by default
+		algae_roller.setDefaultCommand(new AlgaeRollerStopForever(algae_roller)); // we stop by default
 
 		//shooter.setDefaultCommand(new ShooterStopForever(shooter)); // we stop by default
 
@@ -383,7 +391,7 @@ public class RobotContainer {
 			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 
 		joyMain.button(7)
-			.whileTrue(new RollerJoystickControl(roller, drivetrain, getMainJoystick()));
+			.whileTrue(new CoralRollerJoystickControl(roller, drivetrain, getMainJoystick()));
 		
 		joyMain.button(8)
 			.whileTrue(new OldNeckJoystickControl(old_neck, drivetrain, getMainJoystick()));
@@ -406,20 +414,20 @@ public class RobotContainer {
 		// copilot (gamepad)
 		
 		copilotGamepad.a()
-			.whileTrue(new RollerRelease(roller));
+			.whileTrue(new CoralRollerRelease(roller));
 		
 		copilotGamepad.b()
-			.whileTrue(new RollerRoll(roller));
+			.whileTrue(new CoralRollerRoll(roller));
 
 		copilotGamepad.x()
-			.onTrue(new RollerReleaseShortDistance(roller));
+			.onTrue(new CoralRollerReleaseShortDistance(roller));
 
 		copilotGamepad.y()
 			//.whileTrue(new RollerRollLowRpm(roller));
 			//.onTrue(new RollerRollLowRpmUntilNoteSensed(roller, getNoteSensor()));
 			//.onTrue(new RollerReleaseShortDistance(roller));
 			//.onTrue(new RollerSuperSmartRoll(roller, noteSensor, noteSensorTwo));
-			.onTrue(new RollerRollLowRpmUntilNoteSensed(roller, noteSensor, noteSensorTwo));
+			.onTrue(new CoralRollerRollLowRpmUntilNoteSensed(roller, noteSensor, noteSensorTwo));
 			
 		copilotGamepad.back()
 			//.onTrue(new DrivetrainAndGyroReset(drivetrain));
@@ -437,7 +445,7 @@ public class RobotContainer {
 
 		copilotGamepad.rightTrigger()
 			//.onTrue(new DrawerExtendWithStallDetection(drawer));
-			.whileTrue(new RollerRoll(roller));
+			.whileTrue(new CoralRollerRoll(roller));
 
 
 		copilotGamepad.povDown()
@@ -469,11 +477,11 @@ public class RobotContainer {
 
 
 		copilotGamepad.leftStick()
-			.onTrue(new RollerTimedRoll(roller, 3));
+			.onTrue(new CoralRollerTimedRoll(roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));			
 
 		copilotGamepad.rightStick()
-			.onTrue(new RollerTimedRelease(roller, 3));
+			.onTrue(new CoralRollerTimedRelease(roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
 
 
@@ -734,9 +742,14 @@ public class RobotContainer {
 		return neck;
 	}
 
-	public Roller getRoller()
+	public CoralRoller getCoralRoller()
 	{
-		return roller;
+		return coral_roller;
+	}
+
+	public AlgaeRoller getAlgaeRoller()
+	{
+		return algae_roller;
 	}
 
 	/*public Mouth getMouth()

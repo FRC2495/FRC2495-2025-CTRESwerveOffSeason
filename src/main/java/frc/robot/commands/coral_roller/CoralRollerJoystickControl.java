@@ -12,12 +12,12 @@ import frc.robot.subsystems.SwerveDrivetrain;
  */
 public class CoralRollerJoystickControl extends Command {
 
-	private CoralRoller roller;
+	private CoralRoller coral_roller;
 	//private SwerveDrivetrain drivetrain;
 	private Joystick joystick;
 
 	public CoralRollerJoystickControl(CoralRoller roller, SwerveDrivetrain drivetrain, Joystick joystick) {
-		this.roller = roller;
+		this.coral_roller = coral_roller;
 		//this.drivetrain = drivetrain;
 		this.joystick = joystick;
 		
@@ -35,7 +35,7 @@ public class CoralRollerJoystickControl extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	public void execute() {
-		roller.joystickControl(joystick);
+		coral_roller.joystickControl(joystick);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -47,7 +47,7 @@ public class CoralRollerJoystickControl extends Command {
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("RollerJoystickControl: end");
-		roller.stop();
+		System.out.println("CoralRollerJoystickControl: end");
+		coral_roller.stop();
 	}
 }
