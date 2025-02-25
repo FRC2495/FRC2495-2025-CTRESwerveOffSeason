@@ -30,12 +30,15 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 //import edu.wpi.first.wpilibj2.command.InstantCommand;
 //import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
+import java.util.concurrent.TimeoutException;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
 //import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 //import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -56,6 +59,7 @@ import frc.robot.subsystems.SwerveDrivetrain;
 import frc.robot.subsystems.AlgaeRoller;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Hanger;
 //import frc.robot.subsystems.Drawer;
 import frc.robot.subsystems.Neck;
 import frc.robot.subsystems.OldNeck;
@@ -65,7 +69,11 @@ import frc.robot.subsystems.AlgaeRoller;
 //import frc.robot.subsystems.Compressor;
 //import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
+import frc.robot.commands.algae_roller.AlgaeRollerRelease;
+import frc.robot.commands.algae_roller.AlgaeRollerRoll;
 import frc.robot.commands.algae_roller.AlgaeRollerStopForever;
+import frc.robot.commands.algae_roller.AlgaeRollerTimedRelease;
+import frc.robot.commands.algae_roller.AlgaeRollerTimedRoll;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
 import frc.robot.commands.drivetrain.*;
@@ -77,6 +85,7 @@ import frc.robot.interfaces.ICamera;
 import frc.robot.commands.indicator.*;
 import frc.robot.commands.old_neck.*;
 import frc.robot.commands.groups.*;
+import frc.robot.commands.hanger.HangerMoveUpWithStallDetection;
 //import frc.robot.commands.gamepad.*;
 import frc.robot.auton.*;
 import frc.robot.auton.trajectories.*;
@@ -305,6 +314,20 @@ public class RobotContainer {
 		autonOptionChooser.addOption("Feed Note", AUTON_OPTION_FEED_NOTE);
 		SmartDashboard.putData("Auton options", autonOptionChooser);*/
 		
+		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToSecondLevelWithStallDetection", new ElevatorMoveToSecondLevelWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToFirstLevelWithStallDetection", new ElevatorMoveToFirstLevelWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveUpWithStallDetection", new ElevatorMoveUpWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveDownWithStallDetection", new ElevatorMoveDownWithStallDetection(elevator));
+		NamedCommands.registerCommand("algaeRollerRoll", new AlgaeRollerRoll(algae_roller));
+		NamedCommands.registerCommand("algaeRollerRelease", new AlgaeRollerRelease(algae_roller));
+		NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 5));
+		NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
+		NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRoll(coral_roller));
+		NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRelease(coral_roller));
+		NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
+		NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
 
 		// Configure the button bindings
 
