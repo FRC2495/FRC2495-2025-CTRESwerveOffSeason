@@ -22,7 +22,7 @@ public class CoralRollerRelease extends Command {
 
 	private CoralRoller coral_roller;
 
-	public CoralRollerRelease(CoralRoller roller) {
+	public CoralRollerRelease(CoralRoller coral_roller) {
 		this.coral_roller = coral_roller;
 		addRequirements(coral_roller);
 	}
