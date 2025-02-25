@@ -30,7 +30,7 @@ public class AlgaeRollerRelease extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("RollerRelease: initialize");
+		System.out.println("AlgaeRollerRelease: initialize");
 		algae_roller.release();
 	
 	}

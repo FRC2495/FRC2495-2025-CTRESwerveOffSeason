@@ -20,7 +20,7 @@ public class AlgaeRollerRollLowRpm extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("RollerRollLowRpm: initialize");
+		System.out.println("AlgaeRollerRollLowRpm: initialize");
 		algae_roller.rollLowRpm();
 	}
 

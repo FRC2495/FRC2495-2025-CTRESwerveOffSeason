@@ -20,7 +20,7 @@ public class AlgaeRollerStop extends InstantCommand {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("RollerStop: initialize");
+		System.out.println("AlgaeRollerStop: initialize");
 		algae_roller.stop();
 	
 	}
