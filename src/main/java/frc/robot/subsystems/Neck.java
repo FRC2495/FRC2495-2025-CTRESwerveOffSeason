@@ -31,6 +31,8 @@ public class Neck extends SubsystemBase implements INeck {
 	public static final double GEAR_RATIO = 3.0; // todo change if needed
 
 	public static final int ANGLE_TO_CORAL_STATION_TICKS = 0; //TODO set proper value
+	public static final int ANGLE_TO_ALGAE_REEF_TICKS = 0; //TODO set proper value
+	public static final int ANGLE_TO_CORAL_REEF_TICKS = 0; //TODO set proper value
 	public static final int ANGLE_TO_MIDWAY_TICKS = 90000;
 	public static final int ANGLE_TO_TRAVEL_TICKS = 180000; // todo set proper value
 	
@@ -284,6 +286,40 @@ public class Neck extends SubsystemBase implements INeck {
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		tac = -ANGLE_TO_CORAL_STATION_TICKS;
+		neck.set(ControlMode.Position,tac);
+		
+		isMoving = true;
+		isMovingUp = true;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveToCoralReef() {	
+
+		//setPIDParameters();
+		System.out.println("Moving to Coral Station");
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		tac = -ANGLE_TO_CORAL_REEF_TICKS;
+		neck.set(ControlMode.Position,tac);
+		
+		isMoving = true;
+		isMovingUp = true;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveToAlgaeReef() {	
+
+		//setPIDParameters();
+		System.out.println("Moving to Coral Station");
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		tac = -ANGLE_TO_ALGAE_REEF_TICKS;
 		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
