@@ -5,6 +5,9 @@
 package frc.robot.sensors;
 
 
+import java.util.Optional;
+
+import org.photonvision.EstimatedRobotPose;
 //import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 //import org.photonvision.PhotonPoseEstimator;
@@ -107,5 +110,11 @@ public class ObjectDetectionCamera extends PhotonCamera implements ICamera {
 			return 0.0;
 		}
 	}
+
+	/*@Override
+	public Optional<EstimatedRobotPose> getGlobalPose() {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}*/
 	
 }

@@ -4,24 +4,22 @@ package frc.robot.commands.groups;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Drawer;
-import frc.robot.subsystems.Neck;
+import frc.robot.subsystems.OldNeck;
 
 import frc.robot.commands.elevator.*;
-import frc.robot.commands.drawer.*;
-import frc.robot.commands.neck.*;
+import frc.robot.commands.old_neck.*;
 
 /**
  *
  */
 public class ElevatorAndDrawerAndNeckResetEncoders extends SequentialCommandGroup {
 
-	public ElevatorAndDrawerAndNeckResetEncoders(Elevator elevator, Drawer drawer, Neck neck) {
+	public ElevatorAndDrawerAndNeckResetEncoders(Elevator elevator, OldNeck old_neck) {
 
 		addCommands(
 			new ElevatorResetEncoder(elevator),
-			new DrawerResetEncoder(drawer),
-			new NeckResetEncoder(neck));
+			//new DrawerResetEncoder(drawer),
+			new OldNeckResetEncoder(old_neck));
 	} 
 
 	// This instant command can run disabled

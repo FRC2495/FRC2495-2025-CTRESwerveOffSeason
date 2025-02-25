@@ -10,6 +10,8 @@ public class Ports {
 		// between the competition and practice robots.
 		//
 		// The radio is automatically set to 10.24.95.1
+		// The radio configuration IP is http://192.168.69.1/configuration
+		// The Access Point radio WPA is hivemind
 		// The Rio is set to static 10.24.95.2, mask 255.255.255.0
 		// The Limelight is set to 10.24.95.11, mask 255.255.255.0, gateway 10.24.95.1
 		// but note that pressing the reset button will revert to DHCP.
@@ -160,8 +162,8 @@ public class Ports {
 			public static final int NECK_FOLLOWER = 12;
 			public static final int ROLLER_MASTER = 13;
 			public static final int ROLLER_FOLLOWER = 14;
-			public static final int SHOOTER_MASTER = 15;
-			public static final int SHOOTER_FOLLOWER = 16;
+			//public static final int SHOOTER_MASTER = 15;
+			//public static final int SHOOTER_FOLLOWER = 16;
 			public static final int DRAWER = 17;
 		}
 		

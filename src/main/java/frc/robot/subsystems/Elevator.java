@@ -46,6 +46,11 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int TICKS_PER_REVOLUTION = 2048;
 	public static final int LENGTH_OF_TRAVEL_REVS = 900000/TICKS_PER_REVOLUTION; // 900000; // TODO adjust as needed (halve for Talon FX)
 	public static final int LENGTH_OF_MIDWAY_REVS = 450000/TICKS_PER_REVOLUTION; // TODO adjust as needed (halve for Talon FX)
+	public static final int LENGTH_OF_LEVEL_ONE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_LEVEL_TWO_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_LEVEL_THREE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+
 
 	static final double MAX_PCT_OUTPUT = 1.0;
 	static final int WAIT_MS = 1000;
@@ -86,6 +91,10 @@ public class Elevator extends SubsystemBase implements IElevator {
 	PositionDutyCycle elevatorUpPosition = new PositionDutyCycle(-LENGTH_OF_TRAVEL_REVS);
 	PositionDutyCycle elevatorMidwayPosition = new PositionDutyCycle(-LENGTH_OF_MIDWAY_REVS);
 	PositionDutyCycle elevatorHomePosition = new PositionDutyCycle(0);
+	PositionDutyCycle elevatorLevelOnePosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_ONE_REVS);
+	PositionDutyCycle elevatorLevelTwoPosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_TWO_REVS);
+	PositionDutyCycle elevatorLevelThreePosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_THREE_REVS);
+	PositionDutyCycle elevatorLevelFourPosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_FOUR_REVS);
 	
 	boolean isMoving;
 	boolean isMovingUp;
@@ -310,6 +319,25 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = -LENGTH_OF_TRAVEL_TICKS;
 
 		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorLevelOnePosition); //fix
+
+		
+		isMoving = true;
+		isMovingUp = true;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveToFirstLevel() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to First Level");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		//tac = -LENGTH_OF_TRAVEL_TICKS;
+
+		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorUpPosition); //fix
 
 		
@@ -319,6 +347,63 @@ public class Elevator extends SubsystemBase implements IElevator {
 		isReallyStalled = false;
 		stalledCount = 0;
 	}
+	public void moveToSecondLevel() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Second Level");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		//tac = -LENGTH_OF_TRAVEL_TICKS;
+
+		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorLevelTwoPosition); //fix
+
+		
+		isMoving = true;
+		isMovingUp = true;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+
+	}
+	public void moveToThirdLevel() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Third Level");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		//tac = -LENGTH_OF_TRAVEL_TICKS;
+
+		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorLevelThreePosition); //fix
+
+		
+		isMoving = true;
+		isMovingUp = true;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveToFourthLevel() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Fourth Level");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		//tac = -LENGTH_OF_TRAVEL_TICKS;
+
+		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorLevelFourPosition); //fix
+
+		
+		isMoving = true;
+		isMovingUp = true;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
 
 	public void moveMidway() {
 		

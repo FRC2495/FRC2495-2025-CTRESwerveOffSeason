@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.Optional;
+
 import com.ctre.phoenix6.hardware.Pigeon2;
 //imports for Pathplanner follow commmands/stuff below
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -12,6 +14,7 @@ import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -30,11 +33,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
 
+import org.photonvision.EstimatedRobotPose;
+
 import frc.robot.Constants;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.SwerveModuleConstants;
 import frc.utils.SwerveUtils;
 import frc.robot.Ports;
+import frc.robot.interfaces.ICamera;
 
 /**
  * The {@code SwerveDrivetrain} class contains fields and methods pertaining to the function of the drivetrain.
@@ -106,7 +112,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	private double m_prevTime = WPIUtilJNI.now() * 1e-6;
 
 	// Odometry class for tracking robot pose
-	SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
+	SwerveDrivePoseEstimator m_odometry = new SwerveDrivePoseEstimator(
 		DrivetrainConstants.DRIVE_KINEMATICS,
 		Rotation2d.fromDegrees(GYRO_ORIENTATION * m_gyro.getAngle()),
 		new SwerveModulePosition[] {
@@ -114,8 +120,9 @@ public class SwerveDrivetrain extends SubsystemBase {
 			m_frontRight.getPosition(),
 			m_rearLeft.getPosition(),
 			m_rearRight.getPosition()
-		});
-
+		},
+		new Pose2d(0,0, Rotation2d.fromDegrees(GYRO_ORIENTATION * m_gyro.getAngle()))
+		);
 
 	// other variables
 	private boolean isTurning;  // indicates that the drivetrain is turning using the PID controller hereunder
@@ -126,9 +133,12 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 	private RobotConfig config;
 
+	private ICamera poseCamera;
+
 	/** Creates a new Drivetrain. */
-	public SwerveDrivetrain() {
-		
+	public SwerveDrivetrain(ICamera poseCam) {
+		poseCamera = poseCam;
+
 		m_frontLeft.calibrateVirtualPosition(FRONT_LEFT_VIRTUAL_OFFSET_RADIANS); // set virtual position for absolute encoder
 		m_frontRight.calibrateVirtualPosition(FRONT_RIGHT_VIRTUAL_OFFSET_RADIANS);
 		m_rearLeft.calibrateVirtualPosition(REAR_LEFT_VIRTUAL_OFFSET_RADIANS);
@@ -204,6 +214,11 @@ public class SwerveDrivetrain extends SubsystemBase {
 			});
 
 		calculateTurnAngleUsingPidController();
+
+		/*Optional<EstimatedRobotPose> result = poseCamera.getGlobalPose();
+		if (result.isPresent()) {
+			m_odometry.addVisionMeasurement(result.get().estimatedPose.toPose2d(), result.get().timestampSeconds);
+		}*/
 	}
 
 	/**
@@ -212,7 +227,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	 * @return The pose.
 	 */
 	public Pose2d getPose() {
-		return m_odometry.getPoseMeters();
+		return m_odometry.getEstimatedPosition();
 	}
 
 	/**
@@ -523,7 +538,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 		
 		// calling disable() on controller will force a call to pidWrite with zero output
 		// which we need to handle by not doing anything that could have a side effect 
-		if (output != 0 && Math.abs(turnPidController.getPositionError()) < DEGREE_THRESHOLD)
+		if (output != 0 && Math.abs(turnPidController.getError()) < DEGREE_THRESHOLD)
 		{
 			output = 0;
 		}
