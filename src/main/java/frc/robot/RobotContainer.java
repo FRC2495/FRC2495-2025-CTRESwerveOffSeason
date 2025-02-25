@@ -7,35 +7,20 @@ package frc.robot;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
-//import edu.wpi.first.math.controller.PIDController;
-//import edu.wpi.first.math.controller.ProfiledPIDController;
-//import edu.wpi.first.math.geometry.Pose2d;
-//import edu.wpi.first.math.geometry.Rotation2d;
-//import edu.wpi.first.math.geometry.Translation2d;
-//import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
-//import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-//import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj.XboxController.Button;
-//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-//import edu.wpi.first.wpilibj2.command.InstantCommand;
-//import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
-//import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-//import com.revrobotics.CANSparkMax;
-//import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -65,11 +50,12 @@ import frc.robot.subsystems.AlgaeRoller;
 //import frc.robot.subsystems.Compressor;
 //import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
-import frc.robot.commands.algae_roller.AlgaeRollerJoystickControl;
-import frc.robot.commands.algae_roller.AlgaeRollerStopForever;
+import frc.robot.commands.algae_roller.*;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
 import frc.robot.commands.drivetrain.*;
+import frc.robot.commands.slider.*;
+import frc.robot.commands.neck.*;
 import frc.robot.commands.elevator.*;
 //import frc.robot.commands.simpleshooter.*;
 //import frc.robot.commands.shooter.*;
@@ -104,67 +90,6 @@ public class RobotContainer {
 	Command indicatorTimedScrollRainbow; // command to run while stating up and when disabled
 
 	// choosers (for auton)
-	
-	/*public static final String AUTON_DO_NOTHING = "Do Nothing";
-	public static final String AUTON_CUSTOM = "My Auto";
-	public static final String AUTON_SAMPLE_SWERVE = "Sample Swerve";
-	public static final String AUTON_SAMPLE_MOVE_FORWARD = "Sample Move Forward";
-	public static final String AUTON_SAMPLE_MOVE_IN_REVERSE = "Sample Move In Reverse";
-	public static final String AUTON_SAMPLE_MOVE_IN_GAMMA_SHAPE = "Sample Move In Gamma Shape";
-	public static final String AUTON_SAMPLE_MOVE_IN_L_SHAPE_IN_REVERSE = "Sample Move In L Shape In Reverse";
-	public static final String AUTON_TEST_HARDCODED_MOVE_1 = "Test Hardcoded Move 1";
-	public static final String AUTON_TEST_HARDCODED_MOVE_2 = "Test Hardcoded Move 2";
-	public static final String AUTON_TEST_TRAJECTORY_GENERATION = "Test Trajectory Generation";
-	private String autonSelected;
-	private SendableChooser<String> autonChooser = new SendableChooser<>();
-
-	public static final String GAME_PIECE_NONE = "None";
-	public static final String GAME_PIECE_1_NOTE = "1 Note";
-	public static final String GAME_PIECE_2_NOTES = "2 Notes";
-	public static final String GAME_PIECE_3_NOTES = "3 Notes";
-	private String gamePieceSelected;
-	private SendableChooser<String> gamePieceChooser = new SendableChooser<>();
-	
-	public static final String START_POSITION_1 = "Starting Position 1";
-	public static final String START_POSITION_2 = "Starting Position 2";
-	public static final String START_POSITION_3 = "Starting Position 3";
-	public static final String START_POSITION_4 = "Starting Position 4";
-	public static final String START_POSITION_5 = "Starting Position 5";
-	public static final String START_POSITION_6 = "Starting Position 6";
-	private String startPosition;
-	private SendableChooser<String> startPositionChooser = new SendableChooser<>();
-
-	public static final String MAIN_TARGET_SPEAKER = "Speaker";
-	public static final String MAIN_TARGET_NOWHERE = "Nowhere";
-	private String mainTarget;
-	private SendableChooser<String> mainTargetChooser = new SendableChooser<>();
-	
-	public static final String CAMERA_OPTION_USE_ALWAYS = "Always";
-	public static final String CAMERA_OPTION_USE_OPEN_LOOP_ONLY = "Open Loop Only";
-	public static final String CAMERA_OPTION_USE_CLOSED_LOOP_ONLY = "Closed Loop Only";
-	public static final String CAMERA_OPTION_USE_NEVER = "Never";
-	private String cameraOption;
-	private SendableChooser<String> cameraOptionChooser = new SendableChooser<>();
-	
-	public static final String SONAR_OPTION_USE_ALWAYS = "Always";
-	public static final String SONAR_OPTION_USE_RELEASE_ONLY = "Release Only";
-	public static final String SONAR_OPTION_USE_GRASP_ONLY = "Grasp Only";
-	public static final String SONAR_OPTION_USE_NEVER = "Never";
-	private String sonarOption;
-	private SendableChooser<String> sonarOptionChooser = new SendableChooser<>();
-	
-	public static final String CLAW_OPTION_RELEASE = "Release";
-	public static final String CLAW_OPTION_DONT_RELEASE = "Don't Release"; 
-	private String releaseSelected;
-	private SendableChooser<String> releaseChooser = new SendableChooser<>();
-
-	public static final String AUTON_OPTION_JUST_SHOOT_NOTE = "Just Shoot Note";
-	public static final String AUTON_OPTION_LEAVE_COMMUNITY = "Leave Community";
-	public static final String AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE = "Pickup Note at Midline";
-	public static final String AUTON_OPTION_PICKUP_NOTE_AT_WING = "Pickup Note at Wing";
-	public static final String AUTON_OPTION_FEED_NOTE = "Feed Note";
-	private String autonOption;
-	private SendableChooser<String> autonOptionChooser = new SendableChooser<>();*/
 
 	private final SendableChooser<Command> autoChooser;
 
@@ -193,12 +118,12 @@ public class RobotContainer {
 
 	private final /*I*/Elevator elevator = new Elevator(elevator_master, elevator_follower);
 
-	private final WPI_TalonSRX neck_master = new WPI_TalonSRX(Ports.CAN.NECK_MASTER);
+	private final WPI_TalonSRX neck_master = new WPI_TalonSRX(Ports.CAN.OLD_NECK_MASTER);
 	
 	private final /*I*/Neck neck = new Neck(neck_master);
 
-	private final TalonFX old_neck_master = new TalonFX(Ports.CAN.NECK_MASTER);
-	private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.NECK_FOLLOWER);
+	private final TalonFX old_neck_master = new TalonFX(Ports.CAN.OLD_NECK_MASTER);
+	private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.OLD_NECK_FOLLOWER);
 	
 	private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
 
@@ -208,9 +133,10 @@ public class RobotContainer {
 	private final WPI_TalonSRX algae_roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
 	private final WPI_TalonSRX algae_roller_follower = new WPI_TalonSRX(Ports.CAN.ROLLER_FOLLOWER);
 
-
 	private final /*I*/CoralRoller coral_roller = new CoralRoller(coral_roller_master, coral_roller_follower);
 	private final /*I*/AlgaeRoller algae_roller = new AlgaeRoller(algae_roller_master, algae_roller_follower);
+
+
 
 	//private final CANSparkMax shooter_master = new CANSparkMax(Ports.CAN.SHOOTER_MASTER, MotorType.kBrushless);
 	//private final CANSparkMax shooter_follower = new CANSparkMax(Ports.CAN.SHOOTER_FOLLOWER, MotorType.kBrushless);
@@ -320,8 +246,6 @@ public class RobotContainer {
         NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRelease(coral_roller));
         NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
         NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
- 		NamedCommands.registerCommand("sliderExtend", new SliderExtend(slider));
-		NamedCommands.registerCommand("sliderRetract", new SliderRetract(slider));
 		NamedCommands.registerCommand("SliderExtendWithStallDetection", new SliderExtendWithStallDetection(slider));
 		NamedCommands.registerCommand("SliderRetractWithStallDetection", new SliderRetractWithStallDetection(slider));
 		NamedCommands.registerCommand("NeckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));

@@ -8,7 +8,7 @@ import frc.robot.subsystems.Slider;
 /**
  *
  */
-/*public*/ class SliderExtendWithStallDetection extends Command {
+public /*public*/ class SliderExtendWithStallDetection extends Command {
 
 	private Slider slider;
 
