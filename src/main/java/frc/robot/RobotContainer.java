@@ -305,7 +305,27 @@ public class RobotContainer {
 		autonOptionChooser.addOption("Pickup Note At Wing", AUTON_OPTION_PICKUP_NOTE_AT_WING);
 		autonOptionChooser.addOption("Feed Note", AUTON_OPTION_FEED_NOTE);
 		SmartDashboard.putData("Auton options", autonOptionChooser);*/
-		
+
+		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveToSecondLevelWithStallDetection", new ElevatorMoveToSecondLevelWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveToFirstLevelWithStallDetection", new ElevatorMoveToFirstLevelWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveUpWithStallDetection", new ElevatorMoveUpWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveDownWithStallDetection", new ElevatorMoveDownWithStallDetection(elevator));
+        NamedCommands.registerCommand("algaeRollerRoll", new AlgaeRollerRoll(algae_roller));
+        NamedCommands.registerCommand("algaeRollerRelease", new AlgaeRollerRelease(algae_roller));
+        NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 5));
+        NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
+        NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRoll(coral_roller));
+        NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRelease(coral_roller));
+        NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
+        NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
+ 		NamedCommands.registerCommand("sliderExtend", new SliderExtend(slider));
+		NamedCommands.registerCommand("sliderRetract", new SliderRetract(slider));
+		NamedCommands.registerCommand("SliderExtendWithStallDetection", new SliderExtendWithStallDetection(slider));
+		NamedCommands.registerCommand("SliderRetractWithStallDetection", new SliderRetractWithStallDetection(slider));
+		NamedCommands.registerCommand("NeckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
+		NamedCommands.registerCommand("NeckDownUpWithStallDetection", new NeckMoveDownWithStallDetection(neck));
 
 		// Configure the button bindings
 
