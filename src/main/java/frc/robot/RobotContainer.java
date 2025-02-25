@@ -419,8 +419,8 @@ public class RobotContainer {
 		copilotGamepad.b()
 			.whileTrue(new CoralRollerRoll(coral_roller));
 
-		copilotGamepad.x()
-			.onTrue(new CoralRollerReleaseShortDistance(coral_roller));
+		copilotGamepad.x();
+			//.onTrue(new CoralRollerReleaseShortDistance(coral_roller));
 
 		copilotGamepad.y();
 			//.whileTrue(new RollerRollLowRpm(roller));
