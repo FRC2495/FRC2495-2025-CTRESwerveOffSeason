@@ -283,7 +283,7 @@ public class Neck extends SubsystemBase implements INeck {
 		
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		tac = -ANGLE_TO_TRAVEL_TICKS;
+		tac = -ANGLE_TO_CORAL_STATION_TICKS;
 		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
