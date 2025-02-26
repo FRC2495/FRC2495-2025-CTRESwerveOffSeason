@@ -44,6 +44,7 @@ import frc.robot.subsystems.Elevator;
 //import frc.robot.subsystems.Drawer;
 import frc.robot.subsystems.Neck;
 import frc.robot.subsystems.OldNeck;
+import frc.robot.subsystems.Slider;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.AlgaeRoller;
 //import frc.robot.subsystems.Shooter;
@@ -135,6 +136,9 @@ public class RobotContainer {
 
 	private final /*I*/CoralRoller coral_roller = new CoralRoller(coral_roller_master, coral_roller_follower);
 	private final /*I*/AlgaeRoller algae_roller = new AlgaeRoller(algae_roller_master, algae_roller_follower);
+
+	private final WPI_TalonSRX slider_master = new WPI_TalonSRX(Ports.CAN.SLIDER_MASTER);
+	private final Slider slider = new Slider(slider_master);
 
 
 

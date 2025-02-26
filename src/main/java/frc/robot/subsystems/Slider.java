@@ -78,12 +78,12 @@ public class Slider extends SubsystemBase implements ISlider {
 	Robot robot;
 	
 	
-	public Slider(WPI_TalonSRX slider_in, /*BaseMotorController slider_follower_in,*/ Robot robot_in) {
+	public Slider(WPI_TalonSRX slider_in /*BaseMotorController slider_follower_in,*/ /*Robot robot_in*/) {
 		
 		slider = slider_in;
 		//slider_follower = slider_follower_in;
 				
-		robot = robot_in;
+		//robot = robot_in;
 
 		slider.configFactoryDefault();
 		//slider_follower.configFactoryDefault();
