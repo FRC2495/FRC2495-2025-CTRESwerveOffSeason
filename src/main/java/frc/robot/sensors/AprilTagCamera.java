@@ -63,13 +63,13 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		//estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
-	/*public Optional<EstimatedRobotPose> getGlobalPose(){
+	public Optional<EstimatedRobotPose> getGlobalPose(){
 		Optional<EstimatedRobotPose> globalPose = Optional.empty();
 		for (var change : getAllUnreadResults()) {
 			globalPose = estimator.update(change);
 		}
 		return globalPose;
-	}*/
+	}
 	
 	public double getDistanceToTarget() {
 		//return getDistanceToBestTarget();
