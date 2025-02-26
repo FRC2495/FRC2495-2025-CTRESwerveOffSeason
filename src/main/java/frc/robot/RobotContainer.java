@@ -203,7 +203,7 @@ public class RobotContainer {
 
 		autoChooser = AutoBuilder.buildAutoChooser("SPB1 - One Coral and Leave SZ");
 		SmartDashboard.putData("Auto Chooser", autoChooser);
-		
+
 		// Configure the button bindings
 
 		configureButtonBindings();
@@ -637,6 +637,11 @@ public class RobotContainer {
 	public Neck getNeck()
 	{
 		return neck;
+	}
+
+	public Slider getSlider()
+	{
+		return slider;
 	}
 
 	public CoralRoller getCoralRoller()

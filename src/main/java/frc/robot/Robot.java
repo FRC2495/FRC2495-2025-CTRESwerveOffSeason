@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Slider;
 
 import java.util.Optional;
 
@@ -250,10 +251,15 @@ public class Robot extends TimedRobot {
 		/*SmartDashboard.putString("Mouth Position", m_robotContainer.getMouth().getPosition().toString());
 		SmartDashboard.putBoolean("Mouth isDangerous", m_robotContainer.getMouth().isDangerous());*/
 
-		/*SmartDashboard.putBoolean("Shooter IsShooting?",  m_robotContainer.getShooter().isShooting());
-		SmartDashboard.putNumber("Shooter Enc Velocity", m_robotContainer.getShooter().getEncoderVelocity());
-		SmartDashboard.putNumber("Shooter Rpm", m_robotContainer.getShooter().getRpm());
-		SmartDashboard.putNumber("Shooter Preset Rpm", m_robotContainer.getShooter().getPresetRps());*/
+		SmartDashboard.putBoolean("Slider Limit Switch", m_robotContainer.getSlider().getLimitSwitchState());
+		SmartDashboard.putBoolean("Slider Reverse Limit Switch", m_robotContainer.getSlider().getReverseLimitSwitchState());
+		SmartDashboard.putNumber("Slider Enc Position", m_robotContainer.getSlider().getEncoderPosition());
+		SmartDashboard.putBoolean("Slider IsMoving?", m_robotContainer.getSlider().isMoving());
+		SmartDashboard.putNumber("Slider Target", m_robotContainer.getSlider().getTarget());
+		SmartDashboard.putBoolean("Slider isStalled?", m_robotContainer.getSlider().isStalled());
+		SmartDashboard.putBoolean("Slider isRetracted", m_robotContainer.getSlider().isRetracted());
+		SmartDashboard.putBoolean("Slider isMidway", m_robotContainer.getSlider().isMidway());
+		SmartDashboard.putBoolean("Slider isExtended", m_robotContainer.getSlider().isExtended());
 
 		/*SmartDashboard.putString("Auton selected", m_robotContainer.getAutonChooser().getSelected());	
 		SmartDashboard.putString("Game piece", m_robotContainer.getGamePieceChooser().getSelected());
