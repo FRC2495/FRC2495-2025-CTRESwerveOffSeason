@@ -646,7 +646,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///FMSInfo/StationNumber",
-              "_title": "FMSInfo/StationNumber",
+              "_title": "/FMSInfo/StationNumber",
               "_glyph": 148,
               "_showGlyph": false
             }
@@ -1765,90 +1765,19 @@
         "vgap": 16.0,
         "titleType": 0,
         "tiles": {
-          "0,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Roller IsRolling?",
-              "_title": "SmartDashboard/Roller IsRolling?",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Roller IsReleasing?",
-              "_title": "SmartDashboard/Roller IsReleasing?",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Roller IsMoving?",
-              "_title": "SmartDashboard/Roller IsMoving?",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,0": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Roller IsShooting?",
-              "_title": "SmartDashboard/Roller IsShooting?",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "6,0": {
+          "7,0": {
             "size": [
               1,
               1
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Roller Enc Position",
-              "_title": "SmartDashboard/Roller Enc Position",
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller IsRolling?",
+              "_title": "SmartDashboard/AlgaeRoller IsRolling?",
               "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "6,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Roller Target",
-              "_title": "SmartDashboard/Roller Target",
-              "_glyph": 148,
-              "_showGlyph": false
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           },
           "8,0": {
@@ -1857,11 +1786,13 @@
               1
             ],
             "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Roller Preset Rpm",
-              "_title": "SmartDashboard/Roller Preset Rpm",
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller IsReleasing?",
+              "_title": "SmartDashboard/AlgaeRoller IsReleasing?",
               "_glyph": 148,
-              "_showGlyph": false
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           },
           "9,0": {
@@ -1870,22 +1801,216 @@
               1
             ],
             "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller IsShooting?",
+              "_title": "SmartDashboard/AlgaeRoller IsShooting?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller IsMoving?",
+              "_title": "SmartDashboard/AlgaeRoller IsMoving?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/CoralRoller IsRolling?",
+              "_title": "SmartDashboard/CoralRoller IsRolling?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "1,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/CoralRoller IsReleasing?",
+              "_title": "SmartDashboard/CoralRoller IsReleasing?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/CoralRoller IsMoving?",
+              "_title": "SmartDashboard/CoralRoller IsMoving?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "2,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/CoralRoller IsShooting?",
+              "_title": "SmartDashboard/CoralRoller IsShooting?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "0,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Roller Rpm",
-              "_title": "SmartDashboard/Roller Rpm",
+              "_source0": "network_table:///SmartDashboard/CoralRoller Preset Rpm",
+              "_title": "SmartDashboard/CoralRoller Preset Rpm",
               "_glyph": 148,
               "_showGlyph": false
             }
           },
-          "8,1": {
+          "1,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/CoralRoller Rpm",
+              "_title": "SmartDashboard/CoralRoller Rpm",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/CoralRoller Target",
+              "_title": "SmartDashboard/CoralRoller Target",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "7,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller Preset Rpm",
+              "_title": "SmartDashboard/AlgaeRoller Preset Rpm",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "8,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller Rpm",
+              "_title": "SmartDashboard/AlgaeRoller Rpm",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller Target",
+              "_title": "SmartDashboard/AlgaeRoller Target",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "2,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/CoralRoller Enc Position",
+              "_title": "SmartDashboard/CoralRoller Enc Position",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller Enc Position",
+              "_title": "SmartDashboard/AlgaeRoller Enc Position",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "7,3": {
             "size": [
               2,
               1
             ],
             "content": {
               "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Roller Enc Velocity",
-              "_title": "SmartDashboard/Roller Enc Velocity",
+              "_source0": "network_table:///SmartDashboard/AlgaeRoller Enc Velocity",
+              "_title": "SmartDashboard/AlgaeRoller Enc Velocity",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/CoralRoller Enc Velocity",
+              "_title": "SmartDashboard/CoralRoller Enc Velocity",
               "_glyph": 148,
               "_showGlyph": false
             }
