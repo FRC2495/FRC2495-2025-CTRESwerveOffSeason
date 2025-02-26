@@ -182,59 +182,6 @@ public class RobotContainer {
 
 		autoChooser = AutoBuilder.buildAutoChooser("SPB1 - One Coral and Leave SZ");
 		SmartDashboard.putData("Auto Chooser", autoChooser);
-		
-		/*autonChooser.setDefaultOption("Do Nothing", AUTON_DO_NOTHING);
-		autonChooser.addOption("My Auto", AUTON_CUSTOM);
-		autonChooser.addOption("Sample Swerve", AUTON_SAMPLE_SWERVE);
-		autonChooser.addOption("Sample Move Forward", AUTON_SAMPLE_MOVE_FORWARD);
-		autonChooser.addOption("Sample Move In Reverse", AUTON_SAMPLE_MOVE_IN_REVERSE);
-		autonChooser.addOption("Sample Move In Gamma Shape", AUTON_SAMPLE_MOVE_IN_GAMMA_SHAPE);
-		autonChooser.addOption("Sample Move In L Shape In Reverse", AUTON_SAMPLE_MOVE_IN_L_SHAPE_IN_REVERSE);
-		autonChooser.addOption("Test Hardcoded Move 1", AUTON_TEST_HARDCODED_MOVE_1);
-		autonChooser.addOption("Test Hardcoded Move 2", AUTON_TEST_HARDCODED_MOVE_2);
-		autonChooser.addOption("Test Trajectory Generation", AUTON_TEST_TRAJECTORY_GENERATION);
-		SmartDashboard.putData("Auto choices", autonChooser);
-
-		gamePieceChooser.setDefaultOption("None", GAME_PIECE_NONE);
-		gamePieceChooser.addOption("1 Note", GAME_PIECE_1_NOTE);
-		gamePieceChooser.addOption("2 Notes", GAME_PIECE_2_NOTES);
-		gamePieceChooser.addOption("3 Notes", GAME_PIECE_3_NOTES);
-		SmartDashboard.putData("Game piece choices", gamePieceChooser);
-
-		startPositionChooser.setDefaultOption("Starting Position 1", START_POSITION_1);
-		startPositionChooser.addOption("Starting Position 2", START_POSITION_2);
-		startPositionChooser.addOption("Starting Position 3", START_POSITION_3);
-		startPositionChooser.addOption("Starting Position 4", START_POSITION_4);
-		startPositionChooser.addOption("Starting Position 5", START_POSITION_5);
-		startPositionChooser.addOption("Starting Position 6", START_POSITION_6);
-		SmartDashboard.putData("Start positions", startPositionChooser);
-
-		mainTargetChooser.setDefaultOption("To Nowhere", MAIN_TARGET_NOWHERE);
-		mainTargetChooser.addOption("Speaker", MAIN_TARGET_SPEAKER);
-		SmartDashboard.putData("Main targets", mainTargetChooser);
-		
-		cameraOptionChooser.setDefaultOption("Always", CAMERA_OPTION_USE_ALWAYS);
-		cameraOptionChooser.addOption("Open Loop Only", CAMERA_OPTION_USE_OPEN_LOOP_ONLY);
-		cameraOptionChooser.addOption("Closed Loop Only", CAMERA_OPTION_USE_CLOSED_LOOP_ONLY);
-		cameraOptionChooser.addOption("Never", CAMERA_OPTION_USE_NEVER);		
-		SmartDashboard.putData("Camera options", cameraOptionChooser);
-		
-		sonarOptionChooser.setDefaultOption("Always", SONAR_OPTION_USE_ALWAYS);
-		sonarOptionChooser.addOption("Release Only", SONAR_OPTION_USE_RELEASE_ONLY);
-		sonarOptionChooser.addOption("Grasp Only", SONAR_OPTION_USE_GRASP_ONLY);		
-		sonarOptionChooser.addOption("Never", SONAR_OPTION_USE_NEVER);
-		SmartDashboard.putData("Sonar options", sonarOptionChooser);
-		
-		releaseChooser.setDefaultOption("Release", CLAW_OPTION_RELEASE);
-		releaseChooser.addOption("Don't release", CLAW_OPTION_DONT_RELEASE);
-		SmartDashboard.putData("Release options", releaseChooser);
-
-		autonOptionChooser.setDefaultOption("Just Shoot Note", AUTON_OPTION_JUST_SHOOT_NOTE);
-		autonOptionChooser.addOption("Leave Community", AUTON_OPTION_LEAVE_COMMUNITY);
-		autonOptionChooser.addOption("Pickup Note At Midline", AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE);
-		autonOptionChooser.addOption("Pickup Note At Wing", AUTON_OPTION_PICKUP_NOTE_AT_WING);
-		autonOptionChooser.addOption("Feed Note", AUTON_OPTION_FEED_NOTE);
-		SmartDashboard.putData("Auton options", autonOptionChooser);*/
 
 		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
@@ -250,10 +197,12 @@ public class RobotContainer {
         NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRelease(coral_roller));
         NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
         NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
-		NamedCommands.registerCommand("SliderExtendWithStallDetection", new SliderExtendWithStallDetection(slider));
-		NamedCommands.registerCommand("SliderRetractWithStallDetection", new SliderRetractWithStallDetection(slider));
-		NamedCommands.registerCommand("NeckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
-		NamedCommands.registerCommand("NeckDownUpWithStallDetection", new NeckMoveDownWithStallDetection(neck));
+		NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderExtendWithStallDetection(slider));
+		NamedCommands.registerCommand("sliderRetractWithStallDetection", new SliderRetractWithStallDetection(slider));
+		NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
+		NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
+		NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
+		NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
 
 		// Configure the button bindings
 
