@@ -178,11 +178,6 @@ public class RobotContainer {
 	 */
 	public RobotContainer() {
 
-		// choosers (for auton)
-
-		autoChooser = AutoBuilder.buildAutoChooser("SPB1 - One Coral and Leave SZ");
-		SmartDashboard.putData("Auto Chooser", autoChooser);
-
 		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveToSecondLevelWithStallDetection", new ElevatorMoveToSecondLevelWithStallDetection(elevator));
@@ -204,6 +199,11 @@ public class RobotContainer {
 		NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
 
+		// choosers (for auton)
+
+		autoChooser = AutoBuilder.buildAutoChooser("SPB1 - One Coral and Leave SZ");
+		SmartDashboard.putData("Auto Chooser", autoChooser);
+		
 		// Configure the button bindings
 
 		configureButtonBindings();
