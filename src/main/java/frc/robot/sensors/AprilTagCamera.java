@@ -70,6 +70,29 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		}
 		return globalPose;
 	}*/
+
+	public boolean isTargetVisible()
+	{
+		boolean targetVisible = false;
+		double targetYaw = 0.0;
+		var results = getAllUnreadResults();
+        if (!results.isEmpty()) {
+            // Camera processed a new frame since last
+            // Get the last one in the list.
+            var result = results.get(results.size() - 1);
+            if (result.hasTargets()) {
+                // At least one AprilTag was seen by the camera
+                for (var target : result.getTargets()) {
+                    if (target.getFiducialId() == 7) {
+                        // Found Tag 7, record its information
+                        targetYaw = target.getYaw();
+                        targetVisible = true;
+                    }
+                }
+			}
+		}
+		return targetVisible;
+	}
 	
 	public double getDistanceToTarget() {
 		//return getDistanceToBestTarget();
