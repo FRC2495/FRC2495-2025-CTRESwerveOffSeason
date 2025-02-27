@@ -261,6 +261,17 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Slider isMidway", m_robotContainer.getSlider().isMidway());
 		SmartDashboard.putBoolean("Slider isExtended", m_robotContainer.getSlider().isExtended());
 
+		SmartDashboard.putBoolean("Hanger Forward Limit Switch", m_robotContainer.getHanger().getForwardLimitSwitchState());
+		SmartDashboard.putBoolean("Hanger Reverse Limit Switch", m_robotContainer.getHanger().getReverseLimitSwitchState());
+		SmartDashboard.putNumber("Hanger Enc Position", m_robotContainer.getHanger().getEncoderPosition());
+		SmartDashboard.putBoolean("Hanger IsMoving?", m_robotContainer.getHanger().isMoving());
+		SmartDashboard.putNumber("Hanger Target", m_robotContainer.getHanger().getTarget());
+		SmartDashboard.putBoolean("Hanger isStalled?", m_robotContainer.getHanger().isStalled());
+		SmartDashboard.putBoolean("Hanger isDown", m_robotContainer.getHanger().isDown());
+		SmartDashboard.putBoolean("Hanger isMidway", m_robotContainer.getHanger().isMidway());
+		SmartDashboard.putBoolean("Hanger isUp", m_robotContainer.getHanger().isUp());
+		SmartDashboard.putBoolean("Hanger isDangerous", m_robotContainer.getHanger().isDangerous());
+
 		/*SmartDashboard.putString("Auton selected", m_robotContainer.getAutonChooser().getSelected());	
 		SmartDashboard.putString("Game piece", m_robotContainer.getGamePieceChooser().getSelected());
 		SmartDashboard.putString("Start position", m_robotContainer.getStartPositionChooser().getSelected());
