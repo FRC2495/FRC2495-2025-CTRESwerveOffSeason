@@ -18,11 +18,11 @@ import frc.robot.subsystems.CoralRoller;
 /**
  *
  */
-public class CoralRollerRelease extends Command {
+public class CoralRollerRollIn extends Command {
 
 	private CoralRoller coral_roller;
 
-	public CoralRollerRelease(CoralRoller coral_roller) {
+	public CoralRollerRollIn(CoralRoller coral_roller) {
 		this.coral_roller = coral_roller;
 		addRequirements(coral_roller);
 	}
@@ -30,7 +30,7 @@ public class CoralRollerRelease extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("CoralRollerRelease: initialize");
+		System.out.println("CoralRollerRollIn: initialize");
 		coral_roller.release();
 	
 	}

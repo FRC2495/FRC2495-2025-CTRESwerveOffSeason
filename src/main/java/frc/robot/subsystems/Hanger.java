@@ -84,14 +84,15 @@ public class Hanger extends SubsystemBase implements IHanger {
 	PositionDutyCycle hangerUpPosition = new PositionDutyCycle(-LENGTH_OF_TRAVEL_REVS);
 	PositionDutyCycle hangerMidwayPosition = new PositionDutyCycle(-LENGTH_OF_MIDWAY_REVS);
 	PositionDutyCycle hangerHomePosition = new PositionDutyCycle(0);
-	
+
+	double targetEncoder;
+
 	boolean isMoving;
 	boolean isMovingUp;
 	boolean isReallyStalled;
 
 	private int onTargetCount; // counter indicating how many times/iterations we were on target 
 	private int stalledCount; // counter indicating how many times/iterations we were stalled
-	
 	
 	public Hanger(TalonFX hanger_in) {
 		
@@ -264,6 +265,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 
 		//hanger.set(ControlMode.Position,tac);
 		hanger.setControl(hangerUpPosition); //fix
+		targetEncoder = -LENGTH_OF_TRAVEL_REVS;
 
 		
 		isMoving = true;
@@ -282,7 +284,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 		//tac = -LENGTH_OF_MIDWAY_TICKS;
 		
 		hanger.setControl(hangerMidwayPosition);
-		//hanger.set(ControlMode.Position,tac);
+		targetEncoder = -LENGTH_OF_MIDWAY_REVS;
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -300,6 +302,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 		//tac = 0; // adjust as needed
 		//hanger.set(ControlMode.Position,tac);
 		hanger.setControl(hangerHomePosition);
+		targetEncoder = 0.0;
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -434,9 +437,9 @@ public class Hanger extends SubsystemBase implements IHanger {
 		}
 	}
 
-	/*public double getTarget() {
-		return tac;
-	}*/	
+	public double getTarget() {
+		return targetEncoder;
+	}
 
 	public boolean getForwardLimitSwitchState() {
 		//return hanger.getSensorCollection().isFwdLimitSwitchClosed()>0?true:false;

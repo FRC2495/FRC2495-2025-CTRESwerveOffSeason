@@ -191,8 +191,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("algaeRollerRelease", new AlgaeRollerRelease(algae_roller));
         NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 5));
         NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
-        NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRoll(coral_roller));
-        NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRelease(coral_roller));
+        NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRollOut(coral_roller));
+        NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRollIn(coral_roller));
         NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
         NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
 		NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderExtendWithStallDetection(slider));
@@ -314,10 +314,10 @@ public class RobotContainer {
 		// copilot (gamepad)
 		
 		copilotGamepad.a()
-			.whileTrue(new CoralRollerRelease(coral_roller));
+			.whileTrue(new CoralRollerRollIn(coral_roller));
 		
 		copilotGamepad.b()
-			.whileTrue(new CoralRollerRoll(coral_roller));
+			.whileTrue(new CoralRollerRollOut(coral_roller));
 
 		copilotGamepad.x();
 			//.onTrue(new CoralRollerReleaseShortDistance(coral_roller));
@@ -345,7 +345,7 @@ public class RobotContainer {
 
 		copilotGamepad.rightTrigger()
 			//.onTrue(new DrawerExtendWithStallDetection(drawer));
-			.whileTrue(new CoralRollerRoll(coral_roller));
+			.whileTrue(new CoralRollerRollOut(coral_roller));
 
 
 		copilotGamepad.povDown()

@@ -64,7 +64,7 @@ public interface IHanger extends Subsystem {
 	public void joystickControl(Joystick joystick);
 
 	public void gamepadControl(XboxController gamepad);
-	
+
 	public double getTarget();
 
 	// MAKE SURE THAT YOU ARE NOT IN A CLOSED LOOP CONTROL MODE BEFORE CALLING THIS METHOD.
