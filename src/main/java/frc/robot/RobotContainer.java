@@ -143,8 +143,7 @@ public class RobotContainer {
 	private final Slider slider = new Slider(slider_master);
 
 	private final TalonFX hanger_master = new TalonFX(Ports.CAN.HANGER_MASTER);
-	private final TalonFX hanger_follower = new TalonFX(Ports.CAN.HANGER_FOLLOWER);
-	private final Hanger hanger = new Hanger(hanger_master, hanger_follower);
+	private final Hanger hanger = new Hanger(hanger_master);
 
 	//private final CANSparkMax shooter_master = new CANSparkMax(Ports.CAN.SHOOTER_MASTER, MotorType.kBrushless);
 	//private final CANSparkMax shooter_follower = new CANSparkMax(Ports.CAN.SHOOTER_FOLLOWER, MotorType.kBrushless);
