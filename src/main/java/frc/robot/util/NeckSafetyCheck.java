@@ -6,7 +6,7 @@ package frc.robot.util;
 
 import java.util.function.BooleanSupplier;
 
-import frc.robot.subsystems.Neck;
+import frc.robot.subsystems.NeckTemp;
 
 /** The purpose of this class is to check if it's okay to close the mouth.
  * 
@@ -14,9 +14,9 @@ import frc.robot.subsystems.Neck;
  */
 public class NeckSafetyCheck implements BooleanSupplier
 {
-	private Neck neck;
+	private NeckTemp neck;
 
-	public NeckSafetyCheck(Neck neck) {
+	public NeckSafetyCheck(NeckTemp neck) {
 		this.neck = neck;
 	}
 

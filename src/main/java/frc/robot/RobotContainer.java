@@ -43,8 +43,7 @@ import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hanger;
 //import frc.robot.subsystems.Drawer;
-import frc.robot.subsystems.Neck;
-import frc.robot.subsystems.OldNeck;
+import frc.robot.subsystems.NeckTemp;
 import frc.robot.subsystems.Slider;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.AlgaeRoller;
@@ -52,6 +51,7 @@ import frc.robot.subsystems.AlgaeRoller;
 //import frc.robot.subsystems.Compressor;
 //import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
+import frc.robot.subsystems.Neck;
 import frc.robot.commands.algae_roller.*;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
@@ -121,14 +121,14 @@ public class RobotContainer {
 
 	private final /*I*/Elevator elevator = new Elevator(elevator_master, elevator_follower);
 
-	private final WPI_TalonSRX neck_master = new WPI_TalonSRX(Ports.CAN.OLD_NECK_MASTER);
+	private final WPI_TalonSRX neck_master = new WPI_TalonSRX(Ports.CAN.NECK_MASTER);
 	
-	private final /*I*/Neck neck = new Neck(neck_master);
+	private final /*I*/Neck neck = new Neck();
 
-	private final TalonFX old_neck_master = new TalonFX(Ports.CAN.OLD_NECK_MASTER);
-	private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.OLD_NECK_FOLLOWER);
+	//private final TalonFX old_neck_master = new TalonFX(Ports.CAN.OLD_NECK_MASTER);
+	//private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.OLD_NECK_FOLLOWER);
 	
-	private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
+	//private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
 
 	//private final CANSparkMax roller_master = new CANSparkMax(Ports.CAN.ROLLER, MotorType.kBrushless);
 	private final WPI_TalonSRX coral_roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
@@ -329,13 +329,13 @@ public class RobotContainer {
 			//.onTrue(new RollerSuperSmartRoll(roller, noteSensor, noteSensorTwo));
 			//.onTrue(new CoralRollerRollLowRpmUntilNoteSensed(coral_roller, noteSensor, noteSensorTwo));
 			
-		copilotGamepad.back()
+		copilotGamepad.back();
 			//.onTrue(new DrivetrainAndGyroReset(drivetrain));
-			.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
+			//.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
 
-		copilotGamepad.start()
+		copilotGamepad.start();
 			//.onTrue(new AlmostEverythingStop(elevator, neck, roller));
-			.onTrue(new OldNeckHome(old_neck));
+			//.onTrue(new OldNeckHome(old_neck));
 
 
 		copilotGamepad.leftTrigger();
@@ -348,32 +348,32 @@ public class RobotContainer {
 			.whileTrue(new CoralRollerRollOut(coral_roller));
 
 
-		copilotGamepad.povDown()
+		copilotGamepad.povDown();
 			//.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveDownWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveDownWithStallDetection(old_neck));
 
-		copilotGamepad.povLeft()
+		copilotGamepad.povLeft();
 			//.onTrue(new ElevatorMoveMidwayWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveSubWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveSubWithStallDetection(old_neck));
 
-		copilotGamepad.povRight()
+		copilotGamepad.povRight();
 			//.onTrue(new ElevatorMoveMidwayWithStallDetection(elevator));
 			//.onTrue(new NeckMovePodiumWithStallDetection(neck));
-			.onTrue(new OldNeckMoveFeedNoteWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveFeedNoteWithStallDetection(old_neck));
 
-		copilotGamepad.povUp()
+		copilotGamepad.povUp();
 			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveUpWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveUpWithStallDetection(old_neck));
 
 
-		copilotGamepad.leftBumper()
+		copilotGamepad.leftBumper();
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
-			.whileTrue(new OldNeckMoveUsingCamera(old_neck, apriltag_camera));
+			//.whileTrue(new OldNeckMoveUsingCamera(old_neck, apriltag_camera));
 
-		copilotGamepad.rightBumper()
+		copilotGamepad.rightBumper();
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			.onTrue(new OldNeckMoveAcrossFieldWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveAcrossFieldWithStallDetection(old_neck));
 
 
 		copilotGamepad.leftStick()
@@ -397,11 +397,11 @@ public class RobotContainer {
 		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue();*/
 
-		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
+		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
 
-		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
+		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
 
 		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD);
 			//.whileTrue(new DrawerGamepadControl(drawer, getCopilotGamepad()));

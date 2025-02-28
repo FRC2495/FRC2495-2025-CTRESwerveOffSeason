@@ -12,7 +12,7 @@ public interface INeck extends Subsystem {
 	public boolean getForwardLimitSwitchState();
 	
 	// This method should be called to assess the progress of a move
-	public boolean tripleCheckMove();
+	//public boolean tripleCheckMove();
 	
 	public void moveUp();
 
@@ -20,7 +20,7 @@ public interface INeck extends Subsystem {
 	
 	public void moveDown();
 
-	//public double getPosition();
+	public double getPosition();
 
 	public double getEncoderPosition();
 
@@ -43,8 +43,6 @@ public interface INeck extends Subsystem {
 	public void stay();
 	
 	public void stop();
-		
-	public void setNominalAndPeakOutputs(double peakOutput);
 	
 	// for debug purpose only
 	public void joystickControl(Joystick joystick);

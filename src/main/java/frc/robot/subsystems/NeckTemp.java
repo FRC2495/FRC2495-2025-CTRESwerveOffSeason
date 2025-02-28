@@ -1,61 +1,30 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.SwerveModulePosition;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-/*import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.SparkPIDController;*/
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
-import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-import com.revrobotics.spark.config.SparkMaxConfig;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.spark.SparkBase.ControlType;
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
-import com.revrobotics.spark.SparkClosedLoopController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.Constants.SwerveModuleConstants;
-import frc.robot.Ports;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.ParamEnum;
+
+import frc.robot.interfaces.*;
 import frc.robot.RobotContainer;
-import frc.robot.interfaces.INeck;
-import frc.robot.sensors.ThriftyEncoder;
+//import frc.robot.Ports;
+
 
 /**
- * The {@code SwerveModule} class contains fields and methods pertaining to the function of a swerve module.
+ * The {@code Neck} class contains fields and methods pertaining to the function of the neck.
  */
-public class Neck extends SubsystemBase implements INeck {
-	private final SparkMax neck;
-	private final SparkMaxConfig neckConfig;
-
-	private final RelativeEncoder neckEncoder;
-
-	private final SparkClosedLoopController neckClosedLoopController;
-
-	private static final double NECK_P = 0.06;
-	private static final double NECK_I = 0;
-	private static final double NECK_D = 0;
-
-	private static final double MIN_OUTPUT = -1.0;
-	private static final double MAX_OUTPUT = 1.0;
-
-	private double setPosition;
-
+public class NeckTemp extends SubsystemBase implements INeck {
+	
 	// general settings
 	static final int TIMEOUT_MS = 15000;
 	
@@ -79,7 +48,7 @@ public class Neck extends SubsystemBase implements INeck {
 	static final int TALON_TIMEOUT_MS = 20;
 	public static final int TICKS_PER_REVOLUTION = 2048;
 	
-
+	
 	// move settings
 	static final int PRIMARY_PID_LOOP = 0;
 	
@@ -106,51 +75,80 @@ public class Neck extends SubsystemBase implements INeck {
 	boolean isMovingUp;
 	boolean isReallyStalled;
 	boolean isHoming;
-
+	
+	WPI_TalonSRX neck;
+	BaseMotorController neck_follower;
+	
 	double tac;
 
 	private int onTargetCount; // counter indicating how many times/iterations we were on target
 	private int stalledCount; // counter indicating how many times/iterations we were stalled	
 
 	/**
-	 * Constructs a SwerveModule and configures neck motor
-	 * encoder, and PID controller.
-	 */
-	public Neck() {
-		neckConfig = new SparkMaxConfig();
-
-		neck = new SparkMax(Ports.CAN.NECK_MASTER, MotorType.kBrushless);
-
-		neckConfig
-			.inverted(false)
-			.idleMode(IdleMode.kBrake)
-			.closedLoopRampRate(0.6);
-		neckConfig.closedLoop
-			.feedbackSensor(FeedbackSensor.kAlternateOrExternalEncoder)
-			.pid(NECK_P, NECK_I, NECK_D)
-			.positionWrappingEnabled(false)
-            .outputRange(MIN_OUTPUT, MAX_OUTPUT);
-		neck.configure(neckConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+ 	* The {@code Neck} class contains fields and methods pertaining to the function of the neck.
+	*/	
+	public NeckTemp(WPI_TalonSRX neck_in) {
+		neck = neck_in;
 		
-		// Setup encoders and PID controllers for the neck SPARKS MAX.
-		neckClosedLoopController = neck.getClosedLoopController();
-		neckEncoder = neck.getEncoder();
-		setPosition = getPosition();
+		neck.configFactoryDefault();
+
+		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
+		// As of right now, there are two options when setting the neutral mode of a motor controller,
+		// brake and coast.	
+		neck.setNeutralMode(NeutralMode.Brake);
+		
+		// Sensor phase is the term used to explain sensor direction.
+		// In order for limit switches and closed-loop features to function properly the sensor and motor has to be in-phase.
+		// This means that the sensor position must move in a positive direction as the motor controller drives positive output.
+		neck.setSensorPhase(true);
+
+		// Enables limit switches
+		neck.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, TALON_TIMEOUT_MS);
+		neck.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, TALON_TIMEOUT_MS);
+		neck.overrideLimitSwitchesEnable(true);
+
+		// Motor controller output direction can be set by calling the setInverted() function as seen below.
+		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
+		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
+		// (when LEDs are green => forward limit switch and soft limits are being checked). 	
+		neck.setInverted(false); // invert if required
+
+		setPIDParameters();
+		
+		// use slot 0 for closed-looping
+ 		//neck.selectProfileSlot(SLOT_0, PRIMARY_PID_LOOP);
+		
+		// set peak output to max in case if had been reduced previously
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		// Sensors for motor controllers provide feedback about the position, velocity, and acceleration
+		// of the system using that motor controller.
+		// Note: With Phoenix framework, position units are in the natural units of the sensor.
+		// This ensures the best resolution possible when performing closed-loops in firmware.
+		// CTRE Magnetic Encoder (relative/quadrature) =  4096 units per rotation		
+		// FX Integrated Sensor = 2048 units per rotation
+		neck.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,	PRIMARY_PID_LOOP, TALON_TIMEOUT_MS);
+
+		// this will reset the encoder automatically when at or past the reverse limit sensor
+		neck.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, TALON_TIMEOUT_MS);
+		neck.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, TALON_TIMEOUT_MS);		
+		
+		isMoving = false;
+		isMovingUp = false;
+		isReallyStalled = false;
+		stalledCount = 0;	
 	}
 
 	@Override
 	public void periodic() {
 		// Put code here to be run every loop
-		if (neck.getReverseLimitSwitch().isPressed() && getPosition() != 0.0) {
-			resetEncoder();
-		}
+
 	}
 
 	// homes the hinge
 	// we go down slowly until we hit the limit switch.
 	public void home() {
-		//neck.set(ControlMode.PercentOutput,+HOMING_PCT_OUTPUT); // we start moving down
-		neckClosedLoopController.setReference(+HOMING_PCT_OUTPUT, ControlType.kDutyCycle);
+		neck.set(ControlMode.PercentOutput,+HOMING_PCT_OUTPUT); // we start moving down
 		
 		isHoming = true;
 	}
@@ -163,7 +161,7 @@ public class Neck extends SubsystemBase implements INeck {
 
 			if (!isHoming) {
 				System.out.println("You have reached the home.");
-				neckClosedLoopController.setReference(0, ControlType.kDutyCycle); // turn power off
+				neck.set(ControlMode.PercentOutput,0); // turn power off
 			}
 		}
 
@@ -171,11 +169,11 @@ public class Neck extends SubsystemBase implements INeck {
 	}
 	
 	// This method should be called to assess the progress of a move
-	/*public boolean tripleCheckMove() {
+	public boolean tripleCheckMove() {
 		if (isMoving) {
 			
-			double error = neckClosedLoopController.getClosedLoopError(PRIMARY_PID_LOOP);
-			System.out.println("Neck moving error: " + Math.abs(error));
+			double error = neck.getClosedLoopError(PRIMARY_PID_LOOP);
+			//System.out.println("Neck moving error: " + Math.abs(error));
 			
 			boolean isOnTarget = (Math.abs(error) < TICK_THRESH);
 			
@@ -206,7 +204,7 @@ public class Neck extends SubsystemBase implements INeck {
 			}
 		}
 		return isMoving; 
-	}*/
+	}
 
 	// return if drivetrain might be stalled
 	public boolean tripleCheckIfStalled() {
@@ -225,7 +223,7 @@ public class Neck extends SubsystemBase implements INeck {
 				} else {
 					// we are definitely not stalled
 					
-					System.out.println("moving velocity : " + velocity);
+					//System.out.println("moving velocity : " + velocity);
 				}
 			}
 			
@@ -243,15 +241,18 @@ public class Neck extends SubsystemBase implements INeck {
 	}
 
 	public int getEncoderVelocity() {
-		return (int) (neckEncoder.getVelocity());
+		return (int) (neck.getSelectedSensorVelocity(PRIMARY_PID_LOOP));
 	}
 	
 	public void moveUp() {	
 
+		//setPIDParameters();
 		System.out.println("Moving Up");
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		tac = -ANGLE_TO_TRAVEL_TICKS;
-		neckClosedLoopController.setReference(tac, ControlType.kPosition);
+		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -262,10 +263,13 @@ public class Neck extends SubsystemBase implements INeck {
 
 	public void moveCustom(double encoder_ticks) {	
 
-		System.out.println("Moving Custom");
+		//setPIDParameters();
+		//System.out.println("Moving Custom");
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		tac = encoder_ticks;
-		neckClosedLoopController.setReference(tac, ControlType.kPosition);
+		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -276,10 +280,13 @@ public class Neck extends SubsystemBase implements INeck {
 
 	public void moveToCoralStation() {	
 
+		//setPIDParameters();
 		System.out.println("Moving to Coral Station");
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		tac = -ANGLE_TO_CORAL_STATION_TICKS;
-		neckClosedLoopController.setReference(tac, ControlType.kPosition);
+		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -290,10 +297,13 @@ public class Neck extends SubsystemBase implements INeck {
 
 	public void moveToCoralReef() {	
 
+		//setPIDParameters();
 		System.out.println("Moving to Coral Station");
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		tac = -ANGLE_TO_CORAL_REEF_TICKS;
-		neckClosedLoopController.setReference(tac, ControlType.kPosition);
+		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -304,10 +314,13 @@ public class Neck extends SubsystemBase implements INeck {
 
 	public void moveToAlgaeReef() {	
 
+		//setPIDParameters();
 		System.out.println("Moving to Coral Station");
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		tac = -ANGLE_TO_ALGAE_REEF_TICKS;
-		neckClosedLoopController.setReference(tac, ControlType.kPosition);
+		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -318,10 +331,13 @@ public class Neck extends SubsystemBase implements INeck {
 
 	public void moveMidway() {	
 
+		//setPIDParameters();
 		System.out.println("Moving to Midway");
-	
+		
+		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
+
 		tac = -ANGLE_TO_MIDWAY_TICKS;
-		neckClosedLoopController.setReference(tac, ControlType.kPosition);
+		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -331,11 +347,14 @@ public class Neck extends SubsystemBase implements INeck {
 	}
 
 	public void moveDown() {
-
+		
+		//setPIDParameters();
 		System.out.println("Moving Down");
+		
+		setNominalAndPeakOutputs(SUPER_REDUCED_PCT_OUTPUT);
 
 		tac = -VIRTUAL_HOME_OFFSET_TICKS;
-		neckClosedLoopController.setReference(tac, ControlType.kPosition);
+		neck.set(ControlMode.Position,tac);
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -344,13 +363,12 @@ public class Neck extends SubsystemBase implements INeck {
 		stalledCount = 0;
 	}
 
-	//TODO check to see if this translates from talon to rev?
 	public double getPosition() {
-		return neckEncoder.getPosition() * GEAR_RATIO / TICKS_PER_REVOLUTION;
+		return neck.getSelectedSensorPosition(PRIMARY_PID_LOOP) * GEAR_RATIO / TICKS_PER_REVOLUTION;
 	}
 
 	public double getEncoderPosition() {
-		return neckEncoder.getPosition();
+		return neck.getSelectedSensorPosition(PRIMARY_PID_LOOP);
 	}
 
 	public void stay() {	 		
@@ -361,12 +379,57 @@ public class Neck extends SubsystemBase implements INeck {
 	
 	public void stop() {	 
 
-		neckClosedLoopController.setReference(0, ControlType.kDutyCycle);
+		neck.set(ControlMode.PercentOutput, 0);
 		
 		isMoving = false;
 		isMovingUp = false;	
 		isHoming = false;	
+		
+		setNominalAndPeakOutputs(MAX_PCT_OUTPUT); // we undo what me might have changed
 	}	
+	
+	private void setPIDParameters() {		
+		neck.configAllowableClosedloopError(SLOT_0, TALON_TICK_THRESH, TALON_TIMEOUT_MS);
+		
+		// P is the proportional gain. It modifies the closed-loop output by a proportion (the gain value)
+		// of the closed-loop error.
+		// P gain is specified in output unit per error unit.
+		// When tuning P, it's useful to estimate your starting value.
+		// If you want your mechanism to drive 50% output when the error is 4096 (one rotation when using CTRE Mag Encoder),
+		// then the calculated Proportional Gain would be (0.50 X 1023) / 4096 = ~0.125.
+		
+		// I is the integral gain. It modifies the closed-loop output according to the integral error
+		// (summation of the closed-loop error each iteration).
+		// I gain is specified in output units per integrated error.
+		// If your mechanism never quite reaches your target and using integral gain is viable,
+		// start with 1/100th of the Proportional Gain.
+		
+		// D is the derivative gain. It modifies the closed-loop output according to the derivative error
+		// (change in closed-loop error each iteration).
+		// D gain is specified in output units per derivative error.
+		// If your mechanism accelerates too abruptly, Derivative Gain can be used to smooth the motion.
+		// Typically start with 10x to 100x of your current Proportional Gain.
+
+		// Feed-Forward is typically used in velocity and motion profile/magic closed-loop modes.
+		// F gain is multiplied directly by the set point passed into the programming API.
+		// The result of this multiplication is in motor output units [-1023, 1023]. This allows the robot to feed-forward using the target set-point.
+		// In order to calculate feed-forward, you will need to measure your motor's velocity at a specified percent output
+		// (preferably an output close to the intended operating range).
+		
+		neck.config_kP(SLOT_0, MOVE_PROPORTIONAL_GAIN, TALON_TIMEOUT_MS);
+		neck.config_kI(SLOT_0, MOVE_INTEGRAL_GAIN, TALON_TIMEOUT_MS);
+		neck.config_kD(SLOT_0, MOVE_DERIVATIVE_GAIN, TALON_TIMEOUT_MS);
+		neck.config_kF(SLOT_0, 0, TALON_TIMEOUT_MS);
+	}
+
+	public void setNominalAndPeakOutputs(double peakOutput)
+	{
+		neck.configPeakOutputForward(peakOutput, TALON_TIMEOUT_MS);
+		neck.configPeakOutputReverse(-peakOutput, TALON_TIMEOUT_MS);
+		
+		neck.configNominalOutputForward(0, TALON_TIMEOUT_MS);
+		neck.configNominalOutputForward(0, TALON_TIMEOUT_MS);
+	}
 
 	public boolean isHoming() {
 		return isHoming;
@@ -406,8 +469,7 @@ public class Neck extends SubsystemBase implements INeck {
 	{
 		if (!isMoving) // if we are already doing a move we don't take over
 		{
-			neckClosedLoopController.setReference(-joystick.getY(), ControlType.kDutyCycle);
-			//neck.set(ControlMode.PercentOutput, -joystick.getY());
+			neck.set(ControlMode.PercentOutput, -joystick.getY());
 		}
 	}	
 
@@ -415,8 +477,7 @@ public class Neck extends SubsystemBase implements INeck {
 	{
 		if (!isMoving) // if we are already doing a move we don't take over
 		{
-			neckClosedLoopController.setReference(+MathUtil.applyDeadband(gamepad.getRightY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6, ControlType.kDutyCycle);
-			//neck.set(ControlMode.PercentOutput, +MathUtil.applyDeadband(gamepad.getRightY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6); // adjust sign if desired
+			neck.set(ControlMode.PercentOutput, +MathUtil.applyDeadband(gamepad.getRightY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6); // adjust sign if desired
 		}
 	}
 
@@ -426,18 +487,18 @@ public class Neck extends SubsystemBase implements INeck {
 
 	// returns the state of the limit switch
 	public boolean getForwardLimitSwitchState() {
-		return neck.getForwardLimitSwitch().isPressed();
+		return neck.getSensorCollection().isFwdLimitSwitchClosed();
 	}
 
 	public boolean getReverseLimitSwitchState() {
-		return neck.getReverseLimitSwitch().isPressed();
+		return neck.getSensorCollection().isRevLimitSwitchClosed();
 	}
 
 	// MAKE SURE THAT YOU ARE NOT IN A CLOSED LOOP CONTROL MODE BEFORE CALLING THIS METHOD.
 	// OTHERWISE THIS IS EQUIVALENT TO MOVING TO THE DISTANCE TO THE CURRENT ZERO IN REVERSE! 
 	public void resetEncoder() {
-		neckEncoder.setPosition(0.0);
+		neck.set(ControlMode.PercentOutput,0); // we stop AND MAKE SURE WE DO NOT MOVE WHEN SETTING POSITION
+		neck.setSelectedSensorPosition(0, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // we mark the virtual zero
 	}
-
 
 }
