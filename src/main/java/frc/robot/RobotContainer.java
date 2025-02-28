@@ -277,18 +277,16 @@ public class RobotContainer {
 			.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
 			
 		joyMain.button(4)
-			.onTrue(new MoveInGammaShape(drivetrain, this, 3));
+			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
+			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 
 		joyMain.button(5)
-			.onTrue(new MoveForward(drivetrain, this, 3));
-			//.onTrue(new DrivetrainTurnAngleUsingPidController(drivetrain, -90));
-			//.onTrue(new MoveInUShapeInReverse(drivetrain, this, 1));
+			.onTrue(new MoveLeftOfCoralReef(drivetrain, this, GAMEPAD_AXIS_THRESHOLD));
 
 		joyMain.button(6)
-			//.onTrue(new MoveInReverse(drivetrain, this, 3));
-			//.onTrue(new DrivetrainTurnAngleUsingPidController(drivetrain, 90));
 			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
-			.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			.onTrue(new MoveRightOfCoralReef(drivetrain, this, GAMEPAD_AXIS_THRESHOLD));
 
 		joyMain.button(7)
 			.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
@@ -296,8 +294,8 @@ public class RobotContainer {
 		joyMain.button(8)
 			.whileTrue(new AlgaeRollerJoystickControl(algae_roller, drivetrain, getMainJoystick()));
 		
-		joyMain.button(9);
-			//.whileTrue(new NeckJoystickControl(neck, drivetrain, getMainJoystick()));
+		joyMain.button(9)
+			.whileTrue(new NeckJoystickControl(neck, drivetrain, getMainJoystick()));
 		
 		joyMain.button(10)
 			.whileTrue(new ElevatorJoystickControl(elevator, drivetrain, getMainJoystick()));
@@ -308,7 +306,8 @@ public class RobotContainer {
 		
 		joyMain.button(12)
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
+			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
+			.onTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
 			
 				
 		// copilot (gamepad)
