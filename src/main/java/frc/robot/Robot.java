@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Slider;
 
 import java.util.Optional;
 
@@ -227,33 +228,49 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Neck isUp", m_robotContainer.getNeck().isUp());
 		//SmartDashboard.putBoolean("Neck isDangerous", m_robotContainer.getNeck().isDangerous());
 
-		SmartDashboard.putBoolean("Roller IsRolling?", m_robotContainer.getCoralRoller().isRolling());
-		SmartDashboard.putBoolean("Roller IsReleasing?", m_robotContainer.getCoralRoller().isReleasing());
-		SmartDashboard.putBoolean("Roller IsShooting?", m_robotContainer.getCoralRoller().isShooting());
-		SmartDashboard.putBoolean("Roller IsMoving?", m_robotContainer.getCoralRoller().isMoving());
-		SmartDashboard.putNumber("Roller Enc Position", m_robotContainer.getCoralRoller().getEncoderPosition());
-		SmartDashboard.putNumber("Roller Enc Velocity", m_robotContainer.getCoralRoller().getEncoderVelocity());
-		SmartDashboard.putNumber("Roller Rpm", m_robotContainer.getCoralRoller().getRpm());
-		SmartDashboard.putNumber("Roller Preset Rpm", m_robotContainer.getCoralRoller().getPresetRpm());
-		SmartDashboard.putNumber("Roller Target", m_robotContainer.getCoralRoller().getTarget());
+		SmartDashboard.putBoolean("CoralRoller IsRolling?", m_robotContainer.getCoralRoller().isRolling());
+		SmartDashboard.putBoolean("CoralRoller IsReleasing?", m_robotContainer.getCoralRoller().isReleasing());
+		SmartDashboard.putBoolean("CoralRoller IsShooting?", m_robotContainer.getCoralRoller().isShooting());
+		SmartDashboard.putBoolean("CoralRoller IsMoving?", m_robotContainer.getCoralRoller().isMoving());
+		SmartDashboard.putNumber("CoralRoller Enc Position", m_robotContainer.getCoralRoller().getEncoderPosition());
+		SmartDashboard.putNumber("CoralRoller Enc Velocity", m_robotContainer.getCoralRoller().getEncoderVelocity());
+		SmartDashboard.putNumber("CoralRoller Rpm", m_robotContainer.getCoralRoller().getRpm());
+		SmartDashboard.putNumber("CoralRoller Preset Rpm", m_robotContainer.getCoralRoller().getPresetRpm());
+		SmartDashboard.putNumber("CoralRoller Target", m_robotContainer.getCoralRoller().getTarget());
 
-		SmartDashboard.putBoolean("Roller IsRolling?", m_robotContainer.getAlgaeRoller().isRolling());
-		SmartDashboard.putBoolean("Roller IsReleasing?", m_robotContainer.getAlgaeRoller().isReleasing());
-		SmartDashboard.putBoolean("Roller IsShooting?", m_robotContainer.getAlgaeRoller().isShooting());
-		SmartDashboard.putBoolean("Roller IsMoving?", m_robotContainer.getAlgaeRoller().isMoving());
-		SmartDashboard.putNumber("Roller Enc Position", m_robotContainer.getAlgaeRoller().getEncoderPosition());
-		SmartDashboard.putNumber("Roller Enc Velocity", m_robotContainer.getAlgaeRoller().getEncoderVelocity());
-		SmartDashboard.putNumber("Roller Rpm", m_robotContainer.getAlgaeRoller().getRpm());
-		SmartDashboard.putNumber("Roller Preset Rpm", m_robotContainer.getAlgaeRoller().getPresetRpm());
-		SmartDashboard.putNumber("Roller Target", m_robotContainer.getAlgaeRoller().getTarget());
+		SmartDashboard.putBoolean("AlgaeRoller IsRolling?", m_robotContainer.getAlgaeRoller().isRolling());
+		SmartDashboard.putBoolean("AlgaeRoller IsReleasing?", m_robotContainer.getAlgaeRoller().isReleasing());
+		SmartDashboard.putBoolean("AlgaeRoller IsShooting?", m_robotContainer.getAlgaeRoller().isShooting());
+		SmartDashboard.putBoolean("AlgaeRoller IsMoving?", m_robotContainer.getAlgaeRoller().isMoving());
+		SmartDashboard.putNumber("AlgaeRoller Enc Position", m_robotContainer.getAlgaeRoller().getEncoderPosition());
+		SmartDashboard.putNumber("AlgaeRoller Enc Velocity", m_robotContainer.getAlgaeRoller().getEncoderVelocity());
+		SmartDashboard.putNumber("AlgaeRoller Rpm", m_robotContainer.getAlgaeRoller().getRpm());
+		SmartDashboard.putNumber("AlgaeRoller Preset Rpm", m_robotContainer.getAlgaeRoller().getPresetRpm());
+		SmartDashboard.putNumber("AlgaeRoller Target", m_robotContainer.getAlgaeRoller().getTarget());
 
 		/*SmartDashboard.putString("Mouth Position", m_robotContainer.getMouth().getPosition().toString());
 		SmartDashboard.putBoolean("Mouth isDangerous", m_robotContainer.getMouth().isDangerous());*/
 
-		/*SmartDashboard.putBoolean("Shooter IsShooting?",  m_robotContainer.getShooter().isShooting());
-		SmartDashboard.putNumber("Shooter Enc Velocity", m_robotContainer.getShooter().getEncoderVelocity());
-		SmartDashboard.putNumber("Shooter Rpm", m_robotContainer.getShooter().getRpm());
-		SmartDashboard.putNumber("Shooter Preset Rpm", m_robotContainer.getShooter().getPresetRps());*/
+		SmartDashboard.putBoolean("Slider Limit Switch", m_robotContainer.getSlider().getLimitSwitchState());
+		SmartDashboard.putBoolean("Slider Reverse Limit Switch", m_robotContainer.getSlider().getReverseLimitSwitchState());
+		SmartDashboard.putNumber("Slider Enc Position", m_robotContainer.getSlider().getEncoderPosition());
+		SmartDashboard.putBoolean("Slider IsMoving?", m_robotContainer.getSlider().isMoving());
+		SmartDashboard.putNumber("Slider Target", m_robotContainer.getSlider().getTarget());
+		SmartDashboard.putBoolean("Slider isStalled?", m_robotContainer.getSlider().isStalled());
+		SmartDashboard.putBoolean("Slider isRetracted", m_robotContainer.getSlider().isRetracted());
+		SmartDashboard.putBoolean("Slider isMidway", m_robotContainer.getSlider().isMidway());
+		SmartDashboard.putBoolean("Slider isExtended", m_robotContainer.getSlider().isExtended());
+
+		SmartDashboard.putBoolean("Hanger Forward Limit Switch", m_robotContainer.getHanger().getForwardLimitSwitchState());
+		SmartDashboard.putBoolean("Hanger Reverse Limit Switch", m_robotContainer.getHanger().getReverseLimitSwitchState());
+		SmartDashboard.putNumber("Hanger Enc Position", m_robotContainer.getHanger().getEncoderPosition());
+		SmartDashboard.putBoolean("Hanger IsMoving?", m_robotContainer.getHanger().isMoving());
+		SmartDashboard.putNumber("Hanger Target", m_robotContainer.getHanger().getTarget());
+		SmartDashboard.putBoolean("Hanger isStalled?", m_robotContainer.getHanger().isStalled());
+		SmartDashboard.putBoolean("Hanger isDown", m_robotContainer.getHanger().isDown());
+		SmartDashboard.putBoolean("Hanger isMidway", m_robotContainer.getHanger().isMidway());
+		SmartDashboard.putBoolean("Hanger isUp", m_robotContainer.getHanger().isUp());
+		SmartDashboard.putBoolean("Hanger isDangerous", m_robotContainer.getHanger().isDangerous());
 
 		/*SmartDashboard.putString("Auton selected", m_robotContainer.getAutonChooser().getSelected());	
 		SmartDashboard.putString("Game piece", m_robotContainer.getGamePieceChooser().getSelected());

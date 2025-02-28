@@ -41,6 +41,7 @@ import frc.robot.subsystems.SwerveDrivetrain;
 import frc.robot.subsystems.AlgaeRoller;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Hanger;
 //import frc.robot.subsystems.Drawer;
 import frc.robot.subsystems.Neck;
 import frc.robot.subsystems.OldNeck;
@@ -58,6 +59,7 @@ import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.slider.*;
 import frc.robot.commands.neck.*;
 import frc.robot.commands.elevator.*;
+import frc.robot.commands.hanger.*;
 //import frc.robot.commands.simpleshooter.*;
 //import frc.robot.commands.shooter.*;
 import frc.robot.interfaces.ICamera;
@@ -140,7 +142,9 @@ public class RobotContainer {
 	private final WPI_TalonSRX slider_master = new WPI_TalonSRX(Ports.CAN.SLIDER_MASTER);
 	private final Slider slider = new Slider(slider_master);
 
-
+	private final TalonFX hanger_master = new TalonFX(Ports.CAN.HANGER_MASTER);
+	private final TalonFX hanger_follower = new TalonFX(Ports.CAN.HANGER_FOLLOWER);
+	private final Hanger hanger = new Hanger(hanger_master, hanger_follower);
 
 	//private final CANSparkMax shooter_master = new CANSparkMax(Ports.CAN.SHOOTER_MASTER, MotorType.kBrushless);
 	//private final CANSparkMax shooter_follower = new CANSparkMax(Ports.CAN.SHOOTER_FOLLOWER, MotorType.kBrushless);
@@ -178,11 +182,6 @@ public class RobotContainer {
 	 */
 	public RobotContainer() {
 
-		// choosers (for auton)
-
-		autoChooser = AutoBuilder.buildAutoChooser("SPB1 - One Coral and Leave SZ");
-		SmartDashboard.putData("Auto Chooser", autoChooser);
-
 		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveToSecondLevelWithStallDetection", new ElevatorMoveToSecondLevelWithStallDetection(elevator));
@@ -203,6 +202,11 @@ public class RobotContainer {
 		NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
+
+		// choosers (for auton)
+
+		autoChooser = AutoBuilder.buildAutoChooser("SPB1 - One Coral and Leave SZ");
+		SmartDashboard.putData("Auto Chooser", autoChooser);
 
 		// Configure the button bindings
 
@@ -638,6 +642,17 @@ public class RobotContainer {
 	{
 		return neck;
 	}
+
+	public Slider getSlider()
+	{
+		return slider;
+	}
+
+	public Hanger getHanger()
+	{
+		return hanger;
+	}
+
 
 	public CoralRoller getCoralRoller()
 	{
