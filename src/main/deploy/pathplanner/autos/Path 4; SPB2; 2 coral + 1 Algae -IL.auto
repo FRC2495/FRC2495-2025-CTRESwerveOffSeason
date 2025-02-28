@@ -11,27 +11,87 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToSecondLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveToAlgaeReefWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderExtendWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "side b to processor "
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": " processor to f "
+            "name": "neckMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRelease"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "side f to coral pick up "
+            "pathName": "processor to hp"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "coral pick up to side f "
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
           }
         }
       ]

@@ -11,21 +11,99 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToThirdLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveToAlgaeReefWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderExtendWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRoll"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": " coral side c to net "
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveUpWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRelease"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderRetractWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": " net to processor"
+            "pathName": " net to coral"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": " coral station to side D "
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
           }
         }
       ]

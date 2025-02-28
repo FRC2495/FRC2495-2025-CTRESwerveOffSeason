@@ -11,6 +11,24 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Side A to right coral station - SV"
@@ -20,6 +38,24 @@
           "type": "path",
           "data": {
             "pathName": "Right coral station to side F - SV"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
           }
         }
       ]

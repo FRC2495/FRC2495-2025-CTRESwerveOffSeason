@@ -11,36 +11,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "elevatorMoveToFourthLevelWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "neckMoveToCoralReefWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "coralRollerRoll"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "neckMoveDownWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "elevatorMoveDownWithStallDetection"
-          }
-        },
-        {
           "type": "path",
           "data": {
             "pathName": "SPB2 - move out of way"
