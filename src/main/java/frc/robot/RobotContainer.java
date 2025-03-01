@@ -48,13 +48,13 @@ import frc.robot.subsystems.Slider;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.AlgaeRoller;
 import frc.robot.subsystems.Indicator;
-import frc.robot.subsystems.Neck;
+//import frc.robot.subsystems.Neck;
 import frc.robot.commands.algae_roller.*;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.slider.*;
-import frc.robot.commands.neck.*;
+//import frc.robot.commands.neck.*;
 import frc.robot.commands.elevator.*;
 import frc.robot.commands.hanger.*;
 //import frc.robot.commands.simpleshooter.*;
@@ -62,7 +62,6 @@ import frc.robot.commands.hanger.*;
 import frc.robot.interfaces.ICamera;
 //import frc.robot.commands.mouth.*;
 import frc.robot.commands.indicator.*;
-import frc.robot.commands.old_neck.*;
 import frc.robot.commands.groups.*;
 //import frc.robot.commands.gamepad.*;
 import frc.robot.auton.*;
@@ -117,10 +116,8 @@ public class RobotContainer {
 	private final TalonFX elevator_follower = new TalonFX(Ports.CAN.ELEVATOR_FOLLOWER);
 
 	private final /*I*/Elevator elevator = new Elevator(elevator_master, elevator_follower);
-
-	private final SparkMax neck_master = new SparkMax(Ports.CAN.NECK_MASTER, MotorType.kBrushless);
 	
-	private final /*I*/Neck neck = new Neck();
+	//private final /*I*/Neck neck = new Neck();
 
 	//private final TalonFX old_neck_master = new TalonFX(Ports.CAN.OLD_NECK_MASTER);
 	//private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.OLD_NECK_FOLLOWER);
@@ -192,12 +189,12 @@ public class RobotContainer {
         NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRollIn(coral_roller));
         NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
         NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
-		NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderExtendWithStallDetection(slider));
+		//NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderSafeExtendWithStallDetection(neck, slider));
 		NamedCommands.registerCommand("sliderRetractWithStallDetection", new SliderRetractWithStallDetection(slider));
-		NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
-		NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
-		NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
-		NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
 
 		// choosers (for auton)
 
@@ -291,15 +288,16 @@ public class RobotContainer {
 		joyMain.button(8)
 			.whileTrue(new AlgaeRollerJoystickControl(algae_roller, drivetrain, getMainJoystick()));
 		
-		joyMain.button(9)
-			.whileTrue(new NeckJoystickControl(neck, drivetrain, getMainJoystick()));
+		joyMain.button(9);
+			//.whileTrue(new NeckJoystickControl(neck, drivetrain, getMainJoystick()));
 		
 		joyMain.button(10)
 			.whileTrue(new ElevatorJoystickControl(elevator, drivetrain, getMainJoystick()));
 
 		joyMain.button(11)
 			//.onTrue(new DrivetrainZeroHeading(drivetrain));
-			.onTrue(new DrivetrainTurnUsingCamera(drivetrain, apriltag_camera));
+			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, apriltag_camera));
+			.whileTrue(new HangerJoystickControl(hanger, drivetrain, getMainJoystick()));
 		
 		joyMain.button(12)
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
@@ -633,10 +631,10 @@ public class RobotContainer {
 		return drawer;
 	}*/
 
-	public Neck getNeck()
+	/*public Neck getNeck()
 	{
 		return neck;
-	}
+	}*/
 
 	public Slider getSlider()
 	{

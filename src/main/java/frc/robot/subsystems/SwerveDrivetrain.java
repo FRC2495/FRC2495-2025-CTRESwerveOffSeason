@@ -51,11 +51,13 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 	// calibration: manually move wheels so it's facing straight then record the number below, deploy code then enable :)
 
-	public static final double FRONT_LEFT_VIRTUAL_OFFSET_RADIANS = -2.369; // adjust as needed so that virtual (turn) position of wheel is zero when straight
-	public static final double REAR_LEFT_VIRTUAL_OFFSET_RADIANS = -1.220; // adjust as needed so that virtual (turn) position of wheel is zero when straight
+	// offset needs to be subtracted from the virtual position
+
+	public static final double FRONT_LEFT_VIRTUAL_OFFSET_RADIANS = 3.073;//-3.0345;//-2.369; // adjust as needed so that virtual (turn) position of wheel is zero when straight
+	public static final double REAR_LEFT_VIRTUAL_OFFSET_RADIANS = -1.044;//-.970;//-0.415;//-1.220; // adjust as needed so that virtual (turn) position of wheel is zero when straight
 	
-	public static final double FRONT_RIGHT_VIRTUAL_OFFSET_RADIANS = -2.339; //-2.827 // adjust as needed so that virtual (turn) position of wheel is zero when straight
-	public static final double REAR_RIGHT_VIRTUAL_OFFSET_RADIANS = 0.5431; // adjust as needed so that virtual (turn) position of wheel is zero when straight
+	public static final double FRONT_RIGHT_VIRTUAL_OFFSET_RADIANS = -.709;//-0.422;//-2.339; //-2.827 // adjust as needed so that virtual (turn) position of wheel is zero when straight
+	public static final double REAR_RIGHT_VIRTUAL_OFFSET_RADIANS = -2.74;//-2.739;//0.5431; // adjust as needed so that virtual (turn) position of wheel is zero when straight
 
 	public static final int GYRO_ORIENTATION = -1; // might be able to merge with kGyroReversed
 

@@ -126,7 +126,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		elevatorConfig = new TalonFXConfiguration();
 		elevator_followerConfig = new TalonFXConfiguration();
 
-		elevator_follower.setControl(new Follower(elevator.getDeviceID(), false));
+		elevator_follower.setControl(new Follower(elevator.getDeviceID(), true));
 
 		//elevator.getConfigurator().apply(elevatorConfig);
 		//elevator_follower.getConfigurator().apply(elevator_followerConfig);
@@ -160,9 +160,6 @@ public class Elevator extends SubsystemBase implements IElevator {
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
 		elevatorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive; // change value or comment out if needed
 		elevator_followerConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-		//elevator.setInverted(true);  // TODO switch to false if required if switching to Talon FX
-		//elevator_follower.setInverted(true);  // TODO comment out if switching to Talon FX
-		
 		
 
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
