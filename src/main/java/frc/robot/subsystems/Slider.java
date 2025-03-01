@@ -337,7 +337,7 @@ public class Slider extends SubsystemBase implements ISlider {
 		return !getLimitSwitchState();
 	}
 
-	public boolean isDangerousForShoulderAtFloor() {
+	public boolean isDangerousForNeckUp() {
 		return isExtended();
 	}
 
