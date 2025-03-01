@@ -21,6 +21,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -42,14 +44,9 @@ import frc.robot.subsystems.AlgaeRoller;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hanger;
-//import frc.robot.subsystems.Drawer;
-import frc.robot.subsystems.NeckTemp;
 import frc.robot.subsystems.Slider;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.AlgaeRoller;
-//import frc.robot.subsystems.Shooter;
-//import frc.robot.subsystems.Compressor;
-//import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
 import frc.robot.subsystems.Neck;
 import frc.robot.commands.algae_roller.*;
@@ -121,7 +118,7 @@ public class RobotContainer {
 
 	private final /*I*/Elevator elevator = new Elevator(elevator_master, elevator_follower);
 
-	private final WPI_TalonSRX neck_master = new WPI_TalonSRX(Ports.CAN.NECK_MASTER);
+	private final SparkMax neck_master = new SparkMax(Ports.CAN.NECK_MASTER, MotorType.kBrushless);
 	
 	private final /*I*/Neck neck = new Neck();
 
