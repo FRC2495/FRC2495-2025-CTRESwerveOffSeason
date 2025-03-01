@@ -44,6 +44,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "SPB3",
   "choreoAuto": false
 }

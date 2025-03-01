@@ -38,6 +38,6 @@
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "SPB1",
   "choreoAuto": false
 }
