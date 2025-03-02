@@ -7,31 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - SZ to Side A "
+            "pathName": "SPB1 - SZ to Side A (left)"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Side A to Coral Station "
+            "pathName": "SPB1 - Side A (left) to Coral Station "
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side F"
+            "pathName": "SPB1 - Coral Station to Side F (right)"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Side F to Coral Station"
+            "pathName": "SPB1 - Side F (right) to Coral Station"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side F"
+            "pathName": "SPB1 - Coral Station to Side F (left)"
           }
         }
       ]
