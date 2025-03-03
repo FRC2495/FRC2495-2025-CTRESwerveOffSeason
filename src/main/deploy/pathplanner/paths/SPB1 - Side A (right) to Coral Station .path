@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.988527397260274,
+        "x": 4.989,
         "y": 5.189490582191781
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.784330028839221,
+        "x": 4.784802631578947,
         "y": 6.667217555875991
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side A (right)"
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Right Coral Station"
     }
   ],
   "rotationTargets": [],

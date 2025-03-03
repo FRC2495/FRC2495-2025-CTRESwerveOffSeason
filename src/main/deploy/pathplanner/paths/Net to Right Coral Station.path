@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 1.500986842105263,
+        "x": 1.501,
         "y": 7.325
       },
       "prevControl": {
-        "x": 3.3579769736842104,
+        "x": 3.3579901315789473,
         "y": 7.277138157894736
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Right Coral Station"
     }
   ],
   "rotationTargets": [],

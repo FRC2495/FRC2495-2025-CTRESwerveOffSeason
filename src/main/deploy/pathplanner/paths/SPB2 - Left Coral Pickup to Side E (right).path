@@ -12,7 +12,7 @@
         "y": 2.4759046052631586
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Left Coral Station"
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side E (right)"
     }
   ],
   "rotationTargets": [],

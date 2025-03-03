@@ -9,10 +9,10 @@
       "prevControl": null,
       "nextControl": {
         "x": 9.005921052631578,
-        "y": 2.110279605263158
+        "y": 2.1102796052631576
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side B (right)"
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Left Coral Station"
     }
   ],
   "rotationTargets": [],
