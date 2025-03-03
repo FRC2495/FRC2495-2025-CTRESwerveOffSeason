@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SP2 - Leave sz + 1 coral"
+            "pathName": "SPB2 - SZ to Side B (right)"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SP2 - side B to net"
+            "pathName": "SP2 - side B (right) to net"
           }
         },
         {
@@ -25,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Right Coral Pickup to Side E"
+            "pathName": "Right Coral Pickup to Side E (left)"
           }
         }
       ]
