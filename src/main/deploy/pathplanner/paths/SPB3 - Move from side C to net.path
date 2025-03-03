@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.142725409836065,
-        "y": 2.868186475409835
+        "x": 4.965,
+        "y": 2.870394736842105
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.017827868852459,
-        "y": 2.652407786885245
+        "x": 7.697368421052631,
+        "y": 2.7068256578947363
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side C (left)"
     },
     {
       "anchor": {
@@ -20,12 +20,12 @@
         "y": 4.750256147540983
       },
       "prevControl": {
-        "x": 7.355582006482882,
-        "y": 4.7381919603949125
+        "x": 7.783963815789473,
+        "y": 4.371381578947368
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "SPB3 net"
     }
   ],
   "rotationTargets": [],

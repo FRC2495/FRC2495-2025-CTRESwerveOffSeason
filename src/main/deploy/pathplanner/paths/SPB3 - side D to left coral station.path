@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.81225,
-        "y": 2.855
+        "x": 3.7428453947368414,
+        "y": 3.0147203947368424
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.0322500000000003,
-        "y": 2.435749999999999
+        "x": 2.9628453947368416,
+        "y": 2.5954703947368416
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side D (left)"
     },
     {
       "anchor": {

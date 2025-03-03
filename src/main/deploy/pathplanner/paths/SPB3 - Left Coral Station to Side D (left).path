@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.8088815789473682,
-        "y": 1.484868421052631
+        "x": 2.043,
+        "y": 1.8127499999999992
       },
       "isLocked": false,
       "linkedName": "Left Coral Station"
     },
     {
       "anchor": {
-        "x": 3.7236019736842105,
-        "y": 3.0435855263157894
+        "x": 3.7428453947368414,
+        "y": 3.0147203947368424
       },
       "prevControl": {
-        "x": 3.55643869137829,
-        "y": 2.6426320538268144
+        "x": 3.9927689461589186,
+        "y": 3.020902501544083
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side D (left)"
     }
   ],
   "rotationTargets": [],
