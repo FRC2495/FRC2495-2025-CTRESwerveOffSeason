@@ -7,13 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - SZ to Side A "
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": null
+            "pathName": "SPB1 - SZ to Side A (left)"
           }
         },
         {
@@ -31,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side A"
+            "pathName": "SPB1 - Coral Station to Side A (right)"
           }
         }
       ]

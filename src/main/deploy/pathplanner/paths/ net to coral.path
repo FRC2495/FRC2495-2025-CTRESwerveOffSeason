@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.600204918032786,
-        "y": 4.73826844262295
+        "x": 7.720081967213115,
+        "y": 4.750256147540983
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.569262295081967,
-        "y": 5.001997950819672
+        "x": 7.216282894736842,
+        "y": 6.1802631578947365
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "SPB3 net"
     },
     {
       "anchor": {
-        "x": 1.2227459016393434,
-        "y": 7.027920081967213
+        "x": 1.501,
+        "y": 7.325
       },
       "prevControl": {
-        "x": 1.45315474542386,
-        "y": 6.930905831952681
+        "x": 1.7314088437845165,
+        "y": 7.227985749985468
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Right Coral Station"
     }
   ],
   "rotationTargets": [],

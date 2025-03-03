@@ -19,13 +19,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Move from (C) net to left coral pickup station"
+            "pathName": "SPB3 - Move from (C) net to right coral pickup station"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Move from left coral pickup station to side E"
+            "pathName": "SPB3 - Move from right coral pickup station to side F (right)"
           }
         }
       ]

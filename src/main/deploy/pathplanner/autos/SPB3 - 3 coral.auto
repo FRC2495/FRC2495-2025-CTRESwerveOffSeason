@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - left coral station to side D"
+            "pathName": "SPB3 - left coral station to side D (left)"
           }
         },
         {
@@ -31,7 +31,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - left coral station to side D"
+            "pathName": "SPB3 - left coral station to side D (right)"
           }
         }
       ]

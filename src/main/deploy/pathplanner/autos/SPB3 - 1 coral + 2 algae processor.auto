@@ -7,43 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Leave sz + 1 coral"
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Side B to net"
+            "pathName": "SPB3 - Move from side C to processor"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Net to side A"
+            "pathName": "SPB3 - Processor to Side D (left)"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Side A to net"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB2 - Net to Side D"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": " SPB2 - Side D to net"
+            "pathName": "SPB3 - Side D to Processor"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB2",
+  "folder": "SPB3",
   "choreoAuto": false
 }

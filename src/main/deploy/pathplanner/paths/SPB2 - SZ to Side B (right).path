@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.838,
+        "x": 7.227,
         "y": 4.163
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.8032499999999985,
-        "y": 5.79125
+        "x": 6.227780223196414,
+        "y": 4.155160060574599
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "SPB2 real"
     },
     {
       "anchor": {
-        "x": 1.56,
-        "y": 7.242
+        "x": 5.735,
+        "y": 4.163
       },
       "prevControl": {
-        "x": 3.091161342293587,
-        "y": 6.764128737141788
+        "x": 6.2639850004741975,
+        "y": 4.164263516807398
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side B (right)"
     }
   ],
   "rotationTargets": [],
@@ -42,12 +42,12 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 126.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
-    "velocity": 0,
+    "velocity": 0.0,
     "rotation": 180.0
   },
   "useDefaultConstraints": true

@@ -19,25 +19,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Move from processor to side B"
+            "pathName": "SPB3 - Proccessor to Left Coral Station"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Move from side B to processsor"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB3 - Move from processor to side A"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB3 - Move from side A to net"
+            "pathName": "SPB3 - left coral station to side D (left)"
           }
         }
       ]

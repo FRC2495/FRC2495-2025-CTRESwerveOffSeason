@@ -13,25 +13,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Move from side C to net"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB3 - Move from (C) net to right coral pickup station"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB3 - Move from right coral pickup station to side D"
+            "pathName": "SPB3 - Move from side C to processor"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "SPB3",
   "choreoAuto": false
 }

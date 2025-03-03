@@ -100,9 +100,9 @@ public class RobotContainer {
 
 	private final ICamera apriltag_camera = new AprilTagCamera();
 
-	private final NoteSensor noteSensor = new NoteSensor(Ports.Digital.NOTE_SENSOR);
+	private final CoralSensor coralSensor = new CoralSensor();
 
-	private final NoteSensor noteSensorTwo = new NoteSensor(Ports.Digital.NOTE_SENSOR_TWO);
+	//private final NoteSensor noteSensor = new NoteSensor(Ports.Digital.NOTE_SENSOR);
 
 	// motorized devices
 
@@ -606,14 +606,14 @@ public class RobotContainer {
 		return apriltag_camera;
 	}
 
-	public NoteSensor getNoteSensor()
+	/*(public NoteSensor getNoteSensor()
 	{
 		return noteSensor;
-	}
+	}*/
 
-	public NoteSensor getNoteSensorTwo()
+	public CoralSensor getCoralSensor() 
 	{
-		return noteSensorTwo;
+		return coralSensor;
 	}
 
 	public SwerveDrivetrain getDrivetrain()
