@@ -5,29 +5,26 @@
 package frc.robot.sensors;
 
 import com.reduxrobotics.sensors.canandcolor.Canandcolor;
-import com.reduxrobotics.sensors.canandcolor.CanandcolorSettings;
-
-import frc.robot.Ports;
 
 /**
  * The {@code NoteSensor} class contains fields and methods pertaining to the function of the note sensor.
  */
-public class CoralSensor
-{
-	Canandcolor coralSensor = new Canandcolor(Ports.Digital.CORAL_SENSOR);
-	CanandcolorSettings coralSensorSettings = new CanandcolorSettings();
+public class CoralSensor extends Canandcolor {
 
-	public CoralSensor() {
-		//this.digitalInput = new DigitalInput(port);
-		coralSensor.setSettings(coralSensorSettings);
+	private double triggerValue;
+
+	public CoralSensor(int port, double trigVal) {
+		super(port);
+		resetFactoryDefaults();
+		this.triggerValue = trigVal;
 	}
 
 	/**
-	 * Returns the state of the note sensor.
+	 * Returns the state of the coral sensor.
 	 *
-	 * @return the current state of the note sensor.
+	 * @return the current state of the coral sensor.
 	 */
-	//public boolean isEnergized() {
-		//return digitalInput.get();
-	//}
+	public boolean isTriggered() { // if the reported value is less than your trigger value, it returns true
+        return isConnected() && getProximity() < triggerValue; // works because of shortcircuit eval
+    }
 }

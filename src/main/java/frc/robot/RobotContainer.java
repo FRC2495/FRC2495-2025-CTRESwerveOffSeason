@@ -100,7 +100,9 @@ public class RobotContainer {
 
 	private final ICamera apriltag_camera = new AprilTagCamera();
 
-	private final CoralSensor coralSensor = new CoralSensor();
+	//private final CoralSensor firstCoralSensor = new CoralSensor(Ports.Digital.CORAL_SENSOR, 5.0);
+
+	//private final CoralSensor secondCoralSensor = new CoralSensor(Ports.Digital.CORAL_SENSOR_TWO, 5.0);
 
 	//private final NoteSensor noteSensor = new NoteSensor(Ports.Digital.NOTE_SENSOR);
 
@@ -611,10 +613,10 @@ public class RobotContainer {
 		return noteSensor;
 	}*/
 
-	public CoralSensor getCoralSensor() 
+	/*public CoralSensor getCoralSensor() 
 	{
 		return coralSensor;
-	}
+	}*/
 
 	public SwerveDrivetrain getDrivetrain()
 	{
