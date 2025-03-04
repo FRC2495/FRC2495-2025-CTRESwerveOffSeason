@@ -15,6 +15,7 @@ import frc.robot.subsystems.Slider;
 import java.util.Optional;
 
 import com.pathplanner.lib.commands.FollowPathCommand;
+import com.reduxrobotics.canand.CanandEventLoop;
 
 import edu.wpi.first.net.PortForwarder;
 
@@ -51,6 +52,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Swerve Odometry", m_robotContainer.getField());		
 
 		FollowPathCommand.warmupCommand().schedule(); 
+
+		CanandEventLoop.getInstance();
 	}
 
 	/**
