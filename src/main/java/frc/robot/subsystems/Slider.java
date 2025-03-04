@@ -232,11 +232,8 @@ public class Slider extends SubsystemBase implements ISlider {
 		//setPIDParameters();
 		System.out.println("Extending");
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-		
-		if (!getLimitSwitchState()) 
-		{
-			slider.set(REDUCED_PCT_OUTPUT);
-		}
+	
+		slider.set(REDUCED_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = true;
@@ -251,10 +248,7 @@ public class Slider extends SubsystemBase implements ISlider {
 		System.out.println("Retracting");
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		if (!getReverseLimitSwitchState())
-		{
-			slider.set(REDUCED_PCT_OUTPUT);
-		}
+		slider.set(REDUCED_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = false;
@@ -337,7 +331,7 @@ public class Slider extends SubsystemBase implements ISlider {
 		return !getLimitSwitchState();
 	}
 
-	public boolean isDangerousForShoulderAtFloor() {
+	public boolean isDangerousForNeckUp() {
 		return isExtended();
 	}
 

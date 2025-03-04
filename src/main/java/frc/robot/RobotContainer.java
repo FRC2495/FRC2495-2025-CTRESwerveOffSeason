@@ -21,6 +21,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -42,22 +44,17 @@ import frc.robot.subsystems.AlgaeRoller;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hanger;
-//import frc.robot.subsystems.Drawer;
-import frc.robot.subsystems.Neck;
-import frc.robot.subsystems.OldNeck;
 import frc.robot.subsystems.Slider;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.AlgaeRoller;
-//import frc.robot.subsystems.Shooter;
-//import frc.robot.subsystems.Compressor;
-//import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
+//import frc.robot.subsystems.Neck;
 import frc.robot.commands.algae_roller.*;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.slider.*;
-import frc.robot.commands.neck.*;
+//import frc.robot.commands.neck.*;
 import frc.robot.commands.elevator.*;
 import frc.robot.commands.hanger.*;
 //import frc.robot.commands.simpleshooter.*;
@@ -65,7 +62,6 @@ import frc.robot.commands.hanger.*;
 import frc.robot.interfaces.ICamera;
 //import frc.robot.commands.mouth.*;
 import frc.robot.commands.indicator.*;
-import frc.robot.commands.old_neck.*;
 import frc.robot.commands.groups.*;
 //import frc.robot.commands.gamepad.*;
 import frc.robot.auton.*;
@@ -104,9 +100,11 @@ public class RobotContainer {
 
 	private final ICamera apriltag_camera = new AprilTagCamera();
 
-	private final NoteSensor noteSensor = new NoteSensor(Ports.Digital.NOTE_SENSOR);
+	//private final CoralSensor firstCoralSensor = new CoralSensor(Ports.Digital.CORAL_SENSOR, 5.0);
 
-	private final NoteSensor noteSensorTwo = new NoteSensor(Ports.Digital.NOTE_SENSOR_TWO);
+	//private final CoralSensor secondCoralSensor = new CoralSensor(Ports.Digital.CORAL_SENSOR_TWO, 5.0);
+
+	//private final NoteSensor noteSensor = new NoteSensor(Ports.Digital.NOTE_SENSOR);
 
 	// motorized devices
 
@@ -120,15 +118,13 @@ public class RobotContainer {
 	private final TalonFX elevator_follower = new TalonFX(Ports.CAN.ELEVATOR_FOLLOWER);
 
 	private final /*I*/Elevator elevator = new Elevator(elevator_master, elevator_follower);
-
-	private final WPI_TalonSRX neck_master = new WPI_TalonSRX(Ports.CAN.OLD_NECK_MASTER);
 	
-	private final /*I*/Neck neck = new Neck(neck_master);
+	//private final /*I*/Neck neck = new Neck();
 
-	private final TalonFX old_neck_master = new TalonFX(Ports.CAN.OLD_NECK_MASTER);
-	private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.OLD_NECK_FOLLOWER);
+	//private final TalonFX old_neck_master = new TalonFX(Ports.CAN.OLD_NECK_MASTER);
+	//private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.OLD_NECK_FOLLOWER);
 	
-	private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
+	//private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
 
 	//private final CANSparkMax roller_master = new CANSparkMax(Ports.CAN.ROLLER, MotorType.kBrushless);
 	private final WPI_TalonSRX coral_roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
@@ -143,8 +139,7 @@ public class RobotContainer {
 	private final Slider slider = new Slider(slider_master);
 
 	private final TalonFX hanger_master = new TalonFX(Ports.CAN.HANGER_MASTER);
-	private final TalonFX hanger_follower = new TalonFX(Ports.CAN.HANGER_FOLLOWER);
-	private final Hanger hanger = new Hanger(hanger_master, hanger_follower);
+	private final Hanger hanger = new Hanger(hanger_master);
 
 	//private final CANSparkMax shooter_master = new CANSparkMax(Ports.CAN.SHOOTER_MASTER, MotorType.kBrushless);
 	//private final CANSparkMax shooter_follower = new CANSparkMax(Ports.CAN.SHOOTER_FOLLOWER, MotorType.kBrushless);
@@ -192,16 +187,16 @@ public class RobotContainer {
         NamedCommands.registerCommand("algaeRollerRelease", new AlgaeRollerRelease(algae_roller));
         NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 5));
         NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
-        NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRoll(coral_roller));
-        NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRelease(coral_roller));
+        NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRollOut(coral_roller));
+        NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRollIn(coral_roller));
         NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
         NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
-		NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderExtendWithStallDetection(slider));
+		//NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderSafeExtendWithStallDetection(neck, slider));
 		NamedCommands.registerCommand("sliderRetractWithStallDetection", new SliderRetractWithStallDetection(slider));
-		NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
-		NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
-		NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
-		NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
 
 		// choosers (for auton)
 
@@ -278,18 +273,16 @@ public class RobotContainer {
 			.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
 			
 		joyMain.button(4)
-			.onTrue(new MoveInGammaShape(drivetrain, this, 3));
+			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
+			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 
 		joyMain.button(5)
-			.onTrue(new MoveForward(drivetrain, this, 3));
-			//.onTrue(new DrivetrainTurnAngleUsingPidController(drivetrain, -90));
-			//.onTrue(new MoveInUShapeInReverse(drivetrain, this, 1));
+			.onTrue(new MoveLeftOfCoralReef(drivetrain, this, GAMEPAD_AXIS_THRESHOLD));
 
 		joyMain.button(6)
-			//.onTrue(new MoveInReverse(drivetrain, this, 3));
-			//.onTrue(new DrivetrainTurnAngleUsingPidController(drivetrain, 90));
 			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
-			.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			.onTrue(new MoveRightOfCoralReef(drivetrain, this, GAMEPAD_AXIS_THRESHOLD));
 
 		joyMain.button(7)
 			.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
@@ -305,20 +298,22 @@ public class RobotContainer {
 
 		joyMain.button(11)
 			//.onTrue(new DrivetrainZeroHeading(drivetrain));
-			.onTrue(new DrivetrainTurnUsingCamera(drivetrain, apriltag_camera));
+			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, apriltag_camera));
+			.whileTrue(new HangerJoystickControl(hanger, drivetrain, getMainJoystick()));
 		
 		joyMain.button(12)
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
+			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
+			.onTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
 			
 				
 		// copilot (gamepad)
 		
 		copilotGamepad.a()
-			.whileTrue(new CoralRollerRelease(coral_roller));
+			.whileTrue(new CoralRollerRollIn(coral_roller));
 		
 		copilotGamepad.b()
-			.whileTrue(new CoralRollerRoll(coral_roller));
+			.whileTrue(new CoralRollerRollOut(coral_roller));
 
 		copilotGamepad.x();
 			//.onTrue(new CoralRollerReleaseShortDistance(coral_roller));
@@ -330,13 +325,13 @@ public class RobotContainer {
 			//.onTrue(new RollerSuperSmartRoll(roller, noteSensor, noteSensorTwo));
 			//.onTrue(new CoralRollerRollLowRpmUntilNoteSensed(coral_roller, noteSensor, noteSensorTwo));
 			
-		copilotGamepad.back()
+		copilotGamepad.back();
 			//.onTrue(new DrivetrainAndGyroReset(drivetrain));
-			.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
+			//.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
 
-		copilotGamepad.start()
+		copilotGamepad.start();
 			//.onTrue(new AlmostEverythingStop(elevator, neck, roller));
-			.onTrue(new OldNeckHome(old_neck));
+			//.onTrue(new OldNeckHome(old_neck));
 
 
 		copilotGamepad.leftTrigger();
@@ -346,35 +341,35 @@ public class RobotContainer {
 
 		copilotGamepad.rightTrigger()
 			//.onTrue(new DrawerExtendWithStallDetection(drawer));
-			.whileTrue(new CoralRollerRoll(coral_roller));
+			.whileTrue(new CoralRollerRollOut(coral_roller));
 
 
-		copilotGamepad.povDown()
+		copilotGamepad.povDown();
 			//.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveDownWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveDownWithStallDetection(old_neck));
 
-		copilotGamepad.povLeft()
+		copilotGamepad.povLeft();
 			//.onTrue(new ElevatorMoveMidwayWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveSubWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveSubWithStallDetection(old_neck));
 
-		copilotGamepad.povRight()
+		copilotGamepad.povRight();
 			//.onTrue(new ElevatorMoveMidwayWithStallDetection(elevator));
 			//.onTrue(new NeckMovePodiumWithStallDetection(neck));
-			.onTrue(new OldNeckMoveFeedNoteWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveFeedNoteWithStallDetection(old_neck));
 
-		copilotGamepad.povUp()
+		copilotGamepad.povUp();
 			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveUpWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveUpWithStallDetection(old_neck));
 
 
-		copilotGamepad.leftBumper()
+		copilotGamepad.leftBumper();
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
-			.whileTrue(new OldNeckMoveUsingCamera(old_neck, apriltag_camera));
+			//.whileTrue(new OldNeckMoveUsingCamera(old_neck, apriltag_camera));
 
-		copilotGamepad.rightBumper()
+		copilotGamepad.rightBumper();
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			.onTrue(new OldNeckMoveAcrossFieldWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveAcrossFieldWithStallDetection(old_neck));
 
 
 		copilotGamepad.leftStick()
@@ -398,11 +393,11 @@ public class RobotContainer {
 		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue();*/
 
-		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
+		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
 
-		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
+		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
 
 		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD);
 			//.whileTrue(new DrawerGamepadControl(drawer, getCopilotGamepad()));
@@ -613,15 +608,15 @@ public class RobotContainer {
 		return apriltag_camera;
 	}
 
-	public NoteSensor getNoteSensor()
+	/*(public NoteSensor getNoteSensor()
 	{
 		return noteSensor;
-	}
+	}*/
 
-	public NoteSensor getNoteSensorTwo()
+	/*public CoralSensor getCoralSensor() 
 	{
-		return noteSensorTwo;
-	}
+		return coralSensor;
+	}*/
 
 	public SwerveDrivetrain getDrivetrain()
 	{
@@ -638,10 +633,10 @@ public class RobotContainer {
 		return drawer;
 	}*/
 
-	public Neck getNeck()
+	/*public Neck getNeck()
 	{
 		return neck;
-	}
+	}*/
 
 	public Slider getSlider()
 	{

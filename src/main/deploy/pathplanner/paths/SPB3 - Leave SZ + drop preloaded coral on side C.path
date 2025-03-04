@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.067725409836065,
-        "y": 1.89718237704918
+        "x": 7.216282894736842,
+        "y": 2.139144736842105
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.705061302957823,
-        "y": 1.6870132595367018
+        "x": 7.77376724151129,
+        "y": 2.098772492918945
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "SPB3"
     },
     {
       "anchor": {
-        "x": 5.142725409836065,
-        "y": 2.868186475409835
+        "x": 4.965,
+        "y": 2.870394736842105
       },
       "prevControl": {
-        "x": 4.819815221173656,
-        "y": 2.9314527095920098
+        "x": 5.23654754437023,
+        "y": 2.3248307655890574
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side C (left)"
     }
   ],
   "rotationTargets": [],

@@ -1,0 +1,37 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Move from side C to processor"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Proccessor to Left Coral Station"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - left coral station to side D (left)"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "SPB3",
+  "choreoAuto": false
+}
