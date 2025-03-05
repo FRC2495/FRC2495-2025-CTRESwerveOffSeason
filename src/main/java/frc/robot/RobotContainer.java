@@ -65,6 +65,7 @@ import frc.robot.interfaces.ICamera;
 //import frc.robot.commands.mouth.*;
 import frc.robot.commands.indicator.*;
 import frc.robot.commands.groups.*;
+import frc.robot.commands.hanger.HangerMoveUpWithStallDetection;
 //import frc.robot.commands.gamepad.*;
 import frc.robot.auton.*;
 import frc.robot.auton.trajectories.*;
