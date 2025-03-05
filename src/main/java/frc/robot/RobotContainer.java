@@ -8,9 +8,10 @@ import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
-
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -141,15 +142,6 @@ public class RobotContainer {
 	private final TalonFX hanger_master = new TalonFX(Ports.CAN.HANGER_MASTER);
 	private final Hanger hanger = new Hanger(hanger_master);
 
-	//private final CANSparkMax shooter_master = new CANSparkMax(Ports.CAN.SHOOTER_MASTER, MotorType.kBrushless);
-	//private final CANSparkMax shooter_follower = new CANSparkMax(Ports.CAN.SHOOTER_FOLLOWER, MotorType.kBrushless);
-
-	//private final /*I*/SimpleShooter shooter = new SimpleShooter(shooter_master, shooter_follower);
-
-	//private final TalonFX shooter_master = new TalonFX(Ports.CAN.SHOOTER_MASTER);
-	
-	//private final /*I*/Shooter shooter = new Shooter(shooter_master);
-
 	// pneumatic devices
 
 	//private final Compressor compressor = new Compressor();
@@ -165,12 +157,10 @@ public class RobotContainer {
 	public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
 	// The driver's and copilot's joystick(s) and controller(s)
-
-	/*CommandJoystick joyLeft = new CommandJoystick(Ports.USB.LEFT_JOYSTICK);
-	CommandJoystick joyRight = new CommandJoystick(Ports.USB.RIGHT_JOYSTICK);*/
 	CommandJoystick joyMain = new CommandJoystick(Ports.USB.MAIN_JOYSTICK);
 	//CommandXboxController driverGamepad = new CommandXboxController(Ports.USB.DRIVER_GAMEPAD);
 	CommandXboxController copilotGamepad = new CommandXboxController(Ports.USB.COPILOT_GAMEPAD);
+	CommandJoystick buttonBox = new CommandJoystick(Ports.USB.BUTTON_BOX);
 	
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -677,6 +667,11 @@ public class RobotContainer {
 	public XboxController getCopilotGamepad()
 	{
 		return copilotGamepad.getHID();
+	}
+
+	public Joystick getButtonBox() 
+	{
+		return buttonBox.getHID();
 	}
 
 	/*public SendableChooser<String> getAutonChooser()

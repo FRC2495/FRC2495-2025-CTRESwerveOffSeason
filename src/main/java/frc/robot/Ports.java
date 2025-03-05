@@ -180,6 +180,7 @@ public class Ports {
 			public static final int LEFT_JOYSTICK = 1;
 			//public static final int DRIVER_GAMEPAD = 3;
 			public static final int COPILOT_GAMEPAD = 2;
+			public static final int BUTTON_BOX = 3;
 			public static final int MAIN_JOYSTICK = 4;
 		}
 		
