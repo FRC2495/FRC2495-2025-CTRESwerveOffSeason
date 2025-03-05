@@ -125,7 +125,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
-		hangerConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive; // change value or comment out if needed
+		hangerConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive; // change value or comment out if needed
 
 		
 		//setPIDParameters();

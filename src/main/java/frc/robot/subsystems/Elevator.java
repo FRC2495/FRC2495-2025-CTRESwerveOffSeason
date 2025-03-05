@@ -154,17 +154,20 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//drawer.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, TALON_TIMEOUT_MS);
 		
 		//Enable reverse limit switches
-		elevator_followerConfig.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.LimitSwitchPin;
+		elevatorConfig.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.LimitSwitchPin;
+        elevatorConfig.HardwareLimitSwitch.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
+        elevatorConfig.HardwareLimitSwitch.ReverseLimitEnable = true;
+		/*elevator_followerConfig.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.LimitSwitchPin;
         elevator_followerConfig.HardwareLimitSwitch.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
-        elevator_followerConfig.HardwareLimitSwitch.ReverseLimitEnable = true;
+        elevator_followerConfig.HardwareLimitSwitch.ReverseLimitEnable = true;*/
 		//elevator.overrideLimitSwitchesEnable(true);
 	
 		// Motor controller output direction can be set by calling the setInverted() function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
-		elevatorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive; // change value or comment out if needed
-		elevator_followerConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
+		elevatorConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive; // change value or comment out if needed
+		elevator_followerConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
 		
 
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
