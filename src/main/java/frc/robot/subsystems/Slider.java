@@ -34,9 +34,6 @@ public class Slider extends SubsystemBase implements ISlider {
 
 	
 	// general settings
-	public static final int LENGTH_OF_TRAVEL_TICKS = 590000*3/4; // 610000; // TODO adjust as needed (halve for Talon FX)
-	public static final int LENGTH_OF_PICKUP_TICKS = 550000*3/4; // TODO adjust as needed (halve for Talon FX)
-	public static final int LENGTH_OF_LEVEL_TWO_TICKS = 510000*3/4; // TODO adjust as needed (halve for Talon FX)
 
 	static final double MAX_PCT_OUTPUT = 1.0;
 	static final int WAIT_MS = 1000;
@@ -78,12 +75,12 @@ public class Slider extends SubsystemBase implements ISlider {
 	Robot robot;
 	
 	
-	public Slider(WPI_TalonSRX slider_in, /*BaseMotorController slider_follower_in,*/ Robot robot_in) {
+	public Slider(WPI_TalonSRX slider_in /*BaseMotorController slider_follower_in,*/ /*Robot robot_in*/) {
 		
 		slider = slider_in;
 		//slider_follower = slider_follower_in;
 				
-		robot = robot_in;
+		//robot = robot_in;
 
 		slider.configFactoryDefault();
 		//slider_follower.configFactoryDefault();
@@ -235,44 +232,8 @@ public class Slider extends SubsystemBase implements ISlider {
 		//setPIDParameters();
 		System.out.println("Extending");
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-
-		tac = -LENGTH_OF_TRAVEL_TICKS;
-		
-		slider.set(ControlMode.Position,tac);
-		
-		isMoving = true;
-		isExtending = true;
-		onTargetCount = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
-
-	public void extendPickup() {
-		
-		//setPIDParameters();
-		System.out.println("Extending to Pickup");
-		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-
-		tac = -LENGTH_OF_PICKUP_TICKS;
-		
-		slider.set(ControlMode.Position,tac);
-		
-		isMoving = true;
-		isExtending = true;
-		onTargetCount = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
-
-	public void extendLevelTwo() {
-		
-		//setPIDParameters();
-		System.out.println("Extending to Level Two");
-		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-
-		tac = -LENGTH_OF_LEVEL_TWO_TICKS;
-		
-		slider.set(ControlMode.Position,tac);
+	
+		slider.set(REDUCED_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = true;
@@ -287,8 +248,7 @@ public class Slider extends SubsystemBase implements ISlider {
 		System.out.println("Retracting");
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		tac = 0; // adjust as needed
-		slider.set(ControlMode.Position,tac);
+		slider.set(REDUCED_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = false;
@@ -367,23 +327,11 @@ public class Slider extends SubsystemBase implements ISlider {
 		return isExtending;
 	}
 
-	public boolean isExtended() {
-		return Math.abs(getEncoderPosition()) > LENGTH_OF_TRAVEL_TICKS * 9/10;
-	}
-	
-	public boolean isRetracted() {
-		return Math.abs(getEncoderPosition()) < LENGTH_OF_TRAVEL_TICKS * 1/10;
-	}
-	
-	public boolean isMidway() {
-		return !isExtended() && !isRetracted();
-	}
-
 	public boolean isDangerous() {
 		return !getLimitSwitchState();
 	}
 
-	public boolean isDangerousForShoulderAtFloor() {
+	public boolean isDangerousForNeckUp() {
 		return isExtended();
 	}
 
@@ -419,6 +367,21 @@ public class Slider extends SubsystemBase implements ISlider {
 
 	public boolean getReverseLimitSwitchState() {
 		return slider.getSensorCollection().isRevLimitSwitchClosed();
+	}
+
+	
+	public boolean isExtended() {
+		//return Math.abs(getEncoderPosition()) > LENGTH_OF_TRAVEL_TICKS * 9/10;
+		return getLimitSwitchState();
+	}
+	
+	public boolean isRetracted() {
+		//return Math.abs(getEncoderPosition()) < LENGTH_OF_TRAVEL_TICKS * 1/10;
+		return getReverseLimitSwitchState();
+	}
+	
+	public boolean isMidway() {
+		return !isExtended() && !isRetracted();
 	}
 
 	// MAKE SURE THAT YOU ARE NOT IN A CLOSED LOOP CONTROL MODE BEFORE CALLING THIS METHOD.

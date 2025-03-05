@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.142725409836065,
-        "y": 2.868186475409835
+        "x": 4.965,
+        "y": 2.870394736842105
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.780061302957829,
-        "y": 2.6580173578973567
+        "x": 5.602335893121764,
+        "y": 2.6602256193296268
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Side C (left)"
     },
     {
       "anchor": {
@@ -25,7 +25,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Processor (Blue)"
     }
   ],
   "rotationTargets": [],

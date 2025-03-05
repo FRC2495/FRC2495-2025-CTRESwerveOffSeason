@@ -7,38 +7,24 @@ package frc.robot;
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
-//import edu.wpi.first.math.controller.PIDController;
-//import edu.wpi.first.math.controller.ProfiledPIDController;
-//import edu.wpi.first.math.geometry.Pose2d;
-//import edu.wpi.first.math.geometry.Rotation2d;
-//import edu.wpi.first.math.geometry.Translation2d;
-//import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
-//import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
-//import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj.XboxController.Button;
-//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-//import edu.wpi.first.wpilibj2.command.InstantCommand;
-//import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-
-import java.util.concurrent.TimeoutException;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
-//import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-//import com.revrobotics.CANSparkMax;
-//import com.revrobotics.CANSparkLowLevel.MotorType;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -60,30 +46,24 @@ import frc.robot.subsystems.AlgaeRoller;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hanger;
-//import frc.robot.subsystems.Drawer;
-import frc.robot.subsystems.Neck;
-import frc.robot.subsystems.OldNeck;
+import frc.robot.subsystems.Slider;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.AlgaeRoller;
-//import frc.robot.subsystems.Shooter;
-//import frc.robot.subsystems.Compressor;
-//import frc.robot.subsystems.Mouth;
 import frc.robot.subsystems.Indicator;
-import frc.robot.commands.algae_roller.AlgaeRollerRelease;
-import frc.robot.commands.algae_roller.AlgaeRollerRoll;
-import frc.robot.commands.algae_roller.AlgaeRollerStopForever;
-import frc.robot.commands.algae_roller.AlgaeRollerTimedRelease;
-import frc.robot.commands.algae_roller.AlgaeRollerTimedRoll;
+//import frc.robot.subsystems.Neck;
+import frc.robot.commands.algae_roller.*;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
 import frc.robot.commands.drivetrain.*;
+import frc.robot.commands.slider.*;
+//import frc.robot.commands.neck.*;
 import frc.robot.commands.elevator.*;
+import frc.robot.commands.hanger.*;
 //import frc.robot.commands.simpleshooter.*;
 //import frc.robot.commands.shooter.*;
 import frc.robot.interfaces.ICamera;
 //import frc.robot.commands.mouth.*;
 import frc.robot.commands.indicator.*;
-import frc.robot.commands.old_neck.*;
 import frc.robot.commands.groups.*;
 import frc.robot.commands.hanger.HangerMoveUpWithStallDetection;
 //import frc.robot.commands.gamepad.*;
@@ -112,67 +92,6 @@ public class RobotContainer {
 	Command indicatorTimedScrollRainbow; // command to run while stating up and when disabled
 
 	// choosers (for auton)
-	
-	/*public static final String AUTON_DO_NOTHING = "Do Nothing";
-	public static final String AUTON_CUSTOM = "My Auto";
-	public static final String AUTON_SAMPLE_SWERVE = "Sample Swerve";
-	public static final String AUTON_SAMPLE_MOVE_FORWARD = "Sample Move Forward";
-	public static final String AUTON_SAMPLE_MOVE_IN_REVERSE = "Sample Move In Reverse";
-	public static final String AUTON_SAMPLE_MOVE_IN_GAMMA_SHAPE = "Sample Move In Gamma Shape";
-	public static final String AUTON_SAMPLE_MOVE_IN_L_SHAPE_IN_REVERSE = "Sample Move In L Shape In Reverse";
-	public static final String AUTON_TEST_HARDCODED_MOVE_1 = "Test Hardcoded Move 1";
-	public static final String AUTON_TEST_HARDCODED_MOVE_2 = "Test Hardcoded Move 2";
-	public static final String AUTON_TEST_TRAJECTORY_GENERATION = "Test Trajectory Generation";
-	private String autonSelected;
-	private SendableChooser<String> autonChooser = new SendableChooser<>();
-
-	public static final String GAME_PIECE_NONE = "None";
-	public static final String GAME_PIECE_1_NOTE = "1 Note";
-	public static final String GAME_PIECE_2_NOTES = "2 Notes";
-	public static final String GAME_PIECE_3_NOTES = "3 Notes";
-	private String gamePieceSelected;
-	private SendableChooser<String> gamePieceChooser = new SendableChooser<>();
-	
-	public static final String START_POSITION_1 = "Starting Position 1";
-	public static final String START_POSITION_2 = "Starting Position 2";
-	public static final String START_POSITION_3 = "Starting Position 3";
-	public static final String START_POSITION_4 = "Starting Position 4";
-	public static final String START_POSITION_5 = "Starting Position 5";
-	public static final String START_POSITION_6 = "Starting Position 6";
-	private String startPosition;
-	private SendableChooser<String> startPositionChooser = new SendableChooser<>();
-
-	public static final String MAIN_TARGET_SPEAKER = "Speaker";
-	public static final String MAIN_TARGET_NOWHERE = "Nowhere";
-	private String mainTarget;
-	private SendableChooser<String> mainTargetChooser = new SendableChooser<>();
-	
-	public static final String CAMERA_OPTION_USE_ALWAYS = "Always";
-	public static final String CAMERA_OPTION_USE_OPEN_LOOP_ONLY = "Open Loop Only";
-	public static final String CAMERA_OPTION_USE_CLOSED_LOOP_ONLY = "Closed Loop Only";
-	public static final String CAMERA_OPTION_USE_NEVER = "Never";
-	private String cameraOption;
-	private SendableChooser<String> cameraOptionChooser = new SendableChooser<>();
-	
-	public static final String SONAR_OPTION_USE_ALWAYS = "Always";
-	public static final String SONAR_OPTION_USE_RELEASE_ONLY = "Release Only";
-	public static final String SONAR_OPTION_USE_GRASP_ONLY = "Grasp Only";
-	public static final String SONAR_OPTION_USE_NEVER = "Never";
-	private String sonarOption;
-	private SendableChooser<String> sonarOptionChooser = new SendableChooser<>();
-	
-	public static final String CLAW_OPTION_RELEASE = "Release";
-	public static final String CLAW_OPTION_DONT_RELEASE = "Don't Release"; 
-	private String releaseSelected;
-	private SendableChooser<String> releaseChooser = new SendableChooser<>();
-
-	public static final String AUTON_OPTION_JUST_SHOOT_NOTE = "Just Shoot Note";
-	public static final String AUTON_OPTION_LEAVE_COMMUNITY = "Leave Community";
-	public static final String AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE = "Pickup Note at Midline";
-	public static final String AUTON_OPTION_PICKUP_NOTE_AT_WING = "Pickup Note at Wing";
-	public static final String AUTON_OPTION_FEED_NOTE = "Feed Note";
-	private String autonOption;
-	private SendableChooser<String> autonOptionChooser = new SendableChooser<>();*/
 
 	private final SendableChooser<Command> autoChooser;
 
@@ -184,9 +103,11 @@ public class RobotContainer {
 
 	private final ICamera apriltag_camera = new AprilTagCamera();
 
-	private final NoteSensor noteSensor = new NoteSensor(Ports.Digital.NOTE_SENSOR);
+	//private final CoralSensor firstCoralSensor = new CoralSensor(Ports.Digital.CORAL_SENSOR, 5.0);
 
-	private final NoteSensor noteSensorTwo = new NoteSensor(Ports.Digital.NOTE_SENSOR_TWO);
+	//private final CoralSensor secondCoralSensor = new CoralSensor(Ports.Digital.CORAL_SENSOR_TWO, 5.0);
+
+	//private final NoteSensor noteSensor = new NoteSensor(Ports.Digital.NOTE_SENSOR);
 
 	// motorized devices
 
@@ -200,15 +121,13 @@ public class RobotContainer {
 	private final TalonFX elevator_follower = new TalonFX(Ports.CAN.ELEVATOR_FOLLOWER);
 
 	private final /*I*/Elevator elevator = new Elevator(elevator_master, elevator_follower);
-
-	private final WPI_TalonSRX neck_master = new WPI_TalonSRX(Ports.CAN.NECK_MASTER);
 	
-	private final /*I*/Neck neck = new Neck(neck_master);
+	//private final /*I*/Neck neck = new Neck();
 
-	private final TalonFX old_neck_master = new TalonFX(Ports.CAN.NECK_MASTER);
-	private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.NECK_FOLLOWER);
+	//private final TalonFX old_neck_master = new TalonFX(Ports.CAN.OLD_NECK_MASTER);
+	//private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.OLD_NECK_FOLLOWER);
 	
-	private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
+	//private final /*I*/OldNeck old_neck = new OldNeck(old_neck_master, old_neck_follower);
 
 	//private final CANSparkMax roller_master = new CANSparkMax(Ports.CAN.ROLLER, MotorType.kBrushless);
 	private final WPI_TalonSRX coral_roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
@@ -216,18 +135,14 @@ public class RobotContainer {
 	private final WPI_TalonSRX algae_roller_master = new WPI_TalonSRX(Ports.CAN.ROLLER_MASTER);
 	private final WPI_TalonSRX algae_roller_follower = new WPI_TalonSRX(Ports.CAN.ROLLER_FOLLOWER);
 
-
 	private final /*I*/CoralRoller coral_roller = new CoralRoller(coral_roller_master, coral_roller_follower);
 	private final /*I*/AlgaeRoller algae_roller = new AlgaeRoller(algae_roller_master, algae_roller_follower);
 
-	//private final CANSparkMax shooter_master = new CANSparkMax(Ports.CAN.SHOOTER_MASTER, MotorType.kBrushless);
-	//private final CANSparkMax shooter_follower = new CANSparkMax(Ports.CAN.SHOOTER_FOLLOWER, MotorType.kBrushless);
+	private final WPI_TalonSRX slider_master = new WPI_TalonSRX(Ports.CAN.SLIDER_MASTER);
+	private final Slider slider = new Slider(slider_master);
 
-	//private final /*I*/SimpleShooter shooter = new SimpleShooter(shooter_master, shooter_follower);
-
-	//private final TalonFX shooter_master = new TalonFX(Ports.CAN.SHOOTER_MASTER);
-	
-	//private final /*I*/Shooter shooter = new Shooter(shooter_master);
+	private final TalonFX hanger_master = new TalonFX(Ports.CAN.HANGER_MASTER);
+	private final Hanger hanger = new Hanger(hanger_master);
 
 	// pneumatic devices
 
@@ -241,93 +156,54 @@ public class RobotContainer {
 
 	private final Indicator indicator = new Indicator(apriltag_camera, object_detection_camera);
 
-	//public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
+	public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
 	// The driver's and copilot's joystick(s) and controller(s)
-
-	/*CommandJoystick joyLeft = new CommandJoystick(Ports.USB.LEFT_JOYSTICK);
-	CommandJoystick joyRight = new CommandJoystick(Ports.USB.RIGHT_JOYSTICK);*/
 	CommandJoystick joyMain = new CommandJoystick(Ports.USB.MAIN_JOYSTICK);
 	//CommandXboxController driverGamepad = new CommandXboxController(Ports.USB.DRIVER_GAMEPAD);
 	CommandXboxController copilotGamepad = new CommandXboxController(Ports.USB.COPILOT_GAMEPAD);
+	CommandJoystick buttonBox = new CommandJoystick(Ports.USB.BUTTON_BOX);
 	
 	/**
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
 	public RobotContainer() {
 
+		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveToSecondLevelWithStallDetection", new ElevatorMoveToSecondLevelWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveToFirstLevelWithStallDetection", new ElevatorMoveToFirstLevelWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveUpWithStallDetection", new ElevatorMoveUpWithStallDetection(elevator));
+        NamedCommands.registerCommand("elevatorMoveDownWithStallDetection", new ElevatorMoveDownWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelTwoWithStallDetection", new ElevatorMoveToAlgaeLevelTwoWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelThreeWithStallDetection", new ElevatorMoveToAlgaeLevelThreeWithStallDetection(elevator));
+        NamedCommands.registerCommand("algaeRollerRoll", new AlgaeRollerRoll(algae_roller));
+        NamedCommands.registerCommand("algaeRollerRelease", new AlgaeRollerRelease(algae_roller));
+        NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 5));
+        NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
+        NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRollOut(coral_roller));
+        NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRollIn(coral_roller));
+        NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
+        NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
+		//NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderSafeExtendWithStallDetection(neck, slider));
+		NamedCommands.registerCommand("sliderRetractWithStallDetection", new SliderRetractWithStallDetection(slider));
+		//NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
+		//NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
+		NamedCommands.registerCommand("scoreFirstLevelCoral", new ScoreFirstLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("scoreSecondLevelCoral", new ScoreSecondLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("scoreThirdLevelCoral", new ScoreThirdLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("scoreFourthLevelCoral", new ScoreFourthLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("grabLevelTwoAlgae", new GrabLevelTwoAlgae(elevator, algae_roller, slider));
+		NamedCommands.registerCommand("grabLevelThirdAlgae", new GrabLevelThreeAlgae(elevator, algae_roller, slider));
+		NamedCommands.registerCommand("scoreNet", new ScoreNet(elevator, algae_roller, slider));
+		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(algae_roller));
+
 		// choosers (for auton)
 
 		autoChooser = AutoBuilder.buildAutoChooser("SPB1 - One Coral and Leave SZ");
 		SmartDashboard.putData("Auto Chooser", autoChooser);
-		
-		/*autonChooser.setDefaultOption("Do Nothing", AUTON_DO_NOTHING);
-		autonChooser.addOption("My Auto", AUTON_CUSTOM);
-		autonChooser.addOption("Sample Swerve", AUTON_SAMPLE_SWERVE);
-		autonChooser.addOption("Sample Move Forward", AUTON_SAMPLE_MOVE_FORWARD);
-		autonChooser.addOption("Sample Move In Reverse", AUTON_SAMPLE_MOVE_IN_REVERSE);
-		autonChooser.addOption("Sample Move In Gamma Shape", AUTON_SAMPLE_MOVE_IN_GAMMA_SHAPE);
-		autonChooser.addOption("Sample Move In L Shape In Reverse", AUTON_SAMPLE_MOVE_IN_L_SHAPE_IN_REVERSE);
-		autonChooser.addOption("Test Hardcoded Move 1", AUTON_TEST_HARDCODED_MOVE_1);
-		autonChooser.addOption("Test Hardcoded Move 2", AUTON_TEST_HARDCODED_MOVE_2);
-		autonChooser.addOption("Test Trajectory Generation", AUTON_TEST_TRAJECTORY_GENERATION);
-		SmartDashboard.putData("Auto choices", autonChooser);
-
-		gamePieceChooser.setDefaultOption("None", GAME_PIECE_NONE);
-		gamePieceChooser.addOption("1 Note", GAME_PIECE_1_NOTE);
-		gamePieceChooser.addOption("2 Notes", GAME_PIECE_2_NOTES);
-		gamePieceChooser.addOption("3 Notes", GAME_PIECE_3_NOTES);
-		SmartDashboard.putData("Game piece choices", gamePieceChooser);
-
-		startPositionChooser.setDefaultOption("Starting Position 1", START_POSITION_1);
-		startPositionChooser.addOption("Starting Position 2", START_POSITION_2);
-		startPositionChooser.addOption("Starting Position 3", START_POSITION_3);
-		startPositionChooser.addOption("Starting Position 4", START_POSITION_4);
-		startPositionChooser.addOption("Starting Position 5", START_POSITION_5);
-		startPositionChooser.addOption("Starting Position 6", START_POSITION_6);
-		SmartDashboard.putData("Start positions", startPositionChooser);
-
-		mainTargetChooser.setDefaultOption("To Nowhere", MAIN_TARGET_NOWHERE);
-		mainTargetChooser.addOption("Speaker", MAIN_TARGET_SPEAKER);
-		SmartDashboard.putData("Main targets", mainTargetChooser);
-		
-		cameraOptionChooser.setDefaultOption("Always", CAMERA_OPTION_USE_ALWAYS);
-		cameraOptionChooser.addOption("Open Loop Only", CAMERA_OPTION_USE_OPEN_LOOP_ONLY);
-		cameraOptionChooser.addOption("Closed Loop Only", CAMERA_OPTION_USE_CLOSED_LOOP_ONLY);
-		cameraOptionChooser.addOption("Never", CAMERA_OPTION_USE_NEVER);		
-		SmartDashboard.putData("Camera options", cameraOptionChooser);
-		
-		sonarOptionChooser.setDefaultOption("Always", SONAR_OPTION_USE_ALWAYS);
-		sonarOptionChooser.addOption("Release Only", SONAR_OPTION_USE_RELEASE_ONLY);
-		sonarOptionChooser.addOption("Grasp Only", SONAR_OPTION_USE_GRASP_ONLY);		
-		sonarOptionChooser.addOption("Never", SONAR_OPTION_USE_NEVER);
-		SmartDashboard.putData("Sonar options", sonarOptionChooser);
-		
-		releaseChooser.setDefaultOption("Release", CLAW_OPTION_RELEASE);
-		releaseChooser.addOption("Don't release", CLAW_OPTION_DONT_RELEASE);
-		SmartDashboard.putData("Release options", releaseChooser);
-
-		autonOptionChooser.setDefaultOption("Just Shoot Note", AUTON_OPTION_JUST_SHOOT_NOTE);
-		autonOptionChooser.addOption("Leave Community", AUTON_OPTION_LEAVE_COMMUNITY);
-		autonOptionChooser.addOption("Pickup Note At Midline", AUTON_OPTION_PICKUP_NOTE_AT_MIDLINE);
-		autonOptionChooser.addOption("Pickup Note At Wing", AUTON_OPTION_PICKUP_NOTE_AT_WING);
-		autonOptionChooser.addOption("Feed Note", AUTON_OPTION_FEED_NOTE);
-		SmartDashboard.putData("Auton options", autonOptionChooser);*/
-		
-		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
-		NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
-		NamedCommands.registerCommand("elevatorMoveToSecondLevelWithStallDetection", new ElevatorMoveToSecondLevelWithStallDetection(elevator));
-		NamedCommands.registerCommand("elevatorMoveToFirstLevelWithStallDetection", new ElevatorMoveToFirstLevelWithStallDetection(elevator));
-		NamedCommands.registerCommand("elevatorMoveUpWithStallDetection", new ElevatorMoveUpWithStallDetection(elevator));
-		NamedCommands.registerCommand("elevatorMoveDownWithStallDetection", new ElevatorMoveDownWithStallDetection(elevator));
-		NamedCommands.registerCommand("algaeRollerRoll", new AlgaeRollerRoll(algae_roller));
-		NamedCommands.registerCommand("algaeRollerRelease", new AlgaeRollerRelease(algae_roller));
-		NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 5));
-		NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
-		NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRoll(coral_roller));
-		NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRelease(coral_roller));
-		NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
-		NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
 
 		// Configure the button bindings
 
@@ -361,6 +237,23 @@ public class RobotContainer {
 
 		indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(indicator,1);
 		indicatorTimedScrollRainbow.schedule(); // we schedule the command as we are starting up
+
+		Trigger hasCoral = new Trigger(() -> coral_roller.hasCoral());
+		Trigger noCoralPresent = new Trigger(() -> coral_roller.noCoralPresent() && !coral_roller.isReleasing());
+		Trigger isCoralEntering = new Trigger(() -> coral_roller.isCoralEntering() && !coral_roller.isReleasing());
+		Trigger isCoralExiting = new Trigger(() -> coral_roller.isCoralExiting() && !coral_roller.isReleasing());
+
+		isCoralEntering.whileTrue(
+			new CoralRollerRollInLowRpm(coral_roller)
+		);
+
+		isCoralExiting.whileTrue(
+			new CoralRollerRollInLowRpm(coral_roller)
+		);
+
+		(hasCoral).or(noCoralPresent).whileTrue(
+			new CoralRollerStop(coral_roller)
+		);
 	}
 
 	/**
@@ -399,50 +292,50 @@ public class RobotContainer {
 			.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
 			
 		joyMain.button(4)
-			.onTrue(new MoveInGammaShape(drivetrain, this, 3));
+			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
+			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 
 		joyMain.button(5)
-			.onTrue(new MoveForward(drivetrain, this, 3));
-			//.onTrue(new DrivetrainTurnAngleUsingPidController(drivetrain, -90));
-			//.onTrue(new MoveInUShapeInReverse(drivetrain, this, 1));
+			.onTrue(new MoveLeftOfCoralReef(drivetrain, this, GAMEPAD_AXIS_THRESHOLD));
 
 		joyMain.button(6)
-			//.onTrue(new MoveInReverse(drivetrain, this, 3));
-			//.onTrue(new DrivetrainTurnAngleUsingPidController(drivetrain, 90));
 			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
-			.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			.onTrue(new MoveRightOfCoralReef(drivetrain, this, GAMEPAD_AXIS_THRESHOLD));
 
 		joyMain.button(7)
 			.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
 		
 		joyMain.button(8)
-			.whileTrue(new OldNeckJoystickControl(old_neck, drivetrain, getMainJoystick()));
+			.whileTrue(new AlgaeRollerJoystickControl(algae_roller, drivetrain, getMainJoystick()));
 		
 		joyMain.button(9);
-			//.whileTrue(new ShooterJoystickControl(shooter, drivetrain, getMainJoystick()));
+			//.whileTrue(new NeckJoystickControl(neck, drivetrain, getMainJoystick()));
 		
 		joyMain.button(10)
 			.whileTrue(new ElevatorJoystickControl(elevator, drivetrain, getMainJoystick()));
 
 		joyMain.button(11)
 			//.onTrue(new DrivetrainZeroHeading(drivetrain));
-			.onTrue(new DrivetrainTurnUsingCamera(drivetrain, apriltag_camera));
+			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, apriltag_camera));
+			.whileTrue(new HangerJoystickControl(hanger, drivetrain, getMainJoystick()));
 		
 		joyMain.button(12)
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
+			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
+			.onTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
 			
 				
 		// copilot (gamepad)
 		
 		copilotGamepad.a()
-			.whileTrue(new CoralRollerRelease(coral_roller));
+			.whileTrue(new CoralRollerRollIn(coral_roller));
 		
 		copilotGamepad.b()
-			.whileTrue(new CoralRollerRoll(coral_roller));
+			.whileTrue(new CoralRollerRollOut(coral_roller));
 
-		copilotGamepad.x()
-			.onTrue(new CoralRollerReleaseShortDistance(coral_roller));
+		copilotGamepad.x();
+			//.onTrue(new CoralRollerReleaseShortDistance(coral_roller));
 
 		copilotGamepad.y();
 			//.whileTrue(new RollerRollLowRpm(roller));
@@ -451,13 +344,13 @@ public class RobotContainer {
 			//.onTrue(new RollerSuperSmartRoll(roller, noteSensor, noteSensorTwo));
 			//.onTrue(new CoralRollerRollLowRpmUntilNoteSensed(coral_roller, noteSensor, noteSensorTwo));
 			
-		copilotGamepad.back()
+		copilotGamepad.back();
 			//.onTrue(new DrivetrainAndGyroReset(drivetrain));
-			.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
+			//.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
 
-		copilotGamepad.start()
+		copilotGamepad.start();
 			//.onTrue(new AlmostEverythingStop(elevator, neck, roller));
-			.onTrue(new OldNeckHome(old_neck));
+			//.onTrue(new OldNeckHome(old_neck));
 
 
 		copilotGamepad.leftTrigger();
@@ -467,35 +360,35 @@ public class RobotContainer {
 
 		copilotGamepad.rightTrigger()
 			//.onTrue(new DrawerExtendWithStallDetection(drawer));
-			.whileTrue(new CoralRollerRoll(coral_roller));
+			.whileTrue(new CoralRollerRollOut(coral_roller));
 
 
-		copilotGamepad.povDown()
+		copilotGamepad.povDown();
 			//.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveDownWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveDownWithStallDetection(old_neck));
 
-		copilotGamepad.povLeft()
+		copilotGamepad.povLeft();
 			//.onTrue(new ElevatorMoveMidwayWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveSubWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveSubWithStallDetection(old_neck));
 
-		copilotGamepad.povRight()
+		copilotGamepad.povRight();
 			//.onTrue(new ElevatorMoveMidwayWithStallDetection(elevator));
 			//.onTrue(new NeckMovePodiumWithStallDetection(neck));
-			.onTrue(new OldNeckMoveFeedNoteWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveFeedNoteWithStallDetection(old_neck));
 
-		copilotGamepad.povUp()
+		copilotGamepad.povUp();
 			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
-			.onTrue(new OldNeckMoveUpWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveUpWithStallDetection(old_neck));
 
 
-		copilotGamepad.leftBumper()
+		copilotGamepad.leftBumper();
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
-			.whileTrue(new OldNeckMoveUsingCamera(old_neck, apriltag_camera));
+			//.whileTrue(new OldNeckMoveUsingCamera(old_neck, apriltag_camera));
 
-		copilotGamepad.rightBumper()
+		copilotGamepad.rightBumper();
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			.onTrue(new OldNeckMoveAcrossFieldWithStallDetection(old_neck));
+			//.onTrue(new OldNeckMoveAcrossFieldWithStallDetection(old_neck));
 
 
 		copilotGamepad.leftStick()
@@ -519,11 +412,11 @@ public class RobotContainer {
 		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue();*/
 
-		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
+		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
 
-		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
+		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
 
 		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD);
 			//.whileTrue(new DrawerGamepadControl(drawer, getCopilotGamepad()));
@@ -734,15 +627,15 @@ public class RobotContainer {
 		return apriltag_camera;
 	}
 
-	public NoteSensor getNoteSensor()
+	/*(public NoteSensor getNoteSensor()
 	{
 		return noteSensor;
-	}
+	}*/
 
-	public NoteSensor getNoteSensorTwo()
+	/*public CoralSensor getCoralSensor() 
 	{
-		return noteSensorTwo;
-	}
+		return coralSensor;
+	}*/
 
 	public SwerveDrivetrain getDrivetrain()
 	{
@@ -759,10 +652,21 @@ public class RobotContainer {
 		return drawer;
 	}*/
 
-	public Neck getNeck()
+	/*public Neck getNeck()
 	{
 		return neck;
+	}*/
+
+	public Slider getSlider()
+	{
+		return slider;
 	}
+
+	public Hanger getHanger()
+	{
+		return hanger;
+	}
+
 
 	public CoralRoller getCoralRoller()
 	{
@@ -792,6 +696,11 @@ public class RobotContainer {
 	public XboxController getCopilotGamepad()
 	{
 		return copilotGamepad.getHID();
+	}
+
+	public Joystick getButtonBox() 
+	{
+		return buttonBox.getHID();
 	}
 
 	/*public SendableChooser<String> getAutonChooser()

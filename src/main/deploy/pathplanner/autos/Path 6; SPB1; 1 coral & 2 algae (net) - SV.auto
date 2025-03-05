@@ -11,9 +11,93 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToSecondLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveToAlgaeReefWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderExtendWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderRetractWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Side B to Bnet - SV"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveUpWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderExtendWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRelease"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderRetractWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
           }
         },
         {
@@ -23,9 +107,81 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToThirdLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveToAlgaeReefWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderExtendWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderRetractWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "Side A to Bnet - SV"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveUpWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderExtendWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRelease"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "sliderRetractWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
           }
         }
       ]

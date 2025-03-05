@@ -3,7 +3,12 @@
   "robotLength": 0.7366,
   "holonomicMode": true,
   "pathFolders": [],
-  "autoFolders": [],
+  "autoFolders": [
+    "Test",
+    "SPB1",
+    "SPB2",
+    "SPB3"
+  ],
   "defaultMaxVel": 1.5,
   "defaultMaxAccel": 2.5,
   "defaultMaxAngVel": 540.0,

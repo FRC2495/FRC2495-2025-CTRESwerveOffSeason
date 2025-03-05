@@ -11,15 +11,17 @@ import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 
+import frc.robot.Ports;
 import frc.robot.interfaces.*;
 //import frc.robot.RobotContainer;
 //import frc.robot.Ports;
+import frc.robot.sensors.CoralSensor;
 
 
 /**
  * The {@code Roller} class contains fields and methods pertaining to the function of the roller.
  */
-public class CoralRoller extends SubsystemBase implements IRoller{
+public class CoralRoller extends SubsystemBase implements ICoralRoller{
 	public static final int LENGTH_OF_SHORT_DISTANCE_TICKS = 20000; 
 
 	static final double MAX_PCT_OUTPUT = 1.0;
@@ -27,7 +29,7 @@ public class CoralRoller extends SubsystemBase implements IRoller{
 	static final double HALF_PCT_OUTPUT = 0.5;
 	static final double REDUCED_PCT_OUTPUT = 0.6; //0.8;
 	static final double REDUCED_PCT_OUTPUT_SHORT_DISTANCE = 0.4;
-	static final double SUPER_REDUCED_PCT_OUTPUT = 0.2; // 0.3
+	static final double SUPER_REDUCED_PCT_OUTPUT = 0.2; 
 	
 	//todo fix
 	
@@ -78,6 +80,11 @@ public class CoralRoller extends SubsystemBase implements IRoller{
 	static final double PRESET_DELTA_RPM = 100.0; // by what we increase/decrease by default
 
 	static final int CTRE_MAGNETIC_ENCODER_SENSOR_TICKS_PER_ROTATION = 4096; // units per rotation
+
+	private CoralSensor frontCoralSensor, backCoralSensor;
+
+	private final double frontCoralTriggerValue = 0.1; // TODO: need to test for this
+	private final double backCoralTriggerValue = 0.1; // TODO: need to test for this
 	
 		
 	public CoralRoller(WPI_TalonSRX coral_roller_in, BaseMotorController coral_roller_follower_in) {
@@ -128,6 +135,10 @@ public class CoralRoller extends SubsystemBase implements IRoller{
 		
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
+
+		frontCoralSensor = new CoralSensor(Ports.Digital.FRONT_CORAL_SENSOR, frontCoralTriggerValue);
+        backCoralSensor = new CoralSensor(Ports.Digital.BACK_CORAL_SENSOR, backCoralTriggerValue);
+
 	}
 	
 	/*@Override
@@ -182,7 +193,7 @@ public class CoralRoller extends SubsystemBase implements IRoller{
 		return isMoving; 
 	}
 
-	public void roll() {
+	public void rollIn() {
 		//SwitchedCamera.setUsbCamera(Ports.UsbCamera.GRASPER_CAMERA);
 
 		coral_roller.set(ControlMode.PercentOutput, -REDUCED_PCT_OUTPUT);
@@ -194,7 +205,7 @@ public class CoralRoller extends SubsystemBase implements IRoller{
 		isMoving = false;
 	}
 
-	public void rollLowRpm() {
+	public void rollInLowRpm() {
 
 		setPIDParameters();
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT); //this has a global impact, so we reset in stop()
@@ -210,8 +221,7 @@ public class CoralRoller extends SubsystemBase implements IRoller{
 		isMoving = false;
 	}
 	
-	public void release() {
-		//SwitchedCamera.setUsbCamera(Ports.UsbCamera.GRASPER_CAMERA);
+	public void rollOut() {
 
 		coral_roller.set(ControlMode.PercentOutput, SUPER_REDUCED_PCT_OUTPUT);
 		
@@ -222,7 +232,23 @@ public class CoralRoller extends SubsystemBase implements IRoller{
 		isMoving = false;
 	}
 
-	public void releaseShortDistance() {
+	public void rollOutLowRpm() {
+
+		setPIDParameters();
+		setNominalAndPeakOutputs(MAX_PCT_OUTPUT); //this has a global impact, so we reset in stop()
+
+		double targetVelocity_UnitsPer100ms = ROLL_LOW_RPM * CTRE_MAGNETIC_ENCODER_SENSOR_TICKS_PER_ROTATION / 600; // 1 revolution = TICKS_PER_ROTATION ticks, 1 min = 600 * 100 ms
+
+		coral_roller.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
+		
+		isReleasing = true;
+		isRolling = false;
+		isShooting = false;
+
+		isMoving = false;
+	}
+
+	public void rollOutShortDistance() {
 		stop(); // in case we were still doing something
 		
 		resetEncoder(); // set new virtual zero
@@ -400,6 +426,27 @@ public class CoralRoller extends SubsystemBase implements IRoller{
 		coral_roller.set(ControlMode.PercentOutput,0); // we stop AND MAKE SURE WE DO NOT MOVE WHEN SETTING POSITION
 		coral_roller.setSelectedSensorPosition(0, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // we mark the virtual zero
 	}
+
+	public boolean hasCoralEntered() {
+		return backCoralSensor.isTriggered();
+	}
+
+	public boolean hasCoral() {
+		return frontCoralSensor.isTriggered() && backCoralSensor.isTriggered();
+	}
+
+	public boolean isCoralEntering() {
+        return backCoralSensor.isTriggered() && !frontCoralSensor.isTriggered();
+    }
+
+    public boolean isCoralExiting() {
+        return !backCoralSensor.isTriggered() && frontCoralSensor.isTriggered();
+    }
+
+	public boolean noCoralPresent() {
+        return !backCoralSensor.isTriggered() && !frontCoralSensor.isTriggered();
+    }
+
 }
 
 

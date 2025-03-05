@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Leave sz + 1 coral"
+            "pathName": "SPB2 - SZ to Side B (right)"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": null,
+  "folder": "SPB2",
   "choreoAuto": false
 }

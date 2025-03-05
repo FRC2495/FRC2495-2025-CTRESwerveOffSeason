@@ -39,6 +39,6 @@ public class AlgaeRollerStopForever extends Command {
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("RollerStopForever: end");
+		System.out.println("AlgaeRollerStopForever: end");
 	}
 }

@@ -41,7 +41,7 @@ public class CoralRollerTimedRoll extends WaitCommand {
 	public void initialize() {
 		System.out.println("CoralRollerTimedRoll: initialize");
 		super.initialize();
-		coral_roller.roll();
+		coral_roller.rollIn();
 
 	}
 

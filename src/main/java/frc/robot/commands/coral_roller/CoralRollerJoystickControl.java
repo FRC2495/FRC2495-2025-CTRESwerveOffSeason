@@ -16,20 +16,20 @@ public class CoralRollerJoystickControl extends Command {
 	//private SwerveDrivetrain drivetrain;
 	private Joystick joystick;
 
-	public CoralRollerJoystickControl(CoralRoller roller, SwerveDrivetrain drivetrain, Joystick joystick) {
+	public CoralRollerJoystickControl(CoralRoller coral_roller, SwerveDrivetrain drivetrain, Joystick joystick) {
 		this.coral_roller = coral_roller;
 		//this.drivetrain = drivetrain;
 		this.joystick = joystick;
 		
 		addRequirements(
-			roller,
+			coral_roller,
 			drivetrain); // this is needed so that the default drivetrain command does not run at the same time
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("RollerJoystickControl: initialize");
+		System.out.println("CoralRollerJoystickControl: initialize");
 	}
 
 	// Called repeatedly when this Command is scheduled to run

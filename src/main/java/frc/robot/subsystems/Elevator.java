@@ -50,6 +50,9 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int LENGTH_OF_LEVEL_TWO_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
 	public static final int LENGTH_OF_LEVEL_THREE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
 	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	
 
 
 	static final double MAX_PCT_OUTPUT = 1.0;
@@ -95,12 +98,14 @@ public class Elevator extends SubsystemBase implements IElevator {
 	PositionDutyCycle elevatorLevelTwoPosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_TWO_REVS);
 	PositionDutyCycle elevatorLevelThreePosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_THREE_REVS);
 	PositionDutyCycle elevatorLevelFourPosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_FOUR_REVS);
+	PositionDutyCycle elevatorAlgaeLevelTwoPosition = new PositionDutyCycle(-LENGTH_OF_ALGAE_LEVEL_TWO_REVS);
+	PositionDutyCycle elevatorAlgaeLevelThreePosition = new PositionDutyCycle(-LENGTH_OF_ALGAE_LEVEL_THREE_REVS);
 	
 	boolean isMoving;
 	boolean isMovingUp;
 	boolean isReallyStalled;
 
-	double tac;
+	double targetEncoder;
 
 	private int onTargetCount; // counter indicating how many times/iterations we were on target 
 	private int stalledCount; // counter indicating how many times/iterations we were stalled
@@ -126,7 +131,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		elevatorConfig = new TalonFXConfiguration();
 		elevator_followerConfig = new TalonFXConfiguration();
 
-		elevator_follower.setControl(new Follower(elevator.getDeviceID(), false));
+		elevator_follower.setControl(new Follower(elevator.getDeviceID(), true));
 
 		//elevator.getConfigurator().apply(elevatorConfig);
 		//elevator_follower.getConfigurator().apply(elevator_followerConfig);
@@ -160,9 +165,6 @@ public class Elevator extends SubsystemBase implements IElevator {
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
 		elevatorConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive; // change value or comment out if needed
 		elevator_followerConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-		//elevator.setInverted(true);  // TODO switch to false if required if switching to Talon FX
-		//elevator_follower.setInverted(true);  // TODO comment out if switching to Talon FX
-		
 		
 
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
@@ -319,7 +321,8 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = -LENGTH_OF_TRAVEL_TICKS;
 
 		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorLevelOnePosition); //fix
+		elevator.setControl(elevatorUpPosition); //fix
+		targetEncoder = -LENGTH_OF_TRAVEL_REVS;
 
 		
 		isMoving = true;
@@ -338,8 +341,8 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = -LENGTH_OF_TRAVEL_TICKS;
 
 		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorUpPosition); //fix
-
+		elevator.setControl(elevatorLevelOnePosition); //fix
+		targetEncoder = -LENGTH_OF_LEVEL_ONE_REVS;
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -353,10 +356,8 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving to Second Level");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		//tac = -LENGTH_OF_TRAVEL_TICKS;
-
-		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorLevelTwoPosition); //fix
+		targetEncoder = -LENGTH_OF_LEVEL_TWO_REVS;
 
 		
 		isMoving = true;
@@ -376,6 +377,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorLevelThreePosition); //fix
+		targetEncoder = -LENGTH_OF_LEVEL_THREE_REVS;
 
 		
 		isMoving = true;
@@ -395,6 +397,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorLevelFourPosition); //fix
+		targetEncoder = -LENGTH_OF_LEVEL_FOUR_REVS;
 
 		
 		isMoving = true;
@@ -404,6 +407,41 @@ public class Elevator extends SubsystemBase implements IElevator {
 		stalledCount = 0;
 	}
 
+	public void moveToAlgaeLevelTwo() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Algae Level Two");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		//tac = 0; // adjust as needed
+		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorAlgaeLevelTwoPosition);
+		targetEncoder = -LENGTH_OF_ALGAE_LEVEL_TWO_REVS;
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveToAlgaeLevelThree() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Algae Level Three");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		//tac = 0; // adjust as needed
+		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorAlgaeLevelThreePosition);
+		targetEncoder = -LENGTH_OF_ALGAE_LEVEL_THREE_REVS;
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
 
 	public void moveMidway() {
 		
@@ -414,7 +452,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = -LENGTH_OF_MIDWAY_TICKS;
 		
 		elevator.setControl(elevatorMidwayPosition);
-		//elevator.set(ControlMode.Position,tac);
+		targetEncoder = -LENGTH_OF_MIDWAY_REVS;
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -432,6 +470,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = 0; // adjust as needed
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorHomePosition);
+		targetEncoder = 0.0;
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -567,7 +606,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	}
 
 	public double getTarget() {
-		return tac;
+		return targetEncoder;
 	}	
 
 	public boolean getForwardLimitSwitchState() {

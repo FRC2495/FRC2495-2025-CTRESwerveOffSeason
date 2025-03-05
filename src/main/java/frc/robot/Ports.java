@@ -26,8 +26,10 @@ public class Ports {
 		 */
 		public static class Digital {
 			public static final int CHECK_PRESSURE = 0;
-			public static final int NOTE_SENSOR = 1;
-			public static final int NOTE_SENSOR_TWO = 2;
+			public static final int FRONT_CORAL_SENSOR = 1;
+			public static final int BACK_CORAL_SENSOR = 2;
+			//public static final int NOTE_SENSOR = 3;
+			//public static final int NOTE_SENSOR_TWO = 2;
 		}
 		
 		/**
@@ -155,16 +157,19 @@ public class Ports {
 			public static final int FRONT_RIGHT_TURNING = 1;
 			public static final int REAR_RIGHT_TURNING = 3;
 
+			//public static final int NECK_MASTER = 11;
+
 			// TALON SRX CAN IDS
 			public static final int ELEVATOR_MASTER = 9;
 			public static final int ELEVATOR_FOLLOWER = 10;
-			public static final int NECK_MASTER = 11;
-			public static final int NECK_FOLLOWER = 12;
+			//public static final int OLD_NECK_FOLLOWER = 12;
 			public static final int ROLLER_MASTER = 13;
 			public static final int ROLLER_FOLLOWER = 14;
+			public static final int SLIDER_MASTER = 15; //TODO fix
+			public static final int HANGER_MASTER = 16; //TODO fix
 			//public static final int SHOOTER_MASTER = 15;
 			//public static final int SHOOTER_FOLLOWER = 16;
-			public static final int DRAWER = 17;
+			//public static final int DRAWER = 17;
 		}
 		
 		/**
@@ -175,6 +180,7 @@ public class Ports {
 			public static final int LEFT_JOYSTICK = 1;
 			//public static final int DRIVER_GAMEPAD = 3;
 			public static final int COPILOT_GAMEPAD = 2;
+			public static final int BUTTON_BOX = 3;
 			public static final int MAIN_JOYSTICK = 4;
 		}
 		

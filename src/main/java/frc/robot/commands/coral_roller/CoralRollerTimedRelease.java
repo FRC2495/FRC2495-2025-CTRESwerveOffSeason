@@ -41,7 +41,7 @@ public class CoralRollerTimedRelease extends WaitCommand {
 	public void initialize() {
 		System.out.println("CoralRollerTimedRelease: initialize");
 		super.initialize();
-		coral_roller.release();
+		coral_roller.rollOut();
 
 	}
 

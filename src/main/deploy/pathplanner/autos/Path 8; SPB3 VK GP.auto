@@ -11,9 +11,39 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToThirdLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRoll"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "side c to net"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRelease"
           }
         },
         {
@@ -23,9 +53,33 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToThirdLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRoll"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "side a to processor"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFirstLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRelease"
           }
         },
         {
@@ -38,6 +92,18 @@
           "type": "path",
           "data": {
             "pathName": "hp to side e"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
           }
         }
       ]

@@ -75,10 +75,8 @@ public class Hanger extends SubsystemBase implements IHanger {
 	private final static int MOVE_STALLED_MINIMUM_COUNT = MOVE_ON_TARGET_MINIMUM_COUNT * 2 + 30; // number of times/iterations we need to be stalled to really be stalled
 
 	TalonFX hanger; 
-	TalonFX hanger_follower;
 
 	TalonFXConfiguration hangerConfig;
-	TalonFXConfiguration hanger_followerConfig;
 
 	DutyCycleOut hangerStopOut = new DutyCycleOut(0);
 	DutyCycleOut hangerReducedOut = new DutyCycleOut(REDUCED_PCT_OUTPUT);
@@ -86,93 +84,57 @@ public class Hanger extends SubsystemBase implements IHanger {
 	PositionDutyCycle hangerUpPosition = new PositionDutyCycle(-LENGTH_OF_TRAVEL_REVS);
 	PositionDutyCycle hangerMidwayPosition = new PositionDutyCycle(-LENGTH_OF_MIDWAY_REVS);
 	PositionDutyCycle hangerHomePosition = new PositionDutyCycle(0);
-	
+
+	double targetEncoder;
+
 	boolean isMoving;
 	boolean isMovingUp;
 	boolean isReallyStalled;
 
-	double tac;
-
 	private int onTargetCount; // counter indicating how many times/iterations we were on target 
 	private int stalledCount; // counter indicating how many times/iterations we were stalled
 	
-	
-	public Hanger(TalonFX hanger_in, TalonFX hanger_follower_in) {
+	public Hanger(TalonFX hanger_in) {
 		
 		hanger = hanger_in;
-		hanger_follower = hanger_follower_in;
 
-		//hanger.getConfigurator().apply(new TalonFXConfiguration());
-		//hanger_follower.getConfigurator().apply(new TalonFXConfiguration());
 
-		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
-		// Users will still need to set the motor controller's direction, and neutral mode.
-		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
-		// , talon to talon, victor to victor, talon to victor, and victor to talon.
-	
-		
+		// Sets/declares config variable to default settings
+		hangerConfig = new TalonFXConfiguration();
+
+
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
-		hangerConfig = new TalonFXConfiguration();
-		hanger_followerConfig = new TalonFXConfiguration();
-
-		hanger_follower.setControl(new Follower(hanger.getDeviceID(), false));
-
-		//hanger.getConfigurator().apply(hangerConfig);
-		//hanger_follower.getConfigurator().apply(hanger_followerConfig);
-
 		hangerConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-		hanger_followerConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-		//hanger.setNeutralMode(NeutralMode.Brake);
-		//hanger_follower.setNeutralMode(NeutralMode.Brake);
-				
-		// Sensor phase is the term used to explain sensor direction.
-		// In order for limit switches and closed-loop features to function properly the sensor and motor has to be in-phase.
-		// This means that the sensor position must move in a positive direction as the motor controller drives positive output.
 		
-		//hanger.setSensorPhase(true); // false for SRX // TODO switch to true if required if switching to Talon FX
-		
+
 		//Enable forward limit switches
 		hangerConfig.HardwareLimitSwitch.ForwardLimitSource = ForwardLimitSourceValue.LimitSwitchPin;
         hangerConfig.HardwareLimitSwitch.ForwardLimitType = ForwardLimitTypeValue.NormallyOpen;
         hangerConfig.HardwareLimitSwitch.ForwardLimitEnable = true;
-		//drawer.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, TALON_TIMEOUT_MS);
 		
+
 		//Enable reverse limit switches
-		hanger_followerConfig.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.LimitSwitchPin;
-        hanger_followerConfig.HardwareLimitSwitch.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
-        hanger_followerConfig.HardwareLimitSwitch.ReverseLimitEnable = true;
-		//hanger.overrideLimitSwitchesEnable(true);
+		hangerConfig.HardwareLimitSwitch.ReverseLimitSource = ReverseLimitSourceValue.LimitSwitchPin;
+        hangerConfig.HardwareLimitSwitch.ReverseLimitType = ReverseLimitTypeValue.NormallyOpen;
+        hangerConfig.HardwareLimitSwitch.ReverseLimitEnable = true;
 	
-		// Motor controller output direction can be set by calling the setInverted() function as seen below.
+
+		// Motor controller output direction can be set by calling the function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
 		hangerConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive; // change value or comment out if needed
-		hanger_followerConfig.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
-		//hanger.setInverted(true);  // TODO switch to false if required if switching to Talon FX
-		//hanger_follower.setInverted(true);  // TODO comment out if switching to Talon FX
+
 		
-		
-
-		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
-		// The Follower relies on the master status frame allowing its status frame to be slowed without affecting performance.
-		// This is a useful optimization to manage CAN bus utilization.
-
-		//hanger_follower.setStatusFramePeriod(StatusFrame.Status_1_General, 255, TALON_TIMEOUT_MS);
-		hanger_follower.optimizeBusUtilization();
-		//hanger_follower.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255, TALON_TIMEOUT_MS);
-
 		//setPIDParameters();
 		var slot0Configs = hangerConfig.Slot0;
 		slot0Configs.kV = 0 * 2048 / 1023 / 10;
 		slot0Configs.kP = MOVE_PROPORTIONAL_GAIN; // * 2048 / 1023 / 10;
 		slot0Configs.kI = MOVE_INTEGRAL_GAIN; // * 2048 / 1023 * 1000 / 10;
 		slot0Configs.kD = MOVE_DERIVATIVE_GAIN; // * 2048 / 1023 / 1000 / 10;
-		//slot0Configs.kS = SHOOT_DERIVATIVE_GAIN; //TODO change value
 		hanger.getConfigurator().apply(slot0Configs, 0.050); // comment out if needed
-		hanger_follower.getConfigurator().apply(slot0Configs,0.050);
 		
 		// use slot 0 for closed-looping
  		//hanger.selectProfileSlot(SLOT_0, PRIMARY_PID_LOOP);
@@ -200,14 +162,6 @@ public class Hanger extends SubsystemBase implements IHanger {
 		StatusCode status = StatusCode.StatusCodeNotInitialized;
         for (int i = 0; i < 5; ++i) {
             status = hanger.getConfigurator().apply(hangerConfig);
-            if (status.isOK()) break;
-        }
-        if (!status.isOK()) {
-            System.out.println("Could not apply configs, error code: " + status.toString());
-        }
-
-		for (int i = 0; i < 5; ++i) {
-            status = hanger_follower.getConfigurator().apply(hanger_followerConfig);
             if (status.isOK()) break;
         }
         if (!status.isOK()) {
@@ -311,6 +265,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 
 		//hanger.set(ControlMode.Position,tac);
 		hanger.setControl(hangerUpPosition); //fix
+		targetEncoder = -LENGTH_OF_TRAVEL_REVS;
 
 		
 		isMoving = true;
@@ -329,7 +284,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 		//tac = -LENGTH_OF_MIDWAY_TICKS;
 		
 		hanger.setControl(hangerMidwayPosition);
-		//hanger.set(ControlMode.Position,tac);
+		targetEncoder = -LENGTH_OF_MIDWAY_REVS;
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -347,6 +302,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 		//tac = 0; // adjust as needed
 		//hanger.set(ControlMode.Position,tac);
 		hanger.setControl(hangerHomePosition);
+		targetEncoder = 0.0;
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -482,8 +438,8 @@ public class Hanger extends SubsystemBase implements IHanger {
 	}
 
 	public double getTarget() {
-		return tac;
-	}	
+		return targetEncoder;
+	}
 
 	public boolean getForwardLimitSwitchState() {
 		//return hanger.getSensorCollection().isFwdLimitSwitchClosed()>0?true:false;

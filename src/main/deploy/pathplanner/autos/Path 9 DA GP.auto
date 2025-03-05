@@ -11,9 +11,45 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRoll"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "b to net"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveUpWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerRelease"
           }
         },
         {
@@ -23,9 +59,27 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "hp to c"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerRoll"
           }
         }
       ]

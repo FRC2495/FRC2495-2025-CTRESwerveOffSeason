@@ -13,12 +13,10 @@ import frc.robot.subsystems.SwerveDrivetrain;
 public class AlgaeRollerJoystickControl extends Command {
 
 	private AlgaeRoller algae_roller;
-	//private SwerveDrivetrain drivetrain;
 	private Joystick joystick;
 
 	public AlgaeRollerJoystickControl(AlgaeRoller algae_roller, SwerveDrivetrain drivetrain, Joystick joystick) {
 		this.algae_roller = algae_roller;
-		//this.drivetrain = drivetrain;
 		this.joystick = joystick;
 		
 		addRequirements(
@@ -47,7 +45,7 @@ public class AlgaeRollerJoystickControl extends Command {
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("RollerJoystickControl: end");
+		System.out.println("AlgaeRollerJoystickControl: end");
 		algae_roller.stop();
 	}
 }

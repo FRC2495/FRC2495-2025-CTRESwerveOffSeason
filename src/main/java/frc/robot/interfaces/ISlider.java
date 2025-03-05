@@ -17,12 +17,6 @@ public interface ISlider extends Subsystem {
 
 	// extends the arm asynchronously
 	public void extend();
-
-	// extends the arm asynchronously
-	public void extendPickup();
-
-	// extends the arm asynchronously
-	public void extendLevelTwo();
 	
 	// retracts the arm asynchronously
 	public void retract();
@@ -48,8 +42,8 @@ public interface ISlider extends Subsystem {
 	// returns if arm is dangerous
 	public boolean isDangerous();
 
-	// returns if arm is dangerous for shoulder at floor
-	public boolean isDangerousForShoulderAtFloor();
+	// returns if neck is up
+	public boolean isDangerousForNeckUp();
 
 	// returns if stalled
 	public boolean isStalled();
