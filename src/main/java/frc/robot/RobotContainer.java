@@ -426,7 +426,36 @@ public class RobotContainer {
 			//.whileTrue(new DrawerGamepadControl(drawer, getCopilotGamepad()));
 			//.onTrue(new NeckMoveSubWithStallDetection(neck));
 			
+		
+		// button box 
+
+		buttonBox.button(1)
+			.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator)); 
+
+		buttonBox.button(2)
+			.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
+		
+		buttonBox.button(3)
+			.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
+
+		buttonBox.button(4)
+			.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
+		
+		buttonBox.button(5)
+			.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
+		
+		buttonBox.button(6)
+			.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
+		
+		buttonBox.button(7)
+			.onTrue(new ElevatorMoveToAlgaeLevelTwoWithStallDetection(elevator));
+
+		buttonBox.button(8)
+			.onTrue(new ElevatorMoveToAlgaeLevelThreeWithStallDetection(elevator));
+		
 	}
+
+	
 
 	/**
 	 * Use this to pass the autonomous command to the main {@link Robot} class.
