@@ -13,7 +13,7 @@ public class CoralSensor extends Canandcolor {
 
 	private double triggerValue; 
 
-	public CoralSensor(int port, int triggerVal) {
+	public CoralSensor(int port, double triggerVal) {
 		super(port);
 		resetFactoryDefaults();
 

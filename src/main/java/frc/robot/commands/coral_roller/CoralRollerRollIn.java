@@ -31,7 +31,7 @@ public class CoralRollerRollIn extends Command {
 	@Override
 	public void initialize() {
 		System.out.println("CoralRollerRollIn: initialize");
-		coral_roller.release();
+		coral_roller.rollIn();
 	
 	}
 

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 
@@ -225,6 +226,23 @@ public class RobotContainer {
 
 		indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(indicator,1);
 		indicatorTimedScrollRainbow.schedule(); // we schedule the command as we are starting up
+
+		Trigger hasCoral = new Trigger(() -> coral_roller.hasCoral());
+		Trigger noCoralPresent = new Trigger(() -> coral_roller.noCoralPresent() && !coral_roller.isReleasing());
+		Trigger isCoralEntering = new Trigger(() -> coral_roller.isCoralEntering() && !coral_roller.isReleasing());
+		Trigger isCoralExiting = new Trigger(() -> coral_roller.isCoralExiting() && !coral_roller.isReleasing());
+
+		isCoralEntering.whileTrue(
+			new CoralRollerRollInLowRpm(coral_roller)
+		);
+
+		isCoralExiting.whileTrue(
+			new CoralRollerRollInLowRpm(coral_roller)
+		);
+
+		(hasCoral).or(noCoralPresent).whileTrue(
+			new CoralRollerStop(coral_roller)
+		);
 	}
 
 	/**
