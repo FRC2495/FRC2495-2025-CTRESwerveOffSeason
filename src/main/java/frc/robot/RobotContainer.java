@@ -174,6 +174,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("elevatorMoveToFirstLevelWithStallDetection", new ElevatorMoveToFirstLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveUpWithStallDetection", new ElevatorMoveUpWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveDownWithStallDetection", new ElevatorMoveDownWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelTwoWithStallDetection", new ElevatorMoveToAlgaeLevelTwoWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelThreeWithStallDetection", new ElevatorMoveToAlgaeLevelThreeWithStallDetection(elevator));
         NamedCommands.registerCommand("algaeRollerRoll", new AlgaeRollerRoll(algae_roller));
         NamedCommands.registerCommand("algaeRollerRelease", new AlgaeRollerRelease(algae_roller));
         NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 5));
@@ -188,6 +190,14 @@ public class RobotContainer {
 		//NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
 		//NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
 		//NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
+		NamedCommands.registerCommand("scoreFirstLevelCoral", new ScoreFirstLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("scoreSecondLevelCoral", new ScoreSecondLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("scoreThirdLevelCoral", new ScoreThirdLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("scoreFourthLevelCoral", new ScoreFourthLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("grabLevelTwoAlgae", new GrabLevelTwoAlgae(elevator, algae_roller, slider));
+		NamedCommands.registerCommand("grabLevelThirdAlgae", new GrabLevelThirdAlgae(elevator, algae_roller, slider));
+		NamedCommands.registerCommand("scoreNet", new ScoreNet(elevator, algae_roller, slider));
+		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(elevator, algae_roller, slider));
 
 		// choosers (for auton)
 

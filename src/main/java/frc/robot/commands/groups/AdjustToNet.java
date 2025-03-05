@@ -24,7 +24,7 @@ public class AdjustToNet extends ParallelCommandGroup{
 
 		addCommands(
 
-			//new NeckMoveDownWithStallDetection(neck),
+			//new NeckMoveUpWithStallDetection(neck),
 
 			new SliderExtendWithStallDetection(slider)
 		);
