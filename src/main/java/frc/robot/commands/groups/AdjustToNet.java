@@ -1,4 +1,4 @@
-package frc.robot.auton.common;
+package frc.robot.commands.groups;
 
 import java.util.List;
 
@@ -20,13 +20,13 @@ import frc.robot.commands.neck.*;
 
 public class AdjustToNet extends ParallelCommandGroup{
 	
-	public AdjustToNet(Slider slider, Neck neck) {
+	public AdjustToNet(Slider slider/* , Neck neck*/) {
 
 		addCommands(
 
-			new NeckMoveDownWithStallDetection(neck),
+			//new NeckMoveDownWithStallDetection(neck),
 
-			new SliderExtendWithStallDetection(slider),
+			new SliderExtendWithStallDetection(slider)
 		);
 	}
 }

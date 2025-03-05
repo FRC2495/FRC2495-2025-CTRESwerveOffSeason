@@ -1,4 +1,4 @@
-package frc.robot.auton.common;
+package frc.robot.commands.groups;
 
 import java.util.List;
 
@@ -13,22 +13,22 @@ import frc.robot.auton.AutonConstants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.*;
 import frc.robot.commands.drivetrain.*;
+import frc.robot.commands.elevator.ElevatorMoveDownWithStallDetection;
 import frc.robot.commands.algae_roller.*;
 import frc.robot.commands.slider.*;
-import frc.robot.commands.neck.*;
 
 
-public class PickupAlgae extends ParallelCommandGroup{
+public class Home extends ParallelCommandGroup{
 	
-	public PickupAlgae(AlgaeRoller algae_roller, Slider slider, Neck neck) {
+	public Home(Elevator elevator, Slider slider/* , Neck neck*/) {
 
 		addCommands(
 
-			new NeckMoveDownWithStallDetection(neck),
+			new ElevatorMoveDownWithStallDetection(elevator),
 
-			new SliderExtendWithStallDetection(slider),
+			new SliderRetractWithStallDetection(slider)
 			
-			new algaeRollerTimedRoll(algae_roller, .5)
+			//new NeckMoveUpWithStallDetection(neck)
 		);
 	}
 }
