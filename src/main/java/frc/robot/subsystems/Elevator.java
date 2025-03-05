@@ -95,6 +95,8 @@ public class Elevator extends SubsystemBase implements IElevator {
 	PositionDutyCycle elevatorLevelTwoPosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_TWO_REVS);
 	PositionDutyCycle elevatorLevelThreePosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_THREE_REVS);
 	PositionDutyCycle elevatorLevelFourPosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_FOUR_REVS);
+	PositionDutyCycle elevatorAlgaeLevelTwoPosition = new PositionDutyCycle(-LENGTH_OF_ALGAE_LEVEL_TWO_REVS);
+	PositionDutyCycle elevatorAlgaeLevelThreePosition = new PositionDutyCycle(-LENGTH_OF_ALGAE_LEVEL_THREE_REVS);
 	
 	boolean isMoving;
 	boolean isMovingUp;
@@ -402,6 +404,41 @@ public class Elevator extends SubsystemBase implements IElevator {
 		stalledCount = 0;
 	}
 
+	public void moveToAlgaeLevelTwo() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Algae Level Two");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		//tac = 0; // adjust as needed
+		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorAlgaeLevelTwoPosition);
+		targetEncoder = -LENGTH_OF_ALGAE_LEVEL_ONE_REVS;
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveToAlgaeLevelThree() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Algae Level Three");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		//tac = 0; // adjust as needed
+		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorAlgaeLevelThreePosition);
+		targetEncoder = -LENGTH_OF_ALGAE_LEVEL_THREE_REVS;
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
 
 	public void moveMidway() {
 		
