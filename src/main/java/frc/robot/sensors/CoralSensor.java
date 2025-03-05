@@ -11,11 +11,13 @@ import com.reduxrobotics.sensors.canandcolor.Canandcolor;
  */
 public class CoralSensor extends Canandcolor {
 
-	private final double triggerValue = 0.1; //TODO fix value
+	private double triggerValue; 
 
-	public CoralSensor(int port) {
+	public CoralSensor(int port, int triggerVal) {
 		super(port);
 		resetFactoryDefaults();
+
+		this.triggerValue = triggerVal;
 	}
 
 	/**
