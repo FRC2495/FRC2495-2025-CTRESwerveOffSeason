@@ -50,6 +50,9 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int LENGTH_OF_LEVEL_TWO_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
 	public static final int LENGTH_OF_LEVEL_THREE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
 	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	
 
 
 	static final double MAX_PCT_OUTPUT = 1.0;
@@ -413,7 +416,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = 0; // adjust as needed
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorAlgaeLevelTwoPosition);
-		targetEncoder = -LENGTH_OF_ALGAE_LEVEL_ONE_REVS;
+		targetEncoder = -LENGTH_OF_ALGAE_LEVEL_TWO_REVS;
 		
 		isMoving = true;
 		isMovingUp = false;

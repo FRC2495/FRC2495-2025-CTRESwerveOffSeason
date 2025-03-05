@@ -195,9 +195,9 @@ public class RobotContainer {
 		NamedCommands.registerCommand("scoreThirdLevelCoral", new ScoreThirdLevelCoral(elevator, coral_roller));
 		NamedCommands.registerCommand("scoreFourthLevelCoral", new ScoreFourthLevelCoral(elevator, coral_roller));
 		NamedCommands.registerCommand("grabLevelTwoAlgae", new GrabLevelTwoAlgae(elevator, algae_roller, slider));
-		NamedCommands.registerCommand("grabLevelThirdAlgae", new GrabLevelThirdAlgae(elevator, algae_roller, slider));
+		NamedCommands.registerCommand("grabLevelThirdAlgae", new GrabLevelThreeAlgae(elevator, algae_roller, slider));
 		NamedCommands.registerCommand("scoreNet", new ScoreNet(elevator, algae_roller, slider));
-		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(elevator, algae_roller, slider));
+		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(algae_roller));
 
 		// choosers (for auton)
 
