@@ -15,7 +15,7 @@ import frc.robot.subsystems.*;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.algae_roller.*;
 import frc.robot.commands.slider.*;
-import frc.robot.commands.neck.*;
+//import frc.robot.commands.neck.*;
 
 
 public class AdjustToNet extends ParallelCommandGroup{
