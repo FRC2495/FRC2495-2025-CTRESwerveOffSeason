@@ -65,7 +65,6 @@ import frc.robot.interfaces.ICamera;
 //import frc.robot.commands.mouth.*;
 import frc.robot.commands.indicator.*;
 import frc.robot.commands.groups.*;
-import frc.robot.commands.hanger.HangerMoveUpWithStallDetection;
 //import frc.robot.commands.gamepad.*;
 import frc.robot.auton.*;
 import frc.robot.auton.trajectories.*;
@@ -296,12 +295,12 @@ public class RobotContainer {
 			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 
 		joyMain.button(5)
-			.onTrue(new MoveLeftOfCoralReef(drivetrain, this, GAMEPAD_AXIS_THRESHOLD));
+			.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
 
 		joyMain.button(6)
 			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			.onTrue(new MoveRightOfCoralReef(drivetrain, this, GAMEPAD_AXIS_THRESHOLD));
+			.onTrue(new MoveRightOfCoralReef(drivetrain, this));
 
 		joyMain.button(7)
 			.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
@@ -316,107 +315,86 @@ public class RobotContainer {
 			.whileTrue(new ElevatorJoystickControl(elevator, drivetrain, getMainJoystick()));
 
 		joyMain.button(11)
-			//.onTrue(new DrivetrainZeroHeading(drivetrain));
-			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, apriltag_camera));
 			.whileTrue(new HangerJoystickControl(hanger, drivetrain, getMainJoystick()));
 		
 		joyMain.button(12)
-			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
 			.onTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
 			
 				
 		// copilot (gamepad)
 		
-		copilotGamepad.a()
-			.whileTrue(new CoralRollerRollIn(coral_roller));
+		copilotGamepad.a();
+			//.onTrue(new NeckMoveDownWithStallDetection(neck));
 		
-		copilotGamepad.b()
+		copilotGamepad.b();
+			//.onTrue(new NeckMoveUpWithStallDetection(neck));
+
+		copilotGamepad.x()
+			.whileTrue(new CoralRollerRollIn(coral_roller));
+
+		copilotGamepad.y()
 			.whileTrue(new CoralRollerRollOut(coral_roller));
-
-		copilotGamepad.x();
-			//.onTrue(new CoralRollerReleaseShortDistance(coral_roller));
-
-		copilotGamepad.y();
-			//.whileTrue(new RollerRollLowRpm(roller));
-			//.onTrue(new RollerRollLowRpmUntilNoteSensed(roller, getNoteSensor()));
-			//.onTrue(new RollerReleaseShortDistance(roller));
-			//.onTrue(new RollerSuperSmartRoll(roller, noteSensor, noteSensorTwo));
-			//.onTrue(new CoralRollerRollLowRpmUntilNoteSensed(coral_roller, noteSensor, noteSensorTwo));
 			
-		copilotGamepad.back();
-			//.onTrue(new DrivetrainAndGyroReset(drivetrain));
+		copilotGamepad.back()
+			.onTrue(new DrivetrainAndGyroReset(drivetrain));
 			//.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
 
-		copilotGamepad.start();
-			//.onTrue(new AlmostEverythingStop(elevator, neck, roller));
+		copilotGamepad.start()
+			.onTrue(new AlmostEverythingStop(elevator, coral_roller, algae_roller));
 			//.onTrue(new OldNeckHome(old_neck));
 
 
-		copilotGamepad.leftTrigger();
-			//.onTrue(new DrawerRetractWithStallDetection(drawer));
-			//.whileTrue(new ShooterTake(shooter));
-			//.whileTrue(new ShooterShootHigh(shooter));
+		copilotGamepad.leftTrigger()
+			.whileTrue(new AlgaeRollerRoll(algae_roller));
 
 		copilotGamepad.rightTrigger()
-			//.onTrue(new DrawerExtendWithStallDetection(drawer));
-			.whileTrue(new CoralRollerRollOut(coral_roller));
+			.whileTrue(new AlgaeRollerRelease(algae_roller));
 
 
 		copilotGamepad.povDown();
-			//.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
-			//.onTrue(new OldNeckMoveDownWithStallDetection(old_neck));
+			//.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
 
-		copilotGamepad.povLeft();
-			//.onTrue(new ElevatorMoveMidwayWithStallDetection(elevator));
-			//.onTrue(new OldNeckMoveSubWithStallDetection(old_neck));
+		copilotGamepad.povLeft()
+			.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
 
-		copilotGamepad.povRight();
-			//.onTrue(new ElevatorMoveMidwayWithStallDetection(elevator));
-			//.onTrue(new NeckMovePodiumWithStallDetection(neck));
-			//.onTrue(new OldNeckMoveFeedNoteWithStallDetection(old_neck));
+		copilotGamepad.povRight()
+			.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
 
 		copilotGamepad.povUp();
-			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
-			//.onTrue(new OldNeckMoveUpWithStallDetection(old_neck));
+			//.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
 
 
 		copilotGamepad.leftBumper();
-			//.onTrue(new NeckMoveUpWithStallDetection(neck));
-			//.onTrue(new NeckMoveUpWithStallDetection(neck));
-			//.whileTrue(new OldNeckMoveUsingCamera(old_neck, apriltag_camera));
+			//.onTrue(new SliderSafeExtendWithStallDetection(neck, slider));
 
-		copilotGamepad.rightBumper();
-			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			//.onTrue(new OldNeckMoveAcrossFieldWithStallDetection(old_neck));
+		copilotGamepad.rightBumper()
+			.onTrue(new SliderRetractWithStallDetection(slider));
 
 
-		copilotGamepad.leftStick()
-			.onTrue(new CoralRollerTimedRoll(coral_roller, 3));
-			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));			
+		copilotGamepad.leftStick();
+			//.onTrue(new CoralRollerTimedRoll(coral_roller, 3));
+			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
 
-		copilotGamepad.rightStick()
-			.onTrue(new CoralRollerTimedRelease(coral_roller, 3));
+		copilotGamepad.rightStick();
+			//.onTrue(new CoralRollerTimedRelease(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
 
 
 		copilotGamepad.axisGreaterThan(LY,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new ElevatorGamepadControl(elevator, getCopilotGamepad()));
+			.whileTrue(new HangerGamepadControl(hanger, getCopilotGamepad()));
 
 		copilotGamepad.axisLessThan(LY,-GAMEPAD_AXIS_THRESHOLD)
+			.whileTrue(new HangerGamepadControl(hanger, getCopilotGamepad()));
+
+		copilotGamepad.axisGreaterThan(LX,GAMEPAD_AXIS_THRESHOLD);
+
+		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD);
+
+		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue(new ElevatorGamepadControl(elevator, getCopilotGamepad()));
 
-		/*copilotGamepad.axisGreaterThan(LX,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue();
-
-		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue();*/
-
-		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD);
-			//.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
-
-		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD);
-			//.whileTrue(new OldNeckGamepadControl(old_neck, getCopilotGamepad()));
+		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD)
+			.whileTrue(new ElevatorGamepadControl(elevator, getCopilotGamepad()));
 
 		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD);
 			//.whileTrue(new DrawerGamepadControl(drawer, getCopilotGamepad()));
