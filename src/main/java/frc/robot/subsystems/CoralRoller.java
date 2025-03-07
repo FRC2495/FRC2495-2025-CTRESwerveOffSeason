@@ -43,7 +43,7 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 	static final int SHOOT_DISTANCE_INCHES = 17;
 	
 	WPI_TalonSRX coral_roller;
-	BaseMotorController coral_roller_follower; 
+	//BaseMotorController coral_roller_follower; 
 		
 	boolean isMoving;
 	boolean isRolling;
@@ -84,22 +84,22 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 	private CoralSensor frontCoralSensor, backCoralSensor;
 
 	private final double frontCoralTriggerValue = 0.1; // TODO: need to test for this
-	private final double backCoralTriggerValue = 0.1; // TODO: need to test for this
+	private final double backCoralTriggerValue = 0.15; // TODO: need to test for this
 	
 		
-	public CoralRoller(WPI_TalonSRX coral_roller_in, BaseMotorController coral_roller_follower_in) {
+	public CoralRoller(WPI_TalonSRX coral_roller_in/* , BaseMotorController coral_roller_follower_in*/) {
 		
 		coral_roller = coral_roller_in;
-		coral_roller_follower = coral_roller_follower_in; 
+		//coral_roller_follower = coral_roller_follower_in; 
 
 		coral_roller.configFactoryDefault();
-		coral_roller_follower.configFactoryDefault();
+		//coral_roller_follower.configFactoryDefault();
 		
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor contcoral_roller,
 		// brake and coast.
 		coral_roller.setNeutralMode(NeutralMode.Coast);
-		coral_roller_follower.setNeutralMode(NeutralMode.Coast);
+		//coral_roller_follower.setNeutralMode(NeutralMode.Coast);
 
 		// Sensors for motor contcoral_rollers provide feedback about the position, velocity, and acceleration
 		// of the system using that motor contcoral_roller.
@@ -119,19 +119,19 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
 		coral_roller.setInverted(false);
-		coral_roller_follower.setInverted(false);  // TODO comment out if switching to Talon FX
+		//coral_roller_follower.setInverted(false);  // TODO comment out if switching to Talon FX
 
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
 		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
-		coral_roller_follower.follow(coral_roller);
+		//coral_roller_follower.follow(coral_roller);
 
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
 		// The Follower relies on the master status frame allowing its status frame to be slowed without affecting performance.
 		// This is a useful optimization to manage CAN bus utilization.
-		coral_roller_follower.setStatusFramePeriod(StatusFrame.Status_1_General, 255, TALON_TIMEOUT_MS);
-		coral_roller_follower.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255, TALON_TIMEOUT_MS);
+		//coral_roller_follower.setStatusFramePeriod(StatusFrame.Status_1_General, 255, TALON_TIMEOUT_MS);
+		//coral_roller_follower.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255, TALON_TIMEOUT_MS);
 		
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);

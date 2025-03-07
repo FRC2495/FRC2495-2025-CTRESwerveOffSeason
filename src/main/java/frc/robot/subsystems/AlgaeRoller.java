@@ -41,7 +41,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	static final int SHOOT_DISTANCE_INCHES = 17;
 	
 	WPI_TalonSRX algae_roller;
-	BaseMotorController algae_roller_follower; 
+	//BaseMotorController algae_roller_follower; 
 		
 	boolean isMoving;
 	boolean isRolling;
@@ -80,19 +80,19 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	static final int CTRE_MAGNETIC_ENCODER_SENSOR_TICKS_PER_ROTATION = 4096; // units per rotation
 	
 		
-	public AlgaeRoller(WPI_TalonSRX roller_in, BaseMotorController roller_follower_in) {
+	public AlgaeRoller(WPI_TalonSRX roller_in/* , BaseMotorController roller_follower_in*/) {
 		
 		algae_roller = roller_in;
-		algae_roller_follower = roller_follower_in; 
+		//algae_roller_follower = roller_follower_in; 
 
 		algae_roller.configFactoryDefault();
-		algae_roller_follower.configFactoryDefault();
+		//algae_roller_follower.configFactoryDefault();
 		
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
 		algae_roller.setNeutralMode(NeutralMode.Coast);
-		algae_roller_follower.setNeutralMode(NeutralMode.Coast);
+		//algae_roller_follower.setNeutralMode(NeutralMode.Coast);
 
 		// Sensors for motor controllers provide feedback about the position, velocity, and acceleration
 		// of the system using that motor controller.
@@ -112,19 +112,19 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
 		algae_roller.setInverted(false);
-		algae_roller_follower.setInverted(false);  // TODO comment out if switching to Talon FX
+		//algae_roller_follower.setInverted(false);  // TODO comment out if switching to Talon FX
 
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
 		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
-		algae_roller_follower.follow(algae_roller);
+		//algae_roller_follower.follow(algae_roller);
 
 		// Motor controllers that are followers can set Status 1 and Status 2 to 255ms(max) using setStatusFramePeriod.
 		// The Follower relies on the master status frame allowing its status frame to be slowed without affecting performance.
 		// This is a useful optimization to manage CAN bus utilization.
-		algae_roller_follower.setStatusFramePeriod(StatusFrame.Status_1_General, 255, TALON_TIMEOUT_MS);
-		algae_roller_follower.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255, TALON_TIMEOUT_MS);
+		//algae_roller_follower.setStatusFramePeriod(StatusFrame.Status_1_General, 255, TALON_TIMEOUT_MS);
+		//algae_roller_follower.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255, TALON_TIMEOUT_MS);
 		
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
