@@ -217,9 +217,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Drawer isExtended", m_robotContainer.getDrawer().isExtended());
 		SmartDashboard.putBoolean("Drawer isDangerous", m_robotContainer.getDrawer().isDangerous());*/
 
-		/*SmartDashboard.putBoolean("Neck Reverse Limit Switch", m_robotContainer.getNeck().getReverseLimitSwitchState());
+		SmartDashboard.putBoolean("Neck Reverse Limit Switch", m_robotContainer.getNeck().getReverseLimitSwitchState());
 		SmartDashboard.putBoolean("Neck Forward Limit Switch", m_robotContainer.getNeck().getForwardLimitSwitchState());
-		//SmartDashboard.putNumber("Neck Position", m_robotContainer.getNeck().getPosition());
+		SmartDashboard.putNumber("Neck Position", m_robotContainer.getNeck().getPosition());
 		SmartDashboard.putNumber("Neck Enc Position", m_robotContainer.getNeck().getEncoderPosition());
 		SmartDashboard.putBoolean("Neck IsMoving?", m_robotContainer.getNeck().isMoving());
 		SmartDashboard.putBoolean("Neck IsHoming?", m_robotContainer.getNeck().isHoming());
@@ -227,7 +227,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Neck isStalled?", m_robotContainer.getNeck().isStalled());
 		SmartDashboard.putBoolean("Neck isDown", m_robotContainer.getNeck().isDown());
 		SmartDashboard.putBoolean("Neck isMidway", m_robotContainer.getNeck().isMidway());
-		SmartDashboard.putBoolean("Neck isUp", m_robotContainer.getNeck().isUp());*/
+		SmartDashboard.putBoolean("Neck isUp", m_robotContainer.getNeck().isUp());
 		//SmartDashboard.putBoolean("Neck isDangerous", m_robotContainer.getNeck().isDangerous());
 
 		SmartDashboard.putBoolean("CoralRoller IsRolling?", m_robotContainer.getCoralRoller().isRolling());
