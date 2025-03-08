@@ -224,7 +224,7 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 	
 	public void rollOut() {
 
-		coral_roller.set(ControlMode.PercentOutput, MAX_PCT_OUTPUT);
+		coral_roller.set(ControlMode.PercentOutput, REDUCED_PCT_OUTPUT);
 		
 		isReleasing = true;
 		isRolling = false;
