@@ -137,8 +137,8 @@ public class Slider extends SubsystemBase implements ISlider {
 		//slider.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // .CTRE_MagEncoder_Relative for SRX // TODO switch to FeedbackDevice.IntegratedSensor if switching to Talon FX
 		
 		// this will reset the encoder automatically when at or past the forward limit sensor
-		//slider.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, TALON_TIMEOUT_MS);
-		//slider.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, TALON_TIMEOUT_MS);
+		slider.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, TALON_TIMEOUT_MS);
+		slider.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, TALON_TIMEOUT_MS);
 		
 		isMoving = false;
 		isExtending = false;
@@ -229,9 +229,9 @@ public class Slider extends SubsystemBase implements ISlider {
 		
 		//setPIDParameters();
 		System.out.println("Extending");
-		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-		
-		slider.set(REDUCED_PCT_OUTPUT);
+		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
+
+		slider.set(MAX_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = true;
@@ -244,9 +244,9 @@ public class Slider extends SubsystemBase implements ISlider {
 		
 		//setPIDParameters();
 		System.out.println("Retracting");
-		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
+		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
 
-		slider.set(-REDUCED_PCT_OUTPUT);
+		slider.set(-MAX_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = false;
@@ -343,7 +343,7 @@ public class Slider extends SubsystemBase implements ISlider {
 	{
 		if (!isMoving) // if we are already doing a move we don't take over
 		{
-			slider.set(ControlMode.PercentOutput, +joystick.getY()); // adjust sign if desired
+			slider.set(ControlMode.PercentOutput, -joystick.getY()); // adjust sign if desired
 		}
 	}
 
@@ -370,12 +370,12 @@ public class Slider extends SubsystemBase implements ISlider {
 	
 	public boolean isExtended() {
 		//return Math.abs(getEncoderPosition()) > LENGTH_OF_TRAVEL_TICKS * 9/10;
-		return getReverseLimitSwitchState();
+		return getForwardLimitSwitchState();
 	}
 	
 	public boolean isRetracted() {
 		//return Math.abs(getEncoderPosition()) < LENGTH_OF_TRAVEL_TICKS * 1/10;
-		return getForwardLimitSwitchState();
+		return getReverseLimitSwitchState();
 	}
 	
 	public boolean isMidway() {
