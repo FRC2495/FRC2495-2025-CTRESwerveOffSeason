@@ -89,13 +89,12 @@ public class Slider extends SubsystemBase implements ISlider {
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
 		slider.setNeutralMode(NeutralMode.Brake);
-		//slider_follower.setNeutralMode(NeutralMode.Brake);
 				
 		// Sensor phase is the term used to explain sensor direction.
 		// In order for limit switches and closed-loop features to function properly the sensor and motor has to be in-phase.
 		// This means that the sensor position must move in a positive direction as the motor controller drives positive output.
 		
-		slider.setSensorPhase(true); // false for SRX // TODO switch to true if required if switching to Talon FX
+		slider.setSensorPhase(false); // false for SRX // TODO switch to true if required if switching to Talon FX
 		
 		//Enable limit switches
 		slider.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, TALON_TIMEOUT_MS);
@@ -106,8 +105,7 @@ public class Slider extends SubsystemBase implements ISlider {
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
-		slider.setInverted(false);  // TODO switch to false if required if switching to Talon FX
-		//slider_follower.setInverted(true);  // TODO comment out if switching to Talon FX
+		slider.setInverted(false);  
 		
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
@@ -136,11 +134,11 @@ public class Slider extends SubsystemBase implements ISlider {
 		// This ensures the best resolution possible when performing closed-loops in firmware.
 		// CTRE Magnetic Encoder (relative/quadrature) =  4096 units per rotation		
 		// FX Integrated Sensor = 2048 units per rotation
-		slider.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // .CTRE_MagEncoder_Relative for SRX // TODO switch to FeedbackDevice.IntegratedSensor if switching to Talon FX
+		//slider.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // .CTRE_MagEncoder_Relative for SRX // TODO switch to FeedbackDevice.IntegratedSensor if switching to Talon FX
 		
 		// this will reset the encoder automatically when at or past the forward limit sensor
-		slider.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, TALON_TIMEOUT_MS);
-		slider.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, TALON_TIMEOUT_MS);
+		//slider.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, TALON_TIMEOUT_MS);
+		//slider.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, TALON_TIMEOUT_MS);
 		
 		isMoving = false;
 		isExtending = false;
@@ -233,7 +231,7 @@ public class Slider extends SubsystemBase implements ISlider {
 		System.out.println("Extending");
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 	
-		slider.set(REDUCED_PCT_OUTPUT);
+		slider.set(-REDUCED_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = true;
@@ -258,7 +256,8 @@ public class Slider extends SubsystemBase implements ISlider {
 	}
 
 	public double getEncoderPosition() {
-		return slider.getSelectedSensorPosition(PRIMARY_PID_LOOP);
+		return 0;
+		//return slider.getSelectedSensorPosition(PRIMARY_PID_LOOP);
 	}
 	
 	public void stay() {	 		
@@ -328,7 +327,7 @@ public class Slider extends SubsystemBase implements ISlider {
 	}
 
 	public boolean isDangerous() {
-		return !getLimitSwitchState();
+		return !getForwardLimitSwitchState();
 	}
 
 	public boolean isDangerousForNeckUp() {
@@ -361,7 +360,7 @@ public class Slider extends SubsystemBase implements ISlider {
 		return tac;
 	}	
 
-	public boolean getLimitSwitchState() {
+	public boolean getForwardLimitSwitchState() {
 		return slider.getSensorCollection().isFwdLimitSwitchClosed();
 	}
 
@@ -372,12 +371,12 @@ public class Slider extends SubsystemBase implements ISlider {
 	
 	public boolean isExtended() {
 		//return Math.abs(getEncoderPosition()) > LENGTH_OF_TRAVEL_TICKS * 9/10;
-		return getLimitSwitchState();
+		return getReverseLimitSwitchState();
 	}
 	
 	public boolean isRetracted() {
 		//return Math.abs(getEncoderPosition()) < LENGTH_OF_TRAVEL_TICKS * 1/10;
-		return getReverseLimitSwitchState();
+		return getForwardLimitSwitchState();
 	}
 	
 	public boolean isMidway() {
@@ -386,9 +385,9 @@ public class Slider extends SubsystemBase implements ISlider {
 
 	// MAKE SURE THAT YOU ARE NOT IN A CLOSED LOOP CONTROL MODE BEFORE CALLING THIS METHOD.
 	// OTHERWISE THIS IS EQUIVALENT TO MOVING TO THE DISTANCE TO THE CURRENT ZERO IN REVERSE! 
-	public void resetEncoder() {
+	/*public void resetEncoder() {
 		slider.set(ControlMode.PercentOutput,0); // we stop AND MAKE SURE WE DO NOT MOVE WHEN SETTING POSITION
 		slider.setSelectedSensorPosition(0, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // we mark the virtual zero
-	}
+	}*/
 
 }

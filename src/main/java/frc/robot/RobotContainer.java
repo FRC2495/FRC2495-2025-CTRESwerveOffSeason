@@ -303,7 +303,8 @@ public class RobotContainer {
 			.onTrue(new MoveRightOfCoralReef(drivetrain, this));
 
 		joyMain.button(7)
-			.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
+			//.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
+			.whileTrue(new SliderJoystickControl(slider, drivetrain, getMainJoystick()));
 		
 		joyMain.button(8)
 			.whileTrue(new AlgaeRollerJoystickControl(algae_roller, drivetrain, getMainJoystick()));
@@ -366,7 +367,9 @@ public class RobotContainer {
 
 
 		copilotGamepad.leftBumper()
-			.onTrue(new SliderSafeExtendWithStallDetection(neck, slider));
+			//.onTrue(new SliderSafeExtendWithStallDetection(neck, slider));
+			.onTrue(new SliderExtendWithStallDetection(slider));
+			//.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
 
 		copilotGamepad.rightBumper()
 			.onTrue(new SliderRetractWithStallDetection(slider));

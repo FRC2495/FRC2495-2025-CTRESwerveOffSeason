@@ -1,32 +1,32 @@
 
-package frc.robot.commands.slider;
+// package frc.robot.commands.slider;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.Slider;
+// import edu.wpi.first.wpilibj2.command.InstantCommand;
+// import frc.robot.subsystems.Slider;
 
 
-/**
- *
- */
-public class SliderResetEncoder extends InstantCommand {
+// /**
+//  *
+//  */
+// public class SliderResetEncoder extends InstantCommand {
 
-	private Slider slider;
+// 	private Slider slider;
 
-	public SliderResetEncoder(Slider slider) {
-		this.slider = slider;
-		addRequirements(slider);
-	}
+// 	public SliderResetEncoder(Slider slider) {
+// 		this.slider = slider;
+// 		addRequirements(slider);
+// 	}
 
-	// This instant command can run disabled
-	@Override
-	public boolean runsWhenDisabled() {
-		return true;
-	}
+// 	// This instant command can run disabled
+// 	@Override
+// 	public boolean runsWhenDisabled() {
+// 		return true;
+// 	}
 
-	// Called just before this Command runs the first time
-	@Override
-	public void initialize() {
-		System.out.println("SliderResetEncoder: initialize");
-		slider.resetEncoder();
-	}
-}
+// 	// Called just before this Command runs the first time
+// 	@Override
+// 	public void initialize() {
+// 		System.out.println("SliderResetEncoder: initialize");
+// 		slider.resetEncoder();
+// 	}
+// }

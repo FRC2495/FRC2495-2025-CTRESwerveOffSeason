@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public interface ISlider extends Subsystem {
 	// returns the state of the limit switch
-	public boolean getLimitSwitchState();
+	public boolean getForwardLimitSwitchState();
 
 	// returns the state of the reverse limit switch
 	public boolean getReverseLimitSwitchState();
@@ -69,5 +69,5 @@ public interface ISlider extends Subsystem {
 
 	// MAKE SURE THAT YOU ARE NOT IN A CLOSED LOOP CONTROL MODE BEFORE CALLING THIS METHOD.
 	// OTHERWISE THIS IS EQUIVALENT TO MOVING TO THE DISTANCE TO THE CURRENT ZERO IN REVERSE! 
-	public void resetEncoder();
+	//public void resetEncoder();
 }

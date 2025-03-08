@@ -46,7 +46,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int TICKS_PER_REVOLUTION = 2048;
 	public static final int LENGTH_OF_TRAVEL_REVS = 900000/TICKS_PER_REVOLUTION; // 900000; // TODO adjust as needed (halve for Talon FX)
 	public static final int LENGTH_OF_MIDWAY_REVS = 450000/TICKS_PER_REVOLUTION; // TODO adjust as needed (halve for Talon FX)
-	public static final int LENGTH_OF_LEVEL_ONE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_LEVEL_ONE_REVS = 10;//10000/TICKS_PER_REVOLUTION; //TODO FIX
 	public static final int LENGTH_OF_LEVEL_TWO_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
 	public static final int LENGTH_OF_LEVEL_THREE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
 	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
@@ -68,7 +68,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	
 	static final double REDUCED_PCT_OUTPUT = 0.8; // 0.9;
 	
-	static final double MOVE_PROPORTIONAL_GAIN = 0.12011730205278592; //0.6; // 1.2 for SRX // TODO switch to 0.6 if required if switching to Talon FX (as encoder resolution is halved)
+	static final double MOVE_PROPORTIONAL_GAIN = 0.6; // 1.2 for SRX // TODO switch to 0.6 if required if switching to Talon FX (as encoder resolution is halved)
 	static final double MOVE_INTEGRAL_GAIN = 0.0;
 	static final double MOVE_DERIVATIVE_GAIN = 0.0;
 	
@@ -208,8 +208,8 @@ public class Elevator extends SubsystemBase implements IElevator {
 		// this will reset the encoder automatically when at or past the forward limit sensor
 		/*elevator.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, TALON_TIMEOUT_MS);
 		elevator.configSetParameter(ParamEnum.eClearPositionOnLimitR, 0, 0, 0, TALON_TIMEOUT_MS);*/
-		elevatorConfig.HardwareLimitSwitch.ForwardLimitAutosetPositionEnable = true;
-		elevatorConfig.HardwareLimitSwitch.ReverseLimitAutosetPositionEnable = false;
+		elevatorConfig.HardwareLimitSwitch.ForwardLimitAutosetPositionEnable = false;
+		elevatorConfig.HardwareLimitSwitch.ReverseLimitAutosetPositionEnable = true;
 
 		StatusCode status = StatusCode.StatusCodeNotInitialized;
         for (int i = 0; i < 5; ++i) {
@@ -325,7 +325,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorUpPosition); //fix
-		targetEncoder = -LENGTH_OF_TRAVEL_REVS;
+		targetEncoder = LENGTH_OF_TRAVEL_REVS;
 
 		
 		isMoving = true;
@@ -336,16 +336,12 @@ public class Elevator extends SubsystemBase implements IElevator {
 	}
 
 	public void moveToFirstLevel() {
-		
-		//setPIDParameters();
+
 		System.out.println("Moving to First Level");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		//tac = -LENGTH_OF_TRAVEL_TICKS;
-
-		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorLevelOnePosition); //fix
-		targetEncoder = -LENGTH_OF_LEVEL_ONE_REVS;
+		targetEncoder = LENGTH_OF_LEVEL_ONE_REVS;
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -360,7 +356,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		elevator.setControl(elevatorLevelTwoPosition); //fix
-		targetEncoder = -LENGTH_OF_LEVEL_TWO_REVS;
+		targetEncoder = LENGTH_OF_LEVEL_TWO_REVS;
 
 		
 		isMoving = true;
@@ -380,7 +376,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorLevelThreePosition); //fix
-		targetEncoder = -LENGTH_OF_LEVEL_THREE_REVS;
+		targetEncoder = LENGTH_OF_LEVEL_THREE_REVS;
 
 		
 		isMoving = true;
@@ -400,7 +396,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorLevelFourPosition); //fix
-		targetEncoder = -LENGTH_OF_LEVEL_FOUR_REVS;
+		targetEncoder = LENGTH_OF_LEVEL_FOUR_REVS;
 
 		
 		isMoving = true;
@@ -419,7 +415,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = 0; // adjust as needed
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorAlgaeLevelTwoPosition);
-		targetEncoder = -LENGTH_OF_ALGAE_LEVEL_TWO_REVS;
+		targetEncoder = LENGTH_OF_ALGAE_LEVEL_TWO_REVS;
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -437,7 +433,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = 0; // adjust as needed
 		//elevator.set(ControlMode.Position,tac);
 		elevator.setControl(elevatorAlgaeLevelThreePosition);
-		targetEncoder = -LENGTH_OF_ALGAE_LEVEL_THREE_REVS;
+		targetEncoder = LENGTH_OF_ALGAE_LEVEL_THREE_REVS;
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -455,7 +451,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		//tac = -LENGTH_OF_MIDWAY_TICKS;
 		
 		elevator.setControl(elevatorMidwayPosition);
-		targetEncoder = -LENGTH_OF_MIDWAY_REVS;
+		targetEncoder = LENGTH_OF_MIDWAY_REVS;
 		
 		isMoving = true;
 		isMovingUp = true;

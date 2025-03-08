@@ -253,7 +253,7 @@ public class Robot extends TimedRobot {
 		/*SmartDashboard.putString("Mouth Position", m_robotContainer.getMouth().getPosition().toString());
 		SmartDashboard.putBoolean("Mouth isDangerous", m_robotContainer.getMouth().isDangerous());*/
 
-		SmartDashboard.putBoolean("Slider Limit Switch", m_robotContainer.getSlider().getLimitSwitchState());
+		SmartDashboard.putBoolean("Slider Limit Switch", m_robotContainer.getSlider().getForwardLimitSwitchState());
 		SmartDashboard.putBoolean("Slider Reverse Limit Switch", m_robotContainer.getSlider().getReverseLimitSwitchState());
 		SmartDashboard.putNumber("Slider Enc Position", m_robotContainer.getSlider().getEncoderPosition());
 		SmartDashboard.putBoolean("Slider IsMoving?", m_robotContainer.getSlider().isMoving());
