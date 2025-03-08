@@ -47,7 +47,7 @@ public class Neck extends SubsystemBase implements INeck {
 
 	private final SparkClosedLoopController neckClosedLoopController;
 
-	private static final double NECK_P = 0.3;//0.1;
+	private static final double NECK_P = 0.22;//0.25;//0.3;//0.1;
 	private static final double NECK_I = 0;
 	private static final double NECK_D = 0;
 
@@ -64,15 +64,15 @@ public class Neck extends SubsystemBase implements INeck {
 	public static final int ANGLE_TO_CORAL_STATION_TICKS = 0; //TODO set proper value
 	public static final int ANGLE_TO_ALGAE_REEF_TICKS = 0; //TODO set proper value
 	public static final int ANGLE_TO_CORAL_REEF_TICKS = 10; //TODO set proper value
-	public static final int ANGLE_TO_MIDWAY_TICKS = 90000;
-	public static final int ANGLE_TO_TRAVEL_TICKS = 180000; // todo set proper value
+	public static final int ANGLE_TO_MIDWAY_TICKS = 15;
+	public static final int ANGLE_TO_TRAVEL_TICKS = 31;//180000; // todo set proper value
 	
 	/*
 	!!! VIRTUAL_HOME_OFFSET_TICKS is important for moving up,     !!!
 	!!! if this is changed make sure to check to see if moveUp() works !!!
 	(it's used as an error margin for moving up, since we can't reliably check when it's up)
 	*/
-	static final double VIRTUAL_HOME_OFFSET_TICKS = -4000; // position of virtual home compared to physical home
+	static final double VIRTUAL_HOME_OFFSET_TICKS = 0.5;//2; // position of virtual home compared to physical home
 	
 	static final double MAX_PCT_OUTPUT = 1.0; // ~full speed
 	
@@ -88,10 +88,6 @@ public class Neck extends SubsystemBase implements INeck {
 	static final double REDUCED_PCT_OUTPUT = 0.7;
 	static final double SUPER_REDUCED_PCT_OUTPUT = 0.5;
 	static final double HOMING_PCT_OUTPUT = 0.9;//0.7;//0.5;//0.3; // ~homing speed
-	
-	static final double MOVE_PROPORTIONAL_GAIN = 0.06;
-	static final double MOVE_INTEGRAL_GAIN = 0.0;
-	static final double MOVE_DERIVATIVE_GAIN = 0.0;
 	
 	static final int TALON_TICK_THRESH = 256;
 	static final double TICK_THRESH = 2048;	
