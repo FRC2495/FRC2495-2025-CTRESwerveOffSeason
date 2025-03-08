@@ -34,7 +34,8 @@ public class NeckMoveToCoralReefWithStallDetection extends Command {
 	@Override
 	public boolean isFinished() {
 		//return !neck.tripleCheckMove() || neck.tripleCheckIfStalled();
-		return neck.tripleCheckIfStalled();
+		//return neck.tripleCheckIfStalled();
+		return false;
 	}
 
 	// Called once after isFinished returns true

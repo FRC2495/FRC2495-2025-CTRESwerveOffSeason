@@ -243,7 +243,7 @@ public class RobotContainer {
 		Trigger isCoralExiting = new Trigger(() -> coral_roller.isCoralExiting() && !coral_roller.isReleasing());
 
 		isCoralEntering.whileTrue(
-			new CoralRollerRollInLowRpm(coral_roller)
+			new CoralRollerRollOutLowRpm(coral_roller)
 		);
 
 		isCoralExiting.whileTrue(
@@ -327,7 +327,8 @@ public class RobotContainer {
 			.onTrue(new NeckMoveDownWithStallDetection(neck));
 		
 		copilotGamepad.b()
-			.onTrue(new NeckMoveUpWithStallDetection(neck));
+			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 
 		copilotGamepad.x()
 			.whileTrue(new CoralRollerRollIn(coral_roller));

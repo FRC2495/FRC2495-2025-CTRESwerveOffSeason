@@ -29,6 +29,7 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 	static final double HALF_PCT_OUTPUT = 0.5;
 	static final double REDUCED_PCT_OUTPUT = 0.6; //0.8;
 	static final double REDUCED_PCT_OUTPUT_SHORT_DISTANCE = 0.4;
+	static final double REDUCED_PCT_OUTPUT_ROLL_OUT_SENSOR = 0.3;
 	static final double SUPER_REDUCED_PCT_OUTPUT = 0.2; 
 	
 	//todo fix
@@ -212,7 +213,7 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 
 		double targetVelocity_UnitsPer100ms = -ROLL_LOW_RPM * CTRE_MAGNETIC_ENCODER_SENSOR_TICKS_PER_ROTATION / 600; // 1 revolution = TICKS_PER_ROTATION ticks, 1 min = 600 * 100 ms
 
-		coral_roller.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
+		coral_roller.set(ControlMode.PercentOutput, -REDUCED_PCT_OUTPUT_ROLL_OUT_SENSOR);
 		
 		isRolling = true;
 		isReleasing = false;
@@ -223,7 +224,7 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 	
 	public void rollOut() {
 
-		coral_roller.set(ControlMode.PercentOutput, SUPER_REDUCED_PCT_OUTPUT);
+		coral_roller.set(ControlMode.PercentOutput, MAX_PCT_OUTPUT);
 		
 		isReleasing = true;
 		isRolling = false;
@@ -239,7 +240,7 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 
 		double targetVelocity_UnitsPer100ms = ROLL_LOW_RPM * CTRE_MAGNETIC_ENCODER_SENSOR_TICKS_PER_ROTATION / 600; // 1 revolution = TICKS_PER_ROTATION ticks, 1 min = 600 * 100 ms
 
-		coral_roller.set(ControlMode.Velocity, targetVelocity_UnitsPer100ms);
+		coral_roller.set(ControlMode.PercentOutput, REDUCED_PCT_OUTPUT_ROLL_OUT_SENSOR);
 		
 		isReleasing = true;
 		isRolling = false;

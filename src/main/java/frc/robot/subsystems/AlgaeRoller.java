@@ -213,7 +213,7 @@ public class AlgaeRoller extends SubsystemBase implements IRoller{
 	public void release() {
 		//SwitchedCamera.setUsbCamera(Ports.UsbCamera.GRASPER_CAMERA);
 
-		algae_roller.set(ControlMode.PercentOutput, SUPER_REDUCED_PCT_OUTPUT);
+		algae_roller.set(ControlMode.PercentOutput, REDUCED_PCT_OUTPUT);
 		
 		isReleasing = true;
 		isRolling = false;

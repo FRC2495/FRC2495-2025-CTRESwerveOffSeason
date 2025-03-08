@@ -47,7 +47,7 @@ public class Neck extends SubsystemBase implements INeck {
 
 	private final SparkClosedLoopController neckClosedLoopController;
 
-	private static final double NECK_P = 0.06;
+	private static final double NECK_P = 0.3;//0.1;
 	private static final double NECK_I = 0;
 	private static final double NECK_D = 0;
 
@@ -63,7 +63,7 @@ public class Neck extends SubsystemBase implements INeck {
 
 	public static final int ANGLE_TO_CORAL_STATION_TICKS = 0; //TODO set proper value
 	public static final int ANGLE_TO_ALGAE_REEF_TICKS = 0; //TODO set proper value
-	public static final int ANGLE_TO_CORAL_REEF_TICKS = 0; //TODO set proper value
+	public static final int ANGLE_TO_CORAL_REEF_TICKS = 10; //TODO set proper value
 	public static final int ANGLE_TO_MIDWAY_TICKS = 90000;
 	public static final int ANGLE_TO_TRAVEL_TICKS = 180000; // todo set proper value
 	
@@ -119,12 +119,14 @@ public class Neck extends SubsystemBase implements INeck {
 	public Neck() {
 		neckConfig = new SparkMaxConfig();
 
-		neck = new SparkMax(Ports.CAN.NECK_MASTER, MotorType.kBrushless);
+		neck = new SparkMax(Ports.CAN.NECK_MASTER, MotorType.kBrushed);
 
 		neckConfig
-			.inverted(false)
+			.inverted(true)
 			.idleMode(IdleMode.kBrake)
 			.closedLoopRampRate(0.6);
+		neckConfig.encoder
+			.positionConversionFactor(10);
 		neckConfig.closedLoop
 			.feedbackSensor(FeedbackSensor.kPrimaryEncoder)
 			.pid(NECK_P, NECK_I, NECK_D)
@@ -141,7 +143,7 @@ public class Neck extends SubsystemBase implements INeck {
 	@Override
 	public void periodic() {
 		// Put code here to be run every loop
-		if (neck.getReverseLimitSwitch().isPressed() && getPosition() != 0.0) {
+		if (neck.getForwardLimitSwitch().isPressed() && getPosition() != 0.0) {
 			resetEncoder();
 		}
 	}
