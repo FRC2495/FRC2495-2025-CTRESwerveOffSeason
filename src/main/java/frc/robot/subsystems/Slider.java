@@ -230,8 +230,8 @@ public class Slider extends SubsystemBase implements ISlider {
 		//setPIDParameters();
 		System.out.println("Extending");
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
-	
-		slider.set(-REDUCED_PCT_OUTPUT);
+		
+		slider.set(REDUCED_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = true;
@@ -246,7 +246,7 @@ public class Slider extends SubsystemBase implements ISlider {
 		System.out.println("Retracting");
 		setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		slider.set(REDUCED_PCT_OUTPUT);
+		slider.set(-REDUCED_PCT_OUTPUT);
 		
 		isMoving = true;
 		isExtending = false;
@@ -256,8 +256,7 @@ public class Slider extends SubsystemBase implements ISlider {
 	}
 
 	public double getEncoderPosition() {
-		return 0;
-		//return slider.getSelectedSensorPosition(PRIMARY_PID_LOOP);
+		return slider.getSelectedSensorPosition(PRIMARY_PID_LOOP);
 	}
 	
 	public void stay() {	 		

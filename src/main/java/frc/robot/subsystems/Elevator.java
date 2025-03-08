@@ -67,8 +67,9 @@ public class Elevator extends SubsystemBase implements IElevator {
 	static final int SLOT_0 = 0;
 	
 	static final double REDUCED_PCT_OUTPUT = 0.8; // 0.9;
+	static final double HALF_PCT_OUTPUT = 0.5; // 0.9;
 	
-	static final double MOVE_PROPORTIONAL_GAIN = 0.6; // 1.2 for SRX // TODO switch to 0.6 if required if switching to Talon FX (as encoder resolution is halved)
+	static final double MOVE_PROPORTIONAL_GAIN = 0.6; //1.2 for SRX // TODO switch to 0.6 if required if switching to Talon FX (as encoder resolution is halved)
 	static final double MOVE_INTEGRAL_GAIN = 0.0;
 	static final double MOVE_DERIVATIVE_GAIN = 0.0;
 	
@@ -90,16 +91,17 @@ public class Elevator extends SubsystemBase implements IElevator {
 
 	DutyCycleOut elevatorStopOut = new DutyCycleOut(0);
 	DutyCycleOut elevatorReducedOut = new DutyCycleOut(REDUCED_PCT_OUTPUT);
+	DutyCycleOut elevatorHalfOut = new DutyCycleOut(HALF_PCT_OUTPUT);
 
-	PositionDutyCycle elevatorUpPosition = new PositionDutyCycle(-LENGTH_OF_TRAVEL_REVS);
-	PositionDutyCycle elevatorMidwayPosition = new PositionDutyCycle(-LENGTH_OF_MIDWAY_REVS);
+	PositionDutyCycle elevatorUpPosition = new PositionDutyCycle(LENGTH_OF_TRAVEL_REVS);
+	PositionDutyCycle elevatorMidwayPosition = new PositionDutyCycle(LENGTH_OF_MIDWAY_REVS);
 	PositionDutyCycle elevatorHomePosition = new PositionDutyCycle(0);
-	PositionDutyCycle elevatorLevelOnePosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_ONE_REVS);
-	PositionDutyCycle elevatorLevelTwoPosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_TWO_REVS);
-	PositionDutyCycle elevatorLevelThreePosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_THREE_REVS);
-	PositionDutyCycle elevatorLevelFourPosition = new PositionDutyCycle(-LENGTH_OF_LEVEL_FOUR_REVS);
-	PositionDutyCycle elevatorAlgaeLevelTwoPosition = new PositionDutyCycle(-LENGTH_OF_ALGAE_LEVEL_TWO_REVS);
-	PositionDutyCycle elevatorAlgaeLevelThreePosition = new PositionDutyCycle(-LENGTH_OF_ALGAE_LEVEL_THREE_REVS);
+	PositionDutyCycle elevatorLevelOnePosition = new PositionDutyCycle(LENGTH_OF_LEVEL_ONE_REVS);
+	PositionDutyCycle elevatorLevelTwoPosition = new PositionDutyCycle(LENGTH_OF_LEVEL_TWO_REVS);
+	PositionDutyCycle elevatorLevelThreePosition = new PositionDutyCycle(LENGTH_OF_LEVEL_THREE_REVS);
+	PositionDutyCycle elevatorLevelFourPosition = new PositionDutyCycle(LENGTH_OF_LEVEL_FOUR_REVS);
+	PositionDutyCycle elevatorAlgaeLevelTwoPosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_TWO_REVS);
+	PositionDutyCycle elevatorAlgaeLevelThreePosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_THREE_REVS);
 	
 	boolean isMoving;
 	boolean isMovingUp;
@@ -319,11 +321,12 @@ public class Elevator extends SubsystemBase implements IElevator {
 		
 		//setPIDParameters();
 		System.out.println("Moving Up");
-		setPeakOutputs(REDUCED_PCT_OUTPUT);
+		setPeakOutputs(HALF_PCT_OUTPUT);
 
 		//tac = -LENGTH_OF_TRAVEL_TICKS;
 
 		//elevator.set(ControlMode.Position,tac);
+		elevator.setControl(elevatorReducedOut);
 		elevator.setControl(elevatorUpPosition); //fix
 		targetEncoder = LENGTH_OF_TRAVEL_REVS;
 
@@ -340,6 +343,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving to First Level");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
+		//elevator.setControl(elevatorReducedOut);
 		elevator.setControl(elevatorLevelOnePosition); //fix
 		targetEncoder = LENGTH_OF_LEVEL_ONE_REVS;
 		

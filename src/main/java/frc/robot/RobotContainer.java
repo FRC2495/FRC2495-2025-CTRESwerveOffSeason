@@ -368,8 +368,8 @@ public class RobotContainer {
 
 		copilotGamepad.leftBumper()
 			//.onTrue(new SliderSafeExtendWithStallDetection(neck, slider));
-			.onTrue(new SliderExtendWithStallDetection(slider));
-			//.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
+			//.onTrue(new SliderExtendWithStallDetection(slider));
+			.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
 
 		copilotGamepad.rightBumper()
 			.onTrue(new SliderRetractWithStallDetection(slider));
