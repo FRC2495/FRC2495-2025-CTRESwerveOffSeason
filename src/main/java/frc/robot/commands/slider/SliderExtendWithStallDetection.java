@@ -33,7 +33,7 @@ public /*public*/ class SliderExtendWithStallDetection extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	public boolean isFinished() {
-		return !slider.tripleCheckMove() || slider.tripleCheckIfStalled();
+		return slider.getForwardLimitSwitchState();
 	}
 
 	// Called once after isFinished returns true
