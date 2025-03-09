@@ -354,22 +354,21 @@ public class RobotContainer {
 
 
 		copilotGamepad.povDown()
-			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+			.whileTrue(new NeckMoveDownWithStallDetection(neck));
 
 		copilotGamepad.povLeft()
-			.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
+			.whileTrue(new NeckMoveToCoralStationWithStallDetection(neck));
 
 		copilotGamepad.povRight()
-			.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
+			.whileTrue(new NeckMoveToCoralReefWithStallDetection(neck));
 
 		copilotGamepad.povUp()
-			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+			.whileTrue(new NeckMoveUpWithStallDetection(neck));
 
 
 		copilotGamepad.leftBumper()
-			//.onTrue(new SliderSafeExtendWithStallDetection(neck, slider));
-			//.onTrue(new SliderExtendWithStallDetection(slider));
-			.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
+			.onTrue(new SliderExtendWithLimitSwitch(slider)); // TODO see if safe mode is needed?
+			//.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
 
 		copilotGamepad.rightBumper()
 			.onTrue(new SliderRetractWithLimitSwitch(slider));
