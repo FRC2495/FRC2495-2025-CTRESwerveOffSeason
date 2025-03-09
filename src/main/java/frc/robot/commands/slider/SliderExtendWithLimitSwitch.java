@@ -8,11 +8,11 @@ import frc.robot.subsystems.Slider;
 /**
  *
  */
-public class SliderRetractWithStallDetection extends Command {
+public /*public*/ class SliderExtendWithLimitSwitch extends Command {
 
 	private Slider slider;
 
-	public SliderRetractWithStallDetection(Slider slider) {
+	public SliderExtendWithLimitSwitch(Slider slider) {	
 		this.slider = slider;
 		addRequirements(slider);
 	}
@@ -20,8 +20,8 @@ public class SliderRetractWithStallDetection extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("SliderRetractWithStallDetection: initialize");
-		slider.retract();
+		System.out.println("SliderExtendWithLimitSwitch initialize");
+		slider.extend();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -33,13 +33,13 @@ public class SliderRetractWithStallDetection extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	public boolean isFinished() {
-		return slider.getReverseLimitSwitchState();
+		return slider.getForwardLimitSwitchState();
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("SliderRetractWithStallDetection: end");
+		System.out.println("SliderExtendWithLimitSwitch: end");
 		slider.stop(); // adjust if needed
 	}
 }

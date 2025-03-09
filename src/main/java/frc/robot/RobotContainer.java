@@ -185,7 +185,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
         NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
 		NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderSafeExtendWithStallDetection(neck, slider));
-		NamedCommands.registerCommand("sliderRetractWithStallDetection", new SliderRetractWithStallDetection(slider));
+		NamedCommands.registerCommand("sliderRetractWithStallDetection", new SliderRetractWithLimitSwitch(slider));
 		NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
@@ -372,7 +372,7 @@ public class RobotContainer {
 			.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
 
 		copilotGamepad.rightBumper()
-			.onTrue(new SliderRetractWithStallDetection(slider));
+			.onTrue(new SliderRetractWithLimitSwitch(slider));
 
 
 		copilotGamepad.leftStick();

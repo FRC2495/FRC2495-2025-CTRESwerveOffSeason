@@ -14,7 +14,7 @@ import frc.robot.subsystems.Slider;
 public class SliderSafeExtendWithStallDetection extends ConditionalCommand {
 	
 	public SliderSafeExtendWithStallDetection(Neck neck, Slider slider) {
-		super(new SliderExtendWithStallDetection(slider), new DoNothing(), new NeckSafetyCheck(neck));
+		super(new SliderExtendWithLimitSwitch(slider), new DoNothing(), new NeckSafetyCheck(neck));
 	}
 
 }

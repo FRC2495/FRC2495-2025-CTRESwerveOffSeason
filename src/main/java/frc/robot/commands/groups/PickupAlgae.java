@@ -26,7 +26,7 @@ public class PickupAlgae extends ParallelCommandGroup{
 
 			//new NeckMoveDownWithStallDetection(neck),
 
-			new SliderExtendWithStallDetection(slider),
+			new SliderExtendWithLimitSwitch(slider),
 			
 			new AlgaeRollerTimedRoll(algae_roller, .5)
 		);
