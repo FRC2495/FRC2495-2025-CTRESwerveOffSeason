@@ -413,7 +413,7 @@ public class Neck extends SubsystemBase implements INeck {
 	{
 		if (!isMoving) // if we are already doing a move we don't take over
 		{
-			neckClosedLoopController.setReference(+MathUtil.applyDeadband(gamepad.getRightY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6, ControlType.kDutyCycle);
+			neckClosedLoopController.setReference(+MathUtil.applyDeadband(gamepad.getLeftX(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6, ControlType.kDutyCycle);
 			//neck.set(ControlMode.PercentOutput, +MathUtil.applyDeadband(gamepad.getRightY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6); // adjust sign if desired
 		}
 	}

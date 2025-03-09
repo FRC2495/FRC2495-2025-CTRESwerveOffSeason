@@ -389,9 +389,11 @@ public class RobotContainer {
 		copilotGamepad.axisLessThan(LY,-GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue(new HangerGamepadControl(hanger, getCopilotGamepad()));
 
-		copilotGamepad.axisGreaterThan(LX,GAMEPAD_AXIS_THRESHOLD);
+		copilotGamepad.axisGreaterThan(LX,GAMEPAD_AXIS_THRESHOLD)
+			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
 
-		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD);
+		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD)
+			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));;
 
 		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue(new ElevatorGamepadControl(elevator, getCopilotGamepad()));
@@ -399,14 +401,11 @@ public class RobotContainer {
 		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue(new ElevatorGamepadControl(elevator, getCopilotGamepad()));
 
-		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD);
-			//.whileTrue(new DrawerGamepadControl(drawer, getCopilotGamepad()));
-			//.onTrue(new NeckMovePodiumWithStallDetection(neck));
+		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD)
+			.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
 
-		copilotGamepad.axisLessThan(RX,-GAMEPAD_AXIS_THRESHOLD);
-			//.whileTrue(new DrawerGamepadControl(drawer, getCopilotGamepad()));
-			//.onTrue(new NeckMoveSubWithStallDetection(neck));
-			
+		copilotGamepad.axisLessThan(RX,-GAMEPAD_AXIS_THRESHOLD)
+			.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
 		
 		// button box 
 
