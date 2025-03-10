@@ -16,7 +16,7 @@ public class DoNothingUntilCoralSensed extends Command {
 	private CoralSensor coral_sensor;
 
 
-	public DoNothingUntilCoralSensed(CoralRoller roller, CoralSensor coral_sensor) {
+	public DoNothingUntilCoralSensed(CoralRoller roller) {
 		this.roller = roller;
 		this.coral_sensor = coral_sensor;
 		addRequirements(roller);
@@ -31,7 +31,7 @@ public class DoNothingUntilCoralSensed extends Command {
 
 	@Override
 	public boolean isFinished() {
-		return coral_sensor.isTriggered();
+		return roller.hasCoral();
 		//return !notesensor.isEnergized() || !noteSensorTwo.isEnergized();
 	}
 
