@@ -354,16 +354,19 @@ public class RobotContainer {
 
 
 		copilotGamepad.povDown()
-			.whileTrue(new NeckMoveDownWithStallDetection(neck));
+			//.onTrue(new NeckMoveDownWithStallDetection(neck));
+			.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
 
 		copilotGamepad.povLeft()
-			.whileTrue(new NeckMoveToCoralStationWithStallDetection(neck));
+			.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
 
 		copilotGamepad.povRight()
-			.whileTrue(new NeckMoveToCoralReefWithStallDetection(neck));
+			.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
 
 		copilotGamepad.povUp()
-			.whileTrue(new NeckMoveUpWithStallDetection(neck));
+			//.onTrue(new NeckMoveUpWithStallDetection(neck));
+			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
+			.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator));
 
 
 		copilotGamepad.leftBumper()
@@ -374,13 +377,15 @@ public class RobotContainer {
 			.onTrue(new SliderRetractWithLimitSwitch(slider));
 
 
-		copilotGamepad.leftStick();
+		copilotGamepad.leftStick()
 			//.onTrue(new CoralRollerTimedRoll(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
+			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
 
-		copilotGamepad.rightStick();
+		copilotGamepad.rightStick()
 			//.onTrue(new CoralRollerTimedRelease(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
+			.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
 
 
 		copilotGamepad.axisGreaterThan(LY,GAMEPAD_AXIS_THRESHOLD)
@@ -389,23 +394,26 @@ public class RobotContainer {
 		copilotGamepad.axisLessThan(LY,-GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue(new HangerGamepadControl(hanger, getCopilotGamepad()));
 
-		copilotGamepad.axisGreaterThan(LX,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+		copilotGamepad.axisGreaterThan(LX,GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+			//.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
 
-		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));;
+		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+			//.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
 
 		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue(new ElevatorGamepadControl(elevator, getCopilotGamepad()));
 
 		copilotGamepad.axisLessThan(RY,-GAMEPAD_AXIS_THRESHOLD)
 			.whileTrue(new ElevatorGamepadControl(elevator, getCopilotGamepad()));
+			//.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator));
 
-		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
+		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
 
-		copilotGamepad.axisLessThan(RX,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
+		copilotGamepad.axisLessThan(RX,-GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
 		
 		// button box 
 
