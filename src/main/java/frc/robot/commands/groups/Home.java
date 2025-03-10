@@ -28,7 +28,7 @@ public class Home extends ParallelCommandGroup{
 
 			new SliderRetractWithLimitSwitch(slider)
 			
-			//new NeckMoveUpWithStallDetection(neck)
+			//new NeckMoveDownWithStallDetection(neck)
 		);
 	}
 }

@@ -199,6 +199,7 @@ public class RobotContainer {
 		NamedCommands.registerCommand("scoreNet", new ScoreNet(elevator, algae_roller, slider));
 		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(algae_roller));
 		NamedCommands.registerCommand("doNothingUntilCoralSensed", new DoNothingUntilCoralSensed(coral_roller));
+		NamedCommands.registerCommand("home", new Home(elevator, slider /*neck */));
 
 		// choosers (for auton)
 
