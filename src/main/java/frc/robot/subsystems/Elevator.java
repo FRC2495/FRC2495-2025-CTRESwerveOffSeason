@@ -13,6 +13,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
+import com.ctre.phoenix6.controls.PositionVoltage;
 /*import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrame;*/
@@ -50,7 +51,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int LENGTH_OF_LEVEL_TWO_REVS = 25; 
 	public static final int LENGTH_OF_LEVEL_THREE_REVS = 47;
 	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 80; 
-	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_REVS = 5; //TODO FIX
 	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
 	
 
@@ -68,10 +69,17 @@ public class Elevator extends SubsystemBase implements IElevator {
 	
 	static final double REDUCED_PCT_OUTPUT = 0.8; // 0.9;
 	static final double HALF_PCT_OUTPUT = 0.5; // 0.9;
+	static final double SUPER_REDUCED_PCT_OUTPUT = 0.3; // 0.9
 	
-	static final double MOVE_PROPORTIONAL_GAIN =  0.1;//0.6; //1.2 for SRX // TODO switch to 0.6 if required if switching to Talon FX (as encoder resolution is halved)
+	static final double MOVE_PROPORTIONAL_GAIN =  0.06;//0.6; //1.2 for SRX // TODO switch to 0.6 if required if switching to Talon FX (as encoder resolution is halved)
 	static final double MOVE_INTEGRAL_GAIN = 0.0;
 	static final double MOVE_DERIVATIVE_GAIN = 0.0;
+	static final double MOVE_FEED_FORWARD_GAIN = 0.05;
+
+	static final double MOVE_DOWN_PROPORTIONAL_GAIN =  0.02;//0.6; //1.2 for SRX // TODO switch to 0.6 if required if switching to Talon FX (as encoder resolution is halved)
+	static final double MOVE_DOWN_INTEGRAL_GAIN = 0.0;
+	static final double MOVE_DOWN_DERIVATIVE_GAIN = 0.0;
+	static final double MOVE_DOWN_FEED_FORWARD_GAIN = 0.05;
 	
 	//static final int TALON_TICK_THRESH = 512; // 128; //256
 	//static final double TICK_THRESH = 2048; // 512;
@@ -186,10 +194,19 @@ public class Elevator extends SubsystemBase implements IElevator {
 		slot0Configs.kP = MOVE_PROPORTIONAL_GAIN; // * 2048 / 1023 / 10;
 		slot0Configs.kI = MOVE_INTEGRAL_GAIN; // * 2048 / 1023 * 1000 / 10;
 		slot0Configs.kD = MOVE_DERIVATIVE_GAIN; // * 2048 / 1023 / 1000 / 10;
+		slot0Configs.kG = MOVE_FEED_FORWARD_GAIN;
+
+		var slot1Configs = elevatorConfig.Slot1;
+		slot1Configs.kV = 0 * 2048 / 1023 / 10;
+		slot1Configs.kP = MOVE_DOWN_PROPORTIONAL_GAIN; // * 2048 / 1023 / 10;
+		slot1Configs.kI = MOVE_DOWN_INTEGRAL_GAIN; // * 2048 / 1023 * 1000 / 10;
+		slot1Configs.kD = MOVE_DOWN_DERIVATIVE_GAIN; // * 2048 / 1023 / 1000 / 10;
+		slot1Configs.kG = MOVE_DOWN_FEED_FORWARD_GAIN;
 		//slot0Configs.kS = SHOOT_DERIVATIVE_GAIN; //TODO change value
 		elevator.getConfigurator().apply(slot0Configs, 0.050); // comment out if needed
-		elevator_follower.getConfigurator().apply(slot0Configs,0.050);
-		
+		elevator.getConfigurator().apply(slot1Configs, 0.050); // comment out if needed
+		elevator_follower.getConfigurator().apply(slot0Configs, 0.050); // comment out if needed
+		elevator_follower.getConfigurator().apply(slot1Configs, 0.050); // comment out if needed
 		// use slot 0 for closed-looping
  		//elevator.selectProfileSlot(SLOT_0, PRIMARY_PID_LOOP);
 		
@@ -323,13 +340,9 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving Up");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		//tac = -LENGTH_OF_TRAVEL_TICKS;
+		targetEncoder = elevatorUpPosition.Position;
+		elevator.setControl(elevatorUpPosition.withSlot(0)); //fix
 
-		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorUpPosition); //fix
-		targetEncoder = LENGTH_OF_TRAVEL_REVS;
-
-		
 		isMoving = true;
 		isMovingUp = true;
 		onTargetCount = 0;
@@ -342,9 +355,13 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving to First Level");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		//elevator.setControl(elevatorReducedOut);
-		elevator.setControl(elevatorLevelOnePosition); //fix
-		targetEncoder = LENGTH_OF_LEVEL_ONE_REVS;
+		targetEncoder = elevatorLevelOnePosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorLevelOnePosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorLevelOnePosition.withSlot(1)); //fix
+		}
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -358,8 +375,13 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving to Second Level");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		elevator.setControl(elevatorLevelTwoPosition); //fix
-		targetEncoder = LENGTH_OF_LEVEL_TWO_REVS;
+		targetEncoder = elevatorLevelTwoPosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorLevelTwoPosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorLevelTwoPosition.withSlot(1)); //fix
+		}
 
 		
 		isMoving = true;
@@ -375,11 +397,13 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving to Third Level");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		//tac = -LENGTH_OF_TRAVEL_TICKS;
-
-		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorLevelThreePosition); //fix
-		targetEncoder = LENGTH_OF_LEVEL_THREE_REVS;
+		targetEncoder = elevatorLevelThreePosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorLevelThreePosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorLevelThreePosition.withSlot(1)); //fix
+		}
 
 		
 		isMoving = true;
@@ -395,11 +419,13 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving to Fourth Level");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		//tac = -LENGTH_OF_TRAVEL_TICKS;
-
-		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorLevelFourPosition); //fix
-		targetEncoder = LENGTH_OF_LEVEL_FOUR_REVS;
+		targetEncoder = elevatorLevelFourPosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorLevelFourPosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorLevelFourPosition.withSlot(1)); //fix
+		}
 
 		
 		isMoving = true;
@@ -415,10 +441,13 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving to Algae Level Two");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		//tac = 0; // adjust as needed
-		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorAlgaeLevelTwoPosition);
-		targetEncoder = LENGTH_OF_ALGAE_LEVEL_TWO_REVS;
+		targetEncoder = elevatorAlgaeLevelTwoPosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorAlgaeLevelTwoPosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorAlgaeLevelTwoPosition.withSlot(1)); //fix
+		}
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -433,10 +462,13 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving to Algae Level Three");
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
-		//tac = 0; // adjust as needed
-		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorAlgaeLevelThreePosition);
-		targetEncoder = LENGTH_OF_ALGAE_LEVEL_THREE_REVS;
+		targetEncoder = elevatorAlgaeLevelThreePosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorAlgaeLevelThreePosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorAlgaeLevelThreePosition.withSlot(1)); //fix
+		}
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -467,11 +499,11 @@ public class Elevator extends SubsystemBase implements IElevator {
 		
 		//setPIDParameters();
 		System.out.println("Moving Down");
-		setPeakOutputs(REDUCED_PCT_OUTPUT);
+		setPeakOutputs(SUPER_REDUCED_PCT_OUTPUT);
 
 		//tac = 0; // adjust as needed
 		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorHomePosition);
+		elevator.setControl(elevatorHomePosition.withSlot(1));
 		targetEncoder = 0.0;
 		
 		isMoving = true;
@@ -500,6 +532,15 @@ public class Elevator extends SubsystemBase implements IElevator {
 		
 		isMoving = false;
 		isMovingUp = false;
+	}
+
+	public boolean isGoingUp(double target) {
+		if (target > getEncoderPosition()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	/*private void setPIDParameters() {		
@@ -602,7 +643,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	{
 		if (!isMoving) // if we are already doing a move we don't take over
 		{
-			elevator.setControl(elevatorReducedOut.withOutput(+MathUtil.applyDeadband(gamepad.getRightY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*1.0/*0.7*/)); // adjust sign if desired
+			elevator.setControl(elevatorReducedOut.withOutput(+MathUtil.applyDeadband(-gamepad.getRightY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*1.0/*0.7*/)); // adjust sign if desired
 		}
 	}
 
