@@ -271,22 +271,23 @@ public class RobotContainer {
 		// driver (joystick)
 
 		joyMain.povUp()
-			.onTrue(new NeckMoveUpWithStallDetection(neck));	
+			.onTrue(new DrivetrainZeroHeading(drivetrain));	
 
 		joyMain.povDown()
-			.onTrue(new NeckMoveDownWithStallDetection(neck));	
+			.onTrue(new DrivetrainOppositeHeading(drivetrain));	
 
 		joyMain.povLeft()
-			.onTrue(new NeckMoveToCoralStationWithStallDetection(neck));	
+			.onTrue(new DrivetrainLeftSubHeading(drivetrain));	
 
 		joyMain.povRight()
-			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
+			.onTrue(new DrivetrainRightSubHeading(drivetrain));
+
 		joyMain.button(1)
 			.whileTrue(new DrivetrainDriveUsingAprilTagCamera(drivetrain, apriltag_camera, getMainJoystick()));
 
-		joyMain.button(2)
+		joyMain.button(2);
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));	
-			.whileTrue(new DrivetrainDriveUsingObjectDetectionCamera(drivetrain, object_detection_camera, getMainJoystick()));
+			//.whileTrue(new DrivetrainDriveUsingObjectDetectionCamera(drivetrain, object_detection_camera, getMainJoystick()));
 			
 		joyMain.button(3)
 			.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
@@ -378,15 +379,15 @@ public class RobotContainer {
 			.onTrue(new SliderRetractWithLimitSwitch(slider));
 
 
-		copilotGamepad.leftStick()
+		copilotGamepad.leftStick();
 			//.onTrue(new CoralRollerTimedRoll(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
-			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
 
-		copilotGamepad.rightStick()
+		copilotGamepad.rightStick();
 			//.onTrue(new CoralRollerTimedRelease(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
-			.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
+			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
 
 
 		copilotGamepad.axisGreaterThan(LY,GAMEPAD_AXIS_THRESHOLD)
@@ -419,16 +420,16 @@ public class RobotContainer {
 		// button box 
 
 		buttonBox.button(1)
-			.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator)); 
+			.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator)); 
 
 		buttonBox.button(2)
-			.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
+			.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
 		
 		buttonBox.button(3)
-			.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
+			.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
 
 		buttonBox.button(4)
-			.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
+			.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator));
 		
 		buttonBox.button(5)
 			.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
