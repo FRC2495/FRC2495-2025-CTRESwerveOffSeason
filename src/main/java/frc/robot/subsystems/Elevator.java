@@ -52,7 +52,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int LENGTH_OF_LEVEL_THREE_REVS = 47;
 	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 80; 
 	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_REVS = 5; //TODO FIX
-	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_REVS = 0/TICKS_PER_REVOLUTION; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_REVS = 30; //TODO FIX
 	
 
 
