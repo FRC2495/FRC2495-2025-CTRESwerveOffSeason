@@ -239,6 +239,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("CoralRoller Rpm", m_robotContainer.getCoralRoller().getRpm());
 		SmartDashboard.putNumber("CoralRoller Preset Rpm", m_robotContainer.getCoralRoller().getPresetRpm());
 		SmartDashboard.putNumber("CoralRoller Target", m_robotContainer.getCoralRoller().getTarget());
+		SmartDashboard.putBoolean("CoralRoller HasCoral", m_robotContainer.getCoralRoller().hasCoralEntered());
 
 		SmartDashboard.putBoolean("AlgaeRoller IsRolling?", m_robotContainer.getAlgaeRoller().isRolling());
 		SmartDashboard.putBoolean("AlgaeRoller IsReleasing?", m_robotContainer.getAlgaeRoller().isReleasing());

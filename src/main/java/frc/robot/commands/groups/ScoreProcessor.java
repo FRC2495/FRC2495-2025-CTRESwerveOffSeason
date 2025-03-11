@@ -18,7 +18,7 @@ public class ScoreProcessor extends SequentialCommandGroup {
 
 			new SliderExtendWithLimitSwitch(slider),
 
-			new AlgaeRollerTimedRelease(algae_roller, .1)
+			new AlgaeRollerTimedRelease(algae_roller, .5)
 						
 		); 
   

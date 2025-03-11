@@ -43,7 +43,7 @@
         {
           "type": "named",
           "data": {
-            "name": "home"
+            "name": "homeToCoralStation"
           }
         },
         {
@@ -61,7 +61,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side A (right)"
+            "pathName": "SPB1 - Coral Station to Side F (right)"
           }
         },
         {
