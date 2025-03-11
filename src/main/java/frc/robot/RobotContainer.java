@@ -271,17 +271,16 @@ public class RobotContainer {
 		// driver (joystick)
 
 		joyMain.povUp()
-			.onTrue(new DrivetrainZeroHeading(drivetrain));	
+			.onTrue(new NeckMoveUpWithStallDetection(neck));	
 
 		joyMain.povDown()
-			.onTrue(new DrivetrainOppositeHeading(drivetrain));	
+			.onTrue(new NeckMoveDownWithStallDetection(neck));	
 
 		joyMain.povLeft()
-			.onTrue(new DrivetrainLeftSubHeading(drivetrain));	
+			.onTrue(new NeckMoveToCoralStationWithStallDetection(neck));	
 
 		joyMain.povRight()
-			.onTrue(new DrivetrainRightSubHeading(drivetrain));
-
+			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
 		joyMain.button(1)
 			.whileTrue(new DrivetrainDriveUsingAprilTagCamera(drivetrain, apriltag_camera, getMainJoystick()));
 
