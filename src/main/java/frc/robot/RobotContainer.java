@@ -197,7 +197,7 @@ public class RobotContainer {
 		NamedCommands.registerCommand("grabLevelTwoAlgae", new GrabLevelTwoAlgae(elevator, algae_roller, slider));
 		NamedCommands.registerCommand("grabLevelThirdAlgae", new GrabLevelThreeAlgae(elevator, algae_roller, slider));
 		NamedCommands.registerCommand("scoreNet", new ScoreNet(elevator, algae_roller, slider, neck));
-		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(algae_roller));
+		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(algae_roller, neck, slider));
 		NamedCommands.registerCommand("doNothingUntilCoralSensed", new DoNothingUntilCoralSensed(coral_roller));
 		NamedCommands.registerCommand("home", new Home(elevator, slider /*neck */));
 

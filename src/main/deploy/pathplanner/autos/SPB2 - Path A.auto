@@ -9,6 +9,18 @@
           "data": {
             "pathName": "SPB2 - SZ to Side B (right)"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
         }
       ]
     }

@@ -7,31 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+            "pathName": "SPB1 - SZ to Side A (left)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Move from side C to processor"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB3 - Proccessor to Left Coral Station"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB3 - left coral station to side D (left)"
+            "pathName": "SPB1 - Side A to Out of Way"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB3",
+  "folder": "SPB1",
   "choreoAuto": false
 }

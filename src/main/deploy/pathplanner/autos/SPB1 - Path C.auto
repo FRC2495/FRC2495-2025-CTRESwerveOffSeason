@@ -11,27 +11,45 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "SPB1 - Side A (left) to Coral Station "
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side A (right)"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB1 - Side A (right) to Coral Station "
+            "name": "doNothingUntilCoralSensed"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "SPB1 - Coral Station to Side F (right)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
           }
         }
       ]

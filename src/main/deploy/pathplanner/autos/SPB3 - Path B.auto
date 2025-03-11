@@ -7,31 +7,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - SZ to Side B (right)"
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SP2 - side B (right) to net"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Net to Right Coral Station"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Right Coral Pickup to Side E (left)"
+            "pathName": "SPB3 - Move out of the way from side C"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB2",
+  "folder": "SPB3",
   "choreoAuto": false
 }
