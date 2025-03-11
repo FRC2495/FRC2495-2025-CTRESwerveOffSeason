@@ -419,12 +419,12 @@ public class Elevator extends SubsystemBase implements IElevator {
 		setPeakOutputs(REDUCED_PCT_OUTPUT);
 
 		targetEncoder = elevatorLevelFourPosition.Position;
-		if (isGoingUp(targetEncoder)) {
-			elevator.setControl(elevatorLevelFourPosition.withSlot(0)); //fix
-		}
+		//if (isGoingUp(targetEncoder)) {
+		elevator.setControl(elevatorLevelFourPosition.withSlot(0)); //fix
+		/* }
 		else {
 			elevator.setControl(elevatorLevelFourPosition.withSlot(1)); //fix
-		}
+		}*/
 
 		
 		isMoving = true;
