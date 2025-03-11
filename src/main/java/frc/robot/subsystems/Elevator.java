@@ -99,7 +99,6 @@ public class Elevator extends SubsystemBase implements IElevator {
 
 	DutyCycleOut elevatorStopOut = new DutyCycleOut(0);
 	DutyCycleOut elevatorReducedOut = new DutyCycleOut(REDUCED_PCT_OUTPUT);
-	DutyCycleOut elevatorHalfOut = new DutyCycleOut(HALF_PCT_OUTPUT);
 
 	PositionDutyCycle elevatorUpPosition = new PositionDutyCycle(LENGTH_OF_TRAVEL_REVS);
 	PositionDutyCycle elevatorMidwayPosition = new PositionDutyCycle(LENGTH_OF_MIDWAY_REVS);
@@ -485,8 +484,13 @@ public class Elevator extends SubsystemBase implements IElevator {
 
 		//tac = -LENGTH_OF_MIDWAY_TICKS;
 		
-		elevator.setControl(elevatorMidwayPosition);
-		targetEncoder = LENGTH_OF_MIDWAY_REVS;
+		targetEncoder = elevatorMidwayPosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorMidwayPosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorMidwayPosition.withSlot(1)); //fix
+		}
 		
 		isMoving = true;
 		isMovingUp = true;
@@ -501,10 +505,13 @@ public class Elevator extends SubsystemBase implements IElevator {
 		System.out.println("Moving Down");
 		setPeakOutputs(SUPER_REDUCED_PCT_OUTPUT);
 
-		//tac = 0; // adjust as needed
-		//elevator.set(ControlMode.Position,tac);
-		elevator.setControl(elevatorHomePosition.withSlot(1));
-		targetEncoder = 0.0;
+		targetEncoder = elevatorHomePosition.Position;
+		if (getEncoderPosition() > elevatorLevelFourPosition.Position) {
+			elevator.setControl(elevatorHomePosition.withSlot(0));
+		}
+		else {
+			elevator.setControl(elevatorHomePosition.withSlot(1)); 
+		}
 		
 		isMoving = true;
 		isMovingUp = false;
@@ -543,60 +550,12 @@ public class Elevator extends SubsystemBase implements IElevator {
 		}
 	}
 	
-	/*private void setPIDParameters() {		
-		//elevator.configAllowableClosedloopError(SLOT_0, TALON_TICK_THRESH, TALON_TIMEOUT_MS);
-		
-		// P is the proportional gain. It modifies the closed-loop output by a proportion (the gain value)
-		// of the closed-loop error.
-		// P gain is specified in output unit per error unit.
-		// When tuning P, it's useful to estimate your starting value.
-		// If you want your mechanism to drive 50% output when the error is 4096 (one rotation when using CTRE Mag Encoder),
-		// then the calculated Proportional Gain would be (0.50 X 1023) / 4096 = ~0.125.
-		
-		// I is the integral gain. It modifies the closed-loop output according to the integral error
-		// (summation of the closed-loop error each iteration).
-		// I gain is specified in output units per integrated error.
-		// If your mechanism never quite reaches your target and using integral gain is viable,
-		// start with 1/100th of the Proportional Gain.
-		
-		// D is the derivative gain. It modifies the closed-loop output according to the derivative error
-		// (change in closed-loop error each iteration).
-		// D gain is specified in output units per derivative error.
-		// If your mechanism accelerates too abruptly, Derivative Gain can be used to smooth the motion.
-		// Typically start with 10x to 100x of your current Proportional Gain.
-
-		// Feed-Forward is typically used in velocity and motion profile/magic closed-loop modes.
-		// F gain is multiplied directly by the set point passed into the programming API.
-		// The result of this multiplication is in motor output units [-1023, 1023]. This allows the robot to feed-forward using the target set-point.
-		// In order to calculate feed-forward, you will need to measure your motor's velocity at a specified percent output
-		// (preferably an output close to the intended operating range).
-		
-
-		// set slot 0 gains and leave every other config factory-default
-		var slot0Configs = elevatorConfig.Slot0;
-		slot0Configs.kV = 0 * 2048 / 1023 / 10;
-		slot0Configs.kP = MOVE_PROPORTIONAL_GAIN * 2048 / 1023 / 10;
-		slot0Configs.kI = MOVE_INTEGRAL_GAIN * 2048 / 1023 * 1000 / 10;
-		slot0Configs.kD = MOVE_DERIVATIVE_GAIN * 2048 / 1023 / 1000 / 10;
-		//slot0Configs.kS = SHOOT_DERIVATIVE_GAIN; //TODO change value
-
-		/*elevator.config_kP(SLOT_0, MOVE_PROPORTIONAL_GAIN, TALON_TIMEOUT_MS);
-		elevator.config_kI(SLOT_0, MOVE_INTEGRAL_GAIN, TALON_TIMEOUT_MS);
-		elevator.config_kD(SLOT_0, MOVE_DERIVATIVE_GAIN, TALON_TIMEOUT_MS);
-		elevator.config_kF(SLOT_0, 0, TALON_TIMEOUT_MS);
-	}*/
 	
 	// NOTE THAT THIS METHOD WILL IMPACT BOTH OPEN AND CLOSED LOOP MODES
 	public void setPeakOutputs(double peakOutput)
 	{
 		elevatorConfig.MotorOutput.PeakForwardDutyCycle = peakOutput;
 		elevatorConfig.MotorOutput.PeakReverseDutyCycle = -peakOutput;
-		
-		/*elevator.configPeakOutputForward(peakOutput, TALON_TIMEOUT_MS);
-		elevator.configPeakOutputReverse(-peakOutput, TALON_TIMEOUT_MS);
-		
-		elevator.configNominalOutputForward(0, TALON_TIMEOUT_MS);
-		elevator.configNominalOutputReverse(0, TALON_TIMEOUT_MS);*/
 
 	}
 	
