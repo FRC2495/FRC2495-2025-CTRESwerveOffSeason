@@ -9,6 +9,18 @@
           "data": {
             "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
         }
       ]
     }

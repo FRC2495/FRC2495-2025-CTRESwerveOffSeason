@@ -7,43 +7,49 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - SZ to Side A (left)"
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grabLevelThirdAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Side A to Algae Net"
+            "pathName": "SPB3 - Move from side C to net"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB1 - Algae Net To Coral Station"
+            "name": "ScoreNet"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side F (right)"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB1 - Side F (right) to Coral Station"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB1 - Coral Station to Side F (left)"
+            "name": "home"
           }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB1",
+  "folder": "SPB3",
   "choreoAuto": false
 }
