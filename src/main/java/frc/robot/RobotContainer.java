@@ -356,18 +356,18 @@ public class RobotContainer {
 
 		copilotGamepad.povDown()
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
+			.onTrue(new NeckMoveDownWithStallDetection(neck));
 
 		copilotGamepad.povLeft()
-			.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
+			.onTrue(new NeckMoveToCoralStationWithStallDetection(neck));
 
 		copilotGamepad.povRight()
-			.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
+			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
 
 		copilotGamepad.povUp()
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
-			.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator));
+			.onTrue(new NeckMoveUpWithStallDetection(neck));
 
 
 		copilotGamepad.leftBumper()
