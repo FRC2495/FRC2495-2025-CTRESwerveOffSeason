@@ -441,10 +441,10 @@ public class RobotContainer {
 		buttonBox.button(6)
 			.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
 		
-		buttonBox.button(7)
+		buttonBox.button(9)
 			.onTrue(new ElevatorMoveToAlgaeLevelTwoWithStallDetection(elevator));
 
-		buttonBox.button(8)
+		buttonBox.button(10)
 			.onTrue(new ElevatorMoveToAlgaeLevelThreeWithStallDetection(elevator));
 		
 	}
