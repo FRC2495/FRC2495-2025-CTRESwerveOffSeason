@@ -287,7 +287,8 @@ public class RobotContainer {
 
 		joyMain.button(2)
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));	
-			.whileTrue(new DrivetrainDriveUsingObjectDetectionCamera(drivetrain, object_detection_camera, getMainJoystick()));
+			//.whileTrue(new DrivetrainDriveUsingObjectDetectionCamera(drivetrain, object_detection_camera, getMainJoystick()));
+			.whileTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
 			
 		joyMain.button(3)
 			.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
@@ -321,7 +322,8 @@ public class RobotContainer {
 			.whileTrue(new HangerJoystickControl(hanger, drivetrain, getMainJoystick()));
 		
 		joyMain.button(12)
-			.onTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
+			//.onTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
+			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			
 				
 		// copilot (gamepad)
