@@ -1,0 +1,85 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grabLevelThirdAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Move from side C to net"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreNet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "homeToCoralStation"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Move from (C) net to right coral pickup station"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "doNothingUntilCoralSensed"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Move from right coral pickup station to side F (right)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "SPB3",
+  "choreoAuto": false
+}

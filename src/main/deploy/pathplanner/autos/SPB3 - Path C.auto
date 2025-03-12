@@ -11,21 +11,39 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grabLevelThirdAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "SPB3 - Move from side C to processor"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB3 - Processor to Side D (left)"
+            "name": "scoreProcessor"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB3 - Side D to Processor"
+            "name": "home"
           }
         }
       ]

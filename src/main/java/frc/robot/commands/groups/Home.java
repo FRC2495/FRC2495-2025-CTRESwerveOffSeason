@@ -14,21 +14,22 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.*;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.ElevatorMoveDownWithStallDetection;
+import frc.robot.commands.neck.NeckMoveDownWithStallDetection;
 import frc.robot.commands.algae_roller.*;
 import frc.robot.commands.slider.*;
 
 
 public class Home extends ParallelCommandGroup{
 	
-	public Home(Elevator elevator, Slider slider/* , Neck neck*/) {
+	public Home(Elevator elevator, Slider slider , Neck neck) {
 
 		addCommands(
 
 			new ElevatorMoveDownWithStallDetection(elevator),
 
-			new SliderRetractWithLimitSwitch(slider)
+			new SliderRetractWithLimitSwitch(slider),
 			
-			//new NeckMoveDownWithStallDetection(neck)
+			new NeckMoveDownWithStallDetection(neck)
 		);
 	}
 }

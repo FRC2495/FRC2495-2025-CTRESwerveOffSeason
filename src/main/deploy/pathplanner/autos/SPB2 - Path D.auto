@@ -11,15 +11,45 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "homeToCoralStation"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "SPB2 - Side B (right) to Right Coral Pickup"
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "doNothingUntilCoralSensed"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "SPB2 - Right Coral Pickup to Side E (left)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
           }
         }
       ]

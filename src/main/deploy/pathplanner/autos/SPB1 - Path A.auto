@@ -11,21 +11,15 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB1 - Side A to Algae Net"
+            "name": "scoreFourthLevelCoral"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB1 - Algae Net To Coral Station"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB1 - Coral Station to Side A (right)"
+            "name": "home"
           }
         }
       ]

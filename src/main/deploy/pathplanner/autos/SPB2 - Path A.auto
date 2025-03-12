@@ -11,21 +11,15 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SP2 - side B (right) to net"
+            "name": "scoreFourthLevelCoral"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Net to Right Coral Station"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Right Coral Pickup to Side E (left)"
+            "name": "home"
           }
         }
       ]

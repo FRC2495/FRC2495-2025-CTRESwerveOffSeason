@@ -180,8 +180,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("algaeRollerRelease", new AlgaeRollerRelease(algae_roller));
         NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 5));
         NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
-        NamedCommands.registerCommand("coralRollerRoll", new CoralRollerRollOut(coral_roller));
-        NamedCommands.registerCommand("coralRollerRelease", new CoralRollerRollIn(coral_roller));
+        NamedCommands.registerCommand("coralRollerRollOut", new CoralRollerRollOut(coral_roller));
+        NamedCommands.registerCommand("coralRollerRollIn", new CoralRollerRollIn(coral_roller));
         NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, 5));
         NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, 5));
 		NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderSafeExtendWithStallDetection(neck, slider));
@@ -189,17 +189,19 @@ public class RobotContainer {
 		NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveDownWithStallDetection", new NeckMoveDownWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
+		NamedCommands.registerCommand("neckMoveToCoralStationWithStallDetection", new NeckMoveToCoralStationWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
 		NamedCommands.registerCommand("scoreFirstLevelCoral", new ScoreFirstLevelCoral(elevator, coral_roller));
 		NamedCommands.registerCommand("scoreSecondLevelCoral", new ScoreSecondLevelCoral(elevator, coral_roller));
 		NamedCommands.registerCommand("scoreThirdLevelCoral", new ScoreThirdLevelCoral(elevator, coral_roller));
-		NamedCommands.registerCommand("scoreFourthLevelCoral", new ScoreFourthLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("scoreFourthLevelCoral", new ScoreFourthLevelCoral(elevator, coral_roller, neck));
 		NamedCommands.registerCommand("grabLevelTwoAlgae", new GrabLevelTwoAlgae(elevator, algae_roller, slider));
 		NamedCommands.registerCommand("grabLevelThirdAlgae", new GrabLevelThreeAlgae(elevator, algae_roller, slider));
-		NamedCommands.registerCommand("scoreNet", new ScoreNet(elevator, algae_roller, slider));
-		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(algae_roller));
+		NamedCommands.registerCommand("scoreNet", new ScoreNet(elevator, algae_roller, slider, neck));
+		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(algae_roller, neck, slider));
 		NamedCommands.registerCommand("doNothingUntilCoralSensed", new DoNothingUntilCoralSensed(coral_roller));
-		NamedCommands.registerCommand("home", new Home(elevator, slider /*neck */));
+		NamedCommands.registerCommand("home", new Home(elevator, slider, neck));
+		NamedCommands.registerCommand("homeToCoralStation", new HomeToCoralStation(elevator, slider, neck));
 
 		// choosers (for auton)
 
@@ -359,18 +361,18 @@ public class RobotContainer {
 
 		copilotGamepad.povDown()
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
+			.onTrue(new NeckMoveDownWithStallDetection(neck));
 
 		copilotGamepad.povLeft()
-			.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
+			.onTrue(new NeckMoveToCoralStationWithStallDetection(neck));
 
 		copilotGamepad.povRight()
-			.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
+			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
 
 		copilotGamepad.povUp()
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
-			.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator));
+			.onTrue(new NeckMoveUpWithStallDetection(neck));
 
 
 		copilotGamepad.leftBumper()
@@ -381,15 +383,15 @@ public class RobotContainer {
 			.onTrue(new SliderRetractWithLimitSwitch(slider));
 
 
-		copilotGamepad.leftStick()
+		copilotGamepad.leftStick();
 			//.onTrue(new CoralRollerTimedRoll(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
-			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
 
-		copilotGamepad.rightStick()
+		copilotGamepad.rightStick();
 			//.onTrue(new CoralRollerTimedRelease(coral_roller, 3));
 			//.onTrue(new GamepadRumble(getCopilotGamepad(),false));
-			.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
+			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
 
 
 		copilotGamepad.axisGreaterThan(LY,GAMEPAD_AXIS_THRESHOLD)
@@ -422,16 +424,16 @@ public class RobotContainer {
 		// button box 
 
 		buttonBox.button(1)
-			.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator)); 
+			.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator)); 
 
 		buttonBox.button(2)
-			.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
+			.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
 		
 		buttonBox.button(3)
-			.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
+			.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
 
 		buttonBox.button(4)
-			.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
+			.onTrue(new ElevatorMoveToFourthLevelWithStallDetection(elevator));
 		
 		buttonBox.button(5)
 			.onTrue(new ElevatorMoveUpWithStallDetection(elevator));

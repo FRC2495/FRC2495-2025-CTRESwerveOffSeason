@@ -11,9 +11,27 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "homeToCoralStation"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "SPB1 - Side A (left) to Coral Station "
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "doNothingUntilCoralSensed"
           }
         },
         {
@@ -23,15 +41,15 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB1 - Side A (right) to Coral Station "
+            "name": "scoreFourthLevelCoral"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side F (right)"
+            "name": "home"
           }
         }
       ]

@@ -11,21 +11,39 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grabLevelTwoAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "SPB2 - Side B (right) to net"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB2 - Net to Left Coral Station"
+            "name": "ScoreNet"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "SPB2 - Left Coral Pickup to Side E (right)"
+            "name": "home"
           }
         }
       ]

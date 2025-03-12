@@ -1,0 +1,85 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - SZ to Side A (left)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "grabLevelTwoAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Side A to Algae Net"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ScoreNet"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "homeToCoralStation"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Algae Net To Coral Station"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "doNothingUntilCoralSensed"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Coral Station to Side F (right)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "SPB1",
+  "choreoAuto": false
+}
