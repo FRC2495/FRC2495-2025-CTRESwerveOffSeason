@@ -103,10 +103,10 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		//double angle = getAngleToTurnToBestTarget();
 		double angle = getAngleToTurnToHighValueTarget();
 
-		if (angle != 0.0) // only if we can see a target, so we continue to return 0.0 if we don't see one.
+		/*if (angle != 0.0) // only if we can see a target, so we continue to return 0.0 if we don't see one.
 		{
 			angle += APRILTAG_CAMERA_SHOOTER_ALIGNMENT_CORRECTION_DEGREES; // apply offset in degrees to compensate for shooter being a bit crooked
-		}
+		}*/
 
 		return angle;
 	}
@@ -217,14 +217,24 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 			{
 				int targetId = target.getFiducialId();
 
-				if (targetId == AprilTags.MIDDLE_RED_SPEAKER 
-					|| targetId == AprilTags.MIDDLE_BLUE_SPEAKER)
+				if (targetId == AprilTags.RED_REEF_SIDE_A 
+					|| targetId == AprilTags.RED_REEF_SIDE_B 
+					|| targetId == AprilTags.RED_REEF_SIDE_C 
+					||  targetId == AprilTags.RED_REEF_SIDE_D 
+					|| targetId == AprilTags.RED_REEF_SIDE_E 
+					|| targetId == AprilTags.RED_REEF_SIDE_F 
+					|| targetId == AprilTags.BLUE_REEF_SIDE_A 
+					|| targetId == AprilTags.BLUE_REEF_SIDE_B 
+					|| targetId == AprilTags.BLUE_REEF_SIDE_C 
+					|| targetId == AprilTags.BLUE_REEF_SIDE_D 
+					|| targetId == AprilTags.BLUE_REEF_SIDE_E 
+					|| targetId == AprilTags.BLUE_REEF_SIDE_F)
 				{
 					return target; // SUPER high value target found - more important than high value only
 				}
 			}
 
-			for (PhotonTrackedTarget target: targets) 
+			/*for (PhotonTrackedTarget target: targets) 
 			{
 				int targetId = target.getFiducialId();
 
@@ -233,7 +243,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 				{
 					return target; // high value target found
 				}
-			}
+			}*/
 		}
 
 		return null; // no high value target found

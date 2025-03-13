@@ -334,7 +334,7 @@ public class RobotContainer {
 			.onTrue(new NeckMoveDownWithStallDetection(neck));
 		
 		copilotGamepad.b()
-			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
+			.onTrue(new NeckMoveProcessorWithStallDetection(neck));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 
 		copilotGamepad.x()
