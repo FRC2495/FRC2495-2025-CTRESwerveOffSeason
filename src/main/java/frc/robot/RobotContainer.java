@@ -51,6 +51,7 @@ import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.AlgaeRoller;
 import frc.robot.subsystems.Indicator;
 import frc.robot.subsystems.Neck;
+import frc.robot.commands.DoNothing;
 import frc.robot.commands.algae_roller.*;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;

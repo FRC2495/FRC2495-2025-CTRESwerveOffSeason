@@ -37,7 +37,37 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - left coral station to side E (right)"
+            "pathName": "SPB2 - Left Coral Pickup to Side E (right)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreSecondLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "homeToCoralStation"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Side E (right) to Left Coral Station"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "doNothingUntilCoralSensed"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - left coral station to side E (left)"
           }
         },
         {
