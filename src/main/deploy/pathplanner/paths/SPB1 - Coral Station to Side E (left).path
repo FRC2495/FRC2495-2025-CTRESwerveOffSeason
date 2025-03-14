@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5359983687953527,
-        "y": 5.861074009998549
+        "x": 2.834323732501633,
+        "y": 5.603115529583567
       },
       "isLocked": false,
       "linkedName": "Right Coral Station"
     },
     {
       "anchor": {
-        "x": 3.812090163934426,
-        "y": 5.133862704918033
+        "x": 3.1882500000000005,
+        "y": 4.28825
       },
       "prevControl": {
-        "x": 3.285298317041351,
-        "y": 6.076934817449239
+        "x": 2.7268848041866076,
+        "y": 5.153893409294965
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Side F (right)"
+      "linkedName": "Side E (left)"
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -59.99999999999999
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,

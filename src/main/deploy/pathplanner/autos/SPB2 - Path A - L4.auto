@@ -19,30 +19,6 @@
         {
           "type": "named",
           "data": {
-            "name": "grabLevelTwoAlgae"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "home"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB2 - Side B (right) to net"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ScoreNet"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "home"
           }
         }
@@ -50,6 +26,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L 4",
+  "folder": "SPB2 - L4",
   "choreoAuto": false
 }

@@ -4,8 +4,10 @@
   "holonomicMode": true,
   "pathFolders": [],
   "autoFolders": [
+    "SPB2 - L2",
+    "SPB1 - L2",
     "SPB1 - L4",
-    "SPB2 - L 4",
+    "SPB2 - L4",
     "SPB3 - L4",
     "Test"
   ],

@@ -191,9 +191,9 @@ public class RobotContainer {
 		NamedCommands.registerCommand("neckMoveToCoralReefWithStallDetection", new NeckMoveToCoralReefWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveToCoralStationWithStallDetection", new NeckMoveToCoralStationWithStallDetection(neck));
 		NamedCommands.registerCommand("neckMoveToAlgaeReefWithStallDetection", new NeckMoveToAlgaeReefWithStallDetection(neck));
-		NamedCommands.registerCommand("scoreFirstLevelCoral", new ScoreFirstLevelCoral(elevator, coral_roller));
-		NamedCommands.registerCommand("scoreSecondLevelCoral", new ScoreSecondLevelCoral(elevator, coral_roller));
-		NamedCommands.registerCommand("scoreThirdLevelCoral", new ScoreThirdLevelCoral(elevator, coral_roller));
+		NamedCommands.registerCommand("scoreFirstLevelCoral", new ScoreFirstLevelCoral(elevator, coral_roller, neck));
+		NamedCommands.registerCommand("scoreSecondLevelCoral", new ScoreSecondLevelCoral(elevator, coral_roller, neck));
+		NamedCommands.registerCommand("scoreThirdLevelCoral", new ScoreThirdLevelCoral(elevator, coral_roller, neck));
 		NamedCommands.registerCommand("scoreFourthLevelCoral", new ScoreFourthLevelCoral(elevator, coral_roller, neck));
 		NamedCommands.registerCommand("grabLevelTwoAlgae", new GrabLevelTwoAlgae(elevator, algae_roller, slider));
 		NamedCommands.registerCommand("grabLevelThirdAlgae", new GrabLevelThreeAlgae(elevator, algae_roller, slider));

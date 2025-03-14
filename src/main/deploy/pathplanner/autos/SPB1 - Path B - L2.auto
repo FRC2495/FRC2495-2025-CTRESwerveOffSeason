@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - SZ to Side B (right)"
+            "pathName": "SPB1 - SZ to Side A (left)"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "scoreFourthLevelCoral"
+            "name": "scoreSecondLevelCoral"
           }
         },
         {
@@ -21,11 +21,17 @@
           "data": {
             "name": "home"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Side A to Out of Way"
+          }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L 4",
+  "folder": "SPB1 - L2",
   "choreoAuto": false
 }

@@ -9,7 +9,7 @@ import frc.robot.subsystems.*;
 
 public class ScoreFirstLevelCoral extends SequentialCommandGroup {
 
-	public ScoreFirstLevelCoral(Elevator elevator, CoralRoller coral_roller) {
+	public ScoreFirstLevelCoral(Elevator elevator, CoralRoller coral_roller, Neck neck) {
 
 		addCommands(
 

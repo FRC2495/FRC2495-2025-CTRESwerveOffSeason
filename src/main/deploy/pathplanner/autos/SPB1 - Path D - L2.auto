@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - SZ to Side B (right)"
+            "pathName": "SPB1 - SZ to Side A (left)"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "scoreFourthLevelCoral"
+            "name": "scoreSecondLevelCoral"
           }
         },
         {
@@ -25,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Side B (right) to Right Coral Pickup"
+            "pathName": "SPB1 - Side A (left) to Coral Station "
           }
         },
         {
@@ -37,13 +37,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Right Coral Pickup to Side E (left)"
+            "pathName": "SPB1 - Coral Station to Side A (right)"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "scoreFourthLevelCoral"
+            "name": "scoreSecondLevelCoral"
           }
         },
         {
@@ -56,6 +56,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L 4",
+  "folder": "SPB1 - L2",
   "choreoAuto": false
 }

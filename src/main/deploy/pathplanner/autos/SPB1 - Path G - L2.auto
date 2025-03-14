@@ -7,19 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - SZ to Side B (right)"
+            "pathName": "SPB1 - SZ to Side A (left)"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "scoreFourthLevelCoral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "grabLevelTwoAlgae"
+            "name": "scoreSecondLevelCoral"
           }
         },
         {
@@ -31,25 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Side B (right) to net"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ScoreNet"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "homeToCoralStation"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB2 - Net to Left Coral Station"
+            "pathName": "SPB1 - Side A (left) to Coral Station "
           }
         },
         {
@@ -61,13 +37,43 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - Left Coral Pickup to Side E (right)"
+            "pathName": "SPB1 - Coral Station to Side E (left)"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "scoreFourthLevelCoral"
+            "name": "scoreSecondLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Side E (left) to Coral Station"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "doNothingUntilCoralSensed"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Coral Station to Side E (right)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreSecondLevelCoral"
           }
         },
         {
@@ -80,6 +86,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L 4",
+  "folder": "SPB1 - L2",
   "choreoAuto": false
 }
