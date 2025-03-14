@@ -19,7 +19,7 @@
         {
           "type": "named",
           "data": {
-            "name": "home"
+            "name": "homeToCoralStation"
           }
         },
         {
@@ -37,37 +37,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side F (right)"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "scoreFourthLevelCoral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "home"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB1 - Side F (right) to Coral Station"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "doNothingUntilCoralSensed"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB1 - Coral Station to Side F (left)"
+            "pathName": "SPB1 - Coral Station to Side A (right)"
           }
         },
         {
@@ -86,6 +56,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "SPB1",
+  "folder": "SPB1 - L4",
   "choreoAuto": false
 }

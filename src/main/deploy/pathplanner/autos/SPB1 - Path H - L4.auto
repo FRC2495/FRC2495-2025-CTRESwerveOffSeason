@@ -19,31 +19,25 @@
         {
           "type": "named",
           "data": {
-            "name": "homeToCoralStation"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB1 - Side A (left) to Coral Station "
+            "name": "grabLevelTwoAlgae"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "doNothingUntilCoralSensed"
+            "name": "home"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Coral Station to Side A (right)"
+            "pathName": "SPB1 - Side A to Algae Net"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "scoreFourthLevelCoral"
+            "name": "ScoreNet"
           }
         },
         {
@@ -55,7 +49,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Side A (right) to Coral Station "
+            "pathName": "SPB1 - Algae Net To Coral Station"
           }
         },
         {
@@ -81,11 +75,41 @@
           "data": {
             "name": "home"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Side F (right) to Coral Station"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "doNothingUntilCoralSensed"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Coral Station to Side F (left)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreFourthLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB1",
+  "folder": "SPB1 - L4",
   "choreoAuto": false
 }
