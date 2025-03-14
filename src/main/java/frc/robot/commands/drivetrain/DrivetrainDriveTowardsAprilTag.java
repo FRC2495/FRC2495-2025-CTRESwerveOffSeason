@@ -18,7 +18,7 @@ public class DrivetrainDriveTowardsAprilTag extends Command {
 
 	public static final double JOYSTICK_AXIS_THRESHOLD = 0.15;
 	public final static int TURN_USING_CAMERA_ON_TARGET_MINIMUM_COUNT = 10;
-	private final double VISION_DES_RANGE_m = 1.25;//TODO fix
+	private final double VISION_DES_RANGE_m = 20;//TODO fix
 
 	public int onTargetCountTurningUsingCamera;
 

@@ -29,22 +29,28 @@ public final class Constants {
 	public static class AprilTags {
 
 		// facing the field elements (or from the driver station for the stages)
-		public static final int RIGHT_BLUE_SOURCE = 1; 
-		public static final int LEFT_BLUE_SOURCE = 2;
-		public static final int RIGHT_RED_SPEAKER = 3;
-		public static final int MIDDLE_RED_SPEAKER = 4; // target
-		public static final int RED_AMP = 5; // target
-		public static final int BLUE_AMP = 6; // target
-		public static final int MIDDLE_BLUE_SPEAKER = 7; // target
-		public static final int LEFT_BLUE_SPEAKER = 8;
-		public static final int RIGHT_RED_SOURCE = 9;
-		public static final int LEFT_RED_SOURCE = 10;
-		public static final int STAGE_LEFT_RED_TRAP = 11;
-		public static final int STAGE_RIGHT_RED_TRAP = 12;
-		public static final int CENTER_STAGE_RED_TRAP = 13;
-		public static final int CENTER_STAGE_BLUE_TRAP = 14;
-		public static final int STAGE_LEFT_BLUE_TRAP = 15;
-		public static final int STAGE_RIGHT_BLUE_TRAP = 16;
+		public static final int RED_LEFT_CORAL_STATION = 1; 
+		public static final int RED_RIGHT_CORAL_STATION = 2;
+		public static final int BLUE_PROCESSOR = 3;
+		public static final int RED_ALLIANCE_BLUE_NET = 4; 
+		public static final int RED_ALLIANCE_RED_NET = 5; 
+		public static final int RED_REEF_SIDE_D = 6; // target
+		public static final int RED_REEF_SIDE_E = 7; // target
+		public static final int RED_REEF_SIDE_F = 8; // target
+		public static final int RED_REEF_SIDE_A = 9; // target
+		public static final int RED_REEF_SIDE_B = 10; // target
+		public static final int RED_REEF_SIDE_C = 11; // target
+		public static final int BLUE_RIGHT_CORAL_STATION = 12;
+		public static final int BLUE_LEFT_CORAL_STATION = 13;
+		public static final int BLUE_ALLIANCE_BLUE_NET = 14; 
+		public static final int BLUE_ALLIANCE_RED_NET = 15;
+		public static final int RED_PROCESSOR = 16;
+		public static final int BLUE_REEF_SIDE_D = 17; // target
+		public static final int BLUE_REEF_SIDE_E = 18; // target
+		public static final int BLUE_REEF_SIDE_F = 19; // target
+		public static final int BLUE_REEF_SIDE_A = 20; // target
+		public static final int BLUE_REEF_SIDE_B = 21; // target
+		public static final int BLUE_REEF_SIDE_C = 22; // target
 	
 		public AprilTags() {
 		}
