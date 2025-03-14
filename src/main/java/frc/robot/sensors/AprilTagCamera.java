@@ -47,7 +47,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	private static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(8.75); // may need to change 
 	private static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(+20.0); // tilt of our camera (radians)
 	private static final double CAMERA_ROLL_RADIANS = 0.0;
-	private static final double CAMERA_YAW_RADIANS = Units.degreesToRadians(180.0);
+	private static final double CAMERA_YAW_RADIANS = Units.degreesToRadians(0);
 
 	private PhotonPoseEstimator estimator;
 	private Transform3d robotToCam = new Transform3d(
@@ -55,7 +55,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		new Rotation3d(CAMERA_ROLL_RADIANS, CAMERA_PITCH_RADIANS, CAMERA_YAW_RADIANS)
 	);
 
-	static final double APRILTAG_CAMERA_SHOOTER_ALIGNMENT_CORRECTION_DEGREES = 5.0; // apply offset in degrees to compensate for shooter being a bit crooked - TODO adjust as needed
+	//static final double APRILTAG_CAMERA_SHOOTER_ALIGNMENT_CORRECTION_DEGREES = 5.0; // apply offset in degrees to compensate for shooter being a bit crooked - TODO adjust as needed
 	//static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
 	public AprilTagCamera() {
