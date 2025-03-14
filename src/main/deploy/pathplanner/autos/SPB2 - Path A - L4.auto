@@ -13,13 +13,37 @@
         {
           "type": "named",
           "data": {
-            "name": "scoreFourthLevelCoral"
+            "name": "drivetrainStop"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "home"
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveToCoralReefWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerTimedRelease"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
           }
         }
       ]
