@@ -21,11 +21,17 @@
           "data": {
             "name": "home"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB2 - move out of way"
+          }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L2",
+  "folder": "SPB2 - L3",
   "choreoAuto": false
 }

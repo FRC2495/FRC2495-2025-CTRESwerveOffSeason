@@ -1,0 +1,61 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreSecondLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "homeToCoralStation"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Move from side C to left coral station"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "doNothingUntilCoralSensed"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Left Coral Station to Side D (left)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "scoreSecondLevelCoral"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "home"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "SPB3 - L2",
+  "choreoAuto": false
+}

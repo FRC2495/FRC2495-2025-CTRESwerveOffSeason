@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - SZ to Side B (right)"
+            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "scoreThirdLevelCoral"
+            "name": "scoreSecondLevelCoral"
           }
         },
         {
@@ -21,17 +21,11 @@
           "data": {
             "name": "home"
           }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB2 - move out of way"
-          }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L2",
+  "folder": "SPB3 - L2",
   "choreoAuto": false
 }
