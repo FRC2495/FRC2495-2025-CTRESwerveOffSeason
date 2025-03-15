@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.1785,
-        "y": 3.9957499999999997
+        "x": 3.1704195205479455,
+        "y": 3.882255993150685
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.8065067540592263,
-        "y": 3.1642417524005166
+        "x": 2.7984262746071717,
+        "y": 3.050747745551202
       },
       "isLocked": false,
       "linkedName": "Side E (right)"
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -126.0
+    "rotation": 52.470653295369544
   },
   "reversed": false,
   "folder": null,
