@@ -41,6 +41,6 @@ public class ElevatorMoveToFourthLevelWithStallDetection extends Command {
 	@Override
 	public void end(boolean interrupted) {
 		System.out.println("ElevatorMoveToFourthLevelWithStallDetection: end");
-		elevator.stop(); // adjust if needed
+		elevator.stay(); // adjust if needed
 	}
 }
