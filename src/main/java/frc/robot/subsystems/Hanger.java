@@ -80,6 +80,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 
 	DutyCycleOut hangerStopOut = new DutyCycleOut(0);
 	DutyCycleOut hangerReducedOut = new DutyCycleOut(REDUCED_PCT_OUTPUT);
+	DutyCycleOut hangerReducedOutReverse = new DutyCycleOut(-REDUCED_PCT_OUTPUT);
 
 	PositionDutyCycle hangerUpPosition = new PositionDutyCycle(-LENGTH_OF_TRAVEL_REVS);
 	PositionDutyCycle hangerMidwayPosition = new PositionDutyCycle(-LENGTH_OF_MIDWAY_REVS);
@@ -326,7 +327,7 @@ public class Hanger extends SubsystemBase implements IHanger {
 		//dutyCycleOut = 0;
 		hanger.setControl(hangerStopOut);
 		
-		setPeakOutputs(MAX_PCT_OUTPUT); // we undo what me might have changed
+		//setPeakOutputs(MAX_PCT_OUTPUT); // we undo what me might have changed
 		
 		isMoving = false;
 		isMovingUp = false;
@@ -433,6 +434,22 @@ public class Hanger extends SubsystemBase implements IHanger {
 		if (!isMoving) // if we are already doing a move we don't take over
 		{
 			hanger.setControl(hangerReducedOut.withOutput(+MathUtil.applyDeadband(gamepad.getLeftY(), RobotContainer.GAMEPAD_AXIS_THRESHOLD)*1.0/*0.7*/)); // adjust sign if desired
+		}
+	}
+
+	public void buttonBoxDownControl()
+	{
+		if (!isMoving) // if we are already doing a move we don't take over
+		{
+			hanger.setControl(hangerReducedOut); // adjust sign if desired
+		}
+	}
+
+	public void buttonBoxUpControl()
+	{
+		if (!isMoving) // if we are already doing a move we don't take over
+		{
+			hanger.setControl(hangerReducedOutReverse); // adjust sign if desired
 		}
 	}
 

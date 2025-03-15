@@ -62,7 +62,7 @@ public class Neck extends SubsystemBase implements INeck {
 	public static final double GEAR_RATIO = 3.0; // todo change if needed
 
 	//public static final int ANGLE_TO_PRE_MATCH_TICKS = 0.8;
-	public static final int ANGLE_TO_CORAL_STATION_TICKS = 8; //TODO set proper value
+	public static final int ANGLE_TO_CORAL_STATION_TICKS = 11; //TODO set proper value
 	public static final int ANGLE_TO_ALGAE_REEF_TICKS = 13; //TODO set proper value
 	public static final int ANGLE_TO_CORAL_REEF_TICKS = 5; //TODO set proper value
 	public static final int ANGLE_TO_MIDWAY_TICKS = 15;
@@ -443,7 +443,7 @@ public class Neck extends SubsystemBase implements INeck {
 	{
 		if (!isMoving) // if we are already doing a move we don't take over
 		{
-			neckClosedLoopController.setReference(+MathUtil.applyDeadband(gamepad.getLeftX(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6, ControlType.kDutyCycle);
+			neckClosedLoopController.setReference(+MathUtil.applyDeadband(gamepad.getLeftY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6, ControlType.kDutyCycle);
 			//neck.set(ControlMode.PercentOutput, +MathUtil.applyDeadband(gamepad.getRightY(),RobotContainer.GAMEPAD_AXIS_THRESHOLD)*0.6); // adjust sign if desired
 		}
 	}

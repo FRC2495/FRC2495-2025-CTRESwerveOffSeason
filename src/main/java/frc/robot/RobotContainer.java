@@ -236,6 +236,7 @@ public class RobotContainer {
 		
 		coral_roller.setDefaultCommand(new CoralRollerStopForever(coral_roller)); // we stop by default
 		algae_roller.setDefaultCommand(new AlgaeRollerStopForever(algae_roller)); // we stop by default
+		hanger.setDefaultCommand(new HangerStop(hanger));
 
 		//shooter.setDefaultCommand(new ShooterStopForever(shooter)); // we stop by default
 
@@ -407,17 +408,19 @@ public class RobotContainer {
 
 
 		copilotGamepad.axisGreaterThan(LY,GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new HangerGamepadControl(hanger, getCopilotGamepad()));
+			//.whileTrue(new HangerGamepadControl(hanger, getCopilotGamepad()));
+			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
 
 		copilotGamepad.axisLessThan(LY,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new HangerGamepadControl(hanger, getCopilotGamepad()));
-
-		copilotGamepad.axisGreaterThan(LX,GAMEPAD_AXIS_THRESHOLD)
+			//.whileTrue(new HangerGamepadControl(hanger, getCopilotGamepad()));
 			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+
+		copilotGamepad.axisGreaterThan(LX,GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
 			//.onTrue(new ElevatorMoveToThirdLevelWithStallDetection(elevator));
 
-		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD)
-			.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
+		copilotGamepad.axisLessThan(LX,-GAMEPAD_AXIS_THRESHOLD);
+			//.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
 			//.onTrue(new ElevatorMoveToSecondLevelWithStallDetection(elevator));
 
 		copilotGamepad.axisGreaterThan(RY,GAMEPAD_AXIS_THRESHOLD)
@@ -429,9 +432,11 @@ public class RobotContainer {
 
 		copilotGamepad.axisGreaterThan(RX,GAMEPAD_AXIS_THRESHOLD);
 			//.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
+			//.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
 
 		copilotGamepad.axisLessThan(RX,-GAMEPAD_AXIS_THRESHOLD);
 			//.whileTrue(new SliderGamepadControl(slider, getCopilotGamepad()));
+			//.whileTrue(new NeckGamepadControl(neck, getCopilotGamepad()));
 		
 		// button box 
 
@@ -458,6 +463,12 @@ public class RobotContainer {
 
 		buttonBox.button(10)
 			.onTrue(new ElevatorMoveToAlgaeLevelThreeWithStallDetection(elevator));
+		
+		buttonBox.button(11)
+			.whileTrue(new HangerButtonBoxUpControl(hanger));
+		
+		buttonBox.button(12)
+			.whileTrue(new HangerButtonBoxDownControl(hanger));
 		
 	}
 
