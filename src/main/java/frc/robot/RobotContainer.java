@@ -349,7 +349,8 @@ public class RobotContainer {
 			.whileTrue(new CoralRollerRollIn(coral_roller));
 
 		copilotGamepad.y()
-			.whileTrue(new CoralRollerRollOut(coral_roller));
+			//.whileTrue(new CoralRollerRollOut(coral_roller));
+			.whileTrue(new AlgaeRollerRelease(algae_roller));
 			
 		copilotGamepad.back()
 			.onTrue(new DrivetrainAndGyroReset(drivetrain));
@@ -361,10 +362,11 @@ public class RobotContainer {
 
 
 		copilotGamepad.leftTrigger()
-			.whileTrue(new AlgaeRollerRoll(algae_roller));
+			.whileTrue(new CoralRollerRollOut(coral_roller));
 
 		copilotGamepad.rightTrigger()
-			.whileTrue(new AlgaeRollerRelease(algae_roller));
+			//.whileTrue(new AlgaeRollerRelease(algae_roller));
+			.whileTrue(new AlgaeRollerRoll(algae_roller));
 
 
 		copilotGamepad.povDown()
