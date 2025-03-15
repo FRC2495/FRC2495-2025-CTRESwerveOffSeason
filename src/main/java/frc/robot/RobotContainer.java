@@ -206,6 +206,7 @@ public class RobotContainer {
 		NamedCommands.registerCommand("drivetrainStop", new DrivetrainStop(drivetrain));
 		NamedCommands.registerCommand("scoreFourthLevelCoralAndHomeToCoralStation", new ScoreFourthLevelCoralAndHomeToCoralStation(elevator, coral_roller, neck, slider));
 		NamedCommands.registerCommand("scoreFourthLevelCoralAndHome", new ScoreFourthLevelCoralAndHome(elevator, coral_roller, neck, slider));
+		NamedCommands.registerCommand("neckHome", new NeckMoveHomeWithStallDetection(neck));
 
 		// choosers (for auton)
 
@@ -338,9 +339,11 @@ public class RobotContainer {
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
 			.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
 		
-		copilotGamepad.b();
+		copilotGamepad.b()
 			//.onTrue(new NeckMoveProcessorWithStallDetection(neck));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
+			//.onTrue(new NeckMoveHomeWithStallDetection(neck));
+			.onTrue(new NeckMoveDownWithStallDetection(neck));
 
 		copilotGamepad.x()
 			.whileTrue(new CoralRollerRollIn(coral_roller));
@@ -366,7 +369,8 @@ public class RobotContainer {
 
 		copilotGamepad.povDown()
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			.onTrue(new NeckMoveDownWithStallDetection(neck));
+			//.onTrue(new NeckMoveDownWithStallDetection(neck));
+			.onTrue(new NeckMoveHomeWithStallDetection(neck));
 
 		copilotGamepad.povLeft()
 			.onTrue(new NeckMoveToCoralStationWithStallDetection(neck));

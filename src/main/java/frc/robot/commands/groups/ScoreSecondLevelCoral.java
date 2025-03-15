@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.coral_roller.CoralRollerTimedRelease;
 import frc.robot.commands.elevator.ElevatorMoveToSecondLevelWithStallDetection;
+import frc.robot.commands.neck.NeckMoveHomeWithStallDetection;
 import frc.robot.commands.neck.NeckMoveToCoralReefWithStallDetection;
 import frc.robot.subsystems.*;
 
@@ -15,6 +16,8 @@ public class ScoreSecondLevelCoral extends SequentialCommandGroup {
 		addCommands(
 
 			new ElevatorMoveToSecondLevelWithStallDetection(elevator),
+
+			new NeckMoveHomeWithStallDetection(neck),
 
 			new NeckMoveToCoralReefWithStallDetection(neck),
 
