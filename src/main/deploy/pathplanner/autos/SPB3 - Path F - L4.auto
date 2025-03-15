@@ -11,19 +11,19 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "drivetrainStop"
+                  "name": "scoreFourthLevelCoralAndHomeToCoralStation"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "scoreFourthLevelCoralAndHomeToCoralStation"
+                  "name": "drivetrainStop"
                 }
               }
             ]
@@ -36,44 +36,57 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "deadline",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "drivetrainStop"
+                  "name": "doNothingUntilCoralSensed"
                 }
               },
               {
                 "type": "named",
                 "data": {
-                  "name": "doNothingUntilCoralSensed"
+                  "name": "drivetrainStop"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "SPB3 - Left Coral Station to Side D (left)"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "drivetrainStop"
+                  "pathName": "SPB3 - Left Coral Station to Side D (left)"
                 }
               },
               {
                 "type": "named",
                 "data": {
+                  "name": "neckMoveDownWithStallDetection"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
                   "name": "scoreFourthLevelCoralAndHome"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
                 }
               }
             ]
