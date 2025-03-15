@@ -359,6 +359,19 @@ public class Neck extends SubsystemBase implements INeck {
 		stalledCount = 0;
 	}
 
+	public void moveHome() {	
+
+		System.out.println("Moving to Home");
+
+		neckClosedLoopController.setReference(REDUCED_PCT_OUTPUT, ControlType.kDutyCycle);
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
 	//TODO check to see if this translates from talon to rev?
 	public double getPosition() {
 		return neckEncoder.getPosition() * GEAR_RATIO / TICKS_PER_REVOLUTION;

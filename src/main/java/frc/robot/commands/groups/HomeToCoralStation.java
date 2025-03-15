@@ -22,13 +22,13 @@ import frc.robot.commands.slider.*;
 
 public class HomeToCoralStation extends ParallelCommandGroup{
 	
-	public HomeToCoralStation(Elevator elevator, Slider slider , Neck neck) {
+	public HomeToCoralStation(Elevator elevator,/* Slider slider ,*/ Neck neck) {
 
 		addCommands(
 
 			new ElevatorMoveDownWithStallDetection(elevator),
 
-			new SliderRetractWithLimitSwitch(slider),
+			//new SliderRetractWithLimitSwitch(slider),
 			
 			new NeckMoveToCoralStationWithStallDetection(neck)
 		);
