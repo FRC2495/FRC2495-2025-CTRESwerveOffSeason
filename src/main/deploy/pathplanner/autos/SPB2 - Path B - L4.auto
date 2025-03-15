@@ -11,15 +11,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "scoreFourthLevelCoral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "home"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "scoreFourthLevelCoralAndHome"
+                }
+              }
+            ]
           }
         },
         {

@@ -11,39 +11,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "deadline",
           "data": {
-            "name": "drivetrainStop"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "elevatorMoveToFourthLevelWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "neckMoveToCoralReefWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "coralRollerTimedRelease"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "neckMoveDownWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "elevatorMoveDownWithStallDetection"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "scoreFourthLevelCoralAndHomeToCoralStation"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              }
+            ]
           }
         }
       ]

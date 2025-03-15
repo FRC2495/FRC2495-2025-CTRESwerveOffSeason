@@ -11,15 +11,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "deadline",
           "data": {
-            "name": "scoreFourthLevelCoral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "homeToCoralStation"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "scoreFourthLevelCoralAndHomeToCoralStation"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              }
+            ]
           }
         },
         {
@@ -29,9 +36,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "deadline",
           "data": {
-            "name": "doNothingUntilCoralSensed"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "doNothingUntilCoralSensed"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              }
+            ]
           }
         },
         {
@@ -41,15 +61,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "deadline",
           "data": {
-            "name": "scoreFourthLevelCoral"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "home"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "scoreFourthLevelCoralAndHomeToCoralStation"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              }
+            ]
           }
         }
       ]
