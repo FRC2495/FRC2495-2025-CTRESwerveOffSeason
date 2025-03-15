@@ -11,22 +11,45 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "scoreFourthLevelCoralAndHomeToCoralStation"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "drivetrainStop"
-                }
-              }
-            ]
+            "name": "drivetrainStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToFourthLevelWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveToCoralReefWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "coralRollerTimedRelease"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "neckMoveToCoralStationWithStallDetection"
           }
         }
       ]

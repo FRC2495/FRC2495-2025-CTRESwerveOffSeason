@@ -183,8 +183,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
         NamedCommands.registerCommand("coralRollerRollOut", new CoralRollerRollOut(coral_roller));
         NamedCommands.registerCommand("coralRollerRollIn", new CoralRollerRollIn(coral_roller));
-        NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, .2));
-        NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, .2));
+        NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, .4));
+        NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, .4));
 		NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderSafeExtendWithStallDetection(neck, slider));
 		NamedCommands.registerCommand("sliderRetractWithStallDetection", new SliderRetractWithLimitSwitch(slider));
 		NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
