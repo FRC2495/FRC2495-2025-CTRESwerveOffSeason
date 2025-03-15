@@ -202,7 +202,7 @@ public class RobotContainer {
 		NamedCommands.registerCommand("scoreProcessor", new ScoreProcessor(algae_roller, neck, slider));
 		NamedCommands.registerCommand("doNothingUntilCoralSensed", new DoNothingUntilCoralSensed(coral_roller));
 		NamedCommands.registerCommand("home", new Home(elevator, slider, neck));
-		NamedCommands.registerCommand("homeToCoralStation", new HomeToCoralStation(elevator, slider, neck));
+		NamedCommands.registerCommand("homeToCoralStation", new HomeToCoralStation(elevator, /*slider,*/ neck));
 		NamedCommands.registerCommand("drivetrainStop", new DrivetrainStop(drivetrain));
 		NamedCommands.registerCommand("scoreFourthLevelCoralAndHomeToCoralStation", new ScoreFourthLevelCoralAndHomeToCoralStation(elevator, coral_roller, neck, slider));
 		NamedCommands.registerCommand("scoreFourthLevelCoralAndHome", new ScoreFourthLevelCoralAndHome(elevator, coral_roller, neck, slider));
