@@ -13,10 +13,10 @@ public class ScoreFourthLevelCoral extends SequentialCommandGroup {
 	public ScoreFourthLevelCoral(Elevator elevator, CoralRoller coral_roller, Neck neck) {
 
 		addCommands(
-
-			new NeckMoveToCoralReefWithStallDetection(neck),
 			
 			new ElevatorMoveToFourthLevelWithStallDetection(elevator),
+			
+			new NeckMoveToCoralReefWithStallDetection(neck),
 
 			new CoralRollerTimedRelease(coral_roller, .2)
 						

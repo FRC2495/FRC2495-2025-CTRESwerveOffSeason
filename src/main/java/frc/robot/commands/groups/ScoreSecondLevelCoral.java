@@ -14,9 +14,9 @@ public class ScoreSecondLevelCoral extends SequentialCommandGroup {
 
 		addCommands(
 
-			new NeckMoveToCoralReefWithStallDetection(neck),
-
 			new ElevatorMoveToSecondLevelWithStallDetection(elevator),
+
+			new NeckMoveToCoralReefWithStallDetection(neck),
 
 			new CoralRollerTimedRelease(coral_roller, .2)
 						

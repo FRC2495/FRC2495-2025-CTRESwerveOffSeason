@@ -16,10 +16,10 @@ public class ScoreFourthLevelCoralAndHomeToCoralStation extends SequentialComman
 	public ScoreFourthLevelCoralAndHomeToCoralStation(Elevator elevator, CoralRoller coral_roller, Neck neck, Slider slider) {
 
 		addCommands(
-
-			new NeckMoveToCoralReefWithStallDetection(neck),
 			
 			new ElevatorMoveToFourthLevelWithStallDetection(elevator),
+
+			new NeckMoveToCoralReefWithStallDetection(neck),
 
 			new CoralRollerTimedRelease(coral_roller, .2),
 
