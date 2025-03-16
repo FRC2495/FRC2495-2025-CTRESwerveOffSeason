@@ -95,6 +95,11 @@ public class RobotContainer {
 
 	private final SendableChooser<Command> autoChooser;
 
+	public static final String AUTON_DO_NOTHING = "Do Nothing";
+	public static final String AUTON_CUSTOM = "My Auto";
+	private String autonSelected;
+	private SendableChooser<String> autonChooser = new SendableChooser<>();
+
 	// sensors
 
 	private final HMAccelerometer accelerometer = new HMAccelerometer();
@@ -168,6 +173,9 @@ public class RobotContainer {
 	 * The container for the robot. Contains subsystems, OI devices, and commands.
 	 */
 	public RobotContainer() {
+
+		autonChooser.setDefaultOption("SP2 One Coral Test", AUTON_CUSTOM);
+		SmartDashboard.putData("Auto choices", autonChooser); 
 
 		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
@@ -480,69 +488,13 @@ public class RobotContainer {
 	 * @return the command to run in autonomous
 	 */
 	public Command getAutonomousCommand() {
-		return autoChooser.getSelected();
-		/*autonSelected = autonChooser.getSelected();
+		//return autoChooser.getSelected();
+		autonSelected = autonChooser.getSelected();
 		System.out.println("Auton selected: " + autonSelected);	
 
-		gamePieceSelected = gamePieceChooser.getSelected();
-		System.out.println("Game piece selected: " + gamePieceSelected);		
-
-		startPosition = startPositionChooser.getSelected();
-		System.out.println("Start position: " + startPosition);
-
-		mainTarget = mainTargetChooser.getSelected();
-		System.out.println("Main target: " + mainTarget);
-		
-		cameraOption = cameraOptionChooser.getSelected();
-		System.out.println("Camera option: " + cameraOption);
-		
-		sonarOption = sonarOptionChooser.getSelected();
-		System.out.println("Sonar option: " + sonarOption);
-		
-		releaseSelected = releaseChooser.getSelected();
-		System.out.println("Release chosen: " + releaseSelected);
-
-		autonOption = autonOptionChooser.getSelected();
-		System.out.println("Auton option: " + autonOption);
-		
-
 		switch (autonSelected) {
-			case AUTON_SAMPLE_SWERVE:
-				//return createSwerveControllerCommand(createExampleTrajectory());
-				//return new DrivetrainSwerveRelative(drivetrain, this, createExampleTrajectory());
-				return new MoveInSShape(drivetrain, this, 3);
-				//break;
-
-			case AUTON_SAMPLE_MOVE_FORWARD:
-				return new MoveForward(drivetrain, this, 3);
-				//break;
-
-			case AUTON_SAMPLE_MOVE_IN_REVERSE:
-				return new MoveInReverse(drivetrain, this, 3);
-				//break;
-
-			case AUTON_SAMPLE_MOVE_IN_GAMMA_SHAPE:
-				return new MoveInGammaShape(drivetrain, this, 3);
-				//break;
-
-			case AUTON_SAMPLE_MOVE_IN_L_SHAPE_IN_REVERSE:
-				return new MoveInLShapeInReverse(drivetrain, this, 3);
-				//break;
-
-			case AUTON_TEST_HARDCODED_MOVE_1:
-				return new CompletelyLeaveCommunity(drivetrain, this);
-				//break;
-
-			/*case AUTON_TEST_HARDCODED_MOVE_2:
-				return new MoveInNonBumpKTurn(drivetrain, this);
-				//break;
-
-			case AUTON_TEST_TRAJECTORY_GENERATION:
-				return new TrajectoryGenerationTest(drivetrain, this, object_detection_camera, apriltag_camera);
-				//break;
-
 			case AUTON_CUSTOM:
-				return new CustomAuton(gamePieceSelected, startPosition, mainTarget, cameraOption, sonarOption, autonOption, drivetrain, this, elevator, roller, neck, shooter, object_detection_camera, apriltag_camera, noteSensor, noteSensorTwo);
+				return new StartingPositionTwoOneCoral(this, drivetrain, coral_roller, neck, elevator, slider);
 				//break;
 
 			case AUTON_DO_NOTHING:
@@ -553,7 +505,7 @@ public class RobotContainer {
 				// nothing
 				return null;
 				//break;
-		}*/ // end switch
+		} // end switch
 	}
 
 	public TrajectoryConfig createFastTrajectoryConfig() {
@@ -568,6 +520,17 @@ public class RobotContainer {
 	}
 
 	public TrajectoryConfig createTrajectoryConfig() {
+		// Create config for trajectory
+		TrajectoryConfig config = new TrajectoryConfig(
+			AutoConstants.MAX_SPEED_METERS_PER_SECOND,
+			AutoConstants.MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+			// Add kinematics to ensure max speed is actually obeyed
+			.setKinematics(DrivetrainConstants.DRIVE_KINEMATICS);
+
+		return config;
+	}
+
+	public TrajectoryConfig createAlmostMaxTrajectoryConfig() {
 		// Create config for trajectory
 		TrajectoryConfig config = new TrajectoryConfig(
 			AutoConstants.MAX_SPEED_METERS_PER_SECOND,
@@ -752,40 +715,6 @@ public class RobotContainer {
 	/*public SendableChooser<String> getAutonChooser()
 	{
 		return autonChooser;
-	}
-	
-	public SendableChooser<String> getGamePieceChooser()
-	{
-		return gamePieceChooser;
-	}
-
-	public SendableChooser<String> getStartPositionChooser()
-	{
-		return startPositionChooser;
-	}
-
-	public SendableChooser<String> getMainTargetChooser()
-	{
-		return mainTargetChooser;
-	}
-
-	public SendableChooser<String> getCameraOptionChooser()
-	{
-		return cameraOptionChooser;
-	}
-
-	public SendableChooser<String> getSonarOptionChooser()
-	{
-		return sonarOptionChooser;
-	}
-
-	public SendableChooser<String> getReleaseChooser()
-	{
-		return releaseChooser;
-	}
-
-	public SendableChooser<String> getAutonOptionChooser()
-	{
-		return autonOptionChooser;
 	}*/
+
 }

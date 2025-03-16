@@ -135,6 +135,7 @@ public final class Constants {
 
 	public static final class AutoConstants {
 		public static final double MAX_SPEED_METERS_PER_SECOND = 4.0; //2.85;//4.0; //4.42; //3.0;
+		public static final double ALMOST_MAX_SPEED_METERS_PER_SECOND = 3.0; //2.85;//4.0; //4.42; //3.0;
 		public static final double MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 3;
 		public static final double MAX_ANGULAR_SPEED_RADIANS_PER_SECOND = Math.PI;
 		public static final double MAX_ANGULAR_ACCELERATION_RADIANS_PER_SECOND_SQUARED = Math.PI;
