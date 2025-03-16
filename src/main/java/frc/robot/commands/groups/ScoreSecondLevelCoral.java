@@ -3,7 +3,7 @@ package frc.robot.commands.groups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.coral_roller.CoralRollerTimedRelease;
+import frc.robot.commands.coral_roller.CoralRollerTimedRollOut;
 import frc.robot.commands.elevator.ElevatorMoveToSecondLevelWithStallDetection;
 import frc.robot.commands.neck.NeckMoveHomeWithStallDetection;
 import frc.robot.commands.neck.NeckMoveToCoralReefWithStallDetection;
@@ -23,7 +23,7 @@ public class ScoreSecondLevelCoral extends SequentialCommandGroup {
 
 			new ElevatorMoveToSecondLevelWithStallDetection(elevator),
 
-			new CoralRollerTimedRelease(coral_roller, .4)
+			new CoralRollerTimedRollOut(coral_roller, .4)
 						
 		); 
   

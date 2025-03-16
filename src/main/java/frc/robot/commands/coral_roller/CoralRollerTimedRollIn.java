@@ -14,14 +14,14 @@ import frc.robot.subsystems.CoralRoller;
 /**
  * Add your docs here.
  */
-public class CoralRollerTimedRelease extends WaitCommand {
+public class CoralRollerTimedRollIn extends WaitCommand {
 
 	private CoralRoller coral_roller;
 
 	/**
 	 * Add your docs here.
 	 */
-	public CoralRollerTimedRelease(CoralRoller coral_roller, double timeout) {
+	public CoralRollerTimedRollIn(CoralRoller coral_roller, double timeout) {
 		super(timeout);
 		this.coral_roller = coral_roller;
 		addRequirements(coral_roller);
@@ -39,9 +39,9 @@ public class CoralRollerTimedRelease extends WaitCommand {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("CoralRollerTimedRelease: initialize");
+		System.out.println("CoralRollerTimedRoll: initialize");
 		super.initialize();
-		coral_roller.rollOut();
+		coral_roller.rollIn();
 
 	}
 
@@ -54,8 +54,8 @@ public class CoralRollerTimedRelease extends WaitCommand {
 	// Called once after timeout
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("CoralRollerTimedRelease: end");
-		
+		System.out.println("CoralRollerTimedRoll: end");
+		coral_roller.stop();
 		super.end(interrupted);
 	}
 }
