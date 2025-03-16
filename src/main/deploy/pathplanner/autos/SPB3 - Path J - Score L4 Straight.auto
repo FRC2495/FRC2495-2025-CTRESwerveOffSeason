@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - SZ to Side B (right)"
+            "pathName": "SPB3 - SZ to Taxi"
           }
         },
         {
@@ -62,6 +62,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L4",
+  "folder": "SPB3 - L4",
   "choreoAuto": false
 }
