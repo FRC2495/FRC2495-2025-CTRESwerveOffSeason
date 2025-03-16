@@ -95,10 +95,10 @@ public class RobotContainer {
 
 	private final SendableChooser<Command> autoChooser;
 
-	public static final String AUTON_DO_NOTHING = "Do Nothing";
+	/*public static final String AUTON_DO_NOTHING = "Do Nothing";
 	public static final String AUTON_CUSTOM = "My Auto";
 	private String autonSelected;
-	private SendableChooser<String> autonChooser = new SendableChooser<>();
+	private SendableChooser<String> autonChooser = new SendableChooser<>();*/
 
 	// sensors
 
@@ -174,8 +174,8 @@ public class RobotContainer {
 	 */
 	public RobotContainer() {
 
-		autonChooser.setDefaultOption("SP2 One Coral Test", AUTON_CUSTOM);
-		SmartDashboard.putData("Auto choices", autonChooser); 
+		//autonChooser.setDefaultOption("SP2 One Coral Test", AUTON_CUSTOM);
+		//SmartDashboard.putData("Auto choices", autonChooser); 
 
 		NamedCommands.registerCommand("elevatorMoveToFourthLevelWithStallDetection", new ElevatorMoveToFourthLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveToThirdLevelWithStallDetection", new ElevatorMoveToThirdLevelWithStallDetection(elevator));
@@ -488,25 +488,25 @@ public class RobotContainer {
 	 * @return the command to run in autonomous
 	 */
 	public Command getAutonomousCommand() {
-		//return autoChooser.getSelected();
-		autonSelected = autonChooser.getSelected();
-		System.out.println("Auton selected: " + autonSelected);	
+		return autoChooser.getSelected();
+	// 	autonSelected = autonChooser.getSelected();
+	// 	System.out.println("Auton selected: " + autonSelected);	
 
-		switch (autonSelected) {
-			case AUTON_CUSTOM:
-				return new StartingPositionTwoOneCoral(this, drivetrain, coral_roller, neck, elevator, slider);
-				//break;
+	// 	switch (autonSelected) {
+	// 		case AUTON_CUSTOM:
+	// 			return new StartingPositionTwoOneCoral(this, drivetrain, coral_roller, neck, elevator, slider);
+	// 			//break;
 
-			case AUTON_DO_NOTHING:
-				return null;
-				//break;
+	// 		case AUTON_DO_NOTHING:
+	// 			return null;
+	// 			//break;
 				
-			default:
-				// nothing
-				return null;
-				//break;
-		} // end switch
-	}
+	// 		default:
+	// 			// nothing
+	// 			return null;
+	// 			//break;
+	// 	} // end switch
+		}
 
 	public TrajectoryConfig createFastTrajectoryConfig() {
 		// Create config for trajectory
