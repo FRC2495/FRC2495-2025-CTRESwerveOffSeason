@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -98,8 +99,8 @@ public class RobotContainer {
 	/*public static final String AUTON_DO_NOTHING = "Do Nothing";
 	public static final String AUTON_CUSTOM = "My Auto";
 	private String autonSelected;
-	private SendableChooser<String> autonChooser = new SendableChooser<>();*/
-
+	private SendableChooser<String> autonChooser = new SendableChooser<>();
+*/
 	// sensors
 
 	private final HMAccelerometer accelerometer = new HMAccelerometer();
@@ -191,8 +192,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("algaeRollerTimedRelease", new AlgaeRollerTimedRelease(algae_roller, 5));
         NamedCommands.registerCommand("coralRollerRollOut", new CoralRollerRollOut(coral_roller));
         NamedCommands.registerCommand("coralRollerRollIn", new CoralRollerRollIn(coral_roller));
-        NamedCommands.registerCommand("coralRollerTimedRoll", new CoralRollerTimedRoll(coral_roller, .4));
-        NamedCommands.registerCommand("coralRollerTimedRelease", new CoralRollerTimedRelease(coral_roller, .4));
+        NamedCommands.registerCommand("CoralRollerTimedRollIn", new CoralRollerTimedRollIn(coral_roller, .4));
+        NamedCommands.registerCommand("CoralRollerTimedRollOut", new CoralRollerTimedRollOut(coral_roller, .4));
 		NamedCommands.registerCommand("sliderExtendWithStallDetection", new SliderSafeExtendWithStallDetection(neck, slider));
 		NamedCommands.registerCommand("sliderRetractWithStallDetection", new SliderRetractWithLimitSwitch(slider));
 		NamedCommands.registerCommand("neckMoveUpWithStallDetection", new NeckMoveUpWithStallDetection(neck));
@@ -215,6 +216,8 @@ public class RobotContainer {
 		NamedCommands.registerCommand("scoreFourthLevelCoralAndHomeToCoralStation", new ScoreFourthLevelCoralAndHomeToCoralStation(elevator, coral_roller, neck, slider));
 		NamedCommands.registerCommand("scoreFourthLevelCoralAndHome", new ScoreFourthLevelCoralAndHome(elevator, coral_roller, neck, slider));
 		NamedCommands.registerCommand("neckHome", new NeckMoveHomeWithStallDetection(neck));
+		NamedCommands.registerCommand("coralRollerForAutoRollOut", new CoralRollerForAutoRollOut(coral_roller));
+		NamedCommands.registerCommand("waitCommand", new WaitCommand(2));
 
 		// choosers (for auton)
 
@@ -488,24 +491,26 @@ public class RobotContainer {
 	 * @return the command to run in autonomous
 	 */
 	public Command getAutonomousCommand() {
+
 		return autoChooser.getSelected();
-	// 	autonSelected = autonChooser.getSelected();
-	// 	System.out.println("Auton selected: " + autonSelected);	
 
-	// 	switch (autonSelected) {
-	// 		case AUTON_CUSTOM:
-	// 			return new StartingPositionTwoOneCoral(this, drivetrain, coral_roller, neck, elevator, slider);
-	// 			//break;
+		/*autonSelected = autonChooser.getSelected();
+		System.out.println("Auton selected: " + autonSelected);	
 
-	// 		case AUTON_DO_NOTHING:
-	// 			return null;
-	// 			//break;
-				
-	// 		default:
-	// 			// nothing
-	// 			return null;
-	// 			//break;
-	// 	} // end switch
+		switch (autonSelected) {
+			case AUTON_CUSTOM:
+				return new StartingPositionTwoOneCoral(this, drivetrain, coral_roller, neck, elevator, slider);
+				//break;
+
+			case AUTON_DO_NOTHING:
+				return null;
+				//break;
+					
+			default:
+				// nothing
+				return null;
+				//break;
+			} // end switch*/
 		}
 
 	public TrajectoryConfig createFastTrajectoryConfig() {
