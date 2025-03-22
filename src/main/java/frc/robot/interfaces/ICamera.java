@@ -12,5 +12,7 @@ public interface ICamera extends Subsystem {
 	
 	public double getAngleToTurnToTarget();
 
-	//public Optional<EstimatedRobotPose> getGlobalPose();
+	public Optional<EstimatedRobotPose> getGlobalPose();
+
+	public int getLatestID();
 }

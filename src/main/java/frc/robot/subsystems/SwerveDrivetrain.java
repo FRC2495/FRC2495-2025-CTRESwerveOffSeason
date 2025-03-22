@@ -217,10 +217,10 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 		calculateTurnAngleUsingPidController();
 
-		/*Optional<EstimatedRobotPose> result = poseCamera.getGlobalPose();
+		Optional<EstimatedRobotPose> result = poseCamera.getGlobalPose();
 		if (result.isPresent()) {
 			m_odometry.addVisionMeasurement(result.get().estimatedPose.toPose2d(), result.get().timestampSeconds);
-		}*/
+		}
 	}
 
 	/**
@@ -335,6 +335,10 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 	public void drive(double xSpeed, double ySpeed, double angularSpeed) {
 		this.drive(xSpeed, ySpeed, angularSpeed, true, false);
+	}
+
+	public void drive(ChassisSpeeds velocity){
+    	this.drive(velocity);
 	}
 
 	public void driveRobotRelative(ChassisSpeeds speeds){
