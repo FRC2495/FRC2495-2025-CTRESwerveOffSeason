@@ -111,10 +111,14 @@ public class ObjectDetectionCamera extends PhotonCamera implements ICamera {
 		}
 	}
 
-	/*@Override
+	@Override
 	public Optional<EstimatedRobotPose> getGlobalPose() {
 		// TODO Auto-generated method stub
 		return Optional.empty();
-	}*/
+	}
+
+	public int getLatestID() {
+		return 0;
+	}
 	
 }

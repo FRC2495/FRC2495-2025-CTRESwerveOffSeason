@@ -41,13 +41,14 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	//TODO: UPDATE CAM SETTINGS FOR NEW ROBOT
 	private static final String DEFAULT_CAM_NAME = "AprilTagCam";
-	private static final double CAMERA_X_METERS =  Units.inchesToMeters(+8.25); // x distance from the center of the robot
-	private static final double CAMERA_Y_METERS =  Units.inchesToMeters(0); // y distance offset from the center of the robot
+	private static final double CAMERA_X_METERS =  Units.inchesToMeters(+9.6); // x distance from the center of the robot
+	private static final double CAMERA_Y_METERS =  Units.inchesToMeters(-4.1); // y distance offset from the center of the robot
 	private static final double CAMERA_HEIGHT_METERS =  Units.inchesToMeters(8);
 	private static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(8.75); // may need to change 
 	private static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(10.0); // tilt of our camera (radians)
 	private static final double CAMERA_ROLL_RADIANS = 0.0;
 	private static final double CAMERA_YAW_RADIANS = Units.degreesToRadians(0);
+	private int latestID;
 
 	private PhotonPoseEstimator estimator;
 	private Transform3d robotToCam = new Transform3d(
@@ -63,13 +64,22 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		//estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
-	/*public Optional<EstimatedRobotPose> getGlobalPose(){
+	public void periodic(){
+		var result = this.getLatestResult();
+		if(result!=null && result.hasTargets()) {
+			latestID = result.getBestTarget().getFiducialId();
+		} else {
+			latestID = -1;
+    }
+	}
+
+	public Optional<EstimatedRobotPose> getGlobalPose(){
 		Optional<EstimatedRobotPose> globalPose = Optional.empty();
 		for (var change : getAllUnreadResults()) {
 			globalPose = estimator.update(change);
 		}
 		return globalPose;
-	}*/
+	}
 
 	public boolean isTargetVisible()
 	{
@@ -153,6 +163,10 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	public double getAngleToTurnToBestTarget()
 	{
 		return +getYaw();
+	}
+
+	public int getLatestID(){
+		return latestID;
 	}
 
 	public double getPitch() {

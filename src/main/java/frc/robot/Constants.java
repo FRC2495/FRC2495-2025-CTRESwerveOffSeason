@@ -52,8 +52,6 @@ public final class Constants {
 		public static final int BLUE_REEF_SIDE_B = 21; // target
 		public static final int BLUE_REEF_SIDE_C = 22; // target
 	
-		public AprilTags() {
-		}
 	}
 
 
@@ -161,5 +159,22 @@ public final class Constants {
 
 	public static final class NeoMotorConstants {
 		public static final double FREE_SPEED_RPM = 5676;
+	}
+
+	public static final class VisionConstants {
+		public static final double X_LEFT_ALIGNMENT = .2435737274077523; //meters
+		public static final double Y_LEFT_ALIGNMENT = 0.26;
+		public static final double X_RIGHT_ALIGNMENT = .2435737274077523;
+		public static final double Y_RIGHT_ALIGNMENT = 0.6354460866293814;
+		public static final double ROT_ALIGNMENT = -Math.PI/2; //degrees
+		public static double MAX_ALIGNMENT_DISTANCE = 1.5;
+	
+		public static final double X_ALIGNMENT_TOLERANCE = .05;
+		public static final double Y_ALIGNMENT_TOLERANCE = .05;
+		public static final double ROT_ALIGNMENT_TOLERANCE = .05;
+
+		public static final double X_REEF_ALIGNMENT_P = 1;//3.3;
+		public static final double Y_REEF_ALIGNMENT_P = 1;//3.3;
+		public static final double ROT_REEF_ALIGNMENT_P = 1;//0.058;
 	}
 }
