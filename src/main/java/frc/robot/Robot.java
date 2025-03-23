@@ -192,6 +192,7 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("Distance to AprilTag", m_robotContainer.getAprilTagCamera().getDistanceToTarget());
 		SmartDashboard.putNumber("Angle to AprilTag", m_robotContainer.getAprilTagCamera().getAngleToTurnToTarget());
+		SmartDashboard.putNumber("Latest AprilTag ID", m_robotContainer.getAprilTagCamera().getLatestID());
 
 		//SmartDashboard.putBoolean("NoteSensor isEnergized", m_robotContainer.getNoteSensor().isEnergized());
 
