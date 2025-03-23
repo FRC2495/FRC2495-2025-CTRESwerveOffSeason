@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
+import frc.robot.sensors.AprilTagCamera;
 import frc.robot.subsystems.SwerveDrivetrain;
 
 public class AutoAlignToReef extends Command {
@@ -17,14 +18,16 @@ public class AutoAlignToReef extends Command {
   private boolean isRightScore;
   private Timer dontSeeTagTimer, stopTimer;
   private SwerveDrivetrain drivebase;
+  private AprilTagCamera apriltag_camera;
   private double tagID = -1;
 
-  public AutoAlignToReef(boolean isRightScore, SwerveDrivetrain drivebase) {
+  public AutoAlignToReef(boolean isRightScore, SwerveDrivetrain drivebase, AprilTagCamera apriltag_camera) {
     xController = new PIDController(Constants.VisionConstants.X_REEF_ALIGNMENT_P, 0.0, 0);  // Vertical movement
     yController = new PIDController(Constants.VisionConstants.Y_REEF_ALIGNMENT_P, 0.0, 0);  // Horitontal movement
     rotController = new PIDController(Constants.VisionConstants.ROT_REEF_ALIGNMENT_P, 0, 0);  // Rotation
     this.isRightScore = isRightScore;
     this.drivebase = drivebase;
+    this.apriltag_camera = apriltag_camera;
     addRequirements(drivebase);
   }
 
@@ -44,7 +47,7 @@ public class AutoAlignToReef extends Command {
     yController.setSetpoint(isRightScore ? Constants.VisionConstants.Y_LEFT_ALIGNMENT : Constants.VisionConstants.Y_RIGHT_ALIGNMENT);
     yController.setTolerance(Constants.VisionConstants.Y_ALIGNMENT_TOLERANCE);
 
-    tagID = LimelightHelpers.getFiducialID("");
+    tagID = apriltag_camera.getFiducialID("");
   }
 
   @Override
@@ -68,7 +71,7 @@ public class AutoAlignToReef extends Command {
         stopTimer.reset();
       }
     } else {
-      drivebase.drive(new Translation2d(), 0, false);
+      drivebase.drive(0, 0, false); //if we are at the correct setpoint position, we stop
     }
 
     SmartDashboard.putNumber("poseValidTimer", stopTimer.get());

@@ -30,6 +30,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import swervelib.SwerveDrive;
+
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
 
@@ -76,7 +78,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	static final double TURN_DERIVATIVE_GAIN = 0.0; // 0.0001
 	
 	static final int DEGREE_THRESHOLD = 10; // 3;
-	
+
 	private final static int TURN_ON_TARGET_MINIMUM_COUNT = 10; // number of times/iterations we need to be on target to really be on target
 	// end turn settings	
 
