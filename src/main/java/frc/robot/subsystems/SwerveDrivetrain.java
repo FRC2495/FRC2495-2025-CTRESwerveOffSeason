@@ -30,8 +30,6 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import swervelib.SwerveDrive;
-
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
 

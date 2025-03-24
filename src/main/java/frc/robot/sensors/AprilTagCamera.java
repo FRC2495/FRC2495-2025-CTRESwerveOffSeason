@@ -107,7 +107,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		return getBestCameraToTargetPose().getY();
 	}
 
-	public double getBestCameraToTargetRotation() {
+	public double getBestCameraToTargetRotationRadians() {
 		return getBestCameraToTargetPose().getRotation().getAngle();
 	}
 
