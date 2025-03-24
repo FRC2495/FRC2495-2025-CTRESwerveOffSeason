@@ -81,6 +81,36 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		return globalPose;
 	}
 
+	public Transform3d getBestCameraToTargetPose(){
+		Transform3d bestCameraToTarget = null;
+		var results = getAllUnreadResults();
+        if (!results.isEmpty()) {
+            // Camera processed a new frame since last
+            // Get the last one in the list.
+            var result = results.get(results.size() - 1);
+            if (result.hasTargets()) {
+                // At least one AprilTag was seen by the camera
+                for (var target : result.getTargets()) {
+                    bestCameraToTarget = target.getBestCameraToTarget();
+                }
+				
+            }
+		}
+		return bestCameraToTarget;
+	}
+
+	public double getBestCameraToTargetX() {
+		return getBestCameraToTargetPose().getX();
+	}
+
+	public double getBestCameraToTargetY() {
+		return getBestCameraToTargetPose().getY();
+	}
+
+	public double getBestCameraToTargetRotation() {
+		return getBestCameraToTargetPose().getRotation().getAngle();
+	}
+
 	public boolean isTargetVisible()
 	{
 		boolean targetVisible = false;
@@ -93,7 +123,18 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
             if (result.hasTargets()) {
                 // At least one AprilTag was seen by the camera
                 for (var target : result.getTargets()) {
-                    if (target.getFiducialId() == 7) {
+                    if (target.getFiducialId() == AprilTags.RED_REEF_SIDE_A 
+					|| target.getFiducialId() == AprilTags.RED_REEF_SIDE_B 
+					|| target.getFiducialId() == AprilTags.RED_REEF_SIDE_C 
+					|| target.getFiducialId() == AprilTags.RED_REEF_SIDE_D 
+					|| target.getFiducialId() == AprilTags.RED_REEF_SIDE_E 
+					|| target.getFiducialId() == AprilTags.RED_REEF_SIDE_F 
+					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_A 
+					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_B 
+					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_C 
+					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_D 
+					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_E 
+					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_F) {
                         // Found Tag 7, record its information
                         targetYaw = target.getYaw();
                         targetVisible = true;
