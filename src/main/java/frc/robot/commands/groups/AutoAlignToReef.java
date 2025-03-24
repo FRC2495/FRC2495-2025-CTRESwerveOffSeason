@@ -53,29 +53,26 @@ public class AutoAlignToReef extends Command {
 
     yController.setSetpoint(isRightScore ? Constants.VisionConstants.Y_LEFT_ALIGNMENT : Constants.VisionConstants.Y_RIGHT_ALIGNMENT); 
     yController.setTolerance(Constants.VisionConstants.Y_ALIGNMENT_TOLERANCE); 
-*/
+*/  
+    System.out.println("AutoAlignToReef: initialize");
     tagID = apriltag_camera.getLatestID(); //we make the apriltag ID the one we are looking at the moment we press the button to auto align
   }
 
   @Override
   public void execute() {
-    if (apriltag_camera.isTargetVisible() && apriltag_camera.getLatestID() == tagID) { // if we see a target + the target is the one we are aiming for then..
-      this.dontSeeTagTimer.reset();
-      
-      double[] positions = new double[6];
-      positions[2] = apriltag_camera.getBestCameraToTargetX(); // i have no idea if this method is doing what i think it is doing lol
-      positions[0] = apriltag_camera.getBestCameraToTargetY();
-      positions[4] = apriltag_camera.getBestCameraToTargetRotationRadians();
-      SmartDashboard.putNumber("x", positions[2]); // lets us check in shuffleboard if the x is correct
+    if (apriltag_camera.isTargetVisible()) { // if we see a target 
+      // i have no idea if getBestCameraToTargetX() is doing what i think it is doing lol
 
-      double xPower = MathUtil.clamp(xController.calculate(positions[2], Constants.VisionConstants.X_LEFT_ALIGNMENT), -1, 1); //calculates power needed to get from current x position to desired x position
+      SmartDashboard.putNumber("x", apriltag_camera.getBestCameraToTargetX()); // lets us check in shuffleboard if the x is correct
+
+      double xPower = MathUtil.clamp(xController.calculate(apriltag_camera.getBestCameraToTargetX(), Constants.VisionConstants.X_LEFT_ALIGNMENT), -1, 1); //calculates power needed to get from current x position to desired x position
       SmartDashboard.putNumber("xPower", xPower); // lets us check in shuffleboard if the x power is correct
 
-      double yPower = MathUtil.clamp(yController.calculate(positions[0], isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT), -1, 1);
-      double rotPower = rotController.calculate(positions[4], Constants.VisionConstants.ROT_ALIGNMENT);
+      double yPower = MathUtil.clamp(yController.calculate(apriltag_camera.getBestCameraToTargetY(), isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT), -1, 1);
+      double rotPower = rotController.calculate(apriltag_camera.getBestCameraToTargetRotationRadians(), Constants.VisionConstants.ROT_ALIGNMENT);
 
       //drivetrain.drive(new Translation2d(xSpeed, ySpeed), rotValue, false);
-      drivetrain.drive(new ChassisSpeeds(-yPower, xPower, rotPower)); //not sure if the negative is needed
+      drivetrain.drive(new ChassisSpeeds(xPower, yPower, rotPower));//new ChassisSpeeds(-yPower, xPower, rotPower)); //not sure if the negative is needed
 
 
       //   if (!rotController.atSetpoint() ||
@@ -93,6 +90,7 @@ public class AutoAlignToReef extends Command {
 
   @Override
   public void end(boolean interrupted) {
+    System.out.println("AutoAlignToReef: end");
     drivetrain.drive(0, 0, 0.0);
   }
 

@@ -61,7 +61,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	public AprilTagCamera() {
 		super(DEFAULT_CAM_NAME);
-		//estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
+		estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
 	public void periodic(){
@@ -69,8 +69,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		if(result!=null && result.hasTargets()) {
 			latestID = result.getBestTarget().getFiducialId();
 		} else {
-			latestID = -1;
-    }
+			latestID = -1;}
 	}
 
 	public Optional<EstimatedRobotPose> getGlobalPose(){
