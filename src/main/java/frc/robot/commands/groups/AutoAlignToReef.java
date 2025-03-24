@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Constants.VisionConstants;
+import frc.robot.interfaces.ICamera;
 import frc.robot.sensors.AprilTagCamera;
 import frc.robot.subsystems.SwerveDrivetrain;
 
@@ -23,11 +24,11 @@ public class AutoAlignToReef extends Command {
   private boolean isRightScore;
   private Timer dontSeeTagTimer, stopTimer;
   private SwerveDrivetrain drivetrain;
-  private AprilTagCamera apriltag_camera;
+  private ICamera apriltag_camera;
   private double tagID = -1;
   private Pose2d targetPose;
 
-  public AutoAlignToReef(boolean isRightScore, SwerveDrivetrain drivetrain, AprilTagCamera apriltag_camera) {
+  public AutoAlignToReef(boolean isRightScore, SwerveDrivetrain drivetrain, ICamera apriltag_camera) {
     xController = new PIDController(Constants.VisionConstants.X_REEF_ALIGNMENT_P, 0.0, 0);  // Vertical movement
     yController = new PIDController(Constants.VisionConstants.Y_REEF_ALIGNMENT_P, 0.0, 0);  // Horitontal movement
     rotController = new PIDController(Constants.VisionConstants.ROT_REEF_ALIGNMENT_P, 0, 0);  // Rotation

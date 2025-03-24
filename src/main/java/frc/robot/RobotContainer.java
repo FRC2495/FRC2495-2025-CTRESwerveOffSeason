@@ -105,7 +105,7 @@ public class RobotContainer {
 
 	private final HMAccelerometer accelerometer = new HMAccelerometer();
 
-	private final ICamera object_detection_camera = new ObjectDetectionCamera();
+	//private final ICamera object_detection_camera = new ObjectDetectionCamera();
 
 	private final ICamera apriltag_camera = new AprilTagCamera();
 
@@ -160,7 +160,7 @@ public class RobotContainer {
 
 	private final Field2d field = new Field2d(); //  a representation of the field
 
-	private final Indicator indicator = new Indicator(apriltag_camera, object_detection_camera);
+	//private final Indicator indicator = new Indicator(apriltag_camera, object_detection_camera);
 
 	//public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
@@ -253,10 +253,10 @@ public class RobotContainer {
 
 		//compressor.checkCompressor(); //we compress in the background
 
-		indicator.setDefaultCommand(new IndicatorIndicateUsingCamera(indicator)); // default command, only runs when robot is enabled
+		//indicator.setDefaultCommand(new IndicatorIndicateUsingCamera(indicator)); // default command, only runs when robot is enabled
 
-		indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(indicator,1);
-		indicatorTimedScrollRainbow.schedule(); // we schedule the command as we are starting up
+		//indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(indicator,1);
+		//indicatorTimedScrollRainbow.schedule(); // we schedule the command as we are starting up
 
 		Trigger hasCoral = new Trigger(() -> coral_roller.hasCoral());
 		Trigger noCoralPresent = new Trigger(() -> coral_roller.noCoralPresent() && !coral_roller.isReleasing());
@@ -316,15 +316,17 @@ public class RobotContainer {
 			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
 			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 
-		joyMain.button(5);
+		joyMain.button(5)
 			//.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
 			//.whileTrue(new AutoAlignToReef(null, null, true, drivetrain));
+			.whileTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera));
 
-		joyMain.button(6);
+		joyMain.button(6)
 			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			//.onTrue(new MoveRightOfCoralReef(drivetrain, this));
 			//.whileTrue(new AutoAlignToReef(null, null, false, drivetrain));
+			.whileTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera));
 
 		joyMain.button(7)
 			//.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
@@ -633,10 +635,10 @@ public class RobotContainer {
 		return accelerometer;
 	}
 
-	public ICamera getObjectDetectionCamera()
+	/*public ICamera getObjectDetectionCamera()
 	{
 		return object_detection_camera;
-	}
+	}*/
 
 	public ICamera getAprilTagCamera()
 	{
