@@ -61,6 +61,7 @@ public class AutoAlignToReef extends Command {
   @Override
   public void execute() {
     if (apriltag_camera.isTargetVisible()) { // if we see a target 
+      
       // i have no idea if getBestCameraToTargetX() is doing what i think it is doing lol
 
       SmartDashboard.putNumber("x", apriltag_camera.getBestCameraToTargetX()); // lets us check in shuffleboard if the x is correct
