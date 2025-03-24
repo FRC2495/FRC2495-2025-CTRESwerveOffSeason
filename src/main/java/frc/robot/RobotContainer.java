@@ -319,14 +319,14 @@ public class RobotContainer {
 		joyMain.button(5)
 			//.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
 			//.whileTrue(new AutoAlignToReef(null, null, true, drivetrain));
-			.whileTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera));
+			.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera));
 
 		joyMain.button(6)
 			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			//.onTrue(new MoveRightOfCoralReef(drivetrain, this));
 			//.whileTrue(new AutoAlignToReef(null, null, false, drivetrain));
-			.whileTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera));
+			.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera));
 
 		joyMain.button(7)
 			//.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
