@@ -169,13 +169,13 @@ public final class Constants {
 		public static final double ROT_ALIGNMENT = Math.PI;//-Math.PI/2; //radians
 		public static double MAX_ALIGNMENT_DISTANCE = 1.5;
 	
-		public static final double X_ALIGNMENT_TOLERANCE = .3;//.05;
-		public static final double Y_ALIGNMENT_TOLERANCE = .3;//.05;
+		public static final double X_ALIGNMENT_TOLERANCE = .05;//.05;
+		public static final double Y_ALIGNMENT_TOLERANCE = .05;//.05;
 		public static final double ROT_ALIGNMENT_TOLERANCE = .3;//.05;
 
-		public static final double X_REEF_ALIGNMENT_P = 0.4;//1;//3.3;
-		public static final double Y_REEF_ALIGNMENT_P = 0.4;//1;//3.3;
-		public static final double ROT_REEF_ALIGNMENT_P = 0.4;//1;//0.058;
+		public static final double X_REEF_ALIGNMENT_P = .3;//1;//1;//3.3;
+		public static final double Y_REEF_ALIGNMENT_P = .3;//1;//1;//3.3;
+		public static final double ROT_REEF_ALIGNMENT_P = .1;//1;//0.058;
 
 		public static final double DONT_SEE_TAG_WAIT_TIME = 0.3;
 		public static final double POSE_VALIDATION_TIME = 0.3;
