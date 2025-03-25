@@ -71,9 +71,12 @@ public class AutoAlignToReef extends Command {
 
       double xPower = MathUtil.clamp(xController.calculate(apriltag_camera.getBestCameraToTargetX(currentPose), Constants.VisionConstants.X_LEFT_ALIGNMENT), -1, 1); //calculates power needed to get from current x position to desired x position
       SmartDashboard.putNumber("xPower", xPower); // lets us check in shuffleboard if the x power is correct
+      System.out.println("The xPower for auto-align is: " + xPower);
 
       double yPower = MathUtil.clamp(yController.calculate(apriltag_camera.getBestCameraToTargetY(currentPose), isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT), -1, 1);
       double rotPower = rotController.calculate(apriltag_camera.getBestCameraToTargetRotationRadians(currentPose), Constants.VisionConstants.ROT_ALIGNMENT);
+      System.out.println("The yPower for auto-align is: " + yPower);
+      System.out.println("The rotPower for auto-align is: " + rotPower);
 
       //drivetrain.drive(new Translation2d(xSpeed, ySpeed), rotValue, false);
       drivetrain.drive(new ChassisSpeeds(xPower, yPower, rotPower));//new ChassisSpeeds(-yPower, xPower, rotPower)); //not sure if the negative is needed

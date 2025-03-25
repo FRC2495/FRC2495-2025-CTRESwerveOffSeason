@@ -64,11 +64,11 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	public void periodic(){
 		var result = this.getLatestResult();
-		if(result!=null && result.hasTargets()) {
+		/*if(result!=null && result.hasTargets()) {
 			latestID = result.getBestTarget().getFiducialId();
 		} else {
 			latestID = -1;}
-	}
+	*/}
 
 	public Optional<EstimatedRobotPose> getGlobalPose(){
 		Optional<EstimatedRobotPose> globalPose = Optional.empty();
@@ -80,18 +80,22 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	public Transform3d getBestCameraToTargetPose(){
 		Transform3d bestCameraToTarget = null;
-		var results = getAllUnreadResults();
-        if (!results.isEmpty()) {
+		//var results = getAllUnreadResults();
+        //if (!results.isEmpty()) {
             // Camera processed a new frame since last
             // Get the last one in the list.
-            var result = results.get(results.size() - 1);
-            if (result.hasTargets()) {
+            var result = getLatestResult();
+            if (result != null && result.hasTargets()) {
                 // At least one AprilTag was seen by the camera
                 for (var target : result.getTargets()) {
                     bestCameraToTarget = target.getBestCameraToTarget();
+					System.out.println("The pose result is: " + bestCameraToTarget);
                 }
             }
-		}
+			else 
+			{
+				System.out.println("No targets found");
+			}
 		return bestCameraToTarget;
 	}
 
@@ -214,9 +218,9 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		return +getYaw();
 	}
 
-	public int getLatestID(){
+	/*public int getLatestID(){
 		return latestID;
-	}
+	}*/
 
 	public double getPitch() {
 		try

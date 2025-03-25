@@ -15,7 +15,7 @@ public interface ICamera extends Subsystem {
 
 	public Optional<EstimatedRobotPose> getGlobalPose();
 
-	public int getLatestID();
+	//public int getLatestID();
 
 	public boolean isTargetVisible();
 
