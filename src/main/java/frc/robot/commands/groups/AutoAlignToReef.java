@@ -8,6 +8,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -22,16 +23,19 @@ public class AutoAlignToReef extends Command {
   //private Timer dontSeeTagTimer, stopTimer;
   private SwerveDrivetrain drivetrain;
   private ICamera apriltag_camera;
+  private Joystick joystick;
   //private double tagID = -1;
   //private Pose2d targetPose;
+  private static final double JOYSTICK_EXIT_THRESHOLD = 0.1;
 
-  public AutoAlignToReef(boolean isRightScore, SwerveDrivetrain drivetrain, ICamera apriltag_camera) {
+  public AutoAlignToReef(boolean isRightScore, SwerveDrivetrain drivetrain, ICamera apriltag_camera, Joystick joystick) {
     xController = new PIDController(Constants.VisionConstants.X_REEF_ALIGNMENT_P, 0.0, 0);  // Vertical movement
     yController = new PIDController(Constants.VisionConstants.Y_REEF_ALIGNMENT_P, 0.0, 0);  // Horitontal movement
     rotController = new PIDController(Constants.VisionConstants.ROT_REEF_ALIGNMENT_P, 0, 0);  // Rotation
     this.isRightScore = isRightScore;
     this.drivetrain = drivetrain;
     this.apriltag_camera = apriltag_camera;
+    this.joystick = joystick;
     addRequirements(drivetrain);
   }
 
@@ -101,7 +105,7 @@ public class AutoAlignToReef extends Command {
         stopTimer.hasElapsed(Constants.VisionConstants.POSE_VALIDATION_TIME);*/
 
       Transform3d newPose = apriltag_camera.getBestCameraToTargetPose();
-      return (Math.abs(apriltag_camera.getBestCameraToTargetX(newPose)-(isRightScore ? Constants.VisionConstants.X_RIGHT_ALIGNMENT : Constants.VisionConstants.X_LEFT_ALIGNMENT))<VisionConstants.X_ALIGNMENT_TOLERANCE) 
+      return (Math.abs(joystick.getX()) > JOYSTICK_EXIT_THRESHOLD) || (Math.abs(apriltag_camera.getBestCameraToTargetX(newPose)-(isRightScore ? Constants.VisionConstants.X_RIGHT_ALIGNMENT : Constants.VisionConstants.X_LEFT_ALIGNMENT))<VisionConstants.X_ALIGNMENT_TOLERANCE) 
       && (Math.abs(apriltag_camera.getBestCameraToTargetY(newPose)-(isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT))<VisionConstants.Y_ALIGNMENT_TOLERANCE)
       && (Math.abs(apriltag_camera.getBestCameraToTargetRotationRadians(newPose)-Constants.VisionConstants.ROT_ALIGNMENT)<VisionConstants.ROT_ALIGNMENT_TOLERANCE); 
   }
