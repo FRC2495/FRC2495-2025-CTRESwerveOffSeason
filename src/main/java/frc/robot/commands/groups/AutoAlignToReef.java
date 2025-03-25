@@ -105,7 +105,7 @@ public class AutoAlignToReef extends Command {
         stopTimer.hasElapsed(Constants.VisionConstants.POSE_VALIDATION_TIME);*/
 
       Transform3d newPose = apriltag_camera.getBestCameraToTargetPose();
-      return (Math.abs(joystick.getX()) > JOYSTICK_EXIT_THRESHOLD) || (Math.abs(joystick.getY()) > JOYSTICK_EXIT_THRESHOLD) | (Math.abs(apriltag_camera.getBestCameraToTargetX(newPose)-(isRightScore ? Constants.VisionConstants.X_RIGHT_ALIGNMENT : Constants.VisionConstants.X_LEFT_ALIGNMENT))<VisionConstants.X_ALIGNMENT_TOLERANCE) 
+      return ((Math.abs(joystick.getX()) > JOYSTICK_EXIT_THRESHOLD) || (Math.abs(joystick.getY()) > JOYSTICK_EXIT_THRESHOLD)) || (Math.abs(apriltag_camera.getBestCameraToTargetX(newPose)-(isRightScore ? Constants.VisionConstants.X_RIGHT_ALIGNMENT : Constants.VisionConstants.X_LEFT_ALIGNMENT))<VisionConstants.X_ALIGNMENT_TOLERANCE) 
       && (Math.abs(apriltag_camera.getBestCameraToTargetY(newPose)-(isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT))<VisionConstants.Y_ALIGNMENT_TOLERANCE)
       && (Math.abs(apriltag_camera.getBestCameraToTargetRotationRadians(newPose)-Constants.VisionConstants.ROT_ALIGNMENT)<VisionConstants.ROT_ALIGNMENT_TOLERANCE); 
   }
