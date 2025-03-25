@@ -8,10 +8,8 @@ import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -24,8 +22,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.revrobotics.spark.SparkMax;
-import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -48,11 +44,11 @@ import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hanger;
 import frc.robot.subsystems.Slider;
-import frc.robot.subsystems.CoralRoller;
-import frc.robot.subsystems.AlgaeRoller;
-import frc.robot.subsystems.Indicator;
+//import frc.robot.subsystems.CoralRoller;
+//import frc.robot.subsystems.AlgaeRoller;
+//import frc.robot.subsystems.Indicator;
 import frc.robot.subsystems.Neck;
-import frc.robot.commands.DoNothing;
+//import frc.robot.commands.DoNothing;
 import frc.robot.commands.algae_roller.*;
 //import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
@@ -65,10 +61,10 @@ import frc.robot.commands.hanger.*;
 //import frc.robot.commands.shooter.*;
 import frc.robot.interfaces.ICamera;
 //import frc.robot.commands.mouth.*;
-import frc.robot.commands.indicator.*;
+//import frc.robot.commands.indicator.*;
 import frc.robot.commands.groups.*;
 //import frc.robot.commands.gamepad.*;
-import frc.robot.auton.*;
+//import frc.robot.auton.*;
 import frc.robot.auton.trajectories.*;
 
 
@@ -315,14 +311,14 @@ public class RobotContainer {
 		joyMain.button(5)
 			//.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
 			//.whileTrue(new AutoAlignToReef(null, null, true, drivetrain));
-			.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera));
+			.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(6)
 			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			//.onTrue(new MoveRightOfCoralReef(drivetrain, this));
 			//.whileTrue(new AutoAlignToReef(null, null, false, drivetrain));
-			.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera));
+			.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(7)
 			//.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
