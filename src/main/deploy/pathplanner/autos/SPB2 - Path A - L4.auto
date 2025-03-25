@@ -11,51 +11,53 @@
           }
         },
         {
-          "type": "named",
+          "type": "deadline",
           "data": {
-            "name": "drivetrainStop"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "elevatorMoveToFourthLevelWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "neckHome"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "neckMoveToCoralReefWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "coralRollerForAutoRollOut"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "waitCommand"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "elevatorMoveDownWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "neckMoveToCoralStationWithStallDetection"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveToFourthLevelWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "coralRollerForAutoRollOut"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "waitCommand"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveDownWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "neckMoveToCoralStationWithStallDetection"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         }
       ]

@@ -15,9 +15,46 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "scoreFourthLevelCoralAndHomeToCoralStation"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveToFourthLevelWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "coralRollerForAutoRollOut"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "waitCommand"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveDownWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "coralRollerStop"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "neckMoveToCoralStationWithStallDetection"
+                      }
+                    }
+                  ]
                 }
               },
               {
