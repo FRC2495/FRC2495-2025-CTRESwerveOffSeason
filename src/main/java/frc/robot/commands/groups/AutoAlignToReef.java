@@ -64,13 +64,15 @@ public class AutoAlignToReef extends Command {
       
       // i have no idea if getBestCameraToTargetX() is doing what i think it is doing lol
 
-      SmartDashboard.putNumber("x", apriltag_camera.getBestCameraToTargetX()); // lets us check in shuffleboard if the x is correct
+      Transform3d currentPose = apriltag_camera.getBestCameraToTargetPose();
 
-      double xPower = MathUtil.clamp(xController.calculate(apriltag_camera.getBestCameraToTargetX(), Constants.VisionConstants.X_LEFT_ALIGNMENT), -1, 1); //calculates power needed to get from current x position to desired x position
+      SmartDashboard.putNumber("x", apriltag_camera.getBestCameraToTargetX(currentPose)); // lets us check in shuffleboard if the x is correct
+
+      double xPower = MathUtil.clamp(xController.calculate(apriltag_camera.getBestCameraToTargetX(currentPose), Constants.VisionConstants.X_LEFT_ALIGNMENT), -1, 1); //calculates power needed to get from current x position to desired x position
       SmartDashboard.putNumber("xPower", xPower); // lets us check in shuffleboard if the x power is correct
 
-      double yPower = MathUtil.clamp(yController.calculate(apriltag_camera.getBestCameraToTargetY(), isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT), -1, 1);
-      double rotPower = rotController.calculate(apriltag_camera.getBestCameraToTargetRotationRadians(), Constants.VisionConstants.ROT_ALIGNMENT);
+      double yPower = MathUtil.clamp(yController.calculate(apriltag_camera.getBestCameraToTargetY(currentPose), isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT), -1, 1);
+      double rotPower = rotController.calculate(apriltag_camera.getBestCameraToTargetRotationRadians(currentPose), Constants.VisionConstants.ROT_ALIGNMENT);
 
       //drivetrain.drive(new Translation2d(xSpeed, ySpeed), rotValue, false);
       drivetrain.drive(new ChassisSpeeds(xPower, yPower, rotPower));//new ChassisSpeeds(-yPower, xPower, rotPower)); //not sure if the negative is needed
@@ -100,8 +102,10 @@ public class AutoAlignToReef extends Command {
     // Requires the robot to stay in the correct position for 0.3 seconds, as long as it gets a tag in the camera
     /*return this.dontSeeTagTimer.hasElapsed(Constants.VisionConstants.DONT_SEE_TAG_WAIT_TIME) ||
         stopTimer.hasElapsed(Constants.VisionConstants.POSE_VALIDATION_TIME);*/
-      return (Math.abs(apriltag_camera.getBestCameraToTargetX()-(isRightScore ? Constants.VisionConstants.X_RIGHT_ALIGNMENT : Constants.VisionConstants.X_LEFT_ALIGNMENT))<VisionConstants.X_ALIGNMENT_TOLERANCE) 
-      && (Math.abs(apriltag_camera.getBestCameraToTargetY()-(isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT))<VisionConstants.Y_ALIGNMENT_TOLERANCE)
-      && (Math.abs(apriltag_camera.getBestCameraToTargetRotationRadians()-Constants.VisionConstants.ROT_ALIGNMENT)<VisionConstants.ROT_ALIGNMENT_TOLERANCE); 
+
+        Transform3d newPose = apriltag_camera.getBestCameraToTargetPose();
+      return (Math.abs(apriltag_camera.getBestCameraToTargetX(newPose)-(isRightScore ? Constants.VisionConstants.X_RIGHT_ALIGNMENT : Constants.VisionConstants.X_LEFT_ALIGNMENT))<VisionConstants.X_ALIGNMENT_TOLERANCE) 
+      && (Math.abs(apriltag_camera.getBestCameraToTargetY(newPose)-(isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT))<VisionConstants.Y_ALIGNMENT_TOLERANCE)
+      && (Math.abs(apriltag_camera.getBestCameraToTargetRotationRadians(newPose)-Constants.VisionConstants.ROT_ALIGNMENT)<VisionConstants.ROT_ALIGNMENT_TOLERANCE); 
   }
 }

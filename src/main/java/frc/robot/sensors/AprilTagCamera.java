@@ -92,31 +92,30 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
                 for (var target : result.getTargets()) {
                     bestCameraToTarget = target.getBestCameraToTarget();
                 }
-				
             }
 		}
 		return bestCameraToTarget;
 	}
 
-	public double getBestCameraToTargetX() {
-		if (getBestCameraToTargetPose() != null) {
-			return getBestCameraToTargetPose().getX(); 
+	public double getBestCameraToTargetX(Transform3d currentPose) {
+		if (currentPose != null) {
+			return currentPose.getX(); 
 		}
 		System.out.println("No AprilTag target X coordinate found");
 		return 0.0; 
 	}
 
-	public double getBestCameraToTargetY() {
-		if (getBestCameraToTargetPose() != null) {
-			return getBestCameraToTargetPose().getY(); 
+	public double getBestCameraToTargetY(Transform3d currentPose) {
+		if (currentPose != null) {
+			return currentPose.getY(); 
 		}
 		System.out.println("No AprilTag target Y coordinate found");
 		return 0.0; 
 	}
 
-	public double getBestCameraToTargetRotationRadians() {
-		if (getBestCameraToTargetPose() != null) {
-			return getBestCameraToTargetPose().getRotation().getAngle();
+	public double getBestCameraToTargetRotationRadians(Transform3d currentPose) {
+		if (currentPose != null) {
+			return currentPose.getRotation().getAngle();
 		}
 		System.out.println("No AprilTag target rotation coordinate found");
 		return Math.PI; 
