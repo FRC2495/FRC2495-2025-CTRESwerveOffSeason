@@ -26,7 +26,7 @@ public class AutoAlignToReef extends Command {
   private Joystick joystick;
   //private double tagID = -1;
   //private Pose2d targetPose;
-  private static final double JOYSTICK_EXIT_THRESHOLD = 0.1;
+  private static final double JOYSTICK_EXIT_THRESHOLD = 0.3;
 
   public AutoAlignToReef(boolean isRightScore, SwerveDrivetrain drivetrain, ICamera apriltag_camera, Joystick joystick) {
     xController = new PIDController(Constants.VisionConstants.X_REEF_ALIGNMENT_P, 0.0, 0);  // Vertical movement
@@ -79,8 +79,8 @@ public class AutoAlignToReef extends Command {
       System.out.println("The rotPower for auto-align is: " + rotPower);
 
       //drivetrain.drive(new Translation2d(xSpeed, ySpeed), rotValue, false);
-      drivetrain.drive(new ChassisSpeeds(xPower, yPower, rotPower));//new ChassisSpeeds(-yPower, xPower, rotPower)); //not sure if the negative is needed
-
+      //drivetrain.drive(new ChassisSpeeds(xPower, yPower, rotPower));//new ChassisSpeeds(-yPower, xPower, rotPower)); //not sure if the negative is needed
+      drivetrain.driveRobotRelative(new ChassisSpeeds(-xPower, -yPower, rotPower));
 
       //   if (!rotController.atSetpoint() ||
       //       !yController.atSetpoint() ||
