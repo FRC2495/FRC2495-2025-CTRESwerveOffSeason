@@ -19,7 +19,7 @@ public class HangerStop extends InstantCommand {
 	// Called once when this command runs
 	@Override
 	public void initialize() {
-		System.out.println("HangerStop: initialize");
+		//System.out.println("HangerStop: initialize");
 		hanger.stop();
 	}
 
