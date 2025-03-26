@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import frc.robot.subsystems.Slider;
+import frc.robot.interfaces.ICamera;
 
 import java.util.Optional;
 
@@ -70,6 +71,12 @@ public class Robot extends TimedRobot {
 		// and running subsystem periodic() methods.  This must be called from the robot's periodic
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
+
+		if (m_robotContainer.getAprilTagCamera() != null) 
+		{
+			m_robotContainer.getAprilTagCamera().updateCacheResults();
+		}
+		
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */
