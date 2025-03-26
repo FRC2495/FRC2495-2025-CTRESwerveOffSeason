@@ -65,7 +65,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	}
 
 	public void periodic(){
-		cachedResults = getAllUnreadResults();
+		cachedResults = getAllUnreadResults(); // note: calling this function clears the internal FIFO queue. We call this exactly ONCE per loop.
 		//var result = this.getLatestResult();
 		/*if(result!=null && result.hasTargets()) {
 			latestID = result.getBestTarget().getFiducialId();
@@ -88,7 +88,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
             // Camera processed a new frame since last
             // Get the last one in the list.
             var result = results.get(results.size() - 1);
-            if (result != null && result.hasTargets()) {
+            if (result.hasTargets()) {
                 // At least one AprilTag was seen by the camera
                 for (var target : result.getTargets()) {
                     bestCameraToTarget = target.getBestCameraToTarget();
