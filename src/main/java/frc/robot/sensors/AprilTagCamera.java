@@ -82,21 +82,26 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	}
 
 	public Transform3d getBestCameraToTargetPose(){
-		Transform3d bestCameraToTarget = null;
-        var result = cachedResults.get(cachedResults.size() - 1);
-        if (result != null && result.hasTargets()) {
-            // At least one AprilTag was seen by the camera
-            for (var target : result.getTargets()) {
-                bestCameraToTarget = target.getBestCameraToTarget();
-                System.out.println("The pose result is: " + bestCameraToTarget);
+        Transform3d bestCameraToTarget = null;
+        var results = cachedResults;
+        if (!results.isEmpty()) {
+            // Camera processed a new frame since last
+            // Get the last one in the list.
+            var result = results.get(results.size() - 1);
+            if (result != null && result.hasTargets()) {
+                // At least one AprilTag was seen by the camera
+                for (var target : result.getTargets()) {
+                    bestCameraToTarget = target.getBestCameraToTarget();
+                    System.out.println("The pose result is: " + bestCameraToTarget);
+                }
             }
-		}
-		else 
-		{
-			System.out.println("No targets found");
-		}
-		return bestCameraToTarget;
-	}
+            else
+            {
+                System.out.println("No targets found");
+            }
+        }
+        return bestCameraToTarget;
+    }
 
 	public double getBestCameraToTargetX(Transform3d currentPose) {
 		if (currentPose != null) {
@@ -126,11 +131,11 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	{
 		boolean targetVisible = false;
 		double targetYaw = 0.0;
-		//var results = getAllUnreadResults();
-        if (!cachedResults.isEmpty()) {
+		var results = cachedResults;
+        if (!results.isEmpty()) {
             // Camera processed a new frame since last
             // Get the last one in the list.
-            var result = cachedResults.get(cachedResults.size() - 1);
+            var result = results.get(results.size() - 1);
             if (result.hasTargets()) {
                 // At least one AprilTag was seen by the camera
                 for (var target : result.getTargets()) {
