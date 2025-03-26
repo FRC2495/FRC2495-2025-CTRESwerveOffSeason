@@ -444,6 +444,10 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
         return !backCoralSensor.isTriggered() && frontCoralSensor.isTriggered();
     }
 
+	public boolean isCoralExitingAuto() {
+        return frontCoralSensor.isTriggered();
+    }
+
 	public boolean noCoralPresent() {
         return !backCoralSensor.isTriggered() && !frontCoralSensor.isTriggered();
     }

@@ -26,7 +26,7 @@ public class CoralRollerForAutoRollOut extends Command {
 
 	@Override
 	public boolean isFinished() {
-		return !coral_roller.hasCoral();
+		return !coral_roller.isCoralExitingAuto();
 	}
 
 	// Called once after isFinished returns true
