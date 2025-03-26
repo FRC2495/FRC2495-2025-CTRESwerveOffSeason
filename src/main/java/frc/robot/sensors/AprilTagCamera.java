@@ -47,7 +47,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	private static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(10.0); // tilt of our camera (radians)
 	private static final double CAMERA_ROLL_RADIANS = 0.0;
 	private static final double CAMERA_YAW_RADIANS = Units.degreesToRadians(0);
-	private List<PhotonPipelineResult> cachedResults = Collections.emptyList();
+	private List<PhotonPipelineResult> cachedResults = Collections.emptyList(); // we create an empty list so it's never null
 	//private int latestID;
 
 	private PhotonPoseEstimator estimator;
@@ -83,11 +83,11 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	public Transform3d getBestCameraToTargetPose(){
         Transform3d bestCameraToTarget = null;
-        var results = cachedResults;
-        if (!results.isEmpty()) {
+        //var results = cachedResults;
+        if (!cachedResults.isEmpty()) {
             // Camera processed a new frame since last
             // Get the last one in the list.
-            var result = results.get(results.size() - 1);
+            var result = cachedResults.get(cachedResults.size() - 1);
             if (result.hasTargets()) {
                 // At least one AprilTag was seen by the camera
                 for (var target : result.getTargets()) {
@@ -131,11 +131,11 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	{
 		boolean targetVisible = false;
 		double targetYaw = 0.0;
-		var results = cachedResults;
-        if (!results.isEmpty()) {
+		//var results = cachedResults;
+        if (!cachedResults.isEmpty()) {
             // Camera processed a new frame since last
             // Get the last one in the list.
-            var result = results.get(results.size() - 1);
+            var result = cachedResults.get(cachedResults.size() - 1);
             if (result.hasTargets()) {
                 // At least one AprilTag was seen by the camera
                 for (var target : result.getTargets()) {
