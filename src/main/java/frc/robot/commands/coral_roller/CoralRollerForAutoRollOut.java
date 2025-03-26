@@ -33,6 +33,7 @@ public class CoralRollerForAutoRollOut extends Command {
 	@Override
 	public void end(boolean interrupted) {
 		System.out.println("CoralRollerForAutoRollOut: end");
+		coral_roller.stop();
 	}
 
 }
