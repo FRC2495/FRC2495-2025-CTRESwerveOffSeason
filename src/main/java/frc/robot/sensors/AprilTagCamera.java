@@ -82,26 +82,26 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	}
 
 	public Transform3d getBestCameraToTargetPose(){
-        Transform3d bestCameraToTarget = null;
-        //var results = cachedResults;
-        if (!cachedResults.isEmpty()) {
-            // Camera processed a new frame since last
-            // Get the last one in the list.
-            var result = cachedResults.get(cachedResults.size() - 1);
-            if (result.hasTargets()) {
-                // At least one AprilTag was seen by the camera
-                for (var target : result.getTargets()) {
-                    bestCameraToTarget = target.getBestCameraToTarget();
-                    System.out.println("The pose result is: " + bestCameraToTarget);
-                }
-            }
-            else
-            {
-                System.out.println("No targets found");
-            }
-        }
-        return bestCameraToTarget;
-    }
+		Transform3d bestCameraToTarget = null;
+		//var results = cachedResults;
+		if (!cachedResults.isEmpty()) {
+			// Camera processed a new frame since last
+			// Get the last one in the list.
+			var result = cachedResults.get(cachedResults.size() - 1);
+			if (result.hasTargets()) {
+				// At least one AprilTag was seen by the camera
+				for (var target : result.getTargets()) {
+					bestCameraToTarget = target.getBestCameraToTarget();
+					System.out.println("The pose result is: " + bestCameraToTarget);
+				}
+			}
+			else
+			{
+				System.out.println("No targets found");
+			}
+		}
+		return bestCameraToTarget;
+	}
 
 	public double getBestCameraToTargetX(Transform3d currentPose) {
 		if (currentPose != null) {
@@ -132,14 +132,14 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		boolean targetVisible = false;
 		double targetYaw = 0.0;
 		//var results = cachedResults;
-        if (!cachedResults.isEmpty()) {
-            // Camera processed a new frame since last
-            // Get the last one in the list.
-            var result = cachedResults.get(cachedResults.size() - 1);
-            if (result.hasTargets()) {
-                // At least one AprilTag was seen by the camera
-                for (var target : result.getTargets()) {
-                    if (target.getFiducialId() == AprilTags.RED_REEF_SIDE_A 
+		if (!cachedResults.isEmpty()) {
+			// Camera processed a new frame since last
+			// Get the last one in the list.
+			var result = cachedResults.get(cachedResults.size() - 1);
+			if (result.hasTargets()) {
+				// At least one AprilTag was seen by the camera
+				for (var target : result.getTargets()) {
+					if (target.getFiducialId() == AprilTags.RED_REEF_SIDE_A 
 					|| target.getFiducialId() == AprilTags.RED_REEF_SIDE_B 
 					|| target.getFiducialId() == AprilTags.RED_REEF_SIDE_C 
 					|| target.getFiducialId() == AprilTags.RED_REEF_SIDE_D 
@@ -151,11 +151,11 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_D 
 					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_E 
 					|| target.getFiducialId() == AprilTags.BLUE_REEF_SIDE_F) {
-                        // Found Tag 7, record its information
-                        targetYaw = target.getYaw();
-                        targetVisible = true;
-                    }
-                }
+						// Found Tag 7, record its information
+						targetYaw = target.getYaw();
+						targetVisible = true;
+					}
+				}
 			}
 		}
 		return targetVisible;
