@@ -162,20 +162,20 @@ public final class Constants {
 	}
 
 	public static final class VisionConstants {
-		public static final double X_LEFT_ALIGNMENT = 0.35; //meters TODO fix value
-		public static final double Y_LEFT_ALIGNMENT = -0.19;
-		public static final double X_RIGHT_ALIGNMENT = 0.35;
+		public static final double X_LEFT_ALIGNMENT = 0.33; //meters TODO fix value
+		public static final double Y_LEFT_ALIGNMENT = -0.22;
+		public static final double X_RIGHT_ALIGNMENT = 0.33;
 		public static final double Y_RIGHT_ALIGNMENT = 0.14;
 		public static final double ROT_ALIGNMENT = Math.PI;//-Math.PI/2; //radians
 		public static double MAX_ALIGNMENT_DISTANCE = 1.5;
 	
 		public static final double X_ALIGNMENT_TOLERANCE = .05;//.05;
-		public static final double Y_ALIGNMENT_TOLERANCE = .05;//.05;
+		public static final double Y_ALIGNMENT_TOLERANCE = .02;//.05;
 		public static final double ROT_ALIGNMENT_TOLERANCE = .3;//.05;
 
-		public static final double X_REEF_ALIGNMENT_P = .3;//1;//1;//3.3;
-		public static final double Y_REEF_ALIGNMENT_P = .3;//1;//1;//3.3;
-		public static final double ROT_REEF_ALIGNMENT_P = .1;//1;//0.058;
+		public static final double X_REEF_ALIGNMENT_P = .5;
+		public static final double Y_REEF_ALIGNMENT_P = .4;
+		public static final double ROT_REEF_ALIGNMENT_P = .4;//1;//0.058;
 
 		public static final double DONT_SEE_TAG_WAIT_TIME = 0.3;
 		public static final double POSE_VALIDATION_TIME = 0.3;
