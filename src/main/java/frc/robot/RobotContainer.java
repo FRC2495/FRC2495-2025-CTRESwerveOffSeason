@@ -182,8 +182,12 @@ public class RobotContainer {
         NamedCommands.registerCommand("elevatorMoveDownWithStallDetection", new ElevatorMoveDownWithStallDetection(elevator));
 		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelTwoWithStallDetection", new ElevatorMoveToAlgaeLevelTwoWithStallDetection(elevator));
 		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelThreeWithStallDetection", new ElevatorMoveToAlgaeLevelThreeWithStallDetection(elevator));
-        NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, .5));
-        NamedCommands.registerCommand("algaeRollerTimedReleaseForAlgaeRemoval", new AlgaeRollerTimedRelease(algae_roller, .5));
+		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelTwoNeckDownWithStallDetection", new ElevatorMoveToAlgaeLevelTwoNeckDownWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection", new ElevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection(elevator));
+        NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 1));
+		NamedCommands.registerCommand("algaeRollerTimedRollForAlgaeRemoval", new AlgaeRollerTimedRoll(algae_roller, 1));
+        NamedCommands.registerCommand("algaeRollerTimedReleaseForAlgaeRemoval", new AlgaeRollerTimedRelease(algae_roller, 2));
+		NamedCommands.registerCommand("algaeRollerStop", new AlgaeRollerStop(algae_roller));
         NamedCommands.registerCommand("CoralRollerTimedRollIn", new CoralRollerTimedRollIn(coral_roller, .4));
         NamedCommands.registerCommand("CoralRollerTimedRollOut", new CoralRollerTimedRollOut(coral_roller, .4));
 		NamedCommands.registerCommand("coralRollerStop", new CoralRollerStop(coral_roller));

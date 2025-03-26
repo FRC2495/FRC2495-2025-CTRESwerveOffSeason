@@ -52,7 +52,8 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 102; 
 	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_REVS = 33; //TODO FIX
 	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_REVS = 65;//30; //TODO FIX
-	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_NECK_UP_REVS = 84;//30; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_NECK_DOWN_REVS = 84;//30; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_NECK_DOWN_REVS = 50;//30; //TODO FIX
 	
 
 
@@ -109,6 +110,8 @@ public class Elevator extends SubsystemBase implements IElevator {
 	PositionDutyCycle elevatorLevelFourPosition = new PositionDutyCycle(LENGTH_OF_LEVEL_FOUR_REVS);
 	PositionDutyCycle elevatorAlgaeLevelTwoPosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_TWO_REVS);
 	PositionDutyCycle elevatorAlgaeLevelThreePosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_THREE_REVS);
+	PositionDutyCycle elevatorAlgaeLevelTwoNeckDownPosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_TWO_NECK_DOWN_REVS);
+	PositionDutyCycle elevatorAlgaeLevelThreeNeckDownPosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_THREE_NECK_DOWN_REVS);
 	
 	boolean isMoving;
 	boolean isMovingUp;
@@ -467,6 +470,48 @@ public class Elevator extends SubsystemBase implements IElevator {
 		}
 		else {
 			elevator.setControl(elevatorAlgaeLevelThreePosition.withSlot(1)); //fix
+		}
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveToAlgaeLevelThreeNeckDown() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Algae Level Three Neck Down");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		targetEncoder = elevatorAlgaeLevelThreeNeckDownPosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorAlgaeLevelThreeNeckDownPosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorAlgaeLevelThreeNeckDownPosition.withSlot(1)); //fix
+		}
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveToAlgaeLevelTwoNeckDown() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Algae Level Two Neck Down");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		targetEncoder = elevatorAlgaeLevelTwoNeckDownPosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorAlgaeLevelTwoNeckDownPosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorAlgaeLevelTwoNeckDownPosition.withSlot(1)); //fix
 		}
 		
 		isMoving = true;

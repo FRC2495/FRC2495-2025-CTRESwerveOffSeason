@@ -25,18 +25,6 @@
         {
           "type": "named",
           "data": {
-            "name": "neckHome"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "neckMoveToCoralReefWithStallDetection"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
             "name": "coralRollerForAutoRollOut"
           }
         },
@@ -49,19 +37,31 @@
         {
           "type": "named",
           "data": {
+            "name": "coralRollerStop"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "elevatorMoveToAlgaeLevelTwoNeckDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "sliderExtendWithStallDetection"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "elevatorMoveToThirdLevelWithStallDetection"
+            "name": "algaeRollerTimedRollForAlgaeRemoval"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "algaeRollerTimedReleaseForAlgaeRemoval"
+            "name": "waitCommand"
           }
         },
         {
@@ -73,7 +73,31 @@
         {
           "type": "named",
           "data": {
+            "name": "neckHome"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerTimedReleaseForAlgaeRemoval"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "waitCommand"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "elevatorMoveDownWithStallDetection"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "algaeRollerStop"
           }
         },
         {
