@@ -19,7 +19,9 @@ public interface ICamera extends Subsystem {
 
 	public boolean isTargetVisible();
 
-	public Transform3d getBestCameraToTargetPose();
+	public Transform3d getBestCameraToTargetTransform();
+
+	public void updateCacheResults();
 
 	public double getBestCameraToTargetX(Transform3d currentPose);
 

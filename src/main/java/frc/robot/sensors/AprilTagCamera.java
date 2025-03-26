@@ -64,8 +64,9 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
-	public void periodic(){
+	public void updateCacheResults(){ // we call this periodically in robot.java 
 		cachedResults = getAllUnreadResults(); // note: calling this function clears the internal FIFO queue. We call this exactly ONCE per loop.
+		//System.out.println(cachedResults);
 		//var result = this.getLatestResult();
 		/*if(result!=null && result.hasTargets()) {
 			latestID = result.getBestTarget().getFiducialId();
@@ -81,7 +82,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 		return globalPose;
 	}
 
-	public Transform3d getBestCameraToTargetPose(){
+	public Transform3d getBestCameraToTargetTransform(){
 		Transform3d bestCameraToTarget = null;
 		//var results = cachedResults;
 		if (!cachedResults.isEmpty()) {
@@ -92,7 +93,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 				// At least one AprilTag was seen by the camera
 				for (var target : result.getTargets()) {
 					bestCameraToTarget = target.getBestCameraToTarget();
-					System.out.println("The pose result is: " + bestCameraToTarget);
+					//System.out.println("The pose result is: " + bestCameraToTarget);
 				}
 			}
 			else
