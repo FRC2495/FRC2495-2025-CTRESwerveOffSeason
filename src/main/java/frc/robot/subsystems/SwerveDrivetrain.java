@@ -337,10 +337,6 @@ public class SwerveDrivetrain extends SubsystemBase {
 		this.drive(xSpeed, ySpeed, angularSpeed, true, false);
 	}
 
-	/*public void drive(ChassisSpeeds velocity){
-    	this.drive(velocity);
-	}*/
-
 	public void driveRobotRelative(ChassisSpeeds speeds){
 		this.drive(speeds.vxMetersPerSecond,speeds.vyMetersPerSecond,speeds.omegaRadiansPerSecond,false,true);
 	}
