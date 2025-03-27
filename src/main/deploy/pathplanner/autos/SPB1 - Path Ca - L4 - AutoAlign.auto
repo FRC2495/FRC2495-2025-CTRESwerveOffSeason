@@ -1,0 +1,170 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - SZ to Side A (left) for Auto Align"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "autoAlignToLeftReef"
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveToFourthLevelWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "coralRollerForAutoRollOut"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "waitCommand"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveDownWithStallDetection"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "neckMoveToCoralStationWithStallDetection"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "SPB1 - Side A (autoalign) to Right Coral Station"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "doNothingUntilCoralSensed"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "neckHome"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToLeftReef"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveToFourthLevelWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "coralRollerForAutoRollOut"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "waitCommand"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveDownWithStallDetection"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "SPB1 - L4",
+  "choreoAuto": false
+}
