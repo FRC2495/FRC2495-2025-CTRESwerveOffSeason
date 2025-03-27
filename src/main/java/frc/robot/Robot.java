@@ -138,9 +138,9 @@ public class Robot extends TimedRobot {
 
 	public void updateToSmartDash()
 	{
-		SmartDashboard.putNumber("x", m_robotContainer.getDrivetrain().getPose().getX()); // lets us check in shuffleboard if the x is correct
-      SmartDashboard.putNumber("y", m_robotContainer.getDrivetrain().getPose().getY()); 
-      SmartDashboard.putNumber("rot", m_robotContainer.getDrivetrain().getPose().getRotation().getDegrees()); 
+		SmartDashboard.putNumber("x", m_robotContainer.getDrivetrain().getPose().getX()); // lets us see the absolute position of the robot on the field
+    	SmartDashboard.putNumber("y", m_robotContainer.getDrivetrain().getPose().getY()); 
+    	SmartDashboard.putNumber("rot", m_robotContainer.getDrivetrain().getPose().getRotation().getDegrees()); 
 	  
 		SmartDashboard.putNumber("FrontLeftDrivingEncoderPosition", m_robotContainer.getDrivetrain().getFrontLeftModule().getDrivingEncoder().getPosition());
 		SmartDashboard.putNumber("FrontLeftTurningEncoderPosition", m_robotContainer.getDrivetrain().getFrontLeftModule().getTurningEncoder().getPosition());

@@ -309,11 +309,13 @@ public class RobotContainer {
 			.whileTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
 			
 		joyMain.button(3)
-			.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
+			//.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
+			.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, getMainJoystick(), .5));
 			
 		joyMain.button(4)
 			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
-			.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, getMainJoystick(), .5));
 
 		joyMain.button(5)
 			//.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
