@@ -32,7 +32,7 @@ public class AutoAlignToReef extends Command {
     xController = new PIDController(Constants.VisionConstants.X_REEF_ALIGNMENT_P, 0.0, 0);  // Vertical movement
     yController = new PIDController(Constants.VisionConstants.Y_REEF_ALIGNMENT_P, 0.0, 0);  // Horitontal movement
     rotController = new PIDController(Constants.VisionConstants.ROT_REEF_ALIGNMENT_P, 0, 0);  // Rotation
-    this.isRightScore = isRightScore;
+    this.isRightScore = isRightScore; // left and right correspond to the poles when youre facing the reef head on (imagine you are the robot scoring, the left and right aligns with your left and right)
     this.drivetrain = drivetrain;
     this.apriltag_camera = apriltag_camera;
     this.joystick = joystick;
@@ -63,11 +63,13 @@ public class AutoAlignToReef extends Command {
   public void execute() {
     if (apriltag_camera.isTargetVisible()) { // if we see a target 
       
-      // i have no idea if getBestCameraToTargetX() is doing what i think it is doing lol
+      // Side C with offset (4.903, 2.7)
 
       Transform3d currentTransform = apriltag_camera.getBestCameraToTargetTransform();
 
-      SmartDashboard.putNumber("x", apriltag_camera.getBestCameraToTargetX(currentTransform)); // lets us check in shuffleboard if the x is correct
+      SmartDashboard.putNumber("x", drivetrain.getPose().getX()); // lets us check in shuffleboard if the x is correct
+      SmartDashboard.putNumber("y", drivetrain.getPose().getY()); 
+      SmartDashboard.putNumber("rot", drivetrain.getPose().getRotation().getRadians()); 
 
       double xPower = MathUtil.clamp(xController.calculate(apriltag_camera.getBestCameraToTargetX(currentTransform), Constants.VisionConstants.X_LEFT_ALIGNMENT), -1, 1); //calculates power needed to get from current x position to desired x position
       //SmartDashboard.putNumber("xPower", xPower); // lets us check in shuffleboard if the x power is correct

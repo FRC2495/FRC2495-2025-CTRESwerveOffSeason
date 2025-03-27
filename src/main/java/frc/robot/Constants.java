@@ -66,10 +66,10 @@ public final class Constants {
 		public static final double ROTATIONAL_SLEW_RATE = 2.0; // 20.0; //2.0; // percent per second (1 = 100%)
 
 		// Chassis configuration
-		public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(18.75);
+		public static final double TRACK_WIDTH_METERS = Units.inchesToMeters(24);
 		
 		// Distance between centers of right and left wheels on robot
-		public static final double WHEEL_BASE_METERS = Units.inchesToMeters(18.75);
+		public static final double WHEEL_BASE_METERS = Units.inchesToMeters(24);
 		
 		// Distance between front and back wheels on robot
 		public static final SwerveDriveKinematics DRIVE_KINEMATICS = new SwerveDriveKinematics(
@@ -146,7 +146,7 @@ public final class Constants {
 		public static final double Y_CONTROLLER_P = 1;
 		public static final double THETA_CONTROLLER_P = 1;
 
-		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_P = 1.7;//3.1; //2.95;//2.8;//2.9; //.5; //2.75; //4.0;
+		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_P = 3;//3.1; //2.95;//2.8;//2.9; //.5; //2.75; //4.0;
 		public static final double ROTATION_HOLONOMIC_CONTROLLER_P = 2;//1;//1.8;//2;//1; //2; //5; //2.5
 
 		public static final double TRANSLATION_HOLONOMIC_CONTROLLER_I = 0;
@@ -174,7 +174,7 @@ public final class Constants {
 		public static final double ROT_ALIGNMENT_TOLERANCE = .3;//.05;
 
 		public static final double X_REEF_ALIGNMENT_P = .5;
-		public static final double Y_REEF_ALIGNMENT_P = .4;
+		public static final double Y_REEF_ALIGNMENT_P = .5;
 		public static final double ROT_REEF_ALIGNMENT_P = .4;//1;//0.058;
 
 		public static final double DONT_SEE_TAG_WAIT_TIME = 0.3;

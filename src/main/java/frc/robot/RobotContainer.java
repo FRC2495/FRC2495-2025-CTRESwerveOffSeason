@@ -215,6 +215,8 @@ public class RobotContainer {
 		NamedCommands.registerCommand("neckHome", new NeckMoveHomeWithStallDetection(neck));
 		NamedCommands.registerCommand("coralRollerForAutoRollOut", new CoralRollerForAutoRollOut(coral_roller));
 		NamedCommands.registerCommand("waitCommand", new WaitCommand(2));
+		NamedCommands.registerCommand("autoAlignToLeftReef", new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
+		NamedCommands.registerCommand("autoAlignToRightReef", new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
 
 		// choosers (for auton)
 
