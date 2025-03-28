@@ -8,15 +8,10 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.Joystick;
-//import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.Constants.VisionConstants;
 import frc.robot.interfaces.ICamera;
-import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.SwerveDrivetrain;
 
 public class AutoAlignToReefTimed extends WaitCommand {
@@ -25,12 +20,10 @@ public class AutoAlignToReefTimed extends WaitCommand {
   //private Timer dontSeeTagTimer, stopTimer;
   private SwerveDrivetrain drivetrain;
   private ICamera apriltag_camera;
-  private Joystick joystick;
   //private double tagID = -1;
   //private Pose2d targetPose;
-  private static final double JOYSTICK_EXIT_THRESHOLD = 0.3;
 
-  public AutoAlignToReefTimed(boolean isRightScore, SwerveDrivetrain drivetrain, ICamera apriltag_camera, Joystick joystick, double timeout) {
+  public AutoAlignToReefTimed(boolean isRightScore, SwerveDrivetrain drivetrain, ICamera apriltag_camera, double timeout) {
     super(timeout);
     xController = new PIDController(Constants.VisionConstants.X_REEF_ALIGNMENT_P, 0.0, 0);  // Vertical movement
     yController = new PIDController(Constants.VisionConstants.Y_REEF_ALIGNMENT_P, 0.0, 0);  // Horitontal movement
@@ -38,7 +31,6 @@ public class AutoAlignToReefTimed extends WaitCommand {
     this.isRightScore = isRightScore; // left and right correspond to the poles when youre facing the reef head on (imagine you are the robot scoring, the left and right aligns with your left and right)
     this.drivetrain = drivetrain;
     this.apriltag_camera = apriltag_camera;
-    this.joystick = joystick;
     addRequirements(drivetrain);
   }
 

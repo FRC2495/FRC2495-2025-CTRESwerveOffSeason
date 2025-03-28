@@ -65,7 +65,7 @@ import frc.robot.interfaces.ICamera;
 import frc.robot.commands.groups.*;
 //import frc.robot.commands.gamepad.*;
 //import frc.robot.auton.*;
-import frc.robot.auton.trajectories.*;
+//import frc.robot.auton.trajectories.*;
 
 
 /*
@@ -310,12 +310,12 @@ public class RobotContainer {
 			
 		joyMain.button(3)
 			//.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
-			.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, getMainJoystick(), .5));
+			.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, .5));
 			
 		joyMain.button(4)
 			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, getMainJoystick(), .5));
+			.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, .5));
 
 		joyMain.button(5)
 			//.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
