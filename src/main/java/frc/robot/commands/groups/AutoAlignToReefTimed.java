@@ -101,9 +101,8 @@ public class AutoAlignToReefTimed extends WaitCommand {
         stopTimer.hasElapsed(Constants.VisionConstants.POSE_VALIDATION_TIME);*/
 
       Transform3d newTransform = apriltag_camera.getBestCameraToTargetTransform();
-      return ((Math.abs(joystick.getX()) > JOYSTICK_EXIT_THRESHOLD) || (Math.abs(joystick.getY()) > JOYSTICK_EXIT_THRESHOLD)) 
-      || ((Math.abs(apriltag_camera.getBestCameraToTargetX(newTransform) - (isRightScore ? Constants.VisionConstants.X_RIGHT_ALIGNMENT : Constants.VisionConstants.X_LEFT_ALIGNMENT)) < VisionConstants.X_ALIGNMENT_AUTO_TOLERANCE) 
+      return ((Math.abs(apriltag_camera.getBestCameraToTargetX(newTransform) - (isRightScore ? Constants.VisionConstants.X_RIGHT_ALIGNMENT : Constants.VisionConstants.X_LEFT_ALIGNMENT)) < VisionConstants.X_ALIGNMENT_AUTO_TOLERANCE) 
       && (Math.abs(apriltag_camera.getBestCameraToTargetY(newTransform) - (isRightScore ? Constants.VisionConstants.Y_RIGHT_ALIGNMENT : Constants.VisionConstants.Y_LEFT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_AUTO_TOLERANCE)
-      && (Math.abs(apriltag_camera.getBestCameraToTargetRotationRadians(newTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_AUTO_TOLERANCE)); 
+      && (Math.abs(apriltag_camera.getBestCameraToTargetRotationRadians(newTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_AUTO_TOLERANCE)) || super.isFinished(); 
   }
 }
