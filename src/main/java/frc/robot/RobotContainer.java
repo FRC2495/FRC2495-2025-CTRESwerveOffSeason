@@ -220,7 +220,7 @@ public class RobotContainer {
 		NamedCommands.registerCommand("autoAlignToRightReef", new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
 		//NamedCommands.registerCommand("autoAlignToRightReefTimed", new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
 		NamedCommands.registerCommand("autoAlignToRightReefAuton", new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick()));
-		NamedCommands.registerCommand("AutoAlignToLeftReefForAuton", new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick()));
+		NamedCommands.registerCommand("autoAlignToLeftReefForAuton", new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick()));
 
 		// choosers (for auton)
 
