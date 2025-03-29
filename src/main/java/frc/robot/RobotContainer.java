@@ -217,6 +217,7 @@ public class RobotContainer {
 		NamedCommands.registerCommand("waitCommand", new WaitCommand(2));
 		NamedCommands.registerCommand("autoAlignToLeftReef", new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
 		NamedCommands.registerCommand("autoAlignToRightReef", new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
+		NamedCommands.registerCommand("autoAlignToRightReefTimed", new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
 
 		// choosers (for auton)
 
@@ -310,12 +311,14 @@ public class RobotContainer {
 			
 		joyMain.button(3)
 			//.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
-			.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, .5));
+			//.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, 2));
+			.onTrue(new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick()));
 			
 		joyMain.button(4)
 			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, .5));
+			//.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
+			.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(5)
 			//.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
@@ -395,13 +398,15 @@ public class RobotContainer {
 			.onTrue(new NeckMoveToCoralStationWithStallDetection(neck));
 
 		copilotGamepad.povRight()
-			.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
+			.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
 
 		copilotGamepad.povUp()
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
-			.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
+			.onTrue(new NeckMoveUpWithStallDetection(neck));
 
 
 		copilotGamepad.leftBumper()
