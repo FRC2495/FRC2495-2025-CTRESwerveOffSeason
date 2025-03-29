@@ -159,7 +159,7 @@ public class RobotContainer {
 
 	//private final Indicator indicator = new Indicator(apriltag_camera, object_detection_camera);
 
-	public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
+	//public static final AprilTagFieldLayout FIELD_LAYOUT = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
 	// The driver's and copilot's joystick(s) and controller(s)
 	CommandJoystick joyMain = new CommandJoystick(Ports.USB.MAIN_JOYSTICK);

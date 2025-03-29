@@ -54,7 +54,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
      */
 	public AprilTagCamera() {
 		super(DEFAULT_CAM_NAME);
-		estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
+		//estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
 	/**
@@ -79,13 +79,13 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
      *
      * @return The estimated robot pose based on 3D tracking of ApriLTags
      */
-	public Optional<EstimatedRobotPose> getGlobalPose(){
+	/*public Optional<EstimatedRobotPose> getGlobalPose(){
 		Optional<EstimatedRobotPose> globalPose = Optional.empty();
 		for (var change : cachedResults) {
 			globalPose = estimator.update(change);
 		}
 		return globalPose;
-	}
+	}*/
 
 	/**
      * Returns the AprilTag target-to-camera transformation.
