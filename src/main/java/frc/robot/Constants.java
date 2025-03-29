@@ -169,8 +169,8 @@ public final class Constants {
 		public static final double ROT_ALIGNMENT = Math.PI;//-Math.PI/2; //radians
 		public static double MAX_ALIGNMENT_DISTANCE = 1.5;
 	
-		public static final double X_ALIGNMENT_TOLERANCE = .05;//.05;
-		public static final double Y_ALIGNMENT_TOLERANCE = .02;//.05;
+		public static final double X_ALIGNMENT_TOLERANCE = .02;//.05;
+		public static final double Y_ALIGNMENT_TOLERANCE = .01;//.05;
 		public static final double ROT_ALIGNMENT_TOLERANCE = .3;//.05;
 
 		public static final double X_ALIGNMENT_AUTO_TOLERANCE = .05;//.05;
