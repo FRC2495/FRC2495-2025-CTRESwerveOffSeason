@@ -218,8 +218,9 @@ public class RobotContainer {
 		NamedCommands.registerCommand("waitCommand", new WaitCommand(2));
 		NamedCommands.registerCommand("autoAlignToLeftReef", new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
 		NamedCommands.registerCommand("autoAlignToRightReef", new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
-		NamedCommands.registerCommand("autoAlignToRightReefTimed", new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
+		//NamedCommands.registerCommand("autoAlignToRightReefTimed", new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
 		NamedCommands.registerCommand("autoAlignToRightReefAuton", new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick()));
+		NamedCommands.registerCommand("AutoAlignToLeftReefForAuton", new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick()));
 
 		// choosers (for auton)
 
@@ -404,14 +405,15 @@ public class RobotContainer {
 
 		copilotGamepad.povRight()
 			//.onTrue(new NeckMoveToCoralReefWithStallDetection(neck));
-			.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
+			.onTrue(new NeckMoveUpWithStallDetection(neck));
 
 		copilotGamepad.povUp()
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
-			//.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
-			.onTrue(new NeckMoveUpWithStallDetection(neck));
+			.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 
 
 		copilotGamepad.leftBumper()
