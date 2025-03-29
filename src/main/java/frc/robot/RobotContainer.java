@@ -30,7 +30,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DrivetrainConstants;
-
+import frc.robot.auton.AutoAlignLeftAndElevatorUp;
+import frc.robot.auton.AutoAlignRightAndElevatorUp;
 import frc.robot.sensors.*;
 
 /*import frc.robot.interfaces.IElevator;
@@ -314,12 +315,15 @@ public class RobotContainer {
 			//.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
 			//.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, 2));
 			.onTrue(new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignLeftAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
+			
 			
 		joyMain.button(4)
 			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			//.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
 			.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignRightAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(5)
 			//.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
