@@ -163,7 +163,7 @@ public final class Constants {
 
 	public static final class VisionConstants {
 		public static final double X_LEFT_ALIGNMENT = 0.32; //meters TODO fix value
-		public static final double Y_LEFT_ALIGNMENT = -0.17;
+		public static final double Y_LEFT_ALIGNMENT = -0.20;
 		public static final double X_RIGHT_ALIGNMENT = 0.32;
 		public static final double Y_RIGHT_ALIGNMENT = 0.16;
 		public static final double ROT_ALIGNMENT = Math.PI;//-Math.PI/2; //radians
@@ -177,8 +177,8 @@ public final class Constants {
 		public static final double Y_ALIGNMENT_AUTO_TOLERANCE = .02;//.05;
 		public static final double ROT_ALIGNMENT_AUTO_TOLERANCE = .3;//.05;
 
-		public static final double X_REEF_ALIGNMENT_P = .5;
-		public static final double Y_REEF_ALIGNMENT_P = .5;
+		public static final double X_REEF_ALIGNMENT_P = .55;
+		public static final double Y_REEF_ALIGNMENT_P = .55;
 		public static final double ROT_REEF_ALIGNMENT_P = .4;//1;//0.058;
 
 		public static final double DONT_SEE_TAG_WAIT_TIME = 0.3;
