@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 6.677151639344262,
+        "x": 5.311184210526315,
         "y": 5.439391447368421
       },
       "prevControl": {
-        "x": 6.926669005005307,
+        "x": 5.56070157618736,
         "y": 5.423864559928481
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Side A (before autoalign)"
+      "linkedName": "Side A (autoalign)"
     }
   ],
   "rotationTargets": [],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -119.99999999999999
   },
   "reversed": false,
   "folder": null,
