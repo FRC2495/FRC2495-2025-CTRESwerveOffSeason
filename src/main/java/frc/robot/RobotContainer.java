@@ -397,7 +397,6 @@ public class RobotContainer {
 
 		copilotGamepad.povDown()
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			//.onTrue(new NeckMoveDownWithStallDetection(neck));
 			.onTrue(new NeckMoveHomeWithStallDetection(neck));
 
 		copilotGamepad.povLeft()
@@ -408,11 +407,11 @@ public class RobotContainer {
 			//.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
 			.onTrue(new NeckMoveUpWithStallDetection(neck));
 
-		copilotGamepad.povUp()
+		copilotGamepad.povUp();
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
-			.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 
 
