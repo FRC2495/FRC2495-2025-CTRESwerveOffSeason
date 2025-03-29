@@ -363,16 +363,19 @@ public class RobotContainer {
 		
 		copilotGamepad.a()
 			//.onTrue(new NeckMoveDownWithStallDetection(neck));
-			.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
+			//.onTrue(new NeckMoveToAlgaeReefWithStallDetection(neck));
+			.onTrue(new ElevatorMoveToAlgaeLevelTwoNeckDownWithStallDetection(elevator));
 		
 		copilotGamepad.b()
 			//.onTrue(new NeckMoveProcessorWithStallDetection(neck));
 			//.onTrue(new NeckMoveUpWithStallDetection(neck));
 			//.onTrue(new NeckMoveHomeWithStallDetection(neck));
-			.onTrue(new NeckMoveDownWithStallDetection(neck));
+			//.onTrue(new NeckMoveDownWithStallDetection(neck));
+			.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
 
 		copilotGamepad.x()
-			.whileTrue(new CoralRollerRollIn(coral_roller));
+			//.whileTrue(new CoralRollerRollIn(coral_roller));
+			.onTrue(new ElevatorMoveToAlgaeLevelThreeWithStallDetection(elevator));
 
 		copilotGamepad.y()
 			//.whileTrue(new CoralRollerRollOut(coral_roller));
