@@ -29,7 +29,7 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 	static final double HALF_PCT_OUTPUT = 0.5;
 	static final double REDUCED_PCT_OUTPUT = 0.6; //0.8;
 	static final double REDUCED_PCT_OUTPUT_SHORT_DISTANCE = 0.4;
-	static final double REDUCED_PCT_OUTPUT_ROLL_OUT_SENSOR = 0.3;
+	static final double REDUCED_PCT_OUTPUT_ROLL_OUT_SENSOR = 0.15;
 	static final double SUPER_REDUCED_PCT_OUTPUT = 0.2; 
 	
 	//todo fix
@@ -85,7 +85,7 @@ public class CoralRoller extends SubsystemBase implements ICoralRoller{
 	private CoralSensor frontCoralSensor, backCoralSensor;
 
 	private final double frontCoralTriggerValue = 0.1; // TODO: need to test for this
-	private final double backCoralTriggerValue = 0.15; // TODO: need to test for this
+	private final double backCoralTriggerValue = 0.11; // TODO: need to test for this
 	
 		
 	public CoralRoller(WPI_TalonSRX coral_roller_in/* , BaseMotorController coral_roller_follower_in*/) {
