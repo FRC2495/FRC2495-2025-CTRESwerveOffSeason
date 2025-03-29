@@ -154,7 +154,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	 * Transforms the current AprilTag target and sends rotation data, as seen in the UI.
      *
 	 * @param currentPose The latest target-to-camera transformation information.
-     * @return The rotation of the robot compared to the AprilTag from the recieved target-to-camera transformation information in radians if found. If not, returns pi.
+     * @return The rotation of the robot compared to the AprilTag from the received target-to-camera transformation information in radians if found. If not, returns pi.
      */
 	public double getBestCameraToTargetRotationRadians(Transform3d currentPose) {
 		if (currentPose != null) {
@@ -236,7 +236,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	/**
      * Returns the distance from the AprilTag to the camera in inches only if the target is considered a best target.
-	 * Checks if the latest AprilTag target recieved is the best target in list before retrieving.
+	 * Checks if the latest AprilTag target received is the best target in list before retrieving.
      *
 	 * @throws x If no AprilTag target is found or target found is not considered a best target
      * @return The distance from the AprilTag to the camera in inches only if the target is considered a best target.
@@ -265,7 +265,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	/**
      * Returns yaw of the target compared to the camera if the target is considered a best target.
-	 * Checks if the latest AprilTag target recieved is the best target in list before retrievin.
+	 * Checks if the latest AprilTag target received is the best target in list before retrievin.
      *
 	 * @throws x If no AprilTag target was found or was not the best target if found.
      * @return The yaw of the target compared to the camera if the target is considered a best target.
@@ -304,7 +304,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	/**
      * Returns pitch of the target compared to the camera if the target is a best target.
-	 * Checks if the latest AprilTag target recieved is the best target in list before retrieving.
+	 * Checks if the latest AprilTag target received is the best target in list before retrieving.
 	 * 
 	 * @throws x If no AprilTag target found or target found is not considered a best target.
      * @return The pitch of the target compared to the camera if the target is considered a best target.
@@ -329,7 +329,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	/**
      * Returns skew of the target compared to the camera if the target is a best target.
-	 * Checks if the latest AprilTag target recieved is the best target in list before retrieving.
+	 * Checks if the latest AprilTag target received is the best target in list before retrieving.
 	 * 
 	 * @throws x If no AprilTag target found or target found is not considered a best target.
      * @return The skew of the target compared to the camera if the target is considered a best target.
@@ -353,7 +353,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	/**
      * Returns AprilTag ID in camera vision if the target is a best target.
-	 * Checks if the latest AprilTag target recieved is the best target in list before retrieving.
+	 * Checks if the latest AprilTag target received is the best target in list before retrieving.
 	 * 
 	 * @throws x If no AprilTag target found or target found is not considered a best target.
      * @return The AprilTag ID in view of camera if it is considered a best target.
@@ -376,7 +376,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	/**
      * Returns AprilTag ID in camera vision if the target is a high value target.
-	 * Checks if the latest AprilTag target recieved is a high value target.
+	 * Checks if the latest AprilTag target received is a high value target.
 	 * In this case, a high value target is a target on the reef.
 	 * 
 	 * @param result The latest result from the camera pipeline.
@@ -426,7 +426,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 
 	/**
      * Returns distance from AprilTag target to camera in inches if the target is a high value target.
-	 * Checks if the latest AprilTag target recieved is a high value target before retrieving.
+	 * Checks if the latest AprilTag target received is a high value target before retrieving.
 	 * 
 	 * @throws x If no AprilTag target found or target found is not a high value target
      * @return The AprilTag ID in view of camera if it is considered a best target.
