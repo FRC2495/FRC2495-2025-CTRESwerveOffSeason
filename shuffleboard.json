@@ -552,9 +552,7 @@
               "_showGlyph": false,
               "Game/Game": "k2025Reefscape",
               "Visuals/Robot Icon Size": 50.0,
-              "Visuals/Show Outside Circles": false,
-              "Colors/centeredTrajectory": "#FFFFFFFF",
-              "Colors/trajectory": "#FFFFFFFF"
+              "Visuals/Show Outside Circles": false
             }
           },
           "2,4": {
@@ -1139,9 +1137,7 @@
               "_showGlyph": false,
               "Game/Game": "k2025Reefscape",
               "Visuals/Robot Icon Size": 50.0,
-              "Visuals/Show Outside Circles": false,
-              "Colors/centeredTrajectory": "#FFFFFFFF",
-              "Colors/trajectory": "#FFFFFFFF"
+              "Visuals/Show Outside Circles": false
             }
           },
           "3,1": {
@@ -1461,9 +1457,7 @@
               "_showGlyph": false,
               "Game/Game": "k2025Reefscape",
               "Visuals/Robot Icon Size": 50.0,
-              "Visuals/Show Outside Circles": false,
-              "Colors/centeredTrajectory": "#FFFFFFFF",
-              "Colors/trajectory": "#FFFFFFFF"
+              "Visuals/Show Outside Circles": false
             }
           },
           "4,2": {
@@ -2583,9 +2577,7 @@
               "_showGlyph": false,
               "Game/Game": "k2025Reefscape",
               "Visuals/Robot Icon Size": 50.0,
-              "Visuals/Show Outside Circles": false,
-              "Colors/centeredTrajectory": "#FFFFFFFF",
-              "Colors/trajectory": "#FFFFFFFF"
+              "Visuals/Show Outside Circles": false
             }
           },
           "6,0": {
@@ -2958,8 +2950,8 @@
     }
   ],
   "windowGeometry": {
-    "x": 0.800000011920929,
-    "y": 0.800000011920929,
+    "x": 1.0,
+    "y": 1.0,
     "width": 1535.199951171875,
     "height": 815.2000122070312
   }

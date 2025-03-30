@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.2165983606557385,
-        "y": 2.508555327868852
+        "x": 7.234500000000001,
+        "y": 0.7782499999999993
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.498397840558047,
-        "y": 2.4851228508246135
+        "x": 6.516299479902309,
+        "y": 0.754817522955761
       },
       "isLocked": false,
       "linkedName": "SPB3"
     },
     {
       "anchor": {
-        "x": 5.41125,
-        "y": 2.5332499999999993
+        "x": 5.382000000000001,
+        "y": 2.6307499999999995
       },
       "prevControl": {
-        "x": 6.052538921000006,
-        "y": 2.5711129139550644
+        "x": 6.023288921000007,
+        "y": 2.6686129139550645
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 119.99999999999999
   },
   "useDefaultConstraints": true
 }

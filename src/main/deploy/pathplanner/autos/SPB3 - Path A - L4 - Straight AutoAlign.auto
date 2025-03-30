@@ -7,13 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB2 - SZ to Side B (left)"
+            "pathName": "SPB3 - SZ to Side C (left) Straight AutoAlign"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "autoAlignToRightReefAuton"
+            "name": "autoAlignToLeftReef"
           }
         },
         {
@@ -70,6 +70,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L4",
+  "folder": "SPB3 - L4",
   "choreoAuto": false
 }
