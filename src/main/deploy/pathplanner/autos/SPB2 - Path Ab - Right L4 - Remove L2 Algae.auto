@@ -7,7 +7,26 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - SZ to Side A (right)"
+            "pathName": "SPB2 - SZ to Side B (left)"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToRightReefAuton"
+                }
+              }
+            ]
           }
         },
         {
@@ -33,13 +52,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand"
+                        "name": "waitCommand1s"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "elevatorMoveToAlgaeLevelThreeWithStallDetection"
+                        "name": "elevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection"
                       }
                     }
                   ]
@@ -55,12 +74,6 @@
           }
         },
         {
-          "type": "path",
-          "data": {
-            "pathName": "SPB1 - Side A (right) to Side A Remove Algae"
-          }
-        },
-        {
           "type": "deadline",
           "data": {
             "commands": [
@@ -71,31 +84,51 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "elevatorMoveToAlgaeLevelThreeWithStallDetection"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
                         "name": "neckMoveToAlgaeReefWithStallDetection"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "sliderExtendWithStallDetection"
+                        "name": "elevatorMoveToAlgaeLevelTwoWithStallDetection"
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "race",
                       "data": {
-                        "name": "algaeRollerTimedRoll"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "sliderExtendWithStallDetection"
+                            }
+                          },
+                          {
+                            "type": "parallel",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "algaeRollerRoll"
+                                  }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "waitCommand2s"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "waitCommand"
+                        "waitTime": 0.5
                       }
                     },
                     {
@@ -107,19 +140,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "neckMoveDownWithStallDetection"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "algaeRollerTimedReleaseForAlgaeRemoval"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
                         "name": "elevatorMoveDownWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "neckMoveToCoralStationWithStallDetection"
                       }
                     }
                   ]
@@ -138,6 +165,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "SPB1 - L4",
+  "folder": "SPB2 - L4",
   "choreoAuto": false
 }

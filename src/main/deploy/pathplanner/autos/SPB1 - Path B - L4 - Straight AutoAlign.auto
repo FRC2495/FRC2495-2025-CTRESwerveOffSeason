@@ -7,7 +7,26 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+            "pathName": "SPB1 - SZ to Side A (left) for Straight Auto Align"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToRightReefAuton"
+                }
+              }
+            ]
           }
         },
         {
@@ -33,19 +52,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand"
+                        "name": "waitCommand1s"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
                         "name": "elevatorMoveDownWithStallDetection"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "neckMoveToCoralStationWithStallDetection"
                       }
                     }
                   ]
@@ -59,11 +72,23 @@
               }
             ]
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Side A (left) to Side A (autoalign)"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Side A (autoalign) to Right Coral Station"
+          }
         }
       ]
     }
   },
   "resetOdom": true,
-  "folder": "SPB3 - L4",
+  "folder": "SPB1 - L4",
   "choreoAuto": false
 }

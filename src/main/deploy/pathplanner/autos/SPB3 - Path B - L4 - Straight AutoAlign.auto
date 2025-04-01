@@ -7,7 +7,26 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+            "pathName": "SPB3 - SZ to Side C (left) Straight AutoAlign"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToRightReefAuton"
+                }
+              }
+            ]
           }
         },
         {
@@ -33,7 +52,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand"
+                        "name": "waitCommand1s"
                       }
                     },
                     {
@@ -55,41 +74,15 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "neckMoveToCoralStationWithStallDetection"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "SPB3 - Move from side C to left coral station"
-                }
-              }
-            ]
+            "pathName": "SPB3 - Side C (right) to Side C (autoalign)"
           }
         },
         {
-          "type": "deadline",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "doNothingUntilCoralSensed"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "drivetrainStop"
-                }
-              }
-            ]
+            "pathName": "SPB3 - Side C (autoalign) to Left Coral Station"
           }
         }
       ]

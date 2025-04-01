@@ -7,13 +7,26 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - SZ to Side A (left) for Auto Align"
+            "pathName": "SPB1 - SZ to Side A (left) for Straight Auto Align"
           }
         },
         {
-          "type": "named",
+          "type": "race",
           "data": {
-            "name": "autoAlignToLeftReef"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToRightReefAuton"
+                }
+              }
+            ]
           }
         },
         {
@@ -39,7 +52,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand"
+                        "name": "waitCommand1s"
                       }
                     },
                     {
@@ -61,22 +74,15 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "neckMoveToCoralStationWithStallDetection"
-                }
-              },
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "SPB1 - Side A (autoalign) to Right Coral Station"
-                }
-              }
-            ]
+            "pathName": "SPB1 - Side A (left) to Side A (autoalign)"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB1 - Side A (autoalign) to Right Coral Station"
           }
         },
         {
@@ -84,9 +90,22 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "doNothingUntilCoralSensed"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "doNothingUntilCoralSensed"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "neckHome"
+                      }
+                    }
+                  ]
                 }
               },
               {
@@ -99,22 +118,9 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "neckHome"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoAlignToLeftReef"
-                }
-              }
-            ]
+            "pathName": "SPB1 - Right Coral Station to Side F (autoalign)"
           }
         },
         {
@@ -140,7 +146,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand"
+                        "name": "waitCommand1s"
                       }
                     },
                     {

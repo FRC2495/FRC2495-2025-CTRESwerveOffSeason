@@ -7,7 +7,26 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+            "pathName": "SPB3 - SZ to Side C (left) Straight AutoAlign"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToRightReefAuton"
+                }
+              }
+            ]
           }
         },
         {
@@ -33,25 +52,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand"
+                        "name": "waitCommand1s"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
                         "name": "elevatorMoveDownWithStallDetection"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "coralRollerStop"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "neckMoveToCoralStationWithStallDetection"
                       }
                     }
                   ]
@@ -69,7 +76,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Move from side C to left coral station"
+            "pathName": "SPB3 - Side C (right) to Side C (autoalign)"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "SPB3 - Side C (autoalign) to Left Coral Station"
           }
         },
         {
@@ -77,9 +90,22 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "doNothingUntilCoralSensed"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "doNothingUntilCoralSensed"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "neckHome"
+                      }
+                    }
+                  ]
                 }
               },
               {
@@ -92,22 +118,9 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
           "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "SPB3 - Left Coral Station to Side D (left)"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "neckMoveDownWithStallDetection"
-                }
-              }
-            ]
+            "pathName": "SPB3 - Left Coral Station to Side D (left) AutoAlign"
           }
         },
         {
@@ -115,9 +128,34 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "sequential",
                 "data": {
-                  "name": "scoreFourthLevelCoralAndHome"
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveToFourthLevelWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "coralRollerForAutoRollOut"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "waitCommand1s"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveDownWithStallDetection"
+                      }
+                    }
+                  ]
                 }
               },
               {

@@ -31,13 +31,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Move from side C to net"
+            "pathName": "SPB3 - Move from side C to processor"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "ScoreNet"
+            "name": "scoreProcessor"
           }
         },
         {

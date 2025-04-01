@@ -7,7 +7,26 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - Leave SZ + drop preloaded coral on side C"
+            "pathName": "SPB3 - SZ to Side C (left) Straight AutoAlign"
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToLeftReefForAuton"
+                }
+              }
+            ]
           }
         },
         {
@@ -33,61 +52,102 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand"
+                        "name": "waitCommand1s"
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "elevatorMoveToAlgaeLevelThreeWithStallDetection"
+                        "name": "elevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection"
                       }
-                    },
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToRightReefAuton"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "neckMoveToAlgaeReefWithStallDetection"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "deadline",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
                     {
                       "type": "named",
                       "data": {
-                        "name": "neckMoveToAlgaeReefWithStallDetection"
+                        "name": "elevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection"
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "race",
                       "data": {
-                        "name": "sliderExtendWithStallDetection"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "sliderExtendWithStallDetection"
+                            }
+                          },
+                          {
+                            "type": "parallel",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "algaeRollerRoll"
+                                  }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "waitCommand2s"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "algaeRollerTimedRollForAlgaeRemoval"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "waitCommand"
+                        "waitTime": 0.5
                       }
                     },
                     {
                       "type": "named",
                       "data": {
                         "name": "sliderRetractWithStallDetection"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "neckHome"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "algaeRollerTimedReleaseForAlgaeRemoval"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "waitCommand"
                       }
                     },
                     {

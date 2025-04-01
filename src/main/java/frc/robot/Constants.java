@@ -171,11 +171,11 @@ public final class Constants {
 	
 		public static final double X_ALIGNMENT_TOLERANCE = .02;//.05;
 		public static final double Y_ALIGNMENT_TOLERANCE = .01;//.05;
-		public static final double ROT_ALIGNMENT_TOLERANCE = .3;//.05;
+		public static final double ROT_ALIGNMENT_TOLERANCE = .05;//.05;
 
-		public static final double X_ALIGNMENT_AUTO_TOLERANCE = .03;//.05;
+		public static final double X_ALIGNMENT_AUTO_TOLERANCE = .02;//.05;
 		public static final double Y_ALIGNMENT_AUTO_TOLERANCE = .02;//.05;
-		public static final double ROT_ALIGNMENT_AUTO_TOLERANCE = .3;//.05;
+		public static final double ROT_ALIGNMENT_AUTO_TOLERANCE = .05;//.05;
 
 		public static final double X_REEF_ALIGNMENT_P = .55;
 		public static final double Y_REEF_ALIGNMENT_P = .55;

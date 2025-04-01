@@ -215,7 +215,9 @@ public class RobotContainer {
 		//NamedCommands.registerCommand("scoreFourthLevelCoralAndHome", new ScoreFourthLevelCoralAndHome(elevator, coral_roller, neck, slider));
 		NamedCommands.registerCommand("neckHome", new NeckMoveHomeWithStallDetection(neck));
 		NamedCommands.registerCommand("coralRollerForAutoRollOut", new CoralRollerForAutoRollOut(coral_roller));
-		NamedCommands.registerCommand("waitCommand", new WaitCommand(2));
+		NamedCommands.registerCommand("waitCommand2s", new WaitCommand(2));
+		NamedCommands.registerCommand("waitCommand1.5s", new WaitCommand(1.5));
+		NamedCommands.registerCommand("waitCommand1s", new WaitCommand(1));
 		NamedCommands.registerCommand("autoAlignToLeftReef", new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
 		NamedCommands.registerCommand("autoAlignToRightReef", new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
 		//NamedCommands.registerCommand("autoAlignToRightReefTimed", new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
