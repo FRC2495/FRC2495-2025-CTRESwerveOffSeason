@@ -52,6 +52,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 102; 
 	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_REVS = 33; //TODO FIX
 	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_REVS = 65;//30; //TODO FIX
+	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_FOR_AUTON_REVS = 60;//30; //TODO FIX
 	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_NECK_DOWN_REVS = 84;//30; //TODO FIX
 	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_NECK_DOWN_REVS = 50;//30; //TODO FIX
 	
@@ -81,6 +82,8 @@ public class Elevator extends SubsystemBase implements IElevator {
 	static final double MOVE_DOWN_INTEGRAL_GAIN = 0.0;
 	static final double MOVE_DOWN_DERIVATIVE_GAIN = 0.0;
 	static final double MOVE_DOWN_FEED_FORWARD_GAIN = 0.05;
+
+	static final double MOVE_DOWN_FOR_AUTO_PROPORTIONAL_GAIN =  0.075;//0.6; //1.2 for SRX // TODO switch to 0.6 if required if switching to Talon FX (as encoder resolution is halved)
 	
 	//static final int TALON_TICK_THRESH = 512; // 128; //256
 	//static final double TICK_THRESH = 2048; // 512;
@@ -110,6 +113,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	PositionDutyCycle elevatorLevelFourPosition = new PositionDutyCycle(LENGTH_OF_LEVEL_FOUR_REVS);
 	PositionDutyCycle elevatorAlgaeLevelTwoPosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_TWO_REVS);
 	PositionDutyCycle elevatorAlgaeLevelThreePosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_THREE_REVS);
+	PositionDutyCycle elevatorAlgaeLevelThreeForAutonPosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_THREE_FOR_AUTON_REVS);
 	PositionDutyCycle elevatorAlgaeLevelTwoNeckDownPosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_TWO_NECK_DOWN_REVS);
 	PositionDutyCycle elevatorAlgaeLevelThreeNeckDownPosition = new PositionDutyCycle(LENGTH_OF_ALGAE_LEVEL_THREE_NECK_DOWN_REVS);
 	
@@ -204,11 +208,20 @@ public class Elevator extends SubsystemBase implements IElevator {
 		slot1Configs.kI = MOVE_DOWN_INTEGRAL_GAIN; // * 2048 / 1023 * 1000 / 10;
 		slot1Configs.kD = MOVE_DOWN_DERIVATIVE_GAIN; // * 2048 / 1023 / 1000 / 10;
 		slot1Configs.kG = MOVE_DOWN_FEED_FORWARD_GAIN;
+
+		var slot2Configs = elevatorConfig.Slot2;
+		slot2Configs.kV = 0 * 2048 / 1023 / 10;
+		slot2Configs.kP = MOVE_DOWN_FOR_AUTO_PROPORTIONAL_GAIN; // * 2048 / 1023 / 10;
+		slot2Configs.kI = MOVE_DOWN_INTEGRAL_GAIN; // * 2048 / 1023 * 1000 / 10;
+		slot2Configs.kD = MOVE_DOWN_DERIVATIVE_GAIN; // * 2048 / 1023 / 1000 / 10;
+		slot2Configs.kG = MOVE_DOWN_FEED_FORWARD_GAIN;
 		//slot0Configs.kS = SHOOT_DERIVATIVE_GAIN; //TODO change value
 		elevator.getConfigurator().apply(slot0Configs, 0.050); // comment out if needed
 		elevator.getConfigurator().apply(slot1Configs, 0.050); // comment out if needed
+		elevator.getConfigurator().apply(slot2Configs, 0.050);
 		elevator_follower.getConfigurator().apply(slot0Configs, 0.050); // comment out if needed
 		elevator_follower.getConfigurator().apply(slot1Configs, 0.050); // comment out if needed
+		elevator_follower.getConfigurator().apply(slot2Configs, 0.050); // comment out if needed
 		// use slot 0 for closed-looping
  		//elevator.selectProfileSlot(SLOT_0, PRIMARY_PID_LOOP);
 		
@@ -479,6 +492,27 @@ public class Elevator extends SubsystemBase implements IElevator {
 		stalledCount = 0;
 	}
 
+	public void moveToAlgaeLevelThreeForAuton() {
+		
+		//setPIDParameters();
+		System.out.println("Moving to Algae Level Three For Auton");
+		setPeakOutputs(REDUCED_PCT_OUTPUT);
+
+		targetEncoder = elevatorAlgaeLevelThreePosition.Position;
+		if (isGoingUp(targetEncoder)) {
+			elevator.setControl(elevatorAlgaeLevelThreeForAutonPosition.withSlot(0)); //fix
+		}
+		else {
+			elevator.setControl(elevatorAlgaeLevelThreeForAutonPosition.withSlot(2)); //fix
+		}
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
 	public void moveToAlgaeLevelThreeNeckDown() {
 		
 		//setPIDParameters();
@@ -551,11 +585,32 @@ public class Elevator extends SubsystemBase implements IElevator {
 		setPeakOutputs(SUPER_REDUCED_PCT_OUTPUT);
 
 		targetEncoder = elevatorHomePosition.Position;
+		if (getEncoderPosition() >= elevatorLevelFourPosition.Position-10) {
+			elevator.setControl(elevatorHomePosition.withSlot(2));
+		}
+		else {
+			elevator.setControl(elevatorHomePosition.withSlot(1)); 
+		}
+		
+		isMoving = true;
+		isMovingUp = false;
+		onTargetCount = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
+
+	public void moveDownForAuton() {
+		
+		//setPIDParameters();
+		System.out.println("Moving Down for Auton");
+		setPeakOutputs(SUPER_REDUCED_PCT_OUTPUT);
+
+		targetEncoder = elevatorHomePosition.Position;
 		if (getEncoderPosition() > elevatorLevelFourPosition.Position) {
 			elevator.setControl(elevatorHomePosition.withSlot(0));
 		}
 		else {
-			elevator.setControl(elevatorHomePosition.withSlot(1)); 
+			elevator.setControl(elevatorHomePosition.withSlot(2)); 
 		}
 		
 		isMoving = true;
@@ -625,7 +680,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	}
 
 	public boolean isDangerous() {
-		return false;
+		return isDown();
 	}
 
 	// return if stalled

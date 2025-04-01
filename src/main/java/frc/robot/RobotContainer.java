@@ -8,6 +8,7 @@ import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -181,10 +182,10 @@ public class RobotContainer {
         NamedCommands.registerCommand("elevatorMoveToFirstLevelWithStallDetection", new ElevatorMoveToFirstLevelWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveUpWithStallDetection", new ElevatorMoveUpWithStallDetection(elevator));
         NamedCommands.registerCommand("elevatorMoveDownWithStallDetection", new ElevatorMoveDownWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveDownForAutonWithStallDetection", new ElevatorMoveDownWithStallDetectionForAuton(elevator));
 		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelTwoWithStallDetection", new ElevatorMoveToAlgaeLevelTwoWithStallDetection(elevator));
 		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelThreeWithStallDetection", new ElevatorMoveToAlgaeLevelThreeWithStallDetection(elevator));
-		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelTwoNeckDownWithStallDetection", new ElevatorMoveToAlgaeLevelTwoNeckDownWithStallDetection(elevator));
-		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection", new ElevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection(elevator));
+		NamedCommands.registerCommand("elevatorMoveToAlgaeLevelThreeWithStallDetectionForAuton", new ElevatorMoveToAlgaeLevelThreeWithStallDetectionForAuton(elevator));
         NamedCommands.registerCommand("algaeRollerTimedRoll", new AlgaeRollerTimedRoll(algae_roller, 1));
 		NamedCommands.registerCommand("algaeRollerTimedRollForAlgaeRemoval", new AlgaeRollerTimedRoll(algae_roller, 1));
         NamedCommands.registerCommand("algaeRollerTimedReleaseForAlgaeRemoval", new AlgaeRollerTimedRelease(algae_roller, 2));
@@ -266,7 +267,7 @@ public class RobotContainer {
 		Trigger hasCoral = new Trigger(() -> coral_roller.hasCoral());
 		Trigger noCoralPresent = new Trigger(() -> coral_roller.noCoralPresent() && !coral_roller.isReleasing());
 		Trigger isCoralEntering = new Trigger(() -> coral_roller.isCoralEntering() && !coral_roller.isReleasing());
-		Trigger isCoralExiting = new Trigger(() -> coral_roller.isCoralExiting() && !coral_roller.isReleasing());
+		Trigger isCoralExiting = new Trigger(() -> coral_roller.isCoralExiting() && !coral_roller.isReleasing() && DriverStation.isTeleop());
 
 		isCoralEntering.whileTrue(
 			new CoralRollerRollOutLowRpm(coral_roller)
@@ -421,7 +422,7 @@ public class RobotContainer {
 
 
 		copilotGamepad.leftBumper()
-			.onTrue(new SliderExtendWithLimitSwitch(slider)); // TODO see if safe mode is needed?
+			.onTrue(new SliderSafeExtendWithStallDetection(slider, elevator)); // TODO see if safe mode is needed?
 			//.onTrue(new ElevatorMoveToFirstLevelWithStallDetection(elevator));
 
 		copilotGamepad.rightBumper()
@@ -488,6 +489,7 @@ public class RobotContainer {
 			.onTrue(new ElevatorMoveUpWithStallDetection(elevator));
 		
 		buttonBox.button(6)
+			//.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
 			.onTrue(new ElevatorMoveDownWithStallDetection(elevator));
 		
 		buttonBox.button(9)

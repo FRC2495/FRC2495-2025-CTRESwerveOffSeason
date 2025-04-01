@@ -58,7 +58,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "elevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection"
+                        "name": "elevatorMoveToAlgaeLevelThreeWithStallDetectionForAuton"
                       }
                     }
                   ]
@@ -68,6 +68,25 @@
                 "type": "named",
                 "data": {
                   "name": "drivetrainStop"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToLeftReefForAuton"
                 }
               }
             ]

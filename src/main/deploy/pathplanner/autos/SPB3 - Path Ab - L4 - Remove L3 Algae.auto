@@ -54,12 +54,6 @@
                       "data": {
                         "name": "waitCommand1s"
                       }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "elevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection"
-                      }
                     }
                   ]
                 }
@@ -68,25 +62,6 @@
                 "type": "named",
                 "data": {
                   "name": "drivetrainStop"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "autoAlignToRightReefAuton"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "neckMoveToAlgaeReefWithStallDetection"
                 }
               }
             ]
@@ -103,7 +78,13 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "elevatorMoveToAlgaeLevelThreeNeckDownWithStallDetection"
+                        "name": "neckMoveToAlgaeReefWithStallDetection"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "elevatorMoveToAlgaeLevelThreeWithStallDetectionForAuton"
                       }
                     },
                     {

@@ -5,15 +5,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.subsystems.Elevator;
 
-
 /**
  *
  */
-public class ElevatorMoveToFourthLevelWithStallDetection extends Command {
+public class ElevatorMoveDownWithStallDetectionForAuton extends Command {
 
 	private Elevator elevator;
 
-	public ElevatorMoveToFourthLevelWithStallDetection(Elevator elevator) {	
+	public ElevatorMoveDownWithStallDetectionForAuton(Elevator elevator) {
 		this.elevator = elevator;
 		addRequirements(elevator);
 	}
@@ -21,8 +20,8 @@ public class ElevatorMoveToFourthLevelWithStallDetection extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	public void initialize() {
-		System.out.println("ElevatorMoveToFourthLevelWithStallDetection: initialize");
-		elevator.moveToFourthLevel();
+		System.out.println("ElevatorMoveDownWithStallDetectionForAuton: initialize");
+		elevator.moveDownForAuton();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -34,13 +33,13 @@ public class ElevatorMoveToFourthLevelWithStallDetection extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	public boolean isFinished() {
-		return elevator.getForwardLimitSwitchState() || !elevator.tripleCheckMove() || elevator.tripleCheckIfStalled();
+		return !elevator.tripleCheckMove() || elevator.tripleCheckIfStalled();
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	public void end(boolean interrupted) {
-		System.out.println("ElevatorMoveToFourthLevelWithStallDetection: end");
-		elevator.stay(); // adjust if needed
+		System.out.println("ElevatorMoveDownWithStallDetectionForAuton: end");
+		elevator.stop(); // adjust if needed
 	}
 }

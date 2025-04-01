@@ -76,13 +76,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Side A (left) to Side A (autoalign)"
+            "pathName": "SPB1 - Side A (autoalign) to Right Coral Station Pt. 1"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "SPB1 - Side A (autoalign) to Right Coral Station"
+            "pathName": "SPB1 - Side A (autoalign) to Right Coral Station Pt. 2"
           }
         }
       ]
