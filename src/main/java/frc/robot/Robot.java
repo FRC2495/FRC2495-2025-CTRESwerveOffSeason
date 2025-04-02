@@ -198,14 +198,11 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Vertical Offset to Target", m_robotContainer.getCamera().getVerticalOffsetToCompositeTarget());
 		SmartDashboard.putNumber("Filtered Vertical Offset to Target", m_robotContainer.getCamera().getFilteredVerticalOffsetToCompositeTarget());*/
 
-		//SmartDashboard.putNumber("Distance to Target", m_robotContainer.getObjectDetectionCamera().getDistanceToTarget());
-		//SmartDashboard.putNumber("Angle to Target", m_robotContainer.getObjectDetectionCamera().getAngleToTurnToTarget());
-
 		SmartDashboard.putNumber("Distance to AprilTag", m_robotContainer.getAprilTagCamera().getDistanceToTarget());
 		SmartDashboard.putNumber("Angle to AprilTag", m_robotContainer.getAprilTagCamera().getAngleToTurnToTarget());
+		SmartDashboard.putBoolean("At Left Scoring Position?", m_robotContainer.getAprilTagCamera().isAtLeftScoringPosition());
+		SmartDashboard.putBoolean("At Right Scoring Position?", m_robotContainer.getAprilTagCamera().isAtRightScoringPosition());
 		//SmartDashboard.putNumber("Latest AprilTag ID", m_robotContainer.getAprilTagCamera().getLatestID());
-
-		//SmartDashboard.putBoolean("NoteSensor isEnergized", m_robotContainer.getNoteSensor().isEnergized());
 
 		SmartDashboard.putBoolean("Elevator Forward Limit Switch", m_robotContainer.getElevator().getForwardLimitSwitchState());
 		SmartDashboard.putBoolean("Elevator Reverse Limit Switch", m_robotContainer.getElevator().getReverseLimitSwitchState());
@@ -218,17 +215,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Elevator isUp", m_robotContainer.getElevator().isUp());
 		SmartDashboard.putBoolean("Elevator isDangerous", m_robotContainer.getElevator().isDangerous());
 
-		/*SmartDashboard.putBoolean("Drawer Forward Limit Switch", m_robotContainer.getDrawer().getForwardLimitSwitchState());
-		SmartDashboard.putBoolean("Drawer Reverse Limit Switch", m_robotContainer.getDrawer().getReverseLimitSwitchState());
-		SmartDashboard.putNumber("Drawer Enc Position", m_robotContainer.getDrawer().getEncoderPosition());
-		SmartDashboard.putBoolean("Drawer IsMoving?", m_robotContainer.getDrawer().isMoving());
-		SmartDashboard.putNumber("Drawer Target", m_robotContainer.getDrawer().getTarget());
-		SmartDashboard.putBoolean("Drawer isStalled?", m_robotContainer.getDrawer().isStalled());
-		SmartDashboard.putBoolean("Drawer isRetracted", m_robotContainer.getDrawer().isRetracted());
-		SmartDashboard.putBoolean("Drawer isMidway", m_robotContainer.getDrawer().isMidway());
-		SmartDashboard.putBoolean("Drawer isExtended", m_robotContainer.getDrawer().isExtended());
-		SmartDashboard.putBoolean("Drawer isDangerous", m_robotContainer.getDrawer().isDangerous());*/
-
 		SmartDashboard.putBoolean("Neck Reverse Limit Switch", m_robotContainer.getNeck().getReverseLimitSwitchState());
 		SmartDashboard.putBoolean("Neck Forward Limit Switch", m_robotContainer.getNeck().getForwardLimitSwitchState());
 		SmartDashboard.putNumber("Neck Position", m_robotContainer.getNeck().getPosition());
@@ -240,7 +226,6 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Neck isDown", m_robotContainer.getNeck().isDown());
 		SmartDashboard.putBoolean("Neck isMidway", m_robotContainer.getNeck().isMidway());
 		SmartDashboard.putBoolean("Neck isUp", m_robotContainer.getNeck().isUp());
-		//SmartDashboard.putBoolean("Neck isDangerous", m_robotContainer.getNeck().isDangerous());
 
 		SmartDashboard.putBoolean("CoralRoller IsRolling?", m_robotContainer.getCoralRoller().isRolling());
 		SmartDashboard.putBoolean("CoralRoller IsReleasing?", m_robotContainer.getCoralRoller().isReleasing());
@@ -263,14 +248,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("AlgaeRoller Preset Rpm", m_robotContainer.getAlgaeRoller().getPresetRpm());
 		SmartDashboard.putNumber("AlgaeRoller Target", m_robotContainer.getAlgaeRoller().getTarget());
 
-		/*SmartDashboard.putString("Mouth Position", m_robotContainer.getMouth().getPosition().toString());
-		SmartDashboard.putBoolean("Mouth isDangerous", m_robotContainer.getMouth().isDangerous());*/
-
 		SmartDashboard.putBoolean("Slider Limit Switch", m_robotContainer.getSlider().getForwardLimitSwitchState());
 		SmartDashboard.putBoolean("Slider Reverse Limit Switch", m_robotContainer.getSlider().getReverseLimitSwitchState());
-		SmartDashboard.putNumber("Slider Enc Position", m_robotContainer.getSlider().getEncoderPosition());
 		SmartDashboard.putBoolean("Slider IsMoving?", m_robotContainer.getSlider().isMoving());
-		SmartDashboard.putNumber("Slider Target", m_robotContainer.getSlider().getTarget());
 		SmartDashboard.putBoolean("Slider isStalled?", m_robotContainer.getSlider().isStalled());
 		SmartDashboard.putBoolean("Slider isRetracted", m_robotContainer.getSlider().isRetracted());
 		SmartDashboard.putBoolean("Slider isMidway", m_robotContainer.getSlider().isMidway());
@@ -278,14 +258,12 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putBoolean("Hanger Forward Limit Switch", m_robotContainer.getHanger().getForwardLimitSwitchState());
 		SmartDashboard.putBoolean("Hanger Reverse Limit Switch", m_robotContainer.getHanger().getReverseLimitSwitchState());
-		SmartDashboard.putNumber("Hanger Enc Position", m_robotContainer.getHanger().getEncoderPosition());
 		SmartDashboard.putBoolean("Hanger IsMoving?", m_robotContainer.getHanger().isMoving());
 		SmartDashboard.putNumber("Hanger Target", m_robotContainer.getHanger().getTarget());
 		SmartDashboard.putBoolean("Hanger isStalled?", m_robotContainer.getHanger().isStalled());
 		SmartDashboard.putBoolean("Hanger isDown", m_robotContainer.getHanger().isDown());
 		SmartDashboard.putBoolean("Hanger isMidway", m_robotContainer.getHanger().isMidway());
 		SmartDashboard.putBoolean("Hanger isUp", m_robotContainer.getHanger().isUp());
-		SmartDashboard.putBoolean("Hanger isDangerous", m_robotContainer.getHanger().isDangerous());
 
 		/*SmartDashboard.putString("Auton selected", m_robotContainer.getAutonChooser().getSelected());	
 		SmartDashboard.putString("Game piece", m_robotContainer.getGamePieceChooser().getSelected());
@@ -299,6 +277,8 @@ public class Robot extends TimedRobot {
 		Optional<Alliance> alliance = DriverStation.getAlliance();
 		Alliance allianceColor = alliance.isPresent() ? alliance.get() : Alliance.Blue;
 		SmartDashboard.putString("Alliance color", allianceColor.toString());
+
+		SmartDashboard.putNumber("Match Time", DriverStation.getMatchTime());
 	}
 
 	@Override
