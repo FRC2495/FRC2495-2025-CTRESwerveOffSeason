@@ -28,4 +28,8 @@ public interface ICamera extends Subsystem {
 	public double getBestCameraToTargetY(Transform3d currentPose);
 
 	public double getBestCameraToTargetRotationRadians(Transform3d currentPose);
+
+	public boolean isAtLeftScoringPosition();
+
+	public boolean isAtRightScoringPosition();
 }

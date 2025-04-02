@@ -476,53 +476,37 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 	}
 
 	/**
-     * Checks for new updates in canera posiotning
+     * Checks if robot is at the position to score on the left branch
 	 * 
-	 * @param result The latest result from the camera pipeline.
-     * @return The AprilTag ID in view of camera if it is considered a best target.
+     * @return Whether the robot is in the position to score on the right branch (facing the reef)
      */
 	public boolean isAtLeftScoringPosition()
 	{
-		boolean atScoringPosition = false;
+		boolean atLeftScoringPosition = false;
 		if (!cachedResults.isEmpty()) {
 			// Camera processed a new frame since last
 			// Get the last one in the list.
-			var result = cachedResults.get(cachedResults.size() - 1);
-			if (result.hasTargets()) {
-				// At least one AprilTag was seen by the camera
-				for (var target : result.getTargets()) {
-					Transform3d currentTransform =  getBestCameraToTargetTransform();
-					if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_LEFT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_LEFT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE));
-				}
+				Transform3d currentTransform =  getBestCameraToTargetTransform();
+				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_LEFT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_LEFT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE));
 			}
-		}
-		return atScoringPosition;
+		return atLeftScoringPosition;
 	}
 
 	/**
-     * Returns AprilTag ID in camera vision if the target is a high value target.
-	 * Checks if the latest AprilTag target received is a high value target.
-	 * In this case, a high value target is a target on the reef.
+     * Checks if robot is at the position to score on the right branch
 	 * 
-	 * @param result The latest result from the camera pipeline.
-     * @return The AprilTag ID in view of camera if it is considered a best target.
+     * @return Whether the robot is in the position to score on the left branch (facing the reef)
      */
 	public boolean isAtRightScoringPosition()
 	{
-		boolean atScoringPosition = false;
+		boolean atRightScoringPosition = false;
 		if (!cachedResults.isEmpty()) {
 			// Camera processed a new frame since last
 			// Get the last one in the list.
-			var result = cachedResults.get(cachedResults.size() - 1);
-			if (result.hasTargets()) {
-				// At least one AprilTag was seen by the camera
-				for (var target : result.getTargets()) {
-					Transform3d currentTransform =  getBestCameraToTargetTransform();
-					if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_RIGHT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_RIGHT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE))
-				}
+				Transform3d currentTransform =  getBestCameraToTargetTransform();
+				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_RIGHT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_RIGHT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE));
 			}
-		}
-		return atScoringPosition;
+		return atRightScoringPosition;
 	}
 }
 	
