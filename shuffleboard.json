@@ -1760,22 +1760,7 @@
               "_showGlyph": false
             }
           },
-          "0,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/isSuperFlat",
-              "_title": "SmartDashboard/isSuperFlat",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "1,4": {
+          "2,3": {
             "size": [
               1,
               1
@@ -1788,59 +1773,7 @@
               "_showGlyph": false
             }
           },
-          "2,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/AccuratePitch",
-              "_title": "SmartDashboard/AccuratePitch",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "3,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/AccurateRoll",
-              "_title": "SmartDashboard/AccurateRoll",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Angle to Target",
-              "_title": "SmartDashboard/Angle to Target",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "5,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Distance to Target",
-              "_title": "SmartDashboard/Distance to Target",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "9,4": {
+          "9,2": {
             "size": [
               1,
               1
@@ -1853,7 +1786,7 @@
               "_showGlyph": false
             }
           },
-          "7,3": {
+          "7,2": {
             "size": [
               2,
               2
@@ -1870,7 +1803,7 @@
               "Visuals/Counter clockwise": false
             }
           },
-          "9,3": {
+          "6,2": {
             "size": [
               1,
               1
@@ -1900,8 +1833,8 @@
           },
           "3,0": {
             "size": [
-              4,
-              4
+              3,
+              3
             ],
             "content": {
               "_type": "Camera Stream",
@@ -1938,6 +1871,49 @@
               "fps": -1,
               "imageWidth": -1,
               "imageHeight": -1
+            }
+          },
+          "6,0": {
+            "size": [
+              1,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/At Left Scoring Position?",
+              "_title": "/SmartDashboard/At Left Scoring Position?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "9,0": {
+            "size": [
+              1,
+              2
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/At Right Scoring Position?",
+              "_title": "/SmartDashboard/At Right Scoring Position?",
+              "_glyph": 148,
+              "_showGlyph": false,
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "7,0": {
+            "size": [
+              2,
+              2
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Match Time",
+              "_title": "/SmartDashboard/Match Time",
+              "_glyph": 42,
+              "_showGlyph": false
             }
           }
         }
@@ -2950,9 +2926,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 1.0,
-    "y": 1.0,
-    "width": 1535.199951171875,
-    "height": 815.2000122070312
+    "x": -7.199999809265137,
+    "y": -7.199999809265137,
+    "width": 1550.4000244140625,
+    "height": 830.4000244140625
   }
 }
