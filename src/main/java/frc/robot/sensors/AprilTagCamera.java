@@ -6,12 +6,9 @@ package frc.robot.sensors;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
-import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
-import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -20,8 +17,9 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.util.Units;
+import frc.robot.Constants;
 import frc.robot.Constants.AprilTags;
-import frc.robot.RobotContainer;
+import frc.robot.Constants.VisionConstants;
 import frc.robot.interfaces.ICamera;
 
 /** Wrapper for PhotonCamera class */
@@ -476,5 +474,55 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 			return 0.0;
 		}
 	}
-}
 
+	/**
+     * Checks for new updates in canera posiotning
+	 * 
+	 * @param result The latest result from the camera pipeline.
+     * @return The AprilTag ID in view of camera if it is considered a best target.
+     */
+	public boolean isAtLeftScoringPosition()
+	{
+		boolean atScoringPosition = false;
+		if (!cachedResults.isEmpty()) {
+			// Camera processed a new frame since last
+			// Get the last one in the list.
+			var result = cachedResults.get(cachedResults.size() - 1);
+			if (result.hasTargets()) {
+				// At least one AprilTag was seen by the camera
+				for (var target : result.getTargets()) {
+					Transform3d currentTransform =  getBestCameraToTargetTransform();
+					if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_LEFT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_LEFT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE));
+				}
+			}
+		}
+		return atScoringPosition;
+	}
+
+	/**
+     * Returns AprilTag ID in camera vision if the target is a high value target.
+	 * Checks if the latest AprilTag target received is a high value target.
+	 * In this case, a high value target is a target on the reef.
+	 * 
+	 * @param result The latest result from the camera pipeline.
+     * @return The AprilTag ID in view of camera if it is considered a best target.
+     */
+	public boolean isAtRightScoringPosition()
+	{
+		boolean atScoringPosition = false;
+		if (!cachedResults.isEmpty()) {
+			// Camera processed a new frame since last
+			// Get the last one in the list.
+			var result = cachedResults.get(cachedResults.size() - 1);
+			if (result.hasTargets()) {
+				// At least one AprilTag was seen by the camera
+				for (var target : result.getTargets()) {
+					Transform3d currentTransform =  getBestCameraToTargetTransform();
+					if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_RIGHT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_RIGHT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE))
+				}
+			}
+		}
+		return atScoringPosition;
+	}
+}
+	
