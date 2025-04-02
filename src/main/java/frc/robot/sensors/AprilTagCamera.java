@@ -487,7 +487,10 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 			// Camera processed a new frame since last
 			// Get the last one in the list.
 				Transform3d currentTransform =  getBestCameraToTargetTransform();
-				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_LEFT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_LEFT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE));
+				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_LEFT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_LEFT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE)) 
+				{
+					atLeftScoringPosition = true;
+				}
 			}
 		return atLeftScoringPosition;
 	}
@@ -504,7 +507,10 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 			// Camera processed a new frame since last
 			// Get the last one in the list.
 				Transform3d currentTransform =  getBestCameraToTargetTransform();
-				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_RIGHT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_RIGHT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE));
+				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_RIGHT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_RIGHT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE))
+				{
+					atRightScoringPosition = true;
+				}
 			}
 		return atRightScoringPosition;
 	}
