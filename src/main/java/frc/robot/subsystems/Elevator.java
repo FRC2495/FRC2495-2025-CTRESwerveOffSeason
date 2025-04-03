@@ -48,7 +48,7 @@ public class Elevator extends SubsystemBase implements IElevator {
 	public static final int LENGTH_OF_MIDWAY_REVS = 50; // TODO adjust as needed (halve for Talon FX)
 	public static final int LENGTH_OF_LEVEL_ONE_REVS = 10;//TODO FIX
 	public static final int LENGTH_OF_LEVEL_TWO_REVS = 24;//25; 
-	public static final int LENGTH_OF_LEVEL_THREE_REVS = 56;
+	public static final int LENGTH_OF_LEVEL_THREE_REVS = 53;//56;
 	public static final int LENGTH_OF_LEVEL_FOUR_REVS = 102; 
 	public static final int LENGTH_OF_ALGAE_LEVEL_TWO_REVS = 33; //TODO FIX
 	public static final int LENGTH_OF_ALGAE_LEVEL_THREE_REVS = 65;//30; //TODO FIX
