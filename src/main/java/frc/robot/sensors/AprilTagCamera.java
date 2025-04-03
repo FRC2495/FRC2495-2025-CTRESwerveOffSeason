@@ -514,5 +514,40 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 			}
 		return atRightScoringPosition;
 	}
+
+	/*public boolean isAtLeftScoringPositionRed()
+	{
+		boolean atLeftScoringPosition = false;
+		if (!cachedResults.isEmpty()) {
+			// Camera processed a new frame since last
+			// Get the last one in the list.
+				Transform3d currentTransform =  getBestCameraToTargetTransform();
+				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_LEFT_ALIGNMENT_RED) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_LEFT_ALIGNMENT_RED)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE)) 
+				{
+					atLeftScoringPosition = true;
+				}
+			}
+		return atLeftScoringPosition;
+	}
+
+	/**
+     * Checks if robot is at the position to score on the right branch
+	 * 
+     * @return Whether the robot is in the position to score on the left branch (facing the reef)
+     */
+	/*public boolean isAtRightScoringPositionRed()
+	{
+		boolean atRightScoringPosition = false;
+		if (!cachedResults.isEmpty()) {
+			// Camera processed a new frame since last
+			// Get the last one in the list.
+				Transform3d currentTransform =  getBestCameraToTargetTransform();
+				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_RIGHT_ALIGNMENT_RED) < VisionConstants.X_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_RIGHT_ALIGNMENT_RED)) < VisionConstants.Y_ALIGNMENT_TOLERANCE) && (Math.abs(getBestCameraToTargetRotationRadians(currentTransform) - Constants.VisionConstants.ROT_ALIGNMENT) < Constants.VisionConstants.ROT_ALIGNMENT_TOLERANCE))
+				{
+					atRightScoringPosition = true;
+				}
+			}
+		return atRightScoringPosition;
+	}*/
 }
 	

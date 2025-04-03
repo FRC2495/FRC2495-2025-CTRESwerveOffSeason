@@ -32,4 +32,8 @@ public interface ICamera extends Subsystem {
 	public boolean isAtLeftScoringPosition();
 
 	public boolean isAtRightScoringPosition();
+	
+	//public boolean isAtLeftScoringPositionRed();
+
+	//public boolean isAtRightScoringPositionRed();
 }

@@ -9,6 +9,7 @@ import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
@@ -18,6 +19,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+
+import java.util.Optional;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -31,8 +34,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DrivetrainConstants;
-import frc.robot.auton.AutoAlignLeftAndElevatorUp;
-import frc.robot.auton.AutoAlignRightAndElevatorUp;
 import frc.robot.sensors.*;
 
 /*import frc.robot.interfaces.IElevator;
@@ -219,8 +220,8 @@ public class RobotContainer {
 		NamedCommands.registerCommand("waitCommand2s", new WaitCommand(2));
 		NamedCommands.registerCommand("waitCommand1.5s", new WaitCommand(1.5));
 		NamedCommands.registerCommand("waitCommand1s", new WaitCommand(1));
-		NamedCommands.registerCommand("autoAlignToLeftReef", new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
-		NamedCommands.registerCommand("autoAlignToRightReef", new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
+		//NamedCommands.registerCommand("autoAlignToLeftReef", new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
+		//NamedCommands.registerCommand("autoAlignToRightReef", new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
 		//NamedCommands.registerCommand("autoAlignToRightReefTimed", new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
 		NamedCommands.registerCommand("autoAlignToRightReefAuton", new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick()));
 		NamedCommands.registerCommand("autoAlignToLeftReefForAuton", new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick()));
@@ -330,15 +331,11 @@ public class RobotContainer {
 			//.onTrue(new AutoAlignRightAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(5)
-			//.onTrue(new MoveLeftOfCoralReef(drivetrain, this));
-			//.whileTrue(new AutoAlignToReef(null, null, true, drivetrain));
+			//.onTrue(new AutoAlignToReefBlue(false, drivetrain, apriltag_camera, getMainJoystick()));
 			.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(6)
-			//.onTrue(new DrivetrainTurnUsingCamera(drivetrain, object_detection_camera));
-			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			//.onTrue(new MoveRightOfCoralReef(drivetrain, this));
-			//.whileTrue(new AutoAlignToReef(null, null, false, drivetrain));
+			//.onTrue(new AutoAlignToReefBlue(true, drivetrain, apriltag_camera, getMainJoystick()));
 			.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(7)
@@ -724,6 +721,13 @@ public class RobotContainer {
 	{
 		return shooter;
 	}*/
+
+	public String getAllianceColor() 
+	{
+		Optional<Alliance> alliance = DriverStation.getAlliance();
+		Alliance allianceColor = alliance.isPresent() ? alliance.get() : Alliance.Blue;
+		return allianceColor.toString();
+	}
 
 	public Joystick getMainJoystick()
 	{

@@ -162,10 +162,11 @@ public final class Constants {
 	}
 
 	public static final class VisionConstants {
-		public static final double X_LEFT_ALIGNMENT = 0.37; //meters TODO fix value
-		public static final double Y_LEFT_ALIGNMENT = -0.19;
-		public static final double X_RIGHT_ALIGNMENT = 0.37;
-		public static final double Y_RIGHT_ALIGNMENT = 0.14;
+		// blue side
+		public static final double X_LEFT_ALIGNMENT = 0.35; //meters TODO fix value
+		public static final double Y_LEFT_ALIGNMENT = -0.14;//-0.19;
+		public static final double X_RIGHT_ALIGNMENT = 0.35;
+		public static final double Y_RIGHT_ALIGNMENT = 0.19;//0.14;
 		public static final double ROT_ALIGNMENT = Math.PI;//-Math.PI/2; //radians
 		public static double MAX_ALIGNMENT_DISTANCE = 1.5;
 	
