@@ -1886,45 +1886,15 @@
               "_showGlyph": false
             }
           },
-          "6,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/(Red) At Left Scoring Position?",
-              "_title": "Red Left Pos",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "9,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/(Red) At Right Scoring Position?",
-              "_title": "Red Right Pos",
-              "_glyph": 148,
-              "_showGlyph": false,
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "6,0": {
             "size": [
               1,
-              1
+              2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/(Blue) At Left Scoring Position?",
-              "_title": "Blue Left Pos",
+              "_source0": "network_table:///SmartDashboard/At Left Scoring Position?",
+              "_title": "Left Score Pos",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -1934,12 +1904,12 @@
           "9,0": {
             "size": [
               1,
-              1
+              2
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/(Blue) At Right Scoring Position?",
-              "_title": "Blue Right Pos",
+              "_source0": "network_table:///SmartDashboard/At Right Scoring Position?",
+              "_title": "Right Score Pos",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -2956,8 +2926,8 @@
     }
   ],
   "windowGeometry": {
-    "x": 1.0,
-    "y": 1.0,
+    "x": 0.800000011920929,
+    "y": 0.800000011920929,
     "width": 1534.4000244140625,
     "height": 814.4000244140625
   }
