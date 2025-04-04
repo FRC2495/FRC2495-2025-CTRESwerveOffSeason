@@ -1894,7 +1894,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/At Left Scoring Position?",
-              "_title": "Left Score Pos",
+              "_title": "SmartDashboard/At Left Scoring Position?",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
@@ -1909,7 +1909,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/At Right Scoring Position?",
-              "_title": "Right Score Pos",
+              "_title": "SmartDashboard/At Right Scoring Position?",
               "_glyph": 148,
               "_showGlyph": false,
               "Colors/Color when true": "#7CFC00FF",
