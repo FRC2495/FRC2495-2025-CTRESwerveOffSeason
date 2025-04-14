@@ -59,90 +59,7 @@ public class Ports {
 		 * CAN Ids
 		 */
 		public static class CAN {
-			/* 2017 robot
-			public static final int RIGHT_REAR = 3;
-			public static final int RIGHT_FRONT = 4;
-			public static final int LEFT_REAR = 1;
-			public static final int LEFT_FRONT = 2;
-			public static final int SPIN = 5;
-			public static final int CLIMB = 6;
-			public static final int BASIN = 7;
-			public static final int PCM = 8;
-			public static final int PDP = 0;*/
-			
-			// 2019 robot
-			/*
-			public static final int RIGHT_FRONT = 1;
-			public static final int RIGHT_REAR = 2;
-			public static final int LEFT_FRONT = 3;
-			public static final int LEFT_REAR = 4;
-			public static final int FRONT_CENTER = 5; // unused
-			public static final int REAR_CENTER = 6; // unused
-			public static final int ELEVATOR = 7;
-			public static final int SHOOTER_LEFT = 8;
-			public static final int SHOOTER_RIGHT = 9;
-			public static final int HINGE = 10;
-			public static final int WINCH = 11; 
-			public static final int HAB_ELEVATOR = 12;
-			public static final int SPINNER = 13;
-			public static final int PCM = 9;
-			public static final int PDP = 0;
-			*/
-
-			//2020 Robot
-			/*public static final int RIGHT_FRONT = 1;
-			public static final int RIGHT_REAR = 2;
-			public static final int LEFT_FRONT = 3;
-			public static final int LEFT_REAR = 4;
-			public static final int GRASPER = 5;
-			public static final int HINGE_MASTER = 6;
-			public static final int HINGE_FOLLOWER = 7;
-			public static final int SPINNER = 8;
-			public static final int PCM = 9;
-			public static final int PDP = 0;
-			public static final int WINCH_MASTER = 10;
-			public static final int WINCH_FOLLOWER = 11;*/
-
-			//2022 Robot
-			/*public static final int RIGHT_FRONT = 1;
-			public static final int RIGHT_REAR = 2;
-			public static final int LEFT_FRONT = 3;
-			public static final int LEFT_REAR = 4;
-			public static final int GRASPER = 5;
-			public static final int HINGE_MASTER = 6;
-			public static final int HINGE_FOLLOWER = 7;
-			//public static final int SPINNER = 8;
-			public static final int PCM = 9;
-			public static final int PDP = 0;
-			public static final int FRONT_ARM_MASTER_UNUSED = 10;
-			public static final int FRONT_ARM_REAL_MASTER = 11;
-			public static final int REAR_ARM_MASTER_UNUSED = 32;
-			public static final int REAR_ARM_REAL_MASTER = 33;
-			public static final int FRONT_ELBOW_MASTER = 13;
-			public static final int FRONT_ELBOW_FOLLOWER = 12;
-			public static final int REAR_ELBOW_MASTER = 30;
-			public static final int REAR_ELBOW_FOLLOWER = 31;
-			public static final int SHOOTER = 18;
-			public static final int FEEDER = 19;*/
-
-			//2023 Robot
-			/*public static final int RIGHT_FRONT = 1;
-			public static final int RIGHT_REAR = 2;
-			public static final int LEFT_FRONT = 3;
-			public static final int LEFT_REAR = 4;
-			//public static final int GRASPER = 5;
-			public static final int SHOULDER_MASTER = 6;
-			public static final int SHOULDER_FOLLOWER = 7;
-			//public static final int SPINNER = 8;
-			public static final int PCM = 1;
-			public static final int PDP = 0;	
-			public static final int ARM_MASTER = 10;
-			public static final int ARM_FOLLOWER = 11;
-			public static final int ROTATOR_MASTER = 12;
-			public static final int ROTATOR_FOLLOWER = 13;
-			public static final int JACK_MASTER = 14;*/
-
-			//2024 Robot
+			//2025 Robot
 			public static final int PCM = 1;
 			public static final int PDP = 0;	
 
@@ -170,6 +87,10 @@ public class Ports {
 			//public static final int SHOOTER_MASTER = 15;
 			//public static final int SHOOTER_FOLLOWER = 16;
 			//public static final int DRAWER = 17;
+			
+			// GYRO CAN IDS
+			public static final int PIGEON_DRIVETRAIN = 17;
+
 		}
 		
 		/**

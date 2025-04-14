@@ -7,10 +7,13 @@ package frc.robot.subsystems;
 import java.util.Optional;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
+import com.ctre.phoenix6.configs.Pigeon2Configuration;
+
 //imports for Pathplanner follow commmands/stuff below
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.studica.frc.AHRS;
 import com.pathplanner.lib.config.PIDConstants;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
@@ -29,9 +32,6 @@ import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
-import com.studica.frc.AHRS;
-import com.studica.frc.AHRS.NavXComType;
 
 import org.photonvision.EstimatedRobotPose;
 
@@ -102,7 +102,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 		Ports.Analog.REAR_RIGHT_TURNING_ABSOLUTE_ENCODER);
 
 	// The gyro sensor
-	private final AHRS m_gyro = new AHRS(NavXComType.kMXP_SPI); // usign SPI by default, which is what we want.
+	private final Pigeon2 pigeon2 = new Pigeon2(Ports.CAN.PIGEON_DRIVETRAIN);
 
 	// Slew rate filter variables for controlling lateral acceleration
 	private double m_currentRotation = 0.0;
@@ -116,14 +116,14 @@ public class SwerveDrivetrain extends SubsystemBase {
 	// Odometry class for tracking robot pose
 	SwerveDrivePoseEstimator m_odometry = new SwerveDrivePoseEstimator(
 		DrivetrainConstants.DRIVE_KINEMATICS,
-		Rotation2d.fromDegrees(GYRO_ORIENTATION * m_gyro.getAngle()),
+		Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()),
 		new SwerveModulePosition[] {
 			m_frontLeft.getPosition(),
 			m_frontRight.getPosition(),
 			m_rearLeft.getPosition(),
 			m_rearRight.getPosition()
 		},
-		new Pose2d(0,0, Rotation2d.fromDegrees(GYRO_ORIENTATION * m_gyro.getAngle()))
+		new Pose2d(0,0, Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()))
 		);
 
 	// other variables
@@ -150,6 +150,9 @@ public class SwerveDrivetrain extends SubsystemBase {
 		m_frontRight.resetEncoders();
 		m_rearLeft.resetEncoders();
 		m_rearRight.resetEncoders();
+
+		pigeon2.getConfigurator().apply(new Pigeon2Configuration());
+    	pigeon2.getYaw().setUpdateFrequency(10);
 
 		zeroHeading(); // resets gyro
 
@@ -207,7 +210,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	public void periodic() {
 		// Update the odometry in the periodic block
 		m_odometry.update(
-			Rotation2d.fromDegrees(GYRO_ORIENTATION * m_gyro.getAngle()),
+			Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()),
 			new SwerveModulePosition[] {
 				m_frontLeft.getPosition(),
 				m_frontRight.getPosition(),
@@ -239,7 +242,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	 */
 	public void resetOdometry(Pose2d pose) {
 		m_odometry.resetPosition(
-			Rotation2d.fromDegrees(GYRO_ORIENTATION * m_gyro.getAngle()),
+			Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()),
 			new SwerveModulePosition[] {
 				m_frontLeft.getPosition(),
 				m_frontRight.getPosition(),
@@ -321,7 +324,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 		var swerveModuleStates = DrivetrainConstants.DRIVE_KINEMATICS.toSwerveModuleStates(
 			fieldRelative
-				? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered, Rotation2d.fromDegrees(GYRO_ORIENTATION * m_gyro.getAngle()))
+				? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered, Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()))
 				: new ChassisSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered));
 
 		SwerveDriveKinematics.desaturateWheelSpeeds(
@@ -392,33 +395,13 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 	/** Zeroes the heading of the robot. */
 	public void zeroHeading() {
-		m_gyro.reset();
-		m_gyro.setAngleAdjustment(0);
+		pigeon2.reset();
+		//pigeon2.setAngleAdjustment(0);
 	}
 
 	public void oppositeHeading() {
-		m_gyro.reset();
-		m_gyro.setAngleAdjustment(180);
-	}
-
-	public void blueLeftSubHeading() {
-		m_gyro.reset();
-		m_gyro.setAngleAdjustment(300);
-	}
-
-	public void blueRightSubHeading() {
-		m_gyro.reset();
-		m_gyro.setAngleAdjustment(60);
-	}
-
-	public void redLeftSubHeading() {
-		m_gyro.reset();
-		m_gyro.setAngleAdjustment(300);
-	}
-
-	public void redRightSubHeading() {
-		m_gyro.reset();
-		m_gyro.setAngleAdjustment(60);
+		pigeon2.reset();
+		pigeon2.setYaw(180);
 	}
 
 	public void stop()
@@ -434,7 +417,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	 * @return the robot's heading in degrees, from -180 to 180
 	 */
 	public double getHeading() {
-		return Rotation2d.fromDegrees(-1 * GYRO_ORIENTATION * m_gyro.getAngle()).getDegrees();
+		return Rotation2d.fromDegrees(-1 * GYRO_ORIENTATION * pigeon2.getAngle()).getDegrees();
 	}
 
 	/**
@@ -443,7 +426,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	 * @return The turn rate of the robot, in degrees per second
 	 */
 	public double getTurnRate() {
-		return m_gyro.getRate() * (DrivetrainConstants.kGyroReversed ? -1.0 : 1.0);
+		return pigeon2.getRate() * (DrivetrainConstants.kGyroReversed ? -1.0 : 1.0);
 	}
 
 	public SwerveModule getFrontLeftModule()
@@ -466,9 +449,9 @@ public class SwerveDrivetrain extends SubsystemBase {
 		return m_rearRight;
 	}
 
-	public AHRS getImu()
+	public Pigeon2 getImu()
 	{
-		return m_gyro;
+		return pigeon2;
 	}
 
 	public boolean isTurning(){
