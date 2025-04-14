@@ -116,14 +116,14 @@ public class SwerveDrivetrain extends SubsystemBase {
 	// Odometry class for tracking robot pose
 	SwerveDrivePoseEstimator m_odometry = new SwerveDrivePoseEstimator(
 		DrivetrainConstants.DRIVE_KINEMATICS,
-		Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()),
+		getRotation(),
 		new SwerveModulePosition[] {
 			m_frontLeft.getPosition(),
 			m_frontRight.getPosition(),
 			m_rearLeft.getPosition(),
 			m_rearRight.getPosition()
 		},
-		new Pose2d(0,0, Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()))
+		new Pose2d(0,0, getRotation())
 		);
 
 	// other variables
@@ -210,7 +210,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	public void periodic() {
 		// Update the odometry in the periodic block
 		m_odometry.update(
-			Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()),
+			getRotation(),
 			new SwerveModulePosition[] {
 				m_frontLeft.getPosition(),
 				m_frontRight.getPosition(),
@@ -242,7 +242,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	 */
 	public void resetOdometry(Pose2d pose) {
 		m_odometry.resetPosition(
-			Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()),
+			getRotation(),
 			new SwerveModulePosition[] {
 				m_frontLeft.getPosition(),
 				m_frontRight.getPosition(),
@@ -324,7 +324,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 		var swerveModuleStates = DrivetrainConstants.DRIVE_KINEMATICS.toSwerveModuleStates(
 			fieldRelative
-				? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered, Rotation2d.fromDegrees(GYRO_ORIENTATION * pigeon2.getAngle()))
+				? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered, getRotation())
 				: new ChassisSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered));
 
 		SwerveDriveKinematics.desaturateWheelSpeeds(
@@ -417,7 +417,12 @@ public class SwerveDrivetrain extends SubsystemBase {
 	 * @return the robot's heading in degrees, from -180 to 180
 	 */
 	public double getHeading() {
-		return Rotation2d.fromDegrees(-1 * GYRO_ORIENTATION * pigeon2.getAngle()).getDegrees();
+		return getRotation().getDegrees();
+	}
+
+	public Rotation2d getRotation() 
+	{
+		return pigeon2.getRotation2d();
 	}
 
 	/**
