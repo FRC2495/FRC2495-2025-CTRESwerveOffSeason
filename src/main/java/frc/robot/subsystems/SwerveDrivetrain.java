@@ -103,6 +103,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 
 	// The gyro sensor
 	private final Pigeon2 pigeon2 = new Pigeon2(Ports.CAN.PIGEON_DRIVETRAIN);
+	private Rotation2d gyroOffset = Rotation2d.fromDegrees(0);
 
 	// Slew rate filter variables for controlling lateral acceleration
 	private double m_currentRotation = 0.0;
@@ -396,6 +397,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 	/** Zeroes the heading of the robot. */
 	public void zeroHeading() {
 		pigeon2.reset();
+		gyroOffset = Rotation2d.fromDegrees(0);
 		//pigeon2.setAngleAdjustment(0);
 	}
 
