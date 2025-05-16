@@ -84,22 +84,22 @@ public class SwerveDrivetrain extends SubsystemBase {
 	private final SwerveModule m_frontLeft = new SwerveModule(
 		Ports.CAN.FRONT_LEFT_DRIVING,
 		Ports.CAN.FRONT_LEFT_TURNING,
-		Ports.Analog.FRONT_LEFT_TURNING_ABSOLUTE_ENCODER);
+		Ports.CAN.FRONT_LEFT_TURNING_ABSOLUTE_ENCODER);
 
 	private final SwerveModule m_frontRight = new SwerveModule(
 		Ports.CAN.FRONT_RIGHT_DRIVING,
 		Ports.CAN.FRONT_RIGHT_TURNING,
-		Ports.Analog.FRONT_RIGHT_TURNING_ABSOLUTE_ENCODER);
+		Ports.CAN.FRONT_RIGHT_TURNING_ABSOLUTE_ENCODER);
 
 	private final SwerveModule m_rearLeft = new SwerveModule(
 		Ports.CAN.REAR_LEFT_DRIVING,
 		Ports.CAN.REAR_LEFT_TURNING,
-		Ports.Analog.REAR_LEFT_TURNING_ABSOLUTE_ENCODER);
+		Ports.CAN.REAR_LEFT_TURNING_ABSOLUTE_ENCODER);
 
 	private final SwerveModule m_rearRight = new SwerveModule(
 		Ports.CAN.REAR_RIGHT_DRIVING,
 		Ports.CAN.REAR_RIGHT_TURNING,
-		Ports.Analog.REAR_RIGHT_TURNING_ABSOLUTE_ENCODER);
+		Ports.CAN.REAR_RIGHT_TURNING_ABSOLUTE_ENCODER);
 
 	// The gyro sensor
 	private final Pigeon2 pigeon2 = new Pigeon2(Ports.CAN.PIGEON_DRIVETRAIN);
