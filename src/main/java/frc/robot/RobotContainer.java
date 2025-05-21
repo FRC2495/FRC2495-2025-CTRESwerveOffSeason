@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import static edu.wpi.first.units.Units.*;
+
 import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.MathUtil;
@@ -19,56 +21,54 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+
+import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 import java.util.Optional;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import java.util.List;
 
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.sensors.*;
 
-/*import frc.robot.interfaces.IElevator;
-import frc.robot.interfaces.IDrawer;
-import frc.robot.interfaces.INeck;
-import frc.robot.interfaces.IRoller;*/
-
 import frc.robot.subsystems.SwerveDrivetrain;
 import frc.robot.subsystems.AlgaeRoller;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralRoller;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Hanger;
 import frc.robot.subsystems.Slider;
-//import frc.robot.subsystems.CoralRoller;
-//import frc.robot.subsystems.AlgaeRoller;
-//import frc.robot.subsystems.Indicator;
 import frc.robot.subsystems.Neck;
-//import frc.robot.commands.DoNothing;
 import frc.robot.commands.algae_roller.*;
-//import frc.robot.subsystems.SimpleShooter;
 import frc.robot.commands.coral_roller.*;
 import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.slider.*;
+import frc.robot.generated.TunerConstants;
 import frc.robot.commands.neck.*;
 import frc.robot.commands.elevator.*;
 import frc.robot.commands.hanger.*;
-//import frc.robot.commands.simpleshooter.*;
-//import frc.robot.commands.shooter.*;
 import frc.robot.interfaces.ICamera;
-//import frc.robot.commands.mouth.*;
-//import frc.robot.commands.indicator.*;
 import frc.robot.commands.groups.*;
-//import frc.robot.commands.gamepad.*;
-//import frc.robot.auton.*;
-//import frc.robot.auton.trajectories.*;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 
 
 /*
@@ -95,39 +95,38 @@ public class RobotContainer {
 
 	private final SendableChooser<Command> autoChooser;
 
-	/*public static final String AUTON_DO_NOTHING = "Do Nothing";
-	public static final String AUTON_CUSTOM = "My Auto";
-	private String autonSelected;
-	private SendableChooser<String> autonChooser = new SendableChooser<>();
-*/
+
 	// sensors
 
 	private final HMAccelerometer accelerometer = new HMAccelerometer();
 
-	//private final ICamera object_detection_camera = new ObjectDetectionCamera();
-
 	private final ICamera apriltag_camera = new AprilTagCamera();
 
-	//private final CoralSensor firstCoralSensor = new CoralSensor(Ports.Digital.CORAL_SENSOR, 5.0);
+	// drivetrain constants
 
-	//private final CoralSensor secondCoralSensor = new CoralSensor(Ports.Digital.CORAL_SENSOR_TWO, 5.0);
+	private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
-	//private final NoteSensor noteSensor = new NoteSensor(Ports.Digital.NOTE_SENSOR);
+    /* Setting up bindings for necessary control of the swerve drive platform */
+    private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+            .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
+    private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
+    private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
+
+    private final Telemetry logger = new Telemetry(MaxSpeed);
+
 
 	// motorized devices
 
-	private final SwerveDrivetrain drivetrain = new SwerveDrivetrain(apriltag_camera);
-
-	/*private final WPI_TalonSRX drawer_master = new WPI_TalonSRX(Ports.CAN.DRAWER);
-
-	private final Drawer drawer = new Drawer(drawer_master);*/
+	public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
 	private final TalonFX elevator_master = new TalonFX(Ports.CAN.ELEVATOR_MASTER);
 	private final TalonFX elevator_follower = new TalonFX(Ports.CAN.ELEVATOR_FOLLOWER);
 
-	private final /*I*/Elevator elevator = new Elevator(elevator_master, elevator_follower);
+	private final Elevator elevator = new Elevator(elevator_master, elevator_follower);
 	
-	private final /*I*/Neck neck = new Neck();
+	private final Neck neck = new Neck();
 
 	//private final TalonFX old_neck_master = new TalonFX(Ports.CAN.OLD_NECK_MASTER);
 	//private final TalonFX old_neck_follower = new TalonFX(Ports.CAN.OLD_NECK_FOLLOWER);
@@ -244,14 +243,13 @@ public class RobotContainer {
 			// We are inverting LeftY because Xbox controllers return negative values when we push forward.
 			// We are inverting LeftX because we want a positive value when we pull to the left. Xbox controllers return positive values when you pull to the right by default.
 			// We are also inverting RightX because we want a positive value when we pull to the left (CCW is positive in mathematics).
-			new RunCommand(
-				() -> drivetrain.drive(
-					-MathUtil.applyDeadband(joyMain.getY(), JOYSTICK_AXIS_THRESHOLD),
-					-MathUtil.applyDeadband(joyMain.getX(), JOYSTICK_AXIS_THRESHOLD),
-					-MathUtil.applyDeadband(joyMain.getZ(), JOYSTICK_AXIS_THRESHOLD),
-					true, true),
-				drivetrain));
-		
+			// Drivetrain will execute this command periodically
+            drivetrain.applyRequest(() ->
+                drive.withVelocityX(-joyMain.getY() * MaxSpeed) // Drive forward with negative Y (forward)
+                    .withVelocityY(-joyMain.getX() * MaxSpeed) // Drive left with negative X (left)
+                    .withRotationalRate(-joyMain.getZ() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+            ));
+
 		coral_roller.setDefaultCommand(new CoralRollerStopForever(coral_roller)); // we stop by default
 		algae_roller.setDefaultCommand(new AlgaeRollerStopForever(algae_roller)); // we stop by default
 		hanger.setDefaultCommand(new HangerStop(hanger));
@@ -265,6 +263,15 @@ public class RobotContainer {
 		//indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(indicator,1);
 		//indicatorTimedScrollRainbow.schedule(); // we schedule the command as we are starting up
 
+		// Idle while the robot is disabled. This ensures the configured
+        // neutral mode is applied to the drive motors while disabled.
+        final var idle = new SwerveRequest.Idle();
+        RobotModeTriggers.disabled().whileTrue(
+            drivetrain.applyRequest(() -> idle).ignoringDisable(true)
+        );
+
+		drivetrain.registerTelemetry(logger::telemeterize);
+		
 		Trigger hasCoral = new Trigger(() -> coral_roller.hasCoral());
 		Trigger noCoralPresent = new Trigger(() -> coral_roller.noCoralPresent() && !coral_roller.isReleasing());
 		Trigger isCoralEntering = new Trigger(() -> coral_roller.isCoralEntering() && !coral_roller.isReleasing());
@@ -295,9 +302,17 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 
 		// driver (joystick)
+		
+		// Run SysId routines when holding back/start and X/Y.
+        // Note that each routine should be run exactly once in a single log.
+        joyMain.button(1).and(joyMain.button(11)).whileTrue(drivetrain.sysIdDynamic(Direction.kForward));
+        joyMain.button(1).and(joyMain.button(12)).whileTrue(drivetrain.sysIdDynamic(Direction.kReverse));
+        joyMain.button(2).and(joyMain.button(11)).whileTrue(drivetrain.sysIdQuasistatic(Direction.kForward));
+        joyMain.button(2).and(joyMain.button(12)).whileTrue(drivetrain.sysIdQuasistatic(Direction.kReverse));
 
+		// reset the field-centric heading on left bumper press
 		joyMain.povUp()
-			.onTrue(new DrivetrainZeroHeading(drivetrain));	
+			.onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
 		joyMain.povDown()
 			.onTrue(new DrivetrainOppositeHeading(drivetrain));	
@@ -309,12 +324,12 @@ public class RobotContainer {
 			//.onTrue(new DrivetrainRightSubHeading(drivetrain));
 
 		joyMain.button(1)
-			.whileTrue(new DrivetrainDriveUsingAprilTagCamera(drivetrain, apriltag_camera, getMainJoystick()));
+			.whileTrue(drivetrain.applyRequest(() -> brake));
 
 		joyMain.button(2)
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));	
 			//.whileTrue(new DrivetrainDriveUsingObjectDetectionCamera(drivetrain, object_detection_camera, getMainJoystick()));
-			.whileTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
+			.whileTrue(drivetrain.applyRequest(() -> point.withModuleDirection(new Rotation2d(-joyMain.getY(), -joyMain.getX()))));
 			
 		joyMain.button(3)
 			//.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
