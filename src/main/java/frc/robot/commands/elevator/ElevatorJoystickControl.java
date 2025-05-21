@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  *
@@ -13,10 +13,10 @@ import frc.robot.subsystems.SwerveDrivetrain;
 public class ElevatorJoystickControl extends Command {
 
 	private Elevator elevator;
-	//private SwerveDrivetrain drivetrain;
+	//private CommandSwerveDrivetrain drivetrain;
 	private Joystick joystick;
 
-	public ElevatorJoystickControl(Elevator elevator, SwerveDrivetrain drivetrain, Joystick joystick) {
+	public ElevatorJoystickControl(Elevator elevator, CommandSwerveDrivetrain drivetrain, Joystick joystick) {
 		this.elevator = elevator;
 		//this.drivetrain = drivetrain;
 		this.joystick = joystick;

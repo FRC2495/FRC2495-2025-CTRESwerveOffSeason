@@ -271,7 +271,7 @@ public class RobotContainer {
         );
 
 		drivetrain.registerTelemetry(logger::telemeterize);
-		
+
 		Trigger hasCoral = new Trigger(() -> coral_roller.hasCoral());
 		Trigger noCoralPresent = new Trigger(() -> coral_roller.noCoralPresent() && !coral_roller.isReleasing());
 		Trigger isCoralEntering = new Trigger(() -> coral_roller.isCoralEntering() && !coral_roller.isReleasing());
@@ -345,13 +345,13 @@ public class RobotContainer {
 			.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick()));
 			//.onTrue(new AutoAlignRightAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
 
-		joyMain.button(5)
+		joyMain.button(5);
 			//.onTrue(new AutoAlignToReefBlue(false, drivetrain, apriltag_camera, getMainJoystick()));
-			.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
 
-		joyMain.button(6)
+		joyMain.button(6);
 			//.onTrue(new AutoAlignToReefBlue(true, drivetrain, apriltag_camera, getMainJoystick()));
-			.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(7)
 			//.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));

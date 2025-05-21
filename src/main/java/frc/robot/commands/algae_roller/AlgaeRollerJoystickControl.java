@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.subsystems.AlgaeRoller;
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  *
@@ -15,7 +15,7 @@ public class AlgaeRollerJoystickControl extends Command {
 	private AlgaeRoller algae_roller;
 	private Joystick joystick;
 
-	public AlgaeRollerJoystickControl(AlgaeRoller algae_roller, SwerveDrivetrain drivetrain, Joystick joystick) {
+	public AlgaeRollerJoystickControl(AlgaeRoller algae_roller, CommandSwerveDrivetrain drivetrain, Joystick joystick) {
 		this.algae_roller = algae_roller;
 		this.joystick = joystick;
 		

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.Robot;
 import frc.robot.subsystems.Slider;
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  *
@@ -16,7 +16,7 @@ public class SliderJoystickControl extends Command {
 	private Slider slider;
 	private Joystick joystick;
 
-	public SliderJoystickControl(Slider slider, SwerveDrivetrain drivetrain, Joystick joystick) {
+	public SliderJoystickControl(Slider slider, CommandSwerveDrivetrain drivetrain, Joystick joystick) {
 		this.slider = slider;
 		this.joystick = joystick;
 		addRequirements(slider, drivetrain); // this is needed so that the default drivetrain command does not run at the same time
