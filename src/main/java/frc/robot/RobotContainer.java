@@ -48,7 +48,6 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.sensors.*;
 
-import frc.robot.subsystems.SwerveDrivetrain;
 import frc.robot.subsystems.AlgaeRoller;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralRoller;
@@ -211,7 +210,7 @@ public class RobotContainer {
 		NamedCommands.registerCommand("doNothingUntilCoralSensed", new DoNothingUntilCoralSensed(coral_roller));
 		//NamedCommands.registerCommand("home", new Home(elevator, slider, neck));
 		//NamedCommands.registerCommand("homeToCoralStation", new HomeToCoralStation(elevator, /*slider,*/ neck));
-		NamedCommands.registerCommand("drivetrainStop", new DrivetrainStop(drivetrain));
+		//NamedCommands.registerCommand("drivetrainStop", new DrivetrainStop(drivetrain)); TODO
 		//NamedCommands.registerCommand("scoreFourthLevelCoralAndHomeToCoralStation", new ScoreFourthLevelCoralAndHomeToCoralStation(elevator, coral_roller, neck, slider));
 		//NamedCommands.registerCommand("scoreFourthLevelCoralAndHome", new ScoreFourthLevelCoralAndHome(elevator, coral_roller, neck, slider));
 		NamedCommands.registerCommand("neckHome", new NeckMoveHomeWithStallDetection(neck));
@@ -222,11 +221,11 @@ public class RobotContainer {
 		//NamedCommands.registerCommand("autoAlignToLeftReef", new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
 		//NamedCommands.registerCommand("autoAlignToRightReef", new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
 		//NamedCommands.registerCommand("autoAlignToRightReefTimed", new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
-		NamedCommands.registerCommand("autoAlignToRightReefAuton", new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick()));
-		NamedCommands.registerCommand("autoAlignToLeftReefForAuton", new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick()));
+		//NamedCommands.registerCommand("autoAlignToRightReefAuton", new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick())); TODO
+		//NamedCommands.registerCommand("autoAlignToLeftReefForAuton", new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick())); TODO
 
 		// choosers (for auton)
-
+		
 		autoChooser = AutoBuilder.buildAutoChooser("SPB1 - One Coral and Leave SZ");
 		SmartDashboard.putData("Auto Chooser", autoChooser);
 
@@ -312,10 +311,10 @@ public class RobotContainer {
 
 		// reset the field-centric heading on left bumper press
 		joyMain.povUp()
-			.onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
+			.onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); 
 
-		joyMain.povDown()
-			.onTrue(new DrivetrainOppositeHeading(drivetrain));	
+		joyMain.povDown();
+			//.onTrue(new DrivetrainOppositeHeading(drivetrain)); TODO
 
 		joyMain.povLeft();
 			//.onTrue(new DrivetrainLeftSubHeading(drivetrain));	
@@ -331,27 +330,27 @@ public class RobotContainer {
 			//.whileTrue(new DrivetrainDriveUsingObjectDetectionCamera(drivetrain, object_detection_camera, getMainJoystick()));
 			.whileTrue(drivetrain.applyRequest(() -> point.withModuleDirection(new Rotation2d(-joyMain.getY(), -joyMain.getX()))));
 			
-		joyMain.button(3)
+		joyMain.button(3);
 			//.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
 			//.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, 2));
-			.onTrue(new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick())); TODO
 			//.onTrue(new AutoAlignLeftAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
 			
 			
-		joyMain.button(4)
+		joyMain.button(4);
 			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			//.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
-			.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick())); TODO
 			//.onTrue(new AutoAlignRightAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
 
 		joyMain.button(5);
 			//.onTrue(new AutoAlignToReefBlue(false, drivetrain, apriltag_camera, getMainJoystick()));
-			//.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick())); TODO
 
 		joyMain.button(6);
 			//.onTrue(new AutoAlignToReefBlue(true, drivetrain, apriltag_camera, getMainJoystick()));
-			//.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick())); TODO
 
 		joyMain.button(7)
 			//.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
@@ -369,9 +368,10 @@ public class RobotContainer {
 		joyMain.button(11)
 			.whileTrue(new HangerJoystickControl(hanger, drivetrain, getMainJoystick()));
 		
-		joyMain.button(12)
+		joyMain.button(12);
 			//.onTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
-			.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			//TODO
+			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			
 				
 		// copilot (gamepad)
@@ -396,8 +396,8 @@ public class RobotContainer {
 			//.whileTrue(new CoralRollerRollOut(coral_roller));
 			.whileTrue(new AlgaeRollerRelease(algae_roller));
 			
-		copilotGamepad.back()
-			.onTrue(new DrivetrainAndGyroReset(drivetrain));
+		copilotGamepad.back();
+			//.onTrue(new DrivetrainAndGyroReset(drivetrain)); TODO
 			//.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
 
 		copilotGamepad.start()
@@ -686,7 +686,7 @@ public class RobotContainer {
 		return coralSensor;
 	}*/
 
-	public SwerveDrivetrain getDrivetrain()
+	public CommandSwerveDrivetrain getDrivetrain()
 	{
 		return drivetrain;
 	}

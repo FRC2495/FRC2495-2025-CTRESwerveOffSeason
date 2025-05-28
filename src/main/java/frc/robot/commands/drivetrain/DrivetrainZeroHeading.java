@@ -3,16 +3,16 @@ package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  * Resets the heading to zero.
  */
 public class DrivetrainZeroHeading extends InstantCommand {
 
-	private SwerveDrivetrain drivetrain;
+	private CommandSwerveDrivetrain drivetrain;
 
-	public DrivetrainZeroHeading(SwerveDrivetrain drivetrain) {
+	public DrivetrainZeroHeading(CommandSwerveDrivetrain drivetrain) {
 		this.drivetrain = drivetrain;
 		addRequirements(drivetrain);
 	}

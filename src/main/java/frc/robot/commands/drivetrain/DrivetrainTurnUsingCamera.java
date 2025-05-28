@@ -3,7 +3,7 @@ package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.interfaces.ICamera;
 
 /**
@@ -11,7 +11,7 @@ import frc.robot.interfaces.ICamera;
  */
 public class DrivetrainTurnUsingCamera extends Command {
 
-	private SwerveDrivetrain drivetrain;
+	private CommandSwerveDrivetrain drivetrain;
 	private ICamera camera;
 
 	public static final double JOYSTICK_AXIS_THRESHOLD = 0.15;
@@ -19,7 +19,7 @@ public class DrivetrainTurnUsingCamera extends Command {
 
 	public int onTargetCountTurningUsingCamera;
 
-	public DrivetrainTurnUsingCamera(SwerveDrivetrain drivetrain, ICamera camera) {
+	public DrivetrainTurnUsingCamera(CommandSwerveDrivetrain drivetrain, ICamera camera) {
 		this.drivetrain = drivetrain;
 		this.camera = camera;
 		

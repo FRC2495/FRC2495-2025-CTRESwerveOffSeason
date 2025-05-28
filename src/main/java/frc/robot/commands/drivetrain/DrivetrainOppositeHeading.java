@@ -3,16 +3,16 @@ package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  * Switches heading to opposite.
  */
 public class DrivetrainOppositeHeading extends InstantCommand {
 
-	private SwerveDrivetrain drivetrain;
+	private CommandSwerveDrivetrain drivetrain;
 
-	public DrivetrainOppositeHeading(SwerveDrivetrain drivetrain) {
+	public DrivetrainOppositeHeading(CommandSwerveDrivetrain drivetrain) {
 		this.drivetrain = drivetrain;
 		addRequirements(drivetrain);
 	}

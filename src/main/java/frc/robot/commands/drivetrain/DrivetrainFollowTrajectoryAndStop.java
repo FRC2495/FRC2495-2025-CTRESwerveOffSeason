@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import frc.robot.Constants.AutoConstants;
 
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 
 /**
@@ -17,7 +17,7 @@ import frc.robot.subsystems.SwerveDrivetrain;
  */
 public class DrivetrainFollowTrajectoryAndStop extends SequentialCommandGroup {
 
-	public DrivetrainFollowTrajectoryAndStop(SwerveDrivetrain drivetrain, Trajectory trajectory) {
+	public DrivetrainFollowTrajectoryAndStop(CommandSwerveDrivetrain drivetrain, Trajectory trajectory) {
 
 		PIDController xController = new PIDController(AutoConstants.X_CONTROLLER_P, 0, 0); // trajectory tracker PID controller for x position
 

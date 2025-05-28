@@ -4,7 +4,7 @@ package frc.robot.commands.drivetrain;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.interfaces.ICamera;
 
 /**
@@ -12,13 +12,13 @@ import frc.robot.interfaces.ICamera;
  */
 public class DrivetrainDriveUsingAprilTagCamera extends Command {
 
-	private SwerveDrivetrain drivetrain;
+	private CommandSwerveDrivetrain drivetrain;
 	private ICamera camera;
 	private Joystick joystick;
 
 	public static final double JOYSTICK_AXIS_THRESHOLD = 0.15;
 
-	public DrivetrainDriveUsingAprilTagCamera(SwerveDrivetrain drivetrain, ICamera camera, Joystick joystick) {
+	public DrivetrainDriveUsingAprilTagCamera(CommandSwerveDrivetrain drivetrain, ICamera camera, Joystick joystick) {
 		this.drivetrain = drivetrain;
 		this.camera = camera;
 		this.joystick = joystick;

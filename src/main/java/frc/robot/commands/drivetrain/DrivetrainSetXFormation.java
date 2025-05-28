@@ -3,16 +3,16 @@ package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  * Locks drivetrain in X formation.
  */
 public class DrivetrainSetXFormation extends Command {
 
-	private SwerveDrivetrain drivetrain;
+	private CommandSwerveDrivetrain drivetrain;
 
-	public DrivetrainSetXFormation(SwerveDrivetrain drivetrain) {
+	public DrivetrainSetXFormation(CommandSwerveDrivetrain drivetrain) {
 		this.drivetrain = drivetrain;
 		addRequirements(drivetrain);
 	}

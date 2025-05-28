@@ -3,16 +3,16 @@ package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  * Resets all encoders.
  */
 public class DrivetrainResetEncoders extends InstantCommand {
 
-	private SwerveDrivetrain drivetrain;
+	private CommandSwerveDrivetrain drivetrain;
 
-	public DrivetrainResetEncoders(SwerveDrivetrain drivetrain) {
+	public DrivetrainResetEncoders(CommandSwerveDrivetrain drivetrain) {
 		this.drivetrain = drivetrain;
 		addRequirements(drivetrain);
 	}

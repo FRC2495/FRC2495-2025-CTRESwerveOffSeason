@@ -3,16 +3,16 @@ package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  * Stops drivetrain.
  */
 public class DrivetrainStop extends InstantCommand {
 
-	private SwerveDrivetrain drivetrain;
+	private CommandSwerveDrivetrain drivetrain;
 
-	public DrivetrainStop(SwerveDrivetrain drivetrain) {
+	public DrivetrainStop(CommandSwerveDrivetrain drivetrain) {
 		this.drivetrain = drivetrain;
 
 		addRequirements(drivetrain);

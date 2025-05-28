@@ -8,7 +8,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 
 import frc.robot.Constants.DrivetrainConstants;
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 /**
  * Follows specified trajectory. Exact same as SwerveControllerCommand which it is derived from.
@@ -17,7 +17,7 @@ public class DrivetrainFollowTrajectory extends SwerveControllerCommand {
 
 	//private SwerveDrivetrain drivetrain;
 
-	public DrivetrainFollowTrajectory(SwerveDrivetrain drivetrain, Trajectory trajectory, PIDController xController, PIDController yController, ProfiledPIDController thetaController) {
+	public DrivetrainFollowTrajectory(CommandSwerveDrivetrain drivetrain, Trajectory trajectory, PIDController xController, PIDController yController, ProfiledPIDController thetaController) {
 		super(
 			trajectory, // trajectory to follow
 			drivetrain::getPose, // Functional interface to feed supplier
