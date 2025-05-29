@@ -39,6 +39,7 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.FollowPathCommand;
 
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -287,6 +288,9 @@ public class RobotContainer {
 		(hasCoral).or(noCoralPresent).whileTrue(
 			new CoralRollerStop(coral_roller)
 		);
+
+		// Warmup PathPlanner to avoid Java pauses
+        FollowPathCommand.warmupCommand().schedule();
 	}
 
 	/**
