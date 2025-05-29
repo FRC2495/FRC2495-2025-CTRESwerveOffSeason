@@ -18,7 +18,7 @@ public class MoveInReverse extends SequentialCommandGroup {
 
     private double distance;
 	
-	public MoveInReverse(SwerveDrivetrain drivetrain, RobotContainer container, double distance) {
+	public MoveInReverse(CommandSwerveDrivetrain drivetrain, RobotContainer container, double distance) {
 
 		this.distance = distance;
 

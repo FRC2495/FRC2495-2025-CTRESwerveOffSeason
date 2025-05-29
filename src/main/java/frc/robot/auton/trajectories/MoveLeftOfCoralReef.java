@@ -17,7 +17,7 @@ import frc.robot.subsystems.*;
 // moves forward by specified distance
 public class MoveLeftOfCoralReef extends SequentialCommandGroup {
 
-	public MoveLeftOfCoralReef(SwerveDrivetrain drivetrain, RobotContainer container) {
+	public MoveLeftOfCoralReef(CommandSwerveDrivetrain drivetrain, RobotContainer container) {
 		
 		addCommands(
 			new DrivetrainSwerveRelative(drivetrain, container, createMoveLeftOfCoralReefTrajectory(container))

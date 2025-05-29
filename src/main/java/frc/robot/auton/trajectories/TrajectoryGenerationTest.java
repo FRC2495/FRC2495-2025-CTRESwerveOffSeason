@@ -11,7 +11,7 @@ import frc.robot.commands.drivetrain.DrivetrainSwerveRelative;
 // The purpose of this class is to help testing trajectories at home in simulation mode
 public class TrajectoryGenerationTest extends SequentialCommandGroup {
 	
-	public TrajectoryGenerationTest(SwerveDrivetrain drivetrain, RobotContainer container, ICamera object_detection_camera, ICamera apriltag_camera) {
+	public TrajectoryGenerationTest(CommandSwerveDrivetrain drivetrain, RobotContainer container, ICamera object_detection_camera, ICamera apriltag_camera) {
 		
 		addCommands(
 

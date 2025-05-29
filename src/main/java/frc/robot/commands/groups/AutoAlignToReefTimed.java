@@ -12,18 +12,18 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.Constants.VisionConstants;
 import frc.robot.interfaces.ICamera;
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class AutoAlignToReefTimed extends WaitCommand {
   private PIDController xController, yController, rotController;
   private boolean isRightScore;
   //private Timer dontSeeTagTimer, stopTimer;
-  private SwerveDrivetrain drivetrain;
+  private CommandSwerveDrivetrain drivetrain;
   private ICamera apriltag_camera;
   //private double tagID = -1;
   //private Pose2d targetPose;
 
-  public AutoAlignToReefTimed(boolean isRightScore, SwerveDrivetrain drivetrain, ICamera apriltag_camera, double timeout) {
+  public AutoAlignToReefTimed(boolean isRightScore, CommandSwerveDrivetrain drivetrain, ICamera apriltag_camera, double timeout) {
     super(timeout);
     xController = new PIDController(Constants.VisionConstants.X_REEF_ALIGNMENT_P, 0.0, 0);  // Vertical movement
     yController = new PIDController(Constants.VisionConstants.Y_REEF_ALIGNMENT_P, 0.0, 0);  // Horitontal movement

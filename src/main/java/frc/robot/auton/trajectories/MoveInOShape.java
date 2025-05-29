@@ -19,7 +19,7 @@ public class MoveInOShape extends SequentialCommandGroup {
 
 	private double sideLength;
 
-	public MoveInOShape(SwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
+	public MoveInOShape(CommandSwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
 
 		this.sideLength = sideLength;
 		

@@ -18,7 +18,7 @@ public class MoveForward extends SequentialCommandGroup {
 
 	private double distance;
 	
-	public MoveForward(SwerveDrivetrain drivetrain, RobotContainer container, double distance) {
+	public MoveForward(CommandSwerveDrivetrain drivetrain, RobotContainer container, double distance) {
 
 		this.distance = distance;
 		

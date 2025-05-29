@@ -20,7 +20,7 @@ import frc.robot.sensors.*;
 
 public class StartingPositionTwoOneCoral extends SequentialCommandGroup {
 
-	public StartingPositionTwoOneCoral(RobotContainer container, SwerveDrivetrain drivetrain, CoralRoller coral_roller, Neck neck, Elevator elevator, Slider slider){
+	public StartingPositionTwoOneCoral(RobotContainer container, CommandSwerveDrivetrain drivetrain, CoralRoller coral_roller, Neck neck, Elevator elevator, Slider slider){
 
 		addCommands(
 

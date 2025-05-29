@@ -18,7 +18,7 @@ public class MoveInLShapeInReverse extends SequentialCommandGroup {
 
 	private double sideLength;
 
-	public MoveInLShapeInReverse(SwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
+	public MoveInLShapeInReverse(CommandSwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
 
 		this.sideLength = sideLength;
 

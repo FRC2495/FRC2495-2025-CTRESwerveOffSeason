@@ -19,7 +19,7 @@ public class MoveInInfinityShape extends SequentialCommandGroup {
 
 	private double sideLength;
 
-	public MoveInInfinityShape(SwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
+	public MoveInInfinityShape(CommandSwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
 
 		this.sideLength = sideLength;
 		

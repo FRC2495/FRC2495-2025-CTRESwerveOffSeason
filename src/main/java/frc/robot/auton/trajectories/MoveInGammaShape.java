@@ -18,7 +18,7 @@ public class MoveInGammaShape extends SequentialCommandGroup {
 
 	private double sideLength;
 
-	public MoveInGammaShape(SwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
+	public MoveInGammaShape(CommandSwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
 
 		this.sideLength = sideLength;
 		

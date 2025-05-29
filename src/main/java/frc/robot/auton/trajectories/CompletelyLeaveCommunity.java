@@ -10,7 +10,7 @@ import frc.robot.subsystems.*;
 // leaves the community
 public class CompletelyLeaveCommunity extends SequentialCommandGroup {
 
-	public CompletelyLeaveCommunity(SwerveDrivetrain drivetrain, RobotContainer container) {
+	public CompletelyLeaveCommunity(CommandSwerveDrivetrain drivetrain, RobotContainer container) {
 
 		addCommands(
 			new MoveInReverse(drivetrain, container, AutonConstants.DISTANCE_FROM_STARTING_POSITION_TO_LEAVE_COMMUNITY_METERS)            

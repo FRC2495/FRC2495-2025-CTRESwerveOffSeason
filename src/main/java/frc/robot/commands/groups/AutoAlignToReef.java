@@ -15,20 +15,20 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Constants.VisionConstants;
 import frc.robot.interfaces.ICamera;
-import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 
 public class AutoAlignToReef extends Command {
   private PIDController xController, yController, rotController;
   private boolean isRightScore;
   //private Timer dontSeeTagTimer, stopTimer;
-  private SwerveDrivetrain drivetrain;
+  private CommandSwerveDrivetrain drivetrain;
   private ICamera apriltag_camera;
   private Joystick joystick;
   //private double tagID = -1;
   //private Pose2d targetPose;
   private static final double JOYSTICK_EXIT_THRESHOLD = 0.3;
 
-  public AutoAlignToReef(boolean isRightScore, SwerveDrivetrain drivetrain, ICamera apriltag_camera, Joystick joystick) {
+  public AutoAlignToReef(boolean isRightScore, CommandSwerveDrivetrain drivetrain, ICamera apriltag_camera, Joystick joystick) {
     xController = new PIDController(Constants.VisionConstants.X_REEF_ALIGNMENT_P, 0.0, 0);  // Vertical movement
     yController = new PIDController(Constants.VisionConstants.Y_REEF_ALIGNMENT_P, 0.0, 0);  // Horitontal movement
     rotController = new PIDController(Constants.VisionConstants.ROT_REEF_ALIGNMENT_P, 0, 0);  // Rotation

@@ -19,7 +19,7 @@ public class MoveIn8Shape extends SequentialCommandGroup {
 
 	private double sideLength;
 
-	public MoveIn8Shape(SwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
+	public MoveIn8Shape(CommandSwerveDrivetrain drivetrain, RobotContainer container, double sideLength) {
 
 		this.sideLength = sideLength;
 		

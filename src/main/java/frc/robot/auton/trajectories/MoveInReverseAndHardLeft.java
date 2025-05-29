@@ -19,7 +19,7 @@ public class MoveInReverseAndHardLeft extends SequentialCommandGroup {
 	private double reverseDistance;
 	private double leftDistance;
 
-	public MoveInReverseAndHardLeft(SwerveDrivetrain drivetrain, RobotContainer container,  double reverseDistance, double leftDistance) {
+	public MoveInReverseAndHardLeft(CommandSwerveDrivetrain drivetrain, RobotContainer container,  double reverseDistance, double leftDistance) {
 
 		this.reverseDistance = reverseDistance;
 		this.leftDistance = leftDistance;

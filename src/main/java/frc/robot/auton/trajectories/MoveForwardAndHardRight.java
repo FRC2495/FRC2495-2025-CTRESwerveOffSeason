@@ -19,7 +19,7 @@ public class MoveForwardAndHardRight extends SequentialCommandGroup {
 	private double forwardDistance;
 	private double rightDistance;
 
-	public MoveForwardAndHardRight(SwerveDrivetrain drivetrain, RobotContainer container, double forwardDistance, double rightDistance) {
+	public MoveForwardAndHardRight(CommandSwerveDrivetrain drivetrain, RobotContainer container, double forwardDistance, double rightDistance) {
 
 		this.forwardDistance = forwardDistance;
 		this.rightDistance = rightDistance;

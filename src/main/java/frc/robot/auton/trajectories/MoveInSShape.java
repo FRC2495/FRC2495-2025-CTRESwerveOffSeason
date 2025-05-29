@@ -19,7 +19,7 @@ public class MoveInSShape extends SequentialCommandGroup {
 
 	private double distance;
 
-	public MoveInSShape(SwerveDrivetrain drivetrain, RobotContainer container, double distance) {
+	public MoveInSShape(CommandSwerveDrivetrain drivetrain, RobotContainer container, double distance) {
 
 		this.distance = distance;
 
