@@ -7,6 +7,8 @@ import java.util.function.Supplier;
 import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.swerve.SwerveDrivetrainConstants;
+import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveModule.SteerRequestType;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -15,14 +17,13 @@ import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
 import edu.wpi.first.math.Matrix;
-import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.util.WPIUtilJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Notifier;
@@ -30,9 +31,8 @@ import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-import frc.robot.Constants.DrivetrainConstants;
+import frc.robot.generated.TunerConstants;
 import frc.robot.generated.TunerConstants.TunerSwerveDrivetrain;
-import frc.utils.SwerveUtils;
 
 /**
  * Class that extends the Phoenix 6 SwerveDrivetrain class and implements
@@ -50,24 +50,13 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     /* Keep track if we've ever applied the operator perspective before or not */
     private boolean m_hasAppliedOperatorPerspective = false;
 
+    /** Swerve request to apply during robot-centric path following */
+    private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
+
     /* Swerve requests to apply during SysId characterization */
     private final SwerveRequest.SysIdSwerveTranslation m_translationCharacterization = new SwerveRequest.SysIdSwerveTranslation();
     private final SwerveRequest.SysIdSwerveSteerGains m_steerCharacterization = new SwerveRequest.SysIdSwerveSteerGains();
     private final SwerveRequest.SysIdSwerveRotation m_rotationCharacterization = new SwerveRequest.SysIdSwerveRotation();
-
-    /** Swerve request to apply during robot-centric path following */
-    private final SwerveRequest.ApplyRobotSpeeds m_pathApplyRobotSpeeds = new SwerveRequest.ApplyRobotSpeeds();
-
-    // Slew rate filter variables for controlling lateral acceleration
-	private double m_currentRotation = 0.0;
-	private double m_currentTranslationDir = 0.0;
-	private double m_currentTranslationMag = 0.0;
-
-    private SlewRateLimiter m_magLimiter = new SlewRateLimiter(DrivetrainConstants.MAGNITUDE_SLEW_RATE);
-	private SlewRateLimiter m_rotLimiter = new SlewRateLimiter(DrivetrainConstants.ROTATIONAL_SLEW_RATE);
-	private double m_prevTime = WPIUtilJNI.now() * 1e-6;
-
-    private boolean isTurning;
 
     /* SysId routine for characterizing translation. This is used to find PID gains for the drive motors. */
     private final SysIdRoutine m_sysIdRoutineTranslation = new SysIdRoutine(
@@ -100,8 +89,6 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             this
         )
     );
-
-  
 
     /*
      * SysId routine for characterizing rotation.
@@ -211,8 +198,36 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         if (Utils.isSimulation()) {
             startSimThread();
         }
-
         configureAutoBuilder();
+    }
+
+    private void configureAutoBuilder() {
+        try {
+            var config = RobotConfig.fromGUISettings();
+            AutoBuilder.configure(
+                () -> getState().Pose,   // Supplier of current robot pose
+                this::resetPose,         // Consumer for seeding pose against auto
+                () -> getState().Speeds, // Supplier of current robot speeds
+                // Consumer of ChassisSpeeds and feedforwards to drive the robot
+                (speeds, feedforwards) -> setControl(
+                    m_pathApplyRobotSpeeds.withSpeeds(speeds)
+                        .withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
+                        .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())
+                ),
+                new PPHolonomicDriveController(
+                    // PID constants for translation
+                    new PIDConstants(10, 0, 0),
+                    // PID constants for rotation
+                    new PIDConstants(7, 0, 0)
+                ),
+                config,
+                // Assume the path needs to be flipped for Red vs Blue, this is normally the case
+                () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
+                this // Subsystem for requirements
+            );
+        } catch (Exception ex) {
+            DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", ex.getStackTrace());
+        }
     }
 
     /**
@@ -268,79 +283,6 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         }
     }
 
-    /**
-	 * Method to drive the robot using joystick info.
-	 *
-	 * @param xSpeed        Speed of the robot in the x direction (forward).
-	 * @param ySpeed        Speed of the robot in the y direction (sideways).
-	 * @param rot           Angular rate of the robot.
-	 * @param fieldRelative Whether the provided x and y speeds are relative to the
-	 *                      field.
-	 * @param rateLimit     Whether to enable rate limiting for smoother control.
-	 */
-	public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean rateLimit) {
-		
-		double xSpeedCommanded;
-		double ySpeedCommanded;
-
-		if (rateLimit) {
-			// Convert XY to polar for rate limiting
-			double inputTranslationDir = Math.atan2(ySpeed, xSpeed);
-			double inputTranslationMag = Math.sqrt(Math.pow(xSpeed, 2) + Math.pow(ySpeed, 2));
-
-			// Calculate the direction slew rate based on an estimate of the lateral acceleration
-			double directionSlewRate;
-
-			if (m_currentTranslationMag != 0.0) {
-				directionSlewRate = Math.abs(DrivetrainConstants.DIRECTION_SLEW_RATE / m_currentTranslationMag);
-			} else {
-				directionSlewRate = 500.0; //some high number that means the slew rate is effectively instantaneous
-			}
-			
-
-			double currentTime = WPIUtilJNI.now() * 1e-6;
-			double elapsedTime = currentTime - m_prevTime;
-			double angleDif = SwerveUtils.AngleDifference(inputTranslationDir, m_currentTranslationDir);
-
-			if (angleDif < 0.45*Math.PI) {
-				m_currentTranslationDir = SwerveUtils.StepTowardsCircular(m_currentTranslationDir, inputTranslationDir, directionSlewRate * elapsedTime);
-				m_currentTranslationMag = m_magLimiter.calculate(inputTranslationMag);
-			}
-			else if (angleDif > 0.85*Math.PI) {
-				if (m_currentTranslationMag > 1e-4) { //some small number to avoid floating-point errors with equality checking
-					// keep currentTranslationDir unchanged
-					m_currentTranslationMag = m_magLimiter.calculate(0.0);
-				}
-				else {
-					m_currentTranslationDir = SwerveUtils.WrapAngle(m_currentTranslationDir + Math.PI);
-					m_currentTranslationMag = m_magLimiter.calculate(inputTranslationMag);
-				}
-			}
-			else {
-				m_currentTranslationDir = SwerveUtils.StepTowardsCircular(m_currentTranslationDir, inputTranslationDir, directionSlewRate * elapsedTime);
-				m_currentTranslationMag = m_magLimiter.calculate(0.0);
-			}
-
-			m_prevTime = currentTime;
-			
-			xSpeedCommanded = m_currentTranslationMag * Math.cos(m_currentTranslationDir);
-			ySpeedCommanded = m_currentTranslationMag * Math.sin(m_currentTranslationDir);
-			m_currentRotation = m_rotLimiter.calculate(rot);
-
-		} else {
-			xSpeedCommanded = xSpeed;
-			ySpeedCommanded = ySpeed;
-			m_currentRotation = rot; 
-        }
-    }
-
-    public void stop()
-    {
-        drive(0, 0, 0, false, false);
-
-        isTurning = false;
-    }
-
     private void startSimThread() {
         m_lastSimTime = Utils.getCurrentTimeSeconds();
 
@@ -390,34 +332,82 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         super.addVisionMeasurement(visionRobotPoseMeters, Utils.fpgaToCurrentTime(timestampSeconds), visionMeasurementStdDevs);
     }
     
-    private void configureAutoBuilder() {
-        try {
-            var config = RobotConfig.fromGUISettings();
-            AutoBuilder.configure(
-                () -> getState().Pose,   // Supplier of current robot pose
-                this::resetPose,         // Consumer for seeding pose against auto
-                () -> getState().Speeds, // Supplier of current robot speeds
-                // Consumer of ChassisSpeeds and feedforwards to drive the robot
-                (speeds, feedforwards) -> setControl(
-                    m_pathApplyRobotSpeeds.withSpeeds(speeds)
-                        .withWheelForceFeedforwardsX(feedforwards.robotRelativeForcesXNewtons())
-                        .withWheelForceFeedforwardsY(feedforwards.robotRelativeForcesYNewtons())
-                ),
-                new PPHolonomicDriveController(
-                    // PID constants for translation
-                    new PIDConstants(10, 0, 0),
-                    // PID constants for rotation
-                    new PIDConstants(7, 0, 0)
-                ),
-                config,
-                // Assume the path needs to be flipped for Red vs Blue, this is normally the case
-                () -> DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red,
-                this // Subsystem for requirements
-            );
-        } catch (Exception ex) {
-            DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", ex.getStackTrace());
+	
+	/// begin custom code 
+
+    /**
+	 * Method to drive the robot using joystick info.
+	 *
+	 * @param xSpeed        Speed of the robot in the x direction (forward).
+	 * @param ySpeed        Speed of the robot in the y direction (sideways).
+	 * @param rot           Angular rate of the robot.
+	 * @param fieldRelative Whether the provided x and y speeds are relative to the
+	 *                      field.
+	 * @param rateLimit     Whether to enable rate limiting for smoother control. UNUSED
+	 */
+	public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean rateLimit) {
+
+        if (fieldRelative) {
+            driveFieldCentric(xSpeed,ySpeed,rot);
+        } else {
+            driveRobotCentric(xSpeed,ySpeed,rot);
         }
     }
+
+	public void drive(double xSpeed, double ySpeed, double angularSpeed) {
+		this.drive(xSpeed, ySpeed, angularSpeed, true, false);
+	}
+
+	public void driveRobotRelative(ChassisSpeeds speeds){
+		this.drive(speeds.vxMetersPerSecond,speeds.vyMetersPerSecond,speeds.omegaRadiansPerSecond,false,true);
+	}
+
+    private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
+
+    private SwerveRequest.RobotCentric reqRobotCentric= new SwerveRequest.RobotCentric();
+
+    public void driveRobotCentric(double xSpeed, double ySpeed, double rot) {
+        reqRobotCentric.VelocityX = xSpeed * MaxSpeed;
+        reqRobotCentric.VelocityY = ySpeed * MaxSpeed;
+        reqRobotCentric.RotationalRate = rot * MaxAngularRate;
+        reqRobotCentric.DriveRequestType = DriveRequestType.OpenLoopVoltage;
+        
+        super.setControl(reqRobotCentric);
+    }
+
+    private SwerveRequest.FieldCentric reqFieldCentric = new SwerveRequest.FieldCentric();
+
+    public void driveFieldCentric(double xSpeed, double ySpeed, double rot) {
+        reqFieldCentric.Deadband = MaxSpeed * 0.1;
+        reqFieldCentric.RotationalDeadband = MaxAngularRate * 0.1;
+        reqFieldCentric.VelocityX = xSpeed * MaxSpeed;
+        reqFieldCentric.VelocityY = ySpeed * MaxSpeed;
+        reqFieldCentric.RotationalRate = rot * MaxAngularRate;
+        reqFieldCentric.DriveRequestType = DriveRequestType.OpenLoopVoltage;
+        
+        super.setControl(reqFieldCentric);
+    }
+
+
+    /**
+	 * Sets the wheels into an X formation to prevent movement.
+	 */
+	public void setX() {
+        brake();
+	}
+
+    private final SwerveRequest.SwerveDriveBrake reqBrake = new SwerveRequest.SwerveDriveBrake();
+
+    public void brake() {        
+        super.setControl(reqBrake);
+    }
+
+
+    public void stop() {
+        drive(0, 0, 0, false, false);
+    }
+
 
     /** Zeroes the heading of the robot. */
 	public void zeroHeading() {
