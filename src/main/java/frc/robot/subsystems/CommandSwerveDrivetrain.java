@@ -418,10 +418,10 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
             DriverStation.reportError("Failed to load PathPlanner config and configure AutoBuilder", ex.getStackTrace());
         }
     }
+
     /** Zeroes the heading of the robot. */
 	public void zeroHeading() {
-		pigeon2.reset();
-		gyroOffset = Rotation2d.fromDegrees(0);
-		//pigeon2.setAngleAdjustment(0);
+		getPigeon2().reset(); // resets the gyro to a heading of zero
+		seedFieldCentric(); // resets the rotation of the robot pose to zero, regardless of gyro heading
 	}
 }
