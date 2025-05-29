@@ -21,6 +21,8 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
@@ -334,6 +336,16 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     
 	
 	/// begin custom code 
+    
+    /**
+	 * Returns the currently-estimated pose of the robot.
+	 *
+	 * @return The pose.
+	 */
+	public Pose2d getPose() {
+		return getState().Pose;
+	}
+
 
     /**
 	 * Method to drive the robot using joystick info.
@@ -403,6 +415,14 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         super.setControl(reqBrake);
     }
 
+    /**
+	 * Sets the swerve ModuleStates.
+	 *
+	 * @param desiredStates The desired SwerveModule states.
+	 */
+	public void setModuleStates(SwerveModuleState[] desiredStates) {
+        // TODO
+	}
 
     public void stop() {
         drive(0, 0, 0, false, false);
@@ -413,5 +433,50 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 	public void zeroHeading() {
 		getPigeon2().reset(); // resets the gyro to a heading of zero
 		seedFieldCentric(); // resets the rotation of the robot pose to zero, regardless of gyro heading
+	}
+
+    public void oppositeHeading() {
+		getPigeon2().reset(); // resets the gyro to a heading of zero
+		resetRotation(new Rotation2d(Rotation2d.fromDegrees(180).getRadians()));
+	}
+
+	public void blueLeftSubHeading() {
+		getPigeon2().reset(); // resets the gyro to a heading of zero
+		resetRotation(new Rotation2d(Rotation2d.fromDegrees(300).getRadians()));
+	}
+
+	public void blueRightSubHeading() {
+		getPigeon2().reset(); // resets the gyro to a heading of zero
+		resetRotation(new Rotation2d(Rotation2d.fromDegrees(60).getRadians()));
+	}
+
+	public void redLeftSubHeading() {
+		getPigeon2().reset(); // resets the gyro to a heading of zero
+		resetRotation(new Rotation2d(Rotation2d.fromDegrees(300).getRadians()));
+	}
+
+	public void redRightSubHeading() {
+		getPigeon2().reset(); // resets the gyro to a heading of zero
+		resetRotation(new Rotation2d(Rotation2d.fromDegrees(60).getRadians()));
+	}
+
+
+    /** Resets the drive encoders to currently read a position of 0 and seeds the turn encoders using the absolute encoders. */
+	public void resetEncoders() {
+        getModule(0).resetPosition();
+        getModule(1).resetPosition();
+        getModule(2).resetPosition();
+        getModule(3).resetPosition();
+	}
+
+    
+    /**
+	 * Resets the odometry to the specified pose.
+	 *
+	 * @param pose The pose to which to set the odometry.
+	 */
+	public void resetOdometry(Pose2d pose) {
+
+        // TODO
 	}
 }
