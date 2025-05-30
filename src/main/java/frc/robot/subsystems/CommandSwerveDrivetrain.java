@@ -380,9 +380,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private SwerveRequest.RobotCentric reqRobotCentric= new SwerveRequest.RobotCentric();
 
     public void driveRobotCentric(double xSpeed, double ySpeed, double rot) {
-        reqRobotCentric.VelocityX = -ySpeed * MaxSpeed;
-        reqRobotCentric.VelocityY = -xSpeed * MaxSpeed;
-        reqRobotCentric.RotationalRate = -rot * MaxAngularRate;
+        reqRobotCentric.VelocityX = xSpeed * MaxSpeed;
+        reqRobotCentric.VelocityY = ySpeed * MaxSpeed;
+        reqRobotCentric.RotationalRate = rot * MaxAngularRate;
         reqRobotCentric.DriveRequestType = DriveRequestType.OpenLoopVoltage;
         
         super.setControl(reqRobotCentric);
@@ -393,9 +393,9 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     public void driveFieldCentric(double xSpeed, double ySpeed, double rot) {
         reqFieldCentric.Deadband = MaxSpeed * 0.1;
         reqFieldCentric.RotationalDeadband = MaxAngularRate * 0.1;
-        reqFieldCentric.VelocityX = -ySpeed * MaxSpeed;
-        reqFieldCentric.VelocityY = -xSpeed * MaxSpeed;
-        reqFieldCentric.RotationalRate = -rot * MaxAngularRate;
+        reqFieldCentric.VelocityX = xSpeed * MaxSpeed;
+        reqFieldCentric.VelocityY = ySpeed * MaxSpeed;
+        reqFieldCentric.RotationalRate = rot * MaxAngularRate;
         reqFieldCentric.DriveRequestType = DriveRequestType.OpenLoopVoltage;
         
         super.setControl(reqFieldCentric);
