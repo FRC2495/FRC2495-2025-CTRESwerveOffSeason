@@ -139,6 +139,15 @@ public class Robot extends TimedRobot {
 	public void updateToSmartDash()
 	{
 		// TODO
+		SmartDashboard.putNumber("FrontLeftTurningAbsoluteEncoderPosition", m_robotContainer.getDrivetrain().getFrontLeftAbsoluteEncoderPosition());
+		SmartDashboard.putNumber("FrontRightTurningAbsoluteEncoderPosition", m_robotContainer.getDrivetrain().getFrontRightAbsoluteEncoderPosition());
+		SmartDashboard.putNumber("RearLeftTurningAbsoluteEncoderPosition", m_robotContainer.getDrivetrain().getRearLeftAbsoluteEncoderPosition());
+		SmartDashboard.putNumber("RearRightTurningAbsoluteEncoderPosition", m_robotContainer.getDrivetrain().getRearRightAbsoluteEncoderPosition());
+		
+		SmartDashboard.putNumber("FrontLeftRelativeEncoderPosition", m_robotContainer.getDrivetrain().getFrontLeftRelativeEncoderPosition());
+		SmartDashboard.putNumber("FrontRightRelativeEncoderPosition", m_robotContainer.getDrivetrain().getFrontRightRelativeEncoderPosition());
+		SmartDashboard.putNumber("RearLeftRelativeEncoderPosition", m_robotContainer.getDrivetrain().getRearLeftRelativeEncoderPosition());
+		SmartDashboard.putNumber("RearRightRelativeEncoderPosition", m_robotContainer.getDrivetrain().getRearRightRelativeEncoderPosition());
 		// SmartDashboard.putNumber("x", m_robotContainer.getDrivetrain().getPose().getX()); // lets us see the absolute position of the robot on the field
     	// SmartDashboard.putNumber("y", m_robotContainer.getDrivetrain().getPose().getY()); 
     	// SmartDashboard.putNumber("rot", m_robotContainer.getDrivetrain().getPose().getRotation().getDegrees()); 

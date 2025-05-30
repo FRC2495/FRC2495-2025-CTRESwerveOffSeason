@@ -469,6 +469,37 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         getModule(3).resetPosition();
 	}
 
+    public double getFrontLeftAbsoluteEncoderPosition() {
+        return getModule(0).getEncoder().getAbsolutePosition().getValueAsDouble();
+    }
+
+    public double getFrontRightAbsoluteEncoderPosition() {
+        return getModule(1).getEncoder().getAbsolutePosition().getValueAsDouble();
+    }
+
+    public double getRearLeftAbsoluteEncoderPosition() {
+        return getModule(2).getEncoder().getAbsolutePosition().getValueAsDouble();
+    }
+
+    public double getRearRightAbsoluteEncoderPosition() {
+        return getModule(3).getEncoder().getAbsolutePosition().getValueAsDouble();
+    }
+
+    public double getFrontLeftRelativeEncoderPosition() {
+        return getModule(0).getSteerMotor().getPosition().getValueAsDouble();
+    }
+
+    public double getFrontRightRelativeEncoderPosition() {
+        return getModule(1).getSteerMotor().getPosition().getValueAsDouble();
+    }
+
+    public double getRearLeftRelativeEncoderPosition() {
+        return getModule(2).getSteerMotor().getPosition().getValueAsDouble();
+    }
+    
+    public double getRearRightRelativeEncoderPosition() {
+        return getModule(3).getSteerMotor().getPosition().getValueAsDouble();
+    }
     
     /**
 	 * Resets the odometry to the specified pose.
