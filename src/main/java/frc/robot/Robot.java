@@ -15,6 +15,8 @@ import frc.robot.interfaces.ICamera;
 
 import java.util.Optional;
 
+import org.photonvision.EstimatedRobotPose;
+
 import com.pathplanner.lib.commands.FollowPathCommand;
 import com.reduxrobotics.canand.CanandEventLoop;
 
@@ -71,12 +73,15 @@ public class Robot extends TimedRobot {
 		// and running subsystem periodic() methods.  This must be called from the robot's periodic
 		// block in order for anything in the Command-based framework to work.
 		CommandScheduler.getInstance().run();
-
+		
 		if (m_robotContainer.getAprilTagCamera() != null) 
 		{
 			m_robotContainer.getAprilTagCamera().updateCacheResults();
+			Optional<EstimatedRobotPose> result = m_robotContainer.getAprilTagCamera().getGlobalPose();
+			if (result.isPresent()) 
+			m_robotContainer.getDrivetrain().addVisionMeasurement(result.get().estimatedPose.toPose2d(), result.get().timestampSeconds);
 		}
-		
+
 	}
 
 	/** This function is called once each time the robot enters Disabled mode. */
