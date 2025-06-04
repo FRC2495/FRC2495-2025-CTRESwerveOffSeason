@@ -6,9 +6,12 @@ package frc.robot.sensors;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
+import org.photonvision.PhotonPoseEstimator.PoseStrategy;
 import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -20,6 +23,7 @@ import edu.wpi.first.math.util.Units;
 import frc.robot.Constants;
 import frc.robot.Constants.AprilTags;
 import frc.robot.Constants.VisionConstants;
+import frc.robot.RobotContainer;
 import frc.robot.interfaces.ICamera;
 
 /** Wrapper for PhotonCamera class */
@@ -52,7 +56,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
      */
 	public AprilTagCamera() {
 		super(DEFAULT_CAM_NAME);
-		//estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
+		estimator = new PhotonPoseEstimator(RobotContainer.FIELD_LAYOUT, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCam);
 	}
 
 	/**
@@ -77,13 +81,13 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
      *
      * @return The estimated robot pose based on 3D tracking of ApriLTags
      */
-	/*public Optional<EstimatedRobotPose> getGlobalPose(){
+	public Optional<EstimatedRobotPose> getGlobalPose(){
 		Optional<EstimatedRobotPose> globalPose = Optional.empty();
 		for (var change : cachedResults) {
 			globalPose = estimator.update(change);
 		}
 		return globalPose;
-	}*/
+	}
 
 	/**
      * Returns the AprilTag target-to-camera transformation.
