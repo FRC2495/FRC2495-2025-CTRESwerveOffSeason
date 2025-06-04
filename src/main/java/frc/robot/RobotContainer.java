@@ -315,7 +315,8 @@ public class RobotContainer {
 
 		// reset the field-centric heading on left bumper press
 		joyMain.povUp()
-			.onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); 
+			//.onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); 
+			.onTrue(new DrivetrainZeroHeading(drivetrain));
 
 		joyMain.povDown();
 			//.onTrue(new DrivetrainOppositeHeading(drivetrain)); TODO
@@ -334,27 +335,27 @@ public class RobotContainer {
 			//.whileTrue(new DrivetrainDriveUsingObjectDetectionCamera(drivetrain, object_detection_camera, getMainJoystick()));
 			.whileTrue(drivetrain.applyRequest(() -> point.withModuleDirection(new Rotation2d(-joyMain.getY(), -joyMain.getX()))));
 			
-		joyMain.button(3);
+		joyMain.button(3)
 			//.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
 			//.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, 2));
-			//.onTrue(new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick())); TODO
+			.onTrue(new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick())); 
 			//.onTrue(new AutoAlignLeftAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
 			
 			
-		joyMain.button(4);
+		joyMain.button(4)
 			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			//.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
-			//.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick())); TODO
+			.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick())); 
 			//.onTrue(new AutoAlignRightAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
 
-		joyMain.button(5);
+		joyMain.button(5)
 			//.onTrue(new AutoAlignToReefBlue(false, drivetrain, apriltag_camera, getMainJoystick()));
-			//.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick())); TODO
+			.onTrue(new AutoAlignToReef(false, drivetrain, apriltag_camera, getMainJoystick())); 
 
-		joyMain.button(6);
+		joyMain.button(6)
 			//.onTrue(new AutoAlignToReefBlue(true, drivetrain, apriltag_camera, getMainJoystick()));
-			//.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick())); TODO
+			.onTrue(new AutoAlignToReef(true, drivetrain, apriltag_camera, getMainJoystick())); 
 
 		joyMain.button(7)
 			//.whileTrue(new CoralRollerJoystickControl(coral_roller, drivetrain, getMainJoystick()));
