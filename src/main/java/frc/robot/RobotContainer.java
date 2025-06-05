@@ -318,8 +318,8 @@ public class RobotContainer {
 			//.onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric())); 
 			.onTrue(new DrivetrainZeroHeading(drivetrain));
 
-		joyMain.povDown();
-			//.onTrue(new DrivetrainOppositeHeading(drivetrain)); TODO
+		joyMain.povDown()
+			.onTrue(new DrivetrainOppositeHeading(drivetrain));
 
 		joyMain.povLeft();
 			//.onTrue(new DrivetrainLeftSubHeading(drivetrain));	
@@ -373,10 +373,10 @@ public class RobotContainer {
 		joyMain.button(11)
 			.whileTrue(new HangerJoystickControl(hanger, drivetrain, getMainJoystick()));
 		
-		joyMain.button(12);
+		joyMain.button(12)
 			//.onTrue(new DrivetrainDriveTowardsAprilTag(drivetrain, apriltag_camera));
 			//TODO
-			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
+			.whileTrue(new DrivetrainSetXFormation(drivetrain));
 			
 				
 		// copilot (gamepad)
@@ -401,9 +401,9 @@ public class RobotContainer {
 			//.whileTrue(new CoralRollerRollOut(coral_roller));
 			.whileTrue(new AlgaeRollerRelease(algae_roller));
 			
-		copilotGamepad.back();
+		copilotGamepad.back()
 			//.onTrue(new DrivetrainAndGyroReset(drivetrain)); TODO
-			//.onTrue(new AlmostEverythingStop(elevator, old_neck, coral_roller, algae_roller));
+			.onTrue(new AlmostEverythingStop(elevator, coral_roller, algae_roller));
 
 		copilotGamepad.start()
 			.onTrue(new AlmostEverythingStop(elevator, coral_roller, algae_roller));
