@@ -432,33 +432,49 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     /** Zeroes the heading of the robot. */
 	public void zeroHeading() {
 		getPigeon2().reset(); // resets the gyro to a heading of zero
+        tareEverything();
 		seedFieldCentric(); // resets the rotation of the robot pose to zero, regardless of gyro heading
 	}
 
     public void oppositeHeading() {
-		getPigeon2().reset(); // resets the gyro to a heading of zero
+		getPigeon2().reset(); // resets the gyro to a heading of 180
+        tareEverything();
 		resetRotation(new Rotation2d(Rotation2d.fromDegrees(180).getRadians()));
 	}
 
-	public void blueLeftSubHeading() {
+	/*public void blueLeftSubHeading() {
 		getPigeon2().reset(); // resets the gyro to a heading of zero
+        tareEverything();
 		resetRotation(new Rotation2d(Rotation2d.fromDegrees(300).getRadians()));
+	}*/
+
+    public void startingPositionOneHeading() {
+		getPigeon2().reset(); // resets the gyro to a heading of zero
+        tareEverything();
+		resetRotation(new Rotation2d(Rotation2d.fromDegrees(240).getRadians()));
 	}
 
-	public void blueRightSubHeading() {
+	public void startingPositionTwoHeading() {
 		getPigeon2().reset(); // resets the gyro to a heading of zero
-		resetRotation(new Rotation2d(Rotation2d.fromDegrees(60).getRadians()));
+        tareEverything();
+		resetRotation(new Rotation2d(Rotation2d.fromDegrees(120).getRadians()));
 	}
 
-	public void redLeftSubHeading() {
+	/*public void redLeftSubHeading() {
 		getPigeon2().reset(); // resets the gyro to a heading of zero
+        tareEverything();
 		resetRotation(new Rotation2d(Rotation2d.fromDegrees(300).getRadians()));
 	}
 
 	public void redRightSubHeading() {
 		getPigeon2().reset(); // resets the gyro to a heading of zero
+        tareEverything();
 		resetRotation(new Rotation2d(Rotation2d.fromDegrees(60).getRadians()));
-	}
+	}*/
+
+    public double getHeading() {
+        return getPigeon2().getYaw().getValueAsDouble();
+    }
 
 
     /** Resets the drive encoders to currently read a position of 0 and seeds the turn encoders using the absolute encoders. */
