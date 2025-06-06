@@ -192,7 +192,7 @@ public class Robot extends TimedRobot {
 		// //SmartDashboard.putNumber("IMU_Roll", m_robotContainer.getDrivetrain().getImu().getRoll());
 
 		// m_robotContainer.getField().setRobotPose(m_robotContainer.getDrivetrain().getPose());
-		// SmartDashboard.putNumber("Heading", m_robotContainer.getDrivetrain().getHeading());
+		SmartDashboard.putNumber("Heading", m_robotContainer.getDrivetrain().getHeading());
 
 
 		SmartDashboard.putNumber("AccelZ", m_robotContainer.getAccelerometer().getAccelZ());
