@@ -78,7 +78,7 @@ public class Robot extends TimedRobot {
 		{
 			m_robotContainer.getAprilTagCamera().updateCacheResults();
 			Optional<EstimatedRobotPose> result = m_robotContainer.getAprilTagCamera().getGlobalPose();
-			if (result.isPresent()) 
+			if (result.isPresent() && m_robotContainer.getVisionEnablement()) 
 			m_robotContainer.getDrivetrain().addVisionMeasurement(result.get().estimatedPose.toPose2d(), result.get().timestampSeconds);
 		}
 

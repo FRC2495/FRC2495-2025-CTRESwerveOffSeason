@@ -91,6 +91,8 @@ public class RobotContainer {
 
 	Command indicatorTimedScrollRainbow; // command to run while stating up and when disabled
 
+	boolean isVisionCorrectionEnabled; 
+
 	// choosers (for auton)
 
 	private final SendableChooser<Command> autoChooser;
@@ -337,17 +339,15 @@ public class RobotContainer {
 			
 		joyMain.button(3)
 			//.onTrue(new MoveInLShapeInReverse(drivetrain, this, 3));
-			//.onTrue(new AutoAlignToReefTimed(false, drivetrain, apriltag_camera, 2));
-			.onTrue(new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick())); 
-			//.onTrue(new AutoAlignLeftAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignToReefForAuton(false, drivetrain, apriltag_camera, getMainJoystick())); 
+			.onTrue(new EnableVisionCorrection(this, true));
 			
 			
 		joyMain.button(4)
 			//.onTrue(new MoveInGammaShape(drivetrain, this, 3));
 			//.whileTrue(new DrivetrainSetXFormation(drivetrain));
-			//.onTrue(new AutoAlignToReefTimed(true, drivetrain, apriltag_camera, 2));
-			.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick())); 
-			//.onTrue(new AutoAlignRightAndElevatorUp(drivetrain, elevator, apriltag_camera, getMainJoystick()));
+			//.onTrue(new AutoAlignToReefForAuton(true, drivetrain, apriltag_camera, getMainJoystick())); 
+			.onTrue(new EnableVisionCorrection(this, false));
 
 		joyMain.button(5)
 			//.onTrue(new AutoAlignToReefBlue(false, drivetrain, apriltag_camera, getMainJoystick()));
@@ -768,5 +768,15 @@ public class RobotContainer {
 	{
 		return autonChooser;
 	}*/
+
+	public boolean getVisionEnablement() 
+	{
+		return isVisionCorrectionEnabled;
+	}
+	
+	public void changeVisionCorrectionEnablement(boolean visionUse) 
+	{
+		isVisionCorrectionEnabled = visionUse;
+	}
 
 }
