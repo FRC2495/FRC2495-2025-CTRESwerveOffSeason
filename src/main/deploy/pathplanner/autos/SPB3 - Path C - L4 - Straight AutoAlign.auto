@@ -63,20 +63,8 @@
                     }
                   ]
                 }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "drivetrainStop"
-                }
               }
             ]
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "SPB3 - Side C (right) to Side C (autoalign)"
           }
         },
         {

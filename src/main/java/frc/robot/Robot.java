@@ -78,8 +78,12 @@ public class Robot extends TimedRobot {
 		{
 			m_robotContainer.getAprilTagCamera().updateCacheResults();
 			Optional<EstimatedRobotPose> result = m_robotContainer.getAprilTagCamera().getGlobalPose();
-			if (result.isPresent() && m_robotContainer.getVisionEnablement()) 
-			m_robotContainer.getDrivetrain().addVisionMeasurement(result.get().estimatedPose.toPose2d(), result.get().timestampSeconds);
+
+			if (result.isPresent() && m_robotContainer.getVisionEnablement())
+			{
+				// calls the overriden version of addVisionMeasurement() that internally calls Utils.fpgaToCurrentTime() to use the correct time base
+				m_robotContainer.getDrivetrain().addVisionMeasurement(result.get().estimatedPose.toPose2d(), result.get().timestampSeconds);
+			}
 		}
 
 	}
@@ -153,6 +157,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("FrontRightRelativeEncoderPosition", m_robotContainer.getDrivetrain().getFrontRightRelativeEncoderPosition());
 		SmartDashboard.putNumber("RearLeftRelativeEncoderPosition", m_robotContainer.getDrivetrain().getRearLeftRelativeEncoderPosition());
 		SmartDashboard.putNumber("RearRightRelativeEncoderPosition", m_robotContainer.getDrivetrain().getRearRightRelativeEncoderPosition());
+		
 		// SmartDashboard.putNumber("x", m_robotContainer.getDrivetrain().getPose().getX()); // lets us see the absolute position of the robot on the field
     	// SmartDashboard.putNumber("y", m_robotContainer.getDrivetrain().getPose().getY()); 
     	// SmartDashboard.putNumber("rot", m_robotContainer.getDrivetrain().getPose().getRotation().getDegrees()); 
@@ -191,8 +196,8 @@ public class Robot extends TimedRobot {
 		// //SmartDashboard.putNumber("IMU_Pitch", m_robotContainer.getDrivetrain().getImu().getPitch());
 		// //SmartDashboard.putNumber("IMU_Roll", m_robotContainer.getDrivetrain().getImu().getRoll());
 
-		// m_robotContainer.getField().setRobotPose(m_robotContainer.getDrivetrain().getPose());
-		// SmartDashboard.putNumber("Heading", m_robotContainer.getDrivetrain().getHeading());
+		m_robotContainer.getField().setRobotPose(m_robotContainer.getDrivetrain().getPose());
+		SmartDashboard.putNumber("Heading", m_robotContainer.getDrivetrain().getHeading());
 
 
 		SmartDashboard.putNumber("AccelZ", m_robotContainer.getAccelerometer().getAccelZ());

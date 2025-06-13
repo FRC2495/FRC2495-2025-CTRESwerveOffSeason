@@ -1154,7 +1154,7 @@
               "Visuals/Major tick spacing": 45.0,
               "Visuals/Starting angle": 180.0,
               "Visuals/Show tick mark ring": true,
-              "Visuals/Counter clockwise": false
+              "Visuals/Counter clockwise": true
             }
           },
           "2,2": {
@@ -1543,7 +1543,7 @@
               "Visuals/Major tick spacing": 45.0,
               "Visuals/Starting angle": 180.0,
               "Visuals/Show tick mark ring": true,
-              "Visuals/Counter clockwise": false
+              "Visuals/Counter clockwise": true
             }
           },
           "9,2": {
@@ -1848,8 +1848,8 @@
               "Controls/Rotation": "NONE",
               "compression": -1.0,
               "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
+              "imageWidth": 0,
+              "imageHeight": 0
             }
           },
           "0,0": {
@@ -1869,8 +1869,8 @@
               "Controls/Rotation": "NONE",
               "compression": -1.0,
               "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
+              "imageWidth": 0,
+              "imageHeight": 0
             }
           },
           "7,0": {
