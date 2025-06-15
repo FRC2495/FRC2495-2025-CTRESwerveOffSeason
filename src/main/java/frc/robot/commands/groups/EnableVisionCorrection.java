@@ -1,13 +1,13 @@
 
 package frc.robot.commands.groups;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer;
 
 /**
  *
  */
-public class EnableVisionCorrection extends Command {
+public class EnableVisionCorrection extends InstantCommand {
 
 	private RobotContainer container;
 	private boolean visionUse;
@@ -24,16 +24,9 @@ public class EnableVisionCorrection extends Command {
 		container.changeVisionCorrectionEnablement(visionUse);
 	}
 
-	// Called repeatedly when this Command is scheduled to run
+	// This instant command can run disabled
 	@Override
-	public void execute() {
-		// nothing
-	}
-
-	// Called once after isFinished returns true
-	@Override
-	public void end(boolean interrupted) {
-		System.out.println("EnableVisionCorrection: end");
-
+	public boolean runsWhenDisabled() {
+		return true;
 	}
 }

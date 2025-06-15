@@ -91,7 +91,7 @@ public class RobotContainer {
 
 	Command indicatorTimedScrollRainbow; // command to run while stating up and when disabled
 
-	boolean isVisionCorrectionEnabled; 
+	boolean isVisionCorrectionEnabled = true; // vision correction is by default enabled 
 
 	// choosers (for auton)
 
@@ -769,7 +769,7 @@ public class RobotContainer {
 		return autonChooser;
 	}*/
 
-	public boolean getVisionEnablement() 
+	public boolean getVisionCorrectionEnablement() 
 	{
 		return isVisionCorrectionEnabled;
 	}

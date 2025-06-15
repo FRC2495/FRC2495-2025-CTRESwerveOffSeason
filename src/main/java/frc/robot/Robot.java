@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
 			m_robotContainer.getAprilTagCamera().updateCacheResults();
 			Optional<EstimatedRobotPose> result = m_robotContainer.getAprilTagCamera().getGlobalPose();
 
-			if (result.isPresent() && m_robotContainer.getVisionEnablement())
+			if (result.isPresent() && m_robotContainer.getVisionCorrectionEnablement())
 			{
 				// calls the overriden version of addVisionMeasurement() that internally calls Utils.fpgaToCurrentTime() to use the correct time base
 				m_robotContainer.getDrivetrain().addVisionMeasurement(result.get().estimatedPose.toPose2d(), result.get().timestampSeconds);
@@ -284,6 +284,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putBoolean("Hanger isDown", m_robotContainer.getHanger().isDown());
 		SmartDashboard.putBoolean("Hanger isMidway", m_robotContainer.getHanger().isMidway());
 		SmartDashboard.putBoolean("Hanger isUp", m_robotContainer.getHanger().isUp());
+		
+		SmartDashboard.putBoolean("Vision Correction", m_robotContainer.getVisionCorrectionEnablement());
 
 		/*SmartDashboard.putString("Auton selected", m_robotContainer.getAutonChooser().getSelected());	
 		SmartDashboard.putString("Game piece", m_robotContainer.getGamePieceChooser().getSelected());
