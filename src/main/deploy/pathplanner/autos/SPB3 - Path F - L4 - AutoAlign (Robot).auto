@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "SPB3 - SZ to Side C (left) Straight AutoAlign"
+            "pathName": "SPB3 - SZ to Side C (left) AutoAlign"
           }
         },
         {
@@ -23,7 +23,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "autoAlignToRightReefAuton"
+                  "name": "autoAlignToLeftReefForAuton"
                 }
               }
             ]
@@ -52,7 +52,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand1s"
+                        "name": "waitCommand"
                       }
                     },
                     {
@@ -63,14 +63,33 @@
                     }
                   ]
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "drivetrainStop"
+                }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "SPB3 - Side C (autoalign) to Left Coral Station"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "neckMoveToCoralStationWithStallDetection"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "SPB3 - Side C (autoalign) to Left Coral Station"
+                }
+              }
+            ]
           }
         },
         {
@@ -78,22 +97,9 @@
           "data": {
             "commands": [
               {
-                "type": "sequential",
+                "type": "named",
                 "data": {
-                  "commands": [
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "doNothingUntilCoralSensed"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "neckHome"
-                      }
-                    }
-                  ]
+                  "name": "doNothingUntilCoralSensed"
                 }
               },
               {
@@ -112,6 +118,25 @@
           }
         },
         {
+          "type": "race",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToLeftReefForAuton"
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "deadline",
           "data": {
             "commands": [
@@ -134,7 +159,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "waitCommand1s"
+                        "name": "waitCommand"
                       }
                     },
                     {

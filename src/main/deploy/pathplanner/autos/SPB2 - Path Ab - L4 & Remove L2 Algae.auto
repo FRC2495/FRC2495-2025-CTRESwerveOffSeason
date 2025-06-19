@@ -92,6 +92,6 @@
     }
   },
   "resetOdom": true,
-  "folder": "SPB2 - L4",
+  "folder": "SPB2",
   "choreoAuto": false
 }
