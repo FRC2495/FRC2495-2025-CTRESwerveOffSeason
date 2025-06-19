@@ -178,8 +178,8 @@ public final class Constants {
 		public static final double Y_ALIGNMENT_AUTO_TOLERANCE = .02;//.05;
 		public static final double ROT_ALIGNMENT_AUTO_TOLERANCE = .05;//.05;
 
-		public static final double X_REEF_ALIGNMENT_P = .45;//.55;
-		public static final double Y_REEF_ALIGNMENT_P = .45;//.55;
+		public static final double X_REEF_ALIGNMENT_P = .4;//.55;
+		public static final double Y_REEF_ALIGNMENT_P = .4;//.55;
 		public static final double ROT_REEF_ALIGNMENT_P = .25;//.4;//1;//0.058;
 
 		public static final double DONT_SEE_TAG_WAIT_TIME = 0.3;
