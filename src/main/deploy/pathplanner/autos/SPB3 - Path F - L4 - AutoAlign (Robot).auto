@@ -93,6 +93,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "coralRollerStop"
+          }
+        },
+        {
           "type": "deadline",
           "data": {
             "commands": [

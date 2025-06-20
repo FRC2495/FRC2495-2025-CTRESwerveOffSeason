@@ -18,7 +18,7 @@ public class DoNothingUntilCoralSensed extends Command {
 
 	public DoNothingUntilCoralSensed(CoralRoller roller) {
 		this.roller = roller;
-		this.coral_sensor = coral_sensor;
+		//this.coral_sensor = coral_sensor;
 		addRequirements(roller);
 	}
 

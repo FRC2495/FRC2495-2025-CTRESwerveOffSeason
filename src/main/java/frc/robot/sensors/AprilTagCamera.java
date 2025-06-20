@@ -492,7 +492,7 @@ public class AprilTagCamera extends PhotonCamera implements ICamera {
 			// Get the last one in the list.
 				Transform3d currentTransform =  getBestCameraToTargetTransform();
 				if ((Math.abs(getBestCameraToTargetX(currentTransform) - Constants.VisionConstants.X_LEFT_ALIGNMENT) < VisionConstants.X_ALIGNMENT_TOLERANCE) 
-				&& (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_LEFT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_TOLERANCE)) 
+				&& (Math.abs(getBestCameraToTargetY(currentTransform) - (Constants.VisionConstants.Y_LEFT_ALIGNMENT)) < VisionConstants.Y_ALIGNMENT_AUTO_TOLERANCE)) 
 				{
 					atLeftScoringPosition = true;
 				}

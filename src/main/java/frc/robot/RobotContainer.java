@@ -278,6 +278,7 @@ public class RobotContainer {
 		Trigger noCoralPresent = new Trigger(() -> coral_roller.noCoralPresent() && !coral_roller.isReleasing());
 		Trigger isCoralEntering = new Trigger(() -> coral_roller.isCoralEntering() && !coral_roller.isReleasing());
 		Trigger isCoralExiting = new Trigger(() -> coral_roller.isCoralExiting() && !coral_roller.isReleasing() && DriverStation.isTeleop());
+		//Trigger isCoralReadyToScore = new Trigger(() -> (apriltag_camera.isAtLeftScoringPosition() || apriltag_camera.isAtRightScoringPosition()) && DriverStation.isAutonomous());
 
 		isCoralEntering.whileTrue(
 			new CoralRollerRollOutLowRpm(coral_roller)
@@ -290,6 +291,10 @@ public class RobotContainer {
 		(hasCoral).or(noCoralPresent).whileTrue(
 			new CoralRollerStop(coral_roller)
 		);
+
+		/*isCoralReadyToScore.whileTrue(
+			new CoralRollerForAutoRollOut(coral_roller)
+		);*/
 
 		// Warmup PathPlanner to avoid Java pauses
         FollowPathCommand.warmupCommand().schedule();

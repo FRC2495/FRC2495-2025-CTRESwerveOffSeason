@@ -11,9 +11,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "race",
           "data": {
-            "name": "autoAlignToLeftReef"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToRightReefAuton"
+                }
+              }
+            ]
           }
         },
         {
@@ -80,6 +93,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "coralRollerStop"
+          }
+        },
+        {
           "type": "deadline",
           "data": {
             "commands": [
@@ -111,16 +130,29 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "SPB1 - Right Coral Station to Side F (autoalign)"
+                  "pathName": "SPB1 - Coral Station to Side F (autoalign)"
                 }
               }
             ]
           }
         },
         {
-          "type": "named",
+          "type": "race",
           "data": {
-            "name": "autoAlignToLeftReef"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "waitCommand1.5s"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "autoAlignToRightReefAuton"
+                }
+              }
+            ]
           }
         },
         {
